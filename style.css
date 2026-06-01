@@ -2874,6 +2874,7 @@ input, button, textarea, select {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-top: 8px;
   margin-bottom: 4px;
 }
 .screening-invite-bot-field {
@@ -2926,6 +2927,7 @@ input, button, textarea, select {
 }
 .screening-invite-success,
 .screening-invite-status {
+  margin-top: 8px;
   color: var(--yellow);
   font-family: var(--type-heading-font);
   font-size: var(--type-heading-size);
