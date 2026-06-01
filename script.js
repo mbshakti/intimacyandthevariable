@@ -298,6 +298,30 @@ window.DESKTOP_LAYOUT = {
 console.log('[site] loaded');
 
 const CONTENT_BASE = '/content/';
+const FALLBACK_DISCORD_AVATARS = [
+    'img/discord%20avatars/discord-avatar-01.jpg',
+    'img/discord%20avatars/discord-avatar-02.jpg',
+    'img/discord%20avatars/discord-avatar-03.jpg',
+    'img/discord%20avatars/discord-avatar-04.jpg',
+    'img/discord%20avatars/discord-avatar-05.jpg',
+    'img/discord%20avatars/discord-avatar-06.jpg',
+    'img/discord%20avatars/discord-avatar-07.jpg',
+    'img/discord%20avatars/discord-avatar-08.jpg',
+    'img/discord%20avatars/discord-avatar-09.png',
+    'img/discord%20avatars/discord-avatar-010.png',
+    'img/discord%20avatars/discord-avatar-011.png',
+    'img/discord%20avatars/discord-avatar-012.png',
+    'img/discord%20avatars/discord-avatar-013.png',
+    'img/discord%20avatars/discord-avatar-014.png',
+    'img/discord%20avatars/discord-avatar-015.png',
+    'img/discord%20avatars/discord-avatar-016.png',
+    'img/discord%20avatars/discord-avatar-017.png',
+    'img/discord%20avatars/discord-avatar-018.png',
+    'img/discord%20avatars/discord-avatar-019.png',
+    'img/discord%20avatars/discord-avatar-020.png',
+    'img/discord%20avatars/discord-avatar-021.webp',
+    'img/discord%20avatars/discord-avatar-022.webp',
+];
 
 function contentPath(p) {
     if (!p || p.startsWith('/') || p.startsWith('http')) return p;
@@ -313,7 +337,9 @@ function contentPath(p) {
             const files = await r.json();
             if (files.length) window.DISCORD_AVATARS = files.map(embedPath);
         } catch(e) {}
-        window.DISCORD_AVATARS = window.DISCORD_AVATARS || [];
+        window.DISCORD_AVATARS = (window.DISCORD_AVATARS && window.DISCORD_AVATARS.length)
+            ? window.DISCORD_AVATARS
+            : FALLBACK_DISCORD_AVATARS.map(embedPath);
         const canvas = IS_EMBED
             ? document.querySelector('#archive-embed')
             : document.querySelector('.desktop-canvas');
@@ -377,6 +403,19 @@ function contentPath(p) {
             'found-bots':   it => ({ cls: 'desktop-icon',                                 click: `openFoundBots()` }),
             'folder':       it => ({ cls: 'desktop-icon',                                 click: `openFolder('${it.folder}')`,            icon: ICON_FOLDER }),
             'link':         it => ({ cls: 'desktop-icon char-file-icon',                  click: `window.open("${it.url}", "_blank")` }),
+            'guide-grid':   it => {
+                                      const cards = (it.guides || []).map((guide, index) => `
+                                        <a class="guide-card" href="${guide.url}" target="_blank" rel="noopener">
+                                          <span class="guide-card-icon"><img src="${guide.image}" alt=""></span>
+                                          <span class="guide-card-name">${escapeHtml(guide.name)}</span>
+                                        </a>
+                                      `).join('');
+                                      return { cls: 'guide-grid-frame',
+                                               iconHtml: `<div class="guide-grid-board">
+                                                 <div class="guide-grid-title">Creator Guides</div>
+                                                 <div class="guide-grid-cards">${cards}</div>
+                                               </div>` };
+                                    },
             'comment-thread': it => {
                                       const html = (it.comments || []).map(c => `
                                         <div class="card-comment">
@@ -1672,6 +1711,57 @@ async function loadIntroMessages() {
 
 let msgCardQueue = [];
 let msgCardTimer = null;
+let msgCardTypingTimers = [];
+
+function clearMsgCardTypingTimers() {
+    msgCardTypingTimers.forEach(timer => clearTimeout(timer));
+    msgCardTypingTimers = [];
+}
+
+function typeMessageWords(target, text, { scroller, onDone } = {}) {
+    if (!target) {
+        if (onDone) onDone();
+        return;
+    }
+    const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+    if (!words.length) {
+        if (onDone) onDone();
+        return;
+    }
+    target.textContent = '';
+    const messageEl = target.closest('.chat-message');
+    if (messageEl) messageEl.classList.add('typing-active');
+    let i = 0;
+
+    const tick = () => {
+        target.textContent += (i === 0 ? '' : ' ') + words[i];
+        i++;
+        if (scroller) forceScrollBottom(scroller);
+        if (i >= words.length) {
+            target.parentElement?.querySelector('.typing-cursor')?.remove();
+            if (messageEl) messageEl.classList.remove('typing-active');
+            if (onDone) onDone();
+            return;
+        }
+        const delay = Math.min(70 + words[i].length * 8, 150);
+        const timer = setTimeout(tick, delay);
+        msgCardTypingTimers.push(timer);
+    };
+
+    const timer = setTimeout(tick, 120);
+    msgCardTypingTimers.push(timer);
+}
+
+function revealMessageReactions(messageEl) {
+    messageEl?.querySelectorAll('.chat-reaction').forEach((r, i) => {
+        const timer = setTimeout(() => r.classList.add('visible'), 600 + i * 300);
+        msgCardTypingTimers.push(timer);
+    });
+}
+
+function messageBodyText(msg) {
+    return [msg.action, msg.text].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+}
 
 async function openMessageCard(idx, source) {
     closeAllWindows();
@@ -1691,22 +1781,35 @@ async function openMessageCard(idx, source) {
     container.innerHTML = '';
     if (typingEl) typingEl.innerHTML = '';
     if (msgCardTimer) { clearTimeout(msgCardTimer); msgCardTimer = null; }
+    clearMsgCardTypingTimers();
 
-    // Show first message immediately, queue the rest
-    container.innerHTML = renderChatMessage(messages[0], false);
+    const isShortThread = messages.length <= 2;
+
+    // Show first message immediately, then reveal the text in short windows.
+    container.innerHTML = renderChatMessage(messages[0], false, { progressive: isShortThread });
     requestAnimationFrame(() => {
         const first = container.firstElementChild;
         if (first) first.classList.add('visible');
         forceScrollBottom(document.getElementById('msgCardMessages'));
+        if (isShortThread) {
+            typeMessageWords(first?.querySelector('[data-type-target]'), messageBodyText(messages[0]), {
+                scroller: container,
+                onDone: () => {
+                    revealMessageReactions(first);
+                    if (msgCardQueue.length > 0) {
+                        msgCardTimer = setTimeout(showNextMsgCardMessage, 300);
+                    }
+                }
+            });
+        }
     });
     msgCardQueue = messages.slice(1);
     console.log('[openMessageCard] queued', msgCardQueue.length, 'messages');
-    if (msgCardQueue.length > 0) {
+    if (!isShortThread && msgCardQueue.length > 0) {
         msgCardTimer = setTimeout(showNextMsgCardMessage, 300);
     }
 
     const win = document.getElementById('msgCardWindow');
-    const isShortThread = messages.length <= 2;
     setMsgCardBare(isShortThread);
     win.classList.add('active');
     showChatFloatClose(closeMessageCard);
@@ -1737,19 +1840,29 @@ function showNextMsgCardMessage() {
         const scroller = document.getElementById('msgCardMessages');
         const container = scroller;
         const wasAtBottom = isAtBottom(scroller);
+        const isShortThread = document.getElementById('msgCardWindow')?.classList.contains('short-message-panel');
         if (typingEl) typingEl.innerHTML = '';
-        container.innerHTML += renderChatMessage(msg, false);
+        container.innerHTML += renderChatMessage(msg, false, { progressive: isShortThread });
         const newMsg = container.lastElementChild;
         playPing();
         requestAnimationFrame(() => {
             newMsg.classList.add('visible');
-            newMsg.querySelectorAll('.chat-reaction').forEach((r, i) => {
-                setTimeout(() => r.classList.add('visible'), 600 + i * 300);
-            });
             if (wasAtBottom) forceScrollBottom(scroller);
+            if (isShortThread) {
+                typeMessageWords(newMsg.querySelector('[data-type-target]'), messageBodyText(msg), {
+                    scroller,
+                    onDone: () => revealMessageReactions(newMsg)
+                });
+            } else {
+                revealMessageReactions(newMsg);
+            }
         });
         const pauseDelay = 500 + Math.random() * 500;
-        msgCardTimer = setTimeout(showNextMsgCardMessage, pauseDelay);
+        if (isShortThread) {
+            msgCardTimer = setTimeout(showNextMsgCardMessage, Math.max(pauseDelay, messageBodyText(msg).split(/\s+/).length * 90));
+        } else {
+            msgCardTimer = setTimeout(showNextMsgCardMessage, pauseDelay);
+        }
     }, typingDelay);
 }
 
@@ -1774,6 +1887,7 @@ function stopMessagePlayback() {
         clearTimeout(msgCardTimer);
         msgCardTimer = null;
     }
+    clearMsgCardTypingTimers();
     msgCardQueue = [];
     const typingEl = document.getElementById('msgCardTyping');
     if (typingEl) typingEl.innerHTML = '';
@@ -1869,19 +1983,22 @@ function getDiscordAvatar(username) {
     return _avatarCache[username];
 }
 
-function renderChatMessage(msg, visible = false) {
+function renderChatMessage(msg, visible = false, options = {}) {
     const visibleClass = visible ? 'visible' : '';
     const reactionsHtml = renderChatReactions(msg.reactions, visible);
     const avatarSrc = msg.noAvatar ? null : aPath(msg.avatar || getDiscordAvatar(msg.username));
     const avatarClass = avatarSrc && avatarSrc.includes('anime-bitmap') ? 'avatar avatar-top' : 'avatar';
     const avatarHtml = avatarSrc ? `<img class="${avatarClass}" src="${avatarSrc}" alt="">` : '';
-    const bodyParts = [msg.action, msg.text.replace(/\n/g, '<br>')].filter(Boolean);
+    const bodyParts = [msg.action, String(msg.text || '').replace(/\n/g, '<br>')].filter(Boolean);
+    const bodyHtml = options.progressive
+        ? `<span class="comment-handle" style="color: ${msg.color};">${msg.username}</span> <span data-type-target></span><span class="typing-cursor">...</span>`
+        : `<span class="comment-handle" style="color: ${msg.color};">${msg.username}</span> ${bodyParts.join(' ')}`;
 
     return `
         <div class="card-comment chat-message ${visibleClass}">
             ${avatarHtml}
             <div class="comment-content">
-                <div class="comment-body"><span class="comment-handle" style="color: ${msg.color};">${msg.username}</span> ${bodyParts.join(' ')}</div>
+                <div class="comment-body">${bodyHtml}</div>
                 ${reactionsHtml}
             </div>
         </div>
@@ -4179,4 +4296,44 @@ function initChat() {
   setTimeout(nextMsg, 1200);
 }
 
+function initScreeningInviteForm() {
+  const form = document.querySelector('.screening-invite-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submit = form.querySelector('.screening-invite-submit');
+    const formData = new FormData(form);
+    const body = new URLSearchParams(formData).toString();
+
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = 'Sending...';
+    }
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+
+      if (!response.ok) throw new Error('Form submission failed');
+
+      form.innerHTML = '<p class="screening-invite-success">You&apos;re on the list.</p>';
+    } catch (error) {
+      form.classList.add('screening-invite-form-error');
+      const status = form.querySelector('.screening-invite-status') || document.createElement('p');
+      status.className = 'screening-invite-status';
+      status.textContent = 'Could not save. Try again?';
+      form.appendChild(status);
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = 'Notify me';
+      }
+    }
+  });
+}
+
+initScreeningInviteForm();
 initChat();

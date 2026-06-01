@@ -84,7 +84,7 @@
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
 
-    <link rel="stylesheet" href="/style.css?v=69">
+    <link rel="stylesheet" href="/style.css?v=92">
 </head>
 <body>
 
@@ -119,14 +119,24 @@
     </div>
 
     <div class="col-center" id="col-center">
+      <form class="screening-invite-form" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="screening-invites">
+        <p class="screening-invite-bot-field">
+          <label>Do not fill this out: <input name="bot-field"></label>
+        </p>
+        <h2 class="screening-invite-heading">Summer 2026 screening invites</h2>
+        <label class="screening-invite-label" for="screeningInviteEmail">Email address</label>
+        <input id="screeningInviteEmail" class="screening-invite-input" type="email" name="email" placeholder="email@example.com" autocomplete="email" required>
+        <button class="cta-btn screening-invite-submit" type="submit">Notify me</button>
+      </form>
       <p class="center-quote">“The opposite of play is not what is serious. It is what is real.” <span>— Johan Huizinga</span></p>
-      <a class="cta-btn" href="https://www.demofestival.org/tickets" target="_blank" rel="noopener">NEWINC Demo Tickets (JUN 3, 2026)</a>
-      <button class="cta-btn cta-btn-secondary" onclick="openHomeSection('directorNote')">Filmmaker's Note</button>
-      <button class="cta-btn cta-btn-secondary mobile-home-link" onclick="openHomeSection('screenings')">Screenings / Talks</button>
-      <button class="cta-btn cta-btn-secondary mobile-home-link" onclick="openHomeSection('credits')">Team &amp; Thanks</button>
-      <button class="cta-btn cta-btn-secondary mobile-home-link" onclick="openHomeSection('filmCredits')">Credits</button>
-      <button class="cta-btn cta-btn-secondary mobile-home-link" onclick="openHomeSection('contact')">Contact</button>
-      <a class="cta-btn cta-btn-secondary" href="https://shaktimb.com" target="_blank" rel="noopener">A film by Shakti Mb</a>
+      <a class="cta-btn cta-btn-tertiary" href="https://www.demofestival.org/tickets" target="_blank" rel="noopener">NEWINC demo tickets (Jun 3, 2026)</a>
+      <button class="cta-btn cta-btn-tertiary" onclick="openHomeSection('directorNote')">Filmmaker's Note</button>
+      <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('screenings')">Screenings / Talks</button>
+      <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('credits')">Team &amp; thanks</button>
+      <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('filmCredits')">Credits</button>
+      <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('contact')">Contact</button>
+      <a class="cta-btn cta-btn-tertiary" href="https://shaktimb.com" target="_blank" rel="noopener">A film by Shakti Mb</a>
     </div>
 
     <div class="col-chat">
@@ -137,7 +147,7 @@
 
   <div class="intro-ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Film drops summer 2026 &nbsp;✧&nbsp; Web archive open now &nbsp;✧&nbsp; Film drops summer 2026 &nbsp;✧&nbsp; Web archive open now &nbsp;✧&nbsp; Film drops summer 2026 &nbsp;✧&nbsp; Web archive open now &nbsp;✧&nbsp; </span><span>Film drops summer 2026 &nbsp;✧&nbsp; Web archive open now &nbsp;✧&nbsp; Film drops summer 2026 &nbsp;✧&nbsp; Web archive open now &nbsp;✧&nbsp; Film drops summer 2026 &nbsp;✧&nbsp; Web archive open now &nbsp;✧&nbsp; </span>
+      <span>Sign up for summer 2026 screening invites &nbsp;✧&nbsp; In-person dates soon &nbsp;✧&nbsp; Sign up for summer 2026 screening invites &nbsp;✧&nbsp; In-person dates soon &nbsp;✧&nbsp; Sign up for summer 2026 screening invites &nbsp;✧&nbsp; In-person dates soon &nbsp;✧&nbsp; </span><span>Sign up for summer 2026 screening invites &nbsp;✧&nbsp; In-person dates soon &nbsp;✧&nbsp; Sign up for summer 2026 screening invites &nbsp;✧&nbsp; In-person dates soon &nbsp;✧&nbsp; Sign up for summer 2026 screening invites &nbsp;✧&nbsp; In-person dates soon &nbsp;✧&nbsp; </span>
     </div>
   </div>
 
@@ -415,6 +425,6 @@
         </div>
     </div>
 
-<script src="/script.js?v=47"></script>
+<script src="/script.js?v=51"></script>
 </body>
 </html>
