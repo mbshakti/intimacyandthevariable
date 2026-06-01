@@ -4299,12 +4299,12 @@ function initChat() {
 function initScreeningInviteForm() {
   const form = document.querySelector('.screening-invite-form');
   if (!form) return;
+  const endpoint = 'https://script.google.com/macros/s/AKfycbxhqH0y36PICJiRVloJxEDyZKgg8oSJw4UjG1N_CpoJ4VDfI5BWZIfy69o8BuPhaWYf/exec';
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const submit = form.querySelector('.screening-invite-submit');
-    const formData = new FormData(form);
-    const body = new URLSearchParams(formData).toString();
+    const email = form.querySelector('[name="email"]')?.value.trim();
 
     if (submit) {
       submit.disabled = true;
@@ -4312,13 +4312,16 @@ function initScreeningInviteForm() {
     }
 
     try {
-      const response = await fetch('/', {
+      await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          email,
+          source: 'screening-invites',
+          page: window.location.href
+        })
       });
-
-      if (!response.ok) throw new Error('Form submission failed');
 
       form.innerHTML = '<p class="screening-invite-success">You&apos;re on the list.</p>';
     } catch (error) {
