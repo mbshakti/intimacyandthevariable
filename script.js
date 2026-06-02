@@ -4036,7 +4036,7 @@ const sections = {
   about: `
     ${mobileNav}
     <p class="panel-label">// about</p>
-    <p class="center-desc">Intimacy When the Other Side Is a Variable is a 20-minute video essay documenting a subculture of people who make AI roleplay bots. I spent three years lurking in the online spaces these bot makers gather, during which I collected screenshots, images, files, and messages. The film moves through that archive, weaving in interviews with people I meet along the way. The film asks what it means to design personality at the margins of the internet, and what the bots people build reveal about what they're longing for.</p>
+    <p class="center-desc">Intimacy when the other side is a variable is a 20-minute video essay documenting a subculture of people who make AI roleplay bots. I spent three years lurking in the online spaces these bot makers gather, during which I collected screenshots, images, files, and messages. The film moves through that archive, weaving in interviews with people I meet along the way. The film asks what it means to design personality at the margins of the internet, and what the bots people build reveal about what they're longing for.</p>
     <p class="panel-label" style="margin-top:9px">// screenings / talks</p>
     <div class="screening-row">
       <span class="panel-label">June 3, 2026</span>
@@ -4183,25 +4183,25 @@ function goBack() {
   center.innerHTML = defaultContent;
   currentSection = null;
   document.querySelector('.intro')?.classList.remove('section-open');
-  document.querySelectorAll('.intro-nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.site-header button').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.desktop-section-nav button').forEach(b => b.classList.remove('active'));
 }
 
 function showSection(id) {
   const center = document.getElementById('col-center');
-  const navBtns = document.querySelectorAll('.intro-nav button');
+  const navBtns = document.querySelectorAll('.site-header button');
 
   if (currentSection === id) {
     goBack();
     return;
   }
 
-  center.innerHTML = sections[id];
+  center.innerHTML = `<div class="box-body col-center-body">${sections[id]}</div>`;
   hydrateDirectorNote(center);
   currentSection = id;
   document.querySelector('.intro')?.classList.add('section-open');
   navBtns.forEach(b => b.classList.remove('active'));
-  const btn = document.querySelector(`.intro-nav button[onclick="showSection('${id}')"]`);
+  const btn = document.querySelector(`.site-header button[onclick="showSection('${id}')"]`);
   if (btn) btn.classList.add('active');
   document.querySelectorAll('.desktop-section-nav button').forEach(b => {
     b.classList.toggle('active', b.dataset.sectionNav === id);
@@ -4297,46 +4297,55 @@ function initChat() {
 }
 
 function initScreeningInviteForm() {
-  const form = document.querySelector('.screening-invite-form');
-  if (!form) return;
+  const forms = document.querySelectorAll('.screening-invite-form');
+  if (!forms.length) return;
   const endpoint = 'https://script.google.com/macros/s/AKfycbxhqH0y36PICJiRVloJxEDyZKgg8oSJw4UjG1N_CpoJ4VDfI5BWZIfy69o8BuPhaWYf/exec';
 
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const submit = form.querySelector('.screening-invite-submit');
-    const email = form.querySelector('[name="email"]')?.value.trim();
+  forms.forEach(form => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submit = form.querySelector('.screening-invite-submit');
+      const email = form.querySelector('[name="email"]')?.value.trim();
 
-    if (submit) {
-      submit.disabled = true;
-      submit.textContent = 'Sending...';
-    }
-
-    try {
-      await fetch(endpoint, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          email,
-          source: 'screening-invites',
-          page: window.location.href
-        })
-      });
-
-      form.innerHTML = '<p class="screening-invite-success">You&apos;re on the list.</p>';
-    } catch (error) {
-      form.classList.add('screening-invite-form-error');
-      const status = form.querySelector('.screening-invite-status') || document.createElement('p');
-      status.className = 'screening-invite-status';
-      status.textContent = 'Could not save. Try again?';
-      form.appendChild(status);
       if (submit) {
-        submit.disabled = false;
-        submit.textContent = 'Notify me';
+        submit.disabled = true;
+        submit.textContent = 'Sending...';
       }
-    }
+
+      try {
+        await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            email,
+            source: 'screening-invites',
+            page: window.location.href
+          })
+        });
+
+        form.innerHTML = '<p class="screening-invite-success">You&apos;re on the list.</p>';
+      } catch (error) {
+        form.classList.add('screening-invite-form-error');
+        const status = form.querySelector('.screening-invite-status') || document.createElement('p');
+        status.className = 'screening-invite-status';
+        status.textContent = 'Could not save. Try again?';
+        form.appendChild(status);
+        if (submit) {
+          submit.disabled = false;
+          submit.textContent = 'Notify me';
+        }
+      }
+    });
   });
 }
 
 initScreeningInviteForm();
 initChat();
+
+function toggleTrailerMute() {
+  const video = document.getElementById('trailerVideo');
+  const btn = document.getElementById('trailerUnmuteBtn');
+  video.muted = !video.muted;
+  btn.textContent = video.muted ? 'Unmute' : 'Mute';
+}
