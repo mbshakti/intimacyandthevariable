@@ -1,5 +1,6 @@
 {
   "intro": {
+    "creator-guide-grid": { "label": null, "meta": null },
     "chris-waifus":     { "label": "Chris, AI researcher",            "meta": null },
     "priest":           { "label": "judgemental_priest.json",        "meta": "706 tokens" },
     "msg-maker-chat-0": { "label": "any requests for voices?",       "meta": "7 messages" },

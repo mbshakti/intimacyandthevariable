@@ -84,7 +84,7 @@
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
 
-    <link rel="stylesheet" href="/style.css?v=115">
+    <link rel="stylesheet" href="/style.css?v=120">
 </head>
 <body>
 
@@ -114,14 +114,13 @@
       <p class="screening-invite-bot-field">
         <label>Do not fill this out: <input name="bot-field"></label>
       </p>
-      <p class="screening-invite-kicker mobile-screening-kicker">Sign up for an early screening</p>
-      <h2 class="screening-invite-heading">I'm beginning to share the film through early screenings and talks this summer before a wider release.</h2>
+      <h2 class="screening-invite-heading">I'm organizing a series of small screenings to share the film and gather notes. Sign up to be one of the first to watch!</h2>
       <label class="screening-invite-label" for="mobileScreeningInviteEmail">Email address</label>
       <input id="mobileScreeningInviteEmail" class="screening-invite-input" type="email" name="email" placeholder="email@example.com" autocomplete="email" required>
       <button class="cta-btn screening-invite-submit" type="submit">Notify me</button>
     </form>
     <nav class="mobile-top-nav" aria-label="Film sections">
-      <button class="mobile-top-nav-link" onclick="openHomeSection('directorNote')"><span>01</span>About</button>
+      <button class="mobile-top-nav-link" onclick="openHomeSection('directorNote')"><span>01</span>Filmmaker's note</button>
       <button class="mobile-top-nav-link" onclick="openHomeSection('screenings')"><span>02</span>Screenings / Talks</button>
       <button class="mobile-top-nav-link" onclick="openHomeSection('credits')"><span>03</span>Team &amp; thanks</button>
       <button class="mobile-top-nav-link" onclick="openHomeSection('filmCredits')"><span>04</span>Credits</button>
@@ -130,6 +129,15 @@
   </div>
 
   <div class="intro-body">
+
+    <nav class="trailer-nav" aria-label="Film sections">
+      <button class="trailer-nav-link" onclick="goBack()" data-section-nav="home">Home</button>
+      <button class="trailer-nav-link" onclick="showSection('directorNote')" data-section-nav="directorNote">Filmmaker's note</button>
+      <button class="trailer-nav-link" onclick="showSection('screenings')" data-section-nav="screenings">Screenings / Talks</button>
+      <button class="trailer-nav-link" onclick="showSection('credits')" data-section-nav="credits">Team &amp; Thanks</button>
+      <button class="trailer-nav-link" onclick="showSection('filmCredits')" data-section-nav="filmCredits">Credits</button>
+      <button class="trailer-nav-link" onclick="showSection('contact')" data-section-nav="contact">Contact</button>
+    </nav>
 
     <div class="col-left">
       <div class="box-header col-header">About</div>
@@ -140,39 +148,25 @@
       </header>
       <div class="box-body col-left-info">
         <p class="essay-title">Intimacy when the other side is a variable</p>
-        <p class="essay-desc">A film about spaces where people gather and make AI roleplay bots together.</p>
+        <p class="essay-desc">I spent three years lurking in the online spaces where people build AI roleplay bots. This film is an invitation for you to be a voyeur in these spaces with me.</p>
+        <p class="essay-desc">All chat messages, interviews, files, images in the film are real. All voices and usernames have been altered to retain the anonymity of people and participants.</p>
       </div>
     </div>
 
     <div class="col-center" id="col-center">
       <div class="box-header col-header">Screenings</div>
       <div class="box-body col-center-body">
-        <div class="desktop-section-nav" aria-label="Section navigation">
-          <button class="cta-btn cta-btn-secondary" onclick="goBack()" data-section-nav="home">Home</button>
-          <button class="cta-btn cta-btn-secondary" onclick="showSection('directorNote')" data-section-nav="directorNote">About</button>
-          <button class="cta-btn cta-btn-secondary" onclick="showSection('screenings')" data-section-nav="screenings">Screenings / Talks</button>
-          <button class="cta-btn cta-btn-secondary" onclick="showSection('credits')" data-section-nav="credits">Team &amp; Thanks</button>
-          <button class="cta-btn cta-btn-secondary" onclick="showSection('filmCredits')" data-section-nav="filmCredits">Credits</button>
-          <button class="cta-btn cta-btn-secondary" onclick="showSection('contact')" data-section-nav="contact">Contact</button>
-        </div>
         <form class="screening-invite-form" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="screening-invites">
           <p class="screening-invite-bot-field">
             <label>Do not fill this out: <input name="bot-field"></label>
           </p>
-          <p class="screening-invite-kicker">Sign up for an early screening</p>
-          <h2 class="screening-invite-heading">I'm beginning to share the film through early screenings and talks this summer before a wider release.</h2>
+          <h2 class="screening-invite-heading">I'm organizing a series of small screenings to share the film and gather notes. Sign up to be one of the first to watch!</h2>
           <label class="screening-invite-label" for="screeningInviteEmail">Email address</label>
           <input id="screeningInviteEmail" class="screening-invite-input" type="email" name="email" placeholder="email@example.com" autocomplete="email" required>
           <button class="cta-btn screening-invite-submit" type="submit">Notify me</button>
         </form>
         <p class="center-quote">”The opposite of play is not what is serious. It is what is real.” <span>— Johan Huizinga</span></p>
-        <div class="mobile-inter-nav">More</div>
-        <button class="cta-btn cta-btn-tertiary" onclick="openHomeSection('directorNote')">About</button>
-        <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('screenings')">Screenings / Talks</button>
-        <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('credits')">Team &amp; thanks</button>
-        <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('filmCredits')">Credits</button>
-        <button class="cta-btn cta-btn-tertiary mobile-home-link" onclick="openHomeSection('contact')">Contact</button>
       </div>
     </div>
 
@@ -461,6 +455,6 @@
         </div>
     </div>
 
-<script src="/script.js?v=54"></script>
+<script src="/script.js?v=55"></script>
 </body>
 </html>

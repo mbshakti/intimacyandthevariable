@@ -4063,14 +4063,12 @@ const sections = {
 
   directorNote: `
     ${mobileNav}
-    <p class="panel-label">// filmmaker's note</p>
     <div class="director-note-content" data-directors-note>
       <p class="center-desc">Loading filmmaker's note...</p>
     </div>`,
 
   screenings: `
     ${mobileNav}
-    <p class="panel-label">// screenings / talks</p>
     <div class="screening-row">
       <span class="panel-label">June 3, 2026</span>
       <span><span class="sidebar-item">NEW INC Demo Day Talk</span> <span class="sidebar-venue">New Museum, New York City</span></span>
@@ -4096,7 +4094,6 @@ const sections = {
 
   credits: `
     ${mobileNav}
-    <p class="panel-label">// team & thanks</p>
     <div class="inline-credits">
       <div class="credit-row"><span class="panel-label">Created by</span><span>Shakti Mb</span></div>
       <div class="credit-row"><span class="panel-label">Visual Direction & Co-Editor</span><span>Kiana Fernandez</span></div>
@@ -4106,7 +4103,6 @@ const sections = {
 
   filmCredits: `
     ${mobileNav}
-    <p class="panel-label">// credits</p>
     <div class="inline-credits">
       <div class="credit-row">
         <span class="panel-label">Music credits</span>
@@ -4127,7 +4123,6 @@ const sections = {
 
   contact: `
     ${mobileNav}
-    <p class="panel-label">// contact</p>
     <a class="contact-inline" href="mailto:mbshakti@gmail.com">→ mbshakti@gmail.com</a>
     <p class="center-desc">Please feel free to email me for a link to see the film, screening inquiries, or anything else.</p>`
 };
@@ -4184,7 +4179,7 @@ function goBack() {
   currentSection = null;
   document.querySelector('.intro')?.classList.remove('section-open');
   document.querySelectorAll('.site-header button').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.desktop-section-nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.trailer-nav button').forEach(b => b.classList.remove('active'));
 }
 
 function showSection(id) {
@@ -4196,14 +4191,15 @@ function showSection(id) {
     return;
   }
 
-  center.innerHTML = `<div class="box-body col-center-body">${sections[id]}</div>`;
+  const heading = sectionTitles[id] ? `<div class="box-header col-header">${sectionTitles[id]}</div>` : '';
+  center.innerHTML = `${heading}<div class="box-body col-center-body">${sections[id]}</div>`;
   hydrateDirectorNote(center);
   currentSection = id;
   document.querySelector('.intro')?.classList.add('section-open');
   navBtns.forEach(b => b.classList.remove('active'));
   const btn = document.querySelector(`.site-header button[onclick="showSection('${id}')"]`);
   if (btn) btn.classList.add('active');
-  document.querySelectorAll('.desktop-section-nav button').forEach(b => {
+  document.querySelectorAll('.trailer-nav button').forEach(b => {
     b.classList.toggle('active', b.dataset.sectionNav === id);
   });
 }
