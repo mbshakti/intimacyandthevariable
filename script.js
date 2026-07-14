@@ -1334,10 +1334,10 @@ function openDiaryEntry(entry) {
     closeAllWindows();
     document.getElementById('documentTitle').textContent = `diary_${entry.slug}.txt`;
     const dateLine = entry.displayDate
-        ? `<p style="color:var(--text-3);font-size:15px;margin-bottom:28px;font-style:italic;">${entry.displayDate}</p>`
+        ? `<p style="color:var(--text-3);margin-bottom:28px;font-style:italic;">${entry.displayDate}</p>`
         : '';
     document.getElementById('documentContent').innerHTML = `
-        <div class="diary-entry" style="font-family:var(--font-serif);font-size:21px;line-height:1.9;color:var(--text-2);font-weight:300;">
+        <div class="diary-entry" style="line-height:1.9;color:var(--text-2);font-weight:300;">
             ${dateLine}
             ${renderDiaryContent(entry.content)}
         </div>`;
@@ -4197,7 +4197,7 @@ function showSection(id) {
   currentSection = id;
   document.querySelector('.intro')?.classList.add('section-open');
   navBtns.forEach(b => b.classList.remove('active'));
-  const btn = document.querySelector(`.site-header button[onclick="showSection('${id}')"]`);
+  const btn = document.querySelector(`.site-header button[data-section-nav="${id}"]`);
   if (btn) btn.classList.add('active');
   document.querySelectorAll('.trailer-nav button').forEach(b => {
     b.classList.toggle('active', b.dataset.sectionNav === id);

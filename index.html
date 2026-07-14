@@ -84,7 +84,7 @@
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
 
-    <link rel="stylesheet" href="/style.css?v=120">
+    <link rel="stylesheet" href="/style.css?v=121">
 </head>
 <body>
 
@@ -92,11 +92,12 @@
 
 <div class="intro">
 
-  <header class="site-header">
-    <div class="site-header-left">
-      <span class="site-header-title">Intimacy when the other side is a variable</span>
+  <div class="title-marquee" aria-label="Intimacy when the other side is a variable">
+    <div class="title-marquee-track">
+      <span class="title-marquee-group">Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span class="title-marquee-group" aria-hidden="true">Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;</span>
     </div>
-  </header>
+  </div>
 
   <div class="col-video">
     <div class="col-left-gif">
@@ -104,6 +105,19 @@
       <button class="trailer-unmute-btn" id="trailerUnmuteBtn" onclick="toggleTrailerMute()">Unmute</button>
     </div>
   </div>
+
+  <header class="site-header">
+    <nav class="site-header-left" aria-label="Film sections">
+      <button class="site-header-link" onclick="goBack()" data-section-nav="home">Home</button>
+      <span class="nav-sep">|</span>
+      <button class="site-header-link" onclick="showSection('screenings')" data-section-nav="screenings">Screenings</button>
+      <span class="nav-sep">|</span>
+      <button class="site-header-link" onclick="showSection('credits')" data-section-nav="credits">Team &amp; Thanks</button>
+      <span class="nav-sep">|</span>
+      <button class="site-header-link" onclick="showSection('filmCredits')" data-section-nav="filmCredits">Credits</button>
+    </nav>
+    <button class="site-header-link site-header-contact" onclick="showSection('contact')" data-section-nav="contact">Contact</button>
+  </header>
 
   <div class="mobile-top-info" aria-label="Film and screening signup">
     <p class="mobile-film-title">Intimacy when the other side is a variable</p>
@@ -140,7 +154,6 @@
     </nav>
 
     <div class="col-left">
-      <div class="box-header col-header">About</div>
       <header class="site-header site-header--mobile-only">
         <div class="site-header-left">
           <span class="site-header-title">Intimacy when the other side is a variable</span>
@@ -150,12 +163,14 @@
         <p class="essay-title">Intimacy when the other side is a variable</p>
         <p class="essay-desc">I spent three years lurking in the online spaces where people build AI roleplay bots. This film is an invitation for you to be a voyeur in these spaces with me.</p>
         <p class="essay-desc">All chat messages, interviews, files, images in the film are real. All voices and usernames have been altered to retain the anonymity of people and participants.</p>
+        <p class="essay-status">Coming soon<br><span class="essay-kaomoji">ʕ✧ᴥ✧ʔ----(✘ᴗ_ᴗ)</span></p>
+        <p class="essay-by">A film by <a href="https://shaktimb.com" target="_blank" rel="noopener">Shakti Mb</a></p>
       </div>
     </div>
 
     <div class="col-center" id="col-center">
-      <div class="box-header col-header">Screenings</div>
       <div class="box-body col-center-body">
+        <p class="col-heading">Screenings</p>
         <form class="screening-invite-form" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="screening-invites">
           <p class="screening-invite-bot-field">
@@ -166,12 +181,10 @@
           <input id="screeningInviteEmail" class="screening-invite-input" type="email" name="email" placeholder="email@example.com" autocomplete="email" required>
           <button class="cta-btn screening-invite-submit" type="submit">Notify me</button>
         </form>
-        <p class="center-quote">”The opposite of play is not what is serious. It is what is real.” <span>— Johan Huizinga</span></p>
       </div>
     </div>
 
     <div class="col-chat">
-      <div class="box-header col-header">Chat</div>
       <div class="box-body chat-feed" id="chat-feed"></div>
     </div>
 
@@ -455,6 +468,6 @@
         </div>
     </div>
 
-<script src="/script.js?v=55"></script>
+<script src="/script.js?v=56"></script>
 </body>
 </html>
