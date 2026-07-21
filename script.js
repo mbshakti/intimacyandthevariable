@@ -4339,6 +4339,22 @@ function initScreeningInviteForm() {
 initScreeningInviteForm();
 initChat();
 
+function toggleAudio() {
+  const audio = document.getElementById('site-audio');
+  const playBtn = document.getElementById('audio-play-btn');
+  const pauseBtn = document.getElementById('audio-pause-btn');
+  if (!audio || !playBtn || !pauseBtn) return;
+  if (audio.paused) {
+    audio.play();
+    playBtn.hidden = true;
+    pauseBtn.hidden = false;
+  } else {
+    audio.pause();
+    playBtn.hidden = false;
+    pauseBtn.hidden = true;
+  }
+}
+
 function toggleTrailerMute() {
   const video = document.getElementById('trailerVideo');
   const btn = document.getElementById('trailerUnmuteBtn');

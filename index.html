@@ -84,7 +84,7 @@
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
 
-    <link rel="stylesheet" href="/style.css?v=121">
+    <link rel="stylesheet" href="/style.css?v=126">
 </head>
 <body>
 
@@ -92,25 +92,11 @@
 
 <div class="intro">
 
-  <div class="title-marquee" aria-label="Intimacy when the other side is a variable">
-    <div class="title-marquee-track">
-      <span class="title-marquee-group">Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;</span>
-      <span class="title-marquee-group" aria-hidden="true">Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;</span>
-    </div>
-  </div>
-
-  <div class="col-video">
-    <div class="col-left-gif">
-      <video id="trailerVideo" src="/assets/video/trailer.mp4" autoplay muted loop playsinline></video>
-      <button class="trailer-unmute-btn" id="trailerUnmuteBtn" onclick="toggleTrailerMute()">Unmute</button>
-    </div>
-  </div>
-
   <header class="site-header">
     <nav class="site-header-left" aria-label="Film sections">
       <button class="site-header-link" onclick="goBack()" data-section-nav="home">Home</button>
       <span class="nav-sep">|</span>
-      <button class="site-header-link" onclick="showSection('screenings')" data-section-nav="screenings">Screenings</button>
+      <button class="site-header-link" onclick="showSection('screenings')" data-section-nav="screenings">Talks</button>
       <span class="nav-sep">|</span>
       <button class="site-header-link" onclick="showSection('credits')" data-section-nav="credits">Team &amp; Thanks</button>
       <span class="nav-sep">|</span>
@@ -159,10 +145,12 @@
           <span class="site-header-title">Intimacy when the other side is a variable</span>
         </div>
       </header>
+      <div class="col-left-gif">
+        <video id="trailerVideo" src="/assets/video/trailer.mp4" autoplay muted loop playsinline></video>
+        <button class="trailer-unmute-btn" id="trailerUnmuteBtn" onclick="toggleTrailerMute()">Unmute</button>
+      </div>
       <div class="box-body col-left-info">
         <p class="essay-title">Intimacy when the other side is a variable</p>
-        <p class="essay-desc">I spent three years lurking in the online spaces where people build AI roleplay bots. This film is an invitation for you to be a voyeur in these spaces with me.</p>
-        <p class="essay-desc">All chat messages, interviews, files, images in the film are real. All voices and usernames have been altered to retain the anonymity of people and participants.</p>
         <p class="essay-status">Coming soon<br><span class="essay-kaomoji">ʕ✧ᴥ✧ʔ----(✘ᴗ_ᴗ)</span></p>
         <p class="essay-by">A film by <a href="https://shaktimb.com" target="_blank" rel="noopener">Shakti Mb</a></p>
       </div>
@@ -170,7 +158,14 @@
 
     <div class="col-center" id="col-center">
       <div class="box-body col-center-body">
-        <p class="col-heading">Screenings</p>
+        <p class="center-desc">I spent three years lurking in the online spaces where people build AI roleplay bots. This film is an invitation for you to be a voyeur in these spaces with me.</p>
+        <div class="link-list">
+          <button class="link-item" disabled>[1] → watch the film (coming soon)</button>
+          <button class="link-item" onclick="showSection('screenings')">[2] → screenings / talks</button>
+          <button class="link-item" onclick="showSection('credits')">[3] → team &amp; thanks</button>
+          <button class="link-item" onclick="showSection('filmCredits')">[4] → credits</button>
+          <button class="link-item" onclick="showSection('contact')">[5] → contact</button>
+        </div>
         <form class="screening-invite-form" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="screening-invites">
           <p class="screening-invite-bot-field">
@@ -190,13 +185,36 @@
 
   </div>
 
+  <div class="title-marquee" aria-label="Intimacy when the other side is a variable">
+    <div class="title-marquee-track">
+      <span class="title-marquee-group">Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span class="title-marquee-group" aria-hidden="true">Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;Intimacy when the other side is a variable&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <footer class="intro-footer">
+    <div class="footer-btns">
+      <div class="footer-btn footer-audio">
+        <span class="audio-title">♪ Prince — Nothing Compares 2 U</span>
+        <button class="audio-play" id="audio-play-btn" onclick="toggleAudio()" aria-label="Play">▷</button>
+        <button class="audio-pause" id="audio-pause-btn" onclick="toggleAudio()" aria-label="Pause" hidden>▐▐</button>
+      </div>
+      <button class="footer-btn" disabled>▷ Watch</button>
+    </div>
+    <div class="footer-url">
+      <span class="footer-url-label">→ URL</span>
+      <span class="footer-url-value">intimacyandthevariable.com</span>
+    </div>
+    <audio id="site-audio" src="/assets/audio/prince-nothing-compares-2-u.mp3" preload="none"></audio>
+  </footer>
+
 </div>
 
-  <nav class="inter-nav">
+  <!-- <nav class="inter-nav">
     <span class="inter-nav-label">Explore the archive</span>
-  </nav>
+  </nav> -->
 
-    <div class="desktop">
+    <div class="desktop" style="display: none;">
         <div class="desktop-canvas">
         <!-- Band sections and icons render here -->
         </div><!-- end .desktop-canvas -->
@@ -468,6 +486,6 @@
         </div>
     </div>
 
-<script src="/script.js?v=56"></script>
+<script src="/script.js?v=57"></script>
 </body>
 </html>
