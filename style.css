@@ -146,8 +146,10 @@ input, button, textarea, select {
     background: var(--bg);
     position: relative;
     border: none;
+    /* clip, not hidden: hidden would turn overflow-y's `visible` into `auto`,
+       making the grid a scroll container that swallows the page's wheel events */
+    overflow-x: clip;
     overflow-y: visible;
-    overflow-x: hidden;
     height: auto;
     min-height: 0;
     scrollbar-width: none;
@@ -158,8 +160,8 @@ input, button, textarea, select {
 .desktop-canvas {
     position: relative;
     width: 100%;
+    overflow-x: clip;
     overflow-y: visible;
-    overflow-x: hidden;
     scrollbar-width: none;
     scrollbar-gutter: auto;
 }
@@ -939,10 +941,6 @@ input, button, textarea, select {
 }
 /* Rich content (h3 / paragraphs) inside any comment bubble */
 .comment-body h3 {
-
-    font-weight: var(--type-heading-weight);
-    line-height: var(--type-heading-line);
-    color: var(--accent);
     margin: 2px 0 8px 0;
 }
 .comment-body p {
@@ -1108,6 +1106,14 @@ input, button, textarea, select {
 
 .bot-request-panel.open {
     display: flex;
+}
+
+.bot-request-panel .card-comment {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+.bot-request-panel .card-comment.visible {
+    opacity: 1;
 }
 
 .message-panel-body {
@@ -1797,7 +1803,7 @@ input, button, textarea, select {
 
 #msgCardWindow.short-message-panel .creator-messages {
     flex: none;
-    max-height: calc(85vh - 76px);
+    max-height: calc(min(500px, 85vh) - 76px);
     overflow-y: auto;
 }
 
@@ -2739,12 +2745,12 @@ input, button, textarea, select {
 .intro-body {
   position: relative;
   display: grid;
-  grid-template-columns: 240px 1fr 260px;
+  grid-template-columns: 500px 1fr 260px;
   grid-template-areas:
     "about center chat";
   align-items: start;
   background:
-    linear-gradient(to right, transparent 240px, rgba(255, 138, 247, 0.2) 240px, rgba(255, 138, 247, 0.2) 241px, transparent 241px),
+    linear-gradient(to right, transparent 500px, rgba(255, 138, 247, 0.2) 500px, rgba(255, 138, 247, 0.2) 501px, transparent 501px),
     linear-gradient(to left, transparent 260px, rgba(255, 138, 247, 0.2) 260px, rgba(255, 138, 247, 0.2) 261px, transparent 261px);
   border-bottom: 1px solid rgba(255, 138, 247, 0.2);
 }
@@ -2867,7 +2873,7 @@ input, button, textarea, select {
 }
 .col-left-gif {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   flex-shrink: 0;
   background: var(--black);
@@ -2896,7 +2902,7 @@ input, button, textarea, select {
   border-radius: 6px;
 }
 .col-left-info {
-  padding: 9px 10px 10px;
+  padding: 12px;
   border-top: 1px solid rgba(255, 138, 247, 0.2);
   flex: 1;
   display: flex;
@@ -3745,8 +3751,7 @@ dl dd { color: var(--white); margin: 0; }
   }
   .col-chat {
     flex-basis: 320px;
-    height: 320px;
-    max-height: 320px;
+    height: 280px;
     min-height: 0;
     border-top: 1px solid rgba(255, 138, 247, 0.2);
   }

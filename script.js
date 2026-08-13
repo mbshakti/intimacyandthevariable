@@ -162,8 +162,8 @@ window.DESKTOP_LAYOUT = {
         thumbnail: 'bot-requests/img/road 96.png' },
       { type: 'msg-card', y: 3450, x: 550,  mayIndex: 8,  msgFile: 'community',
         label: 'message exchange',                 meta: '2 messages' },
-      { type: 'bot-post', y: 3650, x: 900,  postId: 'saladful-robots',
-        label: 'robot werewolf problem',           meta: 'saladful',                 color: '#f97316',
+      { type: 'bot-post', y: 3650, x: 900,  postId: 'goblin.hours-robots',
+        label: 'robot werewolf problem',           meta: 'goblin.hours',             color: '#f97316',
         thumbnail: 'bot-requests/img/robot animal.png' },
     ],
 
@@ -280,7 +280,7 @@ window.DESKTOP_LAYOUT = {
   // its own `band` so any single request can live in any topic.
   botRequestPanels: [
     { band: 'community', y: 280,  x: 1100 }, // [0] Experiment 0682, Ossix Ayto
-    { band: 'craft',     y: 2600, x: 200  }, // [1] Seeking a bodyguard
+    { band: 'craft',     y: 2600, x: 200,  visible: false }, // [1] Seeking a bodyguard (dupe of bot post)
     { band: 'community', y: 800,  x: 980  }, // [2] Mentally Unwell Dad (integrated, slot unused)
     { band: 'community', y: 1000, x: 380,  visible: false }, // [3] Thanos
     { band: 'community', y: 1200, x: 220,  visible: false }, // [4] Leonardo/Malcom
@@ -289,7 +289,7 @@ window.DESKTOP_LAYOUT = {
     { band: 'community', y: 1800, x: 100  }, // [7] succubus
     { band: 'community', y: 1900, x: 1080 }, // [8] Undercover stressful job
     { band: 'community', y: 2100, x: 400  }, // [9] Haunted Costume Shop
-    { band: 'community', y: 2280, x: 220  }, // [10] Road 96 RPG Journey Bot
+    { band: 'community', y: 2280, x: 220,  visible: false }, // [10] Road 96 RPG Journey Bot (dupe of bot post)
   ],
 
   imageSlots: { found: {}, botRequest: {} },
@@ -920,6 +920,7 @@ function closeAllWindows() {
     document.getElementById('cardWindow').classList.add('hidden');
     document.getElementById('infoWindow')?.classList.remove('active');
     document.getElementById('botRequestPanel')?.classList.remove('open');
+    clearBotRequestPlayback();
     document.getElementById('documentWindow').classList.remove('active');
     document.getElementById('folderWindow').classList.remove('active');
     document.getElementById('creatorChatWindow').classList.remove('active');
@@ -2045,41 +2046,60 @@ async function openBotPost(id) {
     container.innerHTML = '';
     if (typingEl) typingEl.innerHTML = '';
     if (msgCardTimer) { clearTimeout(msgCardTimer); msgCardTimer = null; }
+    clearMsgCardTypingTimers();
 
-    container.innerHTML = renderBotPost(post);
+    // First message shows with the panel; the rest play back like the chat windows.
+    const units = botPostUnits(post);
+    container.innerHTML = units[0].html;
+    requestAnimationFrame(() => {
+        container.querySelectorAll('.chat-message').forEach(el => el.classList.add('visible'));
+    });
+
+    let delay = 400;
+    units.slice(1).forEach(unit => {
+        msgCardTypingTimers.push(setTimeout(() => {
+            if (typingEl) typingEl.innerHTML = `${unit.username} is typing<span class="typing-cursor">...</span>`;
+        }, delay));
+        delay += Math.min(600 + unit.text.length * 6, 1800);
+        msgCardTypingTimers.push(setTimeout(() => {
+            if (typingEl) typingEl.innerHTML = '';
+            const wasAtBottom = isAtBottom(container);
+            container.insertAdjacentHTML('beforeend', unit.html);
+            playPing();
+            requestAnimationFrame(() => {
+                container.querySelectorAll('.chat-message:not(.visible)').forEach(el => el.classList.add('visible'));
+                if (wasAtBottom) forceScrollBottom(container);
+            });
+        }, delay));
+        delay += 300;
+    });
 
     const win = document.getElementById('msgCardWindow');
-    setMsgCardBare(true);
+    setMsgCardBare(false);
     win.classList.add('active');
     showChatFloatClose(closeMessageCard);
     playSound('open');
     setOverlay(true);
     taskbarAdd('msgCardWindow', 'bot post', '<path d="M15 20 C15 16,19 12,25 12 L55 12 C61 12,65 16,65 20 L65 42 C65 46,61 50,55 50 L30 50 L20 60 L20 50 L25 50 C19 50,15 46,15 42 Z" fill="#555"/>');
-    forceScrollBottom(container);
 }
 
-function renderBotPost(post) {
-    const parts = [];
+function botPostUnits(post) {
+    const units = [];
+    const push = (username, color, tags, msg) => units.push({
+        username,
+        text: msg.text || '',
+        html: renderBotMessage({
+            username, color, tags,
+            timestamp: msg.timestamp, text: msg.text, image: msg.image, reactions: msg.reactions || []
+        })
+    });
     if (post.thread) {
-        post.thread.forEach(msg => {
-            parts.push(renderBotMessage({
-                username: post.username, color: post.color, tags: post.tags || [],
-                timestamp: msg.timestamp, text: msg.text, image: msg.image, reactions: msg.reactions || []
-            }));
-        });
+        post.thread.forEach(msg => push(post.username, post.color, post.tags || [], msg));
     } else {
-        parts.push(renderBotMessage({
-            username: post.username, color: post.color, tags: post.tags || [],
-            timestamp: post.timestamp, text: post.text, image: post.image, reactions: post.reactions || []
-        }));
-        (post.comments || []).forEach(c => {
-            parts.push(renderBotMessage({
-                username: c.username, color: c.color, tags: c.tags || [],
-                timestamp: c.timestamp, text: c.text, image: c.image, reactions: c.reactions || []
-            }));
-        });
+        push(post.username, post.color, post.tags || [], post);
+        (post.comments || []).forEach(c => push(c.username, c.color, c.tags || [], c));
     }
-    return parts.join('');
+    return units;
 }
 
 function renderBotMessage({ username, color, tags = [], text, image, reactions = [] }) {
@@ -2110,7 +2130,7 @@ function renderBotMessage({ username, color, tags = [], text, image, reactions =
             ? `<div class="chat-reactions">${reactions.map(r => `<span class="chat-reaction visible"><span class="chat-reaction-emoji">${r.emoji}</span><span class="chat-reaction-count">${r.count}</span></span>`).join('')}</div>`
             : '';
         return `
-        <div class="card-comment chat-message visible">
+        <div class="card-comment chat-message">
             ${leftCol}
             <div class="comment-content">
                 ${headerHtml}${bodyHtml}${reactionsHtml}
@@ -2214,6 +2234,14 @@ loadCreatorChat().then(initBotRequestEntries);
 
 // ============ Inline bot-request entries on the desktop ============
 let currentBotRequestIdx = null;
+let botRequestTimers = [];
+function clearBotRequestPlayback() {
+    botRequestTimers.forEach(t => clearTimeout(t));
+    botRequestTimers = [];
+    clearMsgCardTypingTimers(); // typeMessageWords parks its timers here
+    const typingEl = document.getElementById('botRequestTyping');
+    if (typingEl) typingEl.innerHTML = '';
+}
 // Images that belong to a specific bot request panel (kept off the desktop)
 const botRequestImages = {
     'Experiment 0682 - Ossix Ayto': [
@@ -2314,11 +2342,22 @@ function toggleBotRequest(idx) {
         </div>
     ` : '';
 
-    const html = messages.map((msg, i) => {
-        const text = msg.text || '';
+    // Same convention as the message cards: short threads type word by word.
+    const isShortThread = messages.length <= 2;
+    const plainBody = t => String(t || '')
+        .replace(/<h3>[\s\S]*?<\/h3>/g, '')
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    const commentBlocks = messages.map((msg, i) => {
+        // The leading <h3> title already lives in the titlebar and icon label — don't repeat it in the bubble.
+        const text = String(msg.text || '').replace(/<h3>[\s\S]*?<\/h3>/g, '');
         const username = msg.username || 'anon';
         const isOp = i === 0;
-        const bodyContent = isOp ? `${text}${imagesHtml}` : text;
+        const bodyContent = isShortThread
+            ? `<span data-type-target></span><span class="typing-cursor">...</span>${isOp ? imagesHtml : ''}`
+            : (isOp ? `${text}${imagesHtml}` : text);
         return `
             <div class="card-comment${isOp ? ' op' : ''}">
                 <img class="avatar" src="${avatarFor(username)}" alt="">
@@ -2330,14 +2369,59 @@ function toggleBotRequest(idx) {
                 </div>
             </div>
         `;
-    }).join('');
+    });
 
     const titleEl = document.getElementById('botRequestTitle');
     const contentEl = document.getElementById('botRequestContent');
     if (titleEl) titleEl.textContent = title || 'bot request';
     if (contentEl) {
-        contentEl.innerHTML = html;
+        clearBotRequestPlayback();
+        contentEl.innerHTML = commentBlocks[0];
         contentEl.scrollTop = 0;
+
+        // Replies play back like the chat windows: typing line, then the message lands.
+        const typingEl = document.getElementById('botRequestTyping');
+        const scheduleMessage = (i, startDelay) => {
+            if (i >= messages.length) return;
+            const msg = messages[i];
+            const plain = plainBody(msg.text);
+            botRequestTimers.push(setTimeout(() => {
+                if (typingEl) typingEl.innerHTML = `${msg.username || 'anon'} is typing<span class="typing-cursor">...</span>`;
+            }, startDelay));
+            botRequestTimers.push(setTimeout(() => {
+                if (typingEl) typingEl.innerHTML = '';
+                const wasAtBottom = isAtBottom(contentEl);
+                contentEl.insertAdjacentHTML('beforeend', commentBlocks[i]);
+                const el = contentEl.lastElementChild;
+                playPing();
+                requestAnimationFrame(() => {
+                    el.classList.add('visible');
+                    if (wasAtBottom) forceScrollBottom(contentEl);
+                    if (isShortThread) {
+                        typeMessageWords(el.querySelector('[data-type-target]'), plain, {
+                            scroller: contentEl,
+                            onDone: () => scheduleMessage(i + 1, 300)
+                        });
+                    } else {
+                        scheduleMessage(i + 1, 300);
+                    }
+                });
+            }, startDelay + Math.min(600 + plain.length * 6, 1800)));
+        };
+
+        requestAnimationFrame(() => {
+            const first = contentEl.firstElementChild;
+            if (first) first.classList.add('visible');
+            if (isShortThread) {
+                // No scroller here: the OP types from the top of the panel, and
+                // following the bottom would pin tall requests (text + images) there.
+                typeMessageWords(first?.querySelector('[data-type-target]'), plainBody(messages[0].text), {
+                    onDone: () => scheduleMessage(1, 300)
+                });
+            } else {
+                scheduleMessage(1, 400);
+            }
+        });
     }
     panel.scrollTop = 0;
     panel.classList.add('open');
@@ -2350,6 +2434,7 @@ function toggleBotRequest(idx) {
 function closeBotRequest() {
     const panel = document.getElementById('botRequestPanel');
     if (!panel) return;
+    clearBotRequestPlayback();
     panel.classList.remove('open');
     hideChatFloatClose();
     currentBotRequestIdx = null;
@@ -4171,6 +4256,13 @@ async function hydrateDirectorNote(root = document) {
     target.innerHTML = `<p class="center-desc">// error loading filmmaker's note</p>`;
     console.error('Failed to load director note:', error);
   }
+}
+
+function openArchive() {
+  const desktop = document.querySelector('.desktop');
+  if (!desktop) return;
+  desktop.style.display = '';
+  requestAnimationFrame(() => desktop.scrollIntoView({ behavior: 'smooth' }));
 }
 
 function goBack() {
