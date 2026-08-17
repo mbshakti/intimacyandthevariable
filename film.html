@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Film Capture — Intimacy When the Other Side Is a Variable</title>
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/style.css?v=83">
+    <link rel="stylesheet" href="/film.css?v=9">
+</head>
+<body class="film-capture">
+    <button class="film-back-button" type="button" onclick="closeAllWindows()">Back</button>
+
+    <div class="page-wrap">
+        <div class="desktop">
+            <div class="desktop-canvas" aria-label="Film capture archive frames"></div>
+
+            <div class="desktop-overlay" id="desktopOverlay" onclick="closeAllWindows()"></div>
+
+            <div class="window document-window" id="documentWindow">
+                <div class="window-titlebar">
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeDocument()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title" id="documentTitle">about.txt</span>
+                </div>
+                <div class="document-body" id="documentContent"></div>
+                <div class="window-path-bar">/users/shakti/documents/</div>
+            </div>
+
+            <div class="window info-window" id="infoWindow">
+                <div class="window-titlebar">
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeWindow('infoWindow')"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title" id="infoWindowTitle">info</span>
+                </div>
+                <div class="info-window-body" id="infoWindowContent"></div>
+                <div class="window-path-bar">/users/shakti/homepage/</div>
+            </div>
+
+            <div class="window video-window" id="videoWindow">
+                <div class="window-titlebar">
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeVideoWindow()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title" id="videoWindowTitle">character ai</span>
+                    <div class="window-titlebar-spacer"></div>
+                </div>
+                <video id="videoPlayer" autoplay muted loop playsinline>
+                    <source src="" type="video/mp4">
+                </video>
+                <div class="window-path-bar">/users/shakti/videos/</div>
+            </div>
+
+            <div class="window iframe-window" id="iframeWindow">
+                <div class="window-titlebar">
+                    <div class="window-titlebar-spacer"></div>
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeIframeWindow()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title" id="iframeWindowTitle">-</span>
+                </div>
+                <iframe id="iframeContent" src="" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" allow="autoplay; encrypted-media; fullscreen"></iframe>
+                <div class="iframe-blocked" id="iframeBlocked">
+                    <span>this site can't be embedded</span>
+                </div>
+                <div class="window-path-bar" id="iframePathBar">/users/shakti/bookmarks/</div>
+            </div>
+
+            <div class="window iframe-comments-panel" id="iframeComments"></div>
+
+            <div class="window folder-window" id="folderWindow">
+                <div class="window-titlebar">
+                    <div class="window-titlebar-spacer"></div>
+                    <span class="window-title" id="folderTitle">Folder</span>
+                </div>
+                <div class="folder-body">
+                    <div class="folder-list" id="folderList"></div>
+                </div>
+                <div class="window-path-bar" id="folderPathBar">/users/shakti/</div>
+            </div>
+
+            <div class="message-panel chat-float-window window" id="msgCardWindow">
+                <div class="window-titlebar">
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeMessageCard()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title">messages</span>
+                    <div class="window-titlebar-spacer"></div>
+                </div>
+                <div class="creator-messages" id="msgCardMessages"></div>
+                <div class="chat-typing" id="msgCardTyping"></div>
+                <div class="window-path-bar">/users/shakti/messages/reddit_dms/</div>
+            </div>
+
+            <div class="chat-float-window window" id="groupChatWindow">
+                <div class="window-titlebar">
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeGroupChat()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title">bot group chat</span>
+                    <div class="window-titlebar-spacer"></div>
+                </div>
+                <div class="gc-chat-frame">
+                    <div class="creator-messages" id="groupChatMessages"></div>
+                    <div class="chat-typing" id="groupChatTyping"></div>
+                </div>
+                <div class="window-path-bar">/users/shakti/chat_sessions/group/</div>
+            </div>
+
+            <div class="chat-float-window window" id="creatorChatWindow">
+                <div class="window-titlebar">
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeCreatorChat()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title">chat</span>
+                    <div class="window-titlebar-spacer"></div>
+                </div>
+                <div class="creator-messages" id="creatorMessages"></div>
+                <div class="chat-typing" id="creatorTyping"></div>
+                <div class="window-path-bar">/users/shakti/chat_sessions/</div>
+            </div>
+
+            <div class="window file-window hidden" id="fileWindow">
+                <div class="window-titlebar">
+                    <span class="window-title" id="fileWindowTitle">File Viewer</span>
+                </div>
+                <div class="file-body" id="fileBody">
+                    <div id="jsonContent"></div>
+                </div>
+                <div class="window-path-bar" id="filePathBar">/users/shakti/files/</div>
+            </div>
+
+            <div class="window card-window hidden" id="cardWindow">
+                <div class="window-titlebar">
+                    <div class="window-traffic-lights">
+                        <button class="traffic-light traffic-close" onclick="closeCardWindow()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <span class="window-title" id="cardWindowTitle">judgemental_priest</span>
+                </div>
+                <div class="card-tabbar">
+                    <button class="card-side-toggle" data-view="chat" onclick="toggleCardSide('chat')">chat with bot</button>
+                    <button class="card-side-toggle" data-view="comments" onclick="toggleCardSide('comments')">comments</button>
+                </div>
+                <div class="card-body">
+                    <div class="card-data-pane">
+                        <pre id="cardJsonPretty">loading...</pre>
+                    </div>
+                    <div class="card-comments-pane">
+                        <div class="card-view active" id="cardCommentsView">
+                            <div id="cardCommentsList"></div>
+                        </div>
+                        <div class="card-view" id="cardChatView">
+                            <div id="cardChatMessages"></div>
+                            <div id="cardChatTyping"></div>
+                            <div class="card-chat-input-wrap">
+                                <input id="cardChatInput" type="text" placeholder="say something..." onkeypress="handleCardChatKeypress(event)" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="window-path-bar" id="cardPathBar">/users/shakti/character_data/</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="message-panel bot-request-panel window" id="botRequestPanel">
+        <div class="window-titlebar">
+            <div class="window-traffic-lights">
+                <button class="traffic-light traffic-close" onclick="closeBotRequest()"></button>
+                <button class="traffic-light traffic-minimize"></button>
+                <button class="traffic-light traffic-maximize"></button>
+            </div>
+            <span class="window-title" id="botRequestTitle">bot request</span>
+            <div class="window-titlebar-spacer"></div>
+        </div>
+        <div class="message-panel-body" id="botRequestContent"></div>
+        <div class="window-path-bar">/users/shakti/messages/bot_requests/</div>
+    </div>
+
+    <div class="window voice-memo-player hidden" id="voiceMemoPlayer">
+        <button class="vm-play" onclick="vmTogglePlay(event)"><svg width="8" height="10" viewBox="0 0 8 10" fill="currentColor"><path d="M0 0 L8 5 L0 10 Z"/></svg></button>
+        <span class="vm-time" id="vmTime">0:00</span>
+        <button class="vm-transcript" onclick="vmShowTranscript()" title="show transcript">read</button>
+        <button class="vm-close" onclick="closeVoiceMemo()" aria-label="close">x</button>
+        <div class="vm-progress" onclick="vmSeek(event)">
+            <div class="vm-fill" id="vmFill"></div>
+        </div>
+        <audio id="vmAudio" preload="metadata"></audio>
+        <div class="vm-captions" id="vmCaptions"></div>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+    </div>
+
+    <script src="/script.js?v=55"></script>
+</body>
+</html>

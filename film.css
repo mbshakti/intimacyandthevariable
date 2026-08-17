@@ -1,0 +1,203 @@
+/* Film capture page: same archive data, one 16:9 composition per item. */
+body.film-capture {
+    --bg: #000;
+    --surface: #000;
+    --surface-high: #000;
+    --black: #000;
+    overflow-x: hidden;
+    background: #000;
+}
+
+body.film-capture.modal-open {
+    position: static;
+    top: auto !important;
+}
+
+body.film-capture .page-wrap {
+    width: 100%;
+    margin: 0;
+    background: #000;
+}
+
+body.film-capture .desktop {
+    width: 100%;
+    min-height: 100vh;
+    background: #000;
+}
+
+body.film-capture .desktop-canvas,
+body.film-capture .band-grid-wrap,
+body.film-capture .band-grid,
+body.film-capture .band-grid > * {
+    background: #000;
+}
+
+body.film-capture.modal-open .desktop-canvas {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.film-capture .window {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+body.film-capture .card-data-pane,
+body.film-capture .card-comments-pane,
+body.film-capture .message-panel,
+body.film-capture .message-panel-body,
+body.film-capture .creator-messages,
+body.film-capture .chat-float-window,
+body.film-capture .document-body,
+body.film-capture .file-body,
+body.film-capture .folder-body,
+body.film-capture .gc-chat-frame,
+body.film-capture .iframe-window,
+body.film-capture .video-window {
+    background: transparent;
+    background-color: transparent;
+}
+
+body.film-capture .window-titlebar,
+body.film-capture .window-path-bar {
+    display: none;
+}
+
+body.film-capture .desktop-overlay,
+body.film-capture .desktop-overlay.active {
+    display: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.film-capture .film-back-button {
+    display: none;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    border: 1px solid rgba(249, 248, 248, 0.72);
+    border-radius: 4px;
+    background: #000;
+    color: var(--text);
+    padding: 10px 16px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+body.film-capture.modal-open .film-back-button {
+    display: block;
+}
+
+body.film-capture .film-back-button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+body.film-capture .band-grid-wrap {
+    width: 100%;
+    border: 0;
+}
+
+body.film-capture .band-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.film-capture .band-grid > * {
+    width: min(100vw, 177.7778vh);
+    aspect-ratio: 16 / 9;
+    border: 0;
+    padding: 96px;
+    position: relative;
+}
+
+body.film-capture .desktop-icon {
+    cursor: default;
+    gap: 8px;
+    pointer-events: none;
+}
+
+body.film-capture .desktop-icon .icon,
+body.film-capture .desktop-icon .portrait-icon,
+body.film-capture .desktop-icon .label,
+body.film-capture .desktop-icon .meta,
+body.film-capture .desktop-icon .play-pill {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+body.film-capture .desktop-icon .icon,
+body.film-capture .portrait-icon {
+    width: 88px;
+    height: 88px;
+}
+
+body.film-capture .desktop-icon .icon.img-thumb {
+    width: 112px;
+    height: 112px;
+}
+
+body.film-capture .desktop-icon .label {
+    max-width: 360px;
+    line-height: 1.22;
+    margin-top: 18px;
+}
+
+body.film-capture .desktop-icon .meta {
+    margin-top: 8px;
+}
+
+body.film-capture .desktop-icon .play-pill {
+    margin-top: 14px;
+}
+
+body.film-capture .guide-grid-frame {
+    pointer-events: auto;
+}
+
+body.film-capture .guide-card-icon {
+    width: clamp(56px, 5.4vw, 106px);
+}
+
+@media (max-width: 760px) {
+    body.film-capture .band-grid > * {
+        width: 100vw;
+        padding: 36px 24px;
+    }
+
+    body.film-capture .desktop-icon .icon,
+    body.film-capture .portrait-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    body.film-capture .desktop-icon .icon.img-thumb {
+        width: 72px;
+        height: 72px;
+    }
+
+    body.film-capture .desktop-icon .label {
+        max-width: 82vw;
+    }
+
+    body.film-capture .guide-grid-frame {
+        aspect-ratio: auto;
+        min-height: 100vh;
+        padding: 44px 24px;
+    }
+
+    body.film-capture .guide-grid-cards {
+        grid-template-columns: 1fr;
+    }
+
+    body.film-capture .guide-card-icon {
+        width: 58px;
+    }
+}
+

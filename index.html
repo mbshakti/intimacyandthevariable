@@ -114,7 +114,6 @@
         <header class="landing-header">
             <nav class="landing-section-nav" aria-label="Film sections">
                 <a data-landing-section="film" onclick="showLandingSection('film')">Film</a>
-                <a data-landing-section="about" onclick="showLandingSection('about')">About</a>
                 <a data-landing-section="credits" onclick="showLandingSection('credits')">Team &amp; Thanks</a>
                 <a data-landing-section="filmCredits" onclick="showLandingSection('filmCredits')">Credits</a>
                 <a data-landing-section="contact" onclick="showLandingSection('contact')">Contact</a>
@@ -134,7 +133,9 @@
                 <section class="landing-box landing-box-desc">
                     <div class="landing-desc-swap" id="landingBoxDesc">
                         <p class="landing-desc">In 2022, a new kind of technology arrived into the world — LLM chatbots. It was around this time, I stumbled into a subculture I've started to get obsessed with. A subculture around bot making.</p>
-                        <p class="landing-desc">I spent three years lurking in the online spaces where people build AI roleplay bots. This film is an invitation for you to be a voyeur in these spaces with me. If you're interested in human behavior, internet subcultures, or the psychology of botmakers — this film is for you.</p>
+                        <p class="landing-desc">Hey, I'm <a href="https://shaktimb.com" target="_blank">Shakti Mb</a>, a documentarian, filmmaker, and artist. This web archive contains found objects from my two years of lurking in online spaces where people make AI bots together. The most rigorous experiments around making a bot's personality feel "real" are happening within these spaces. These found objects include discord chat messages, PDF personality creation guides, JSON personality code, and bot requests I collected and saved. The most interesting thing I found was sharing JSON files.</p>
+                        <p class="landing-desc">This film is an invitation for you to be a voyeur in these spaces with me. If you're interested in human behavior, internet subcultures, or the psychology of botmakers — this film is for you.</p>
+                        <p class="landing-desc">This project is supported by <a href="https://rhizome.org" target="_blank">Rhizome</a>, <a href="https://newinc.org" target="_blank">NEW INC</a>, <a href="https://mercatus.org/emergent-ventures" target="_blank">Emergent Ventures</a>, <a href="https://www.mozilla.org" target="_blank">Mozilla</a>.</p>
                     </div>
                         <form class="landing-invite-form" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                             <input type="hidden" name="form-name" value="screening-invites">
@@ -404,7 +405,7 @@
 
             <div class="desktop-icon" data-msg="welcome-to-bot-dementia" onclick="toggleMsgInline('welcome-to-bot-dementia')">
                 <div class="icon">
-                    <img src="img/icons/stressed_parents.png" alt="welcome to bot dementia">
+                    <img src="img/icons/unhinged.png" alt="welcome to bot dementia">
                 </div>
                 <span class="label">welcome to bot dementia</span>
                 <span class="metadata">3 messages</span>
@@ -418,6 +419,7 @@
                 <span class="metadata">2 messages</span>
             </div>
 
+            <!-- hidden
             <div class="desktop-icon" data-msg="be-careful-not-to-set-so-many-rules" onclick="toggleMsgInline('be-careful-not-to-set-so-many-rules')">
                 <div class="icon">
                     <img src="img/icons/ruler.png" alt="be careful not to set so many rules">
@@ -425,6 +427,8 @@
                 <span class="label">be careful not to set so many rules</span>
                 <span class="metadata">1 message</span>
             </div>
+            -->
+
 
             <div class="desktop-icon" data-msg="json-vs-plain-text" onclick="toggleMsgInline('json-vs-plain-text')">
                 <div class="icon">
@@ -1854,7 +1858,6 @@
 
         const landingSectionTitles = {
             film: 'Film',
-            about: 'About',
             credits: 'Team & Thanks',
             filmCredits: 'Credits',
             contact: 'Contact'
@@ -1863,14 +1866,10 @@
         const landingSections = {
             film: `
                 <p class="landing-desc">In 2022, a new kind of technology arrived into the world — LLM chatbots. It was around this time, I stumbled into a subculture I've started to get obsessed with. A subculture around bot making.</p>
-                <p class="landing-desc">I spent three years lurking in the online spaces where people build AI roleplay bots. This film is an invitation for you to be a voyeur in these spaces with me. If you're interested in human behavior, internet subcultures, or the psychology of botmakers — this film is for you.</p>
+                <p class="landing-desc">Hey, I'm <a href="https://shaktimb.com" target="_blank">Shakti Mb</a>, a documentarian, filmmaker, and artist. This web archive contains found objects from my two years of lurking in online spaces where people make AI bots together. The most rigorous experiments around making a bot's personality feel "real" are happening within these spaces. These found objects include discord chat messages, PDF personality creation guides, JSON personality code, and bot requests I collected and saved. The most interesting thing I found was sharing JSON files.</p>
+                <p class="landing-desc">This film is an invitation for you to be a voyeur in these spaces with me. If you're interested in human behavior, internet subcultures, or the psychology of botmakers — this film is for you.</p>
+                <p class="landing-desc">This project is supported by <a href="https://rhizome.org" target="_blank">Rhizome</a>, <a href="https://newinc.org" target="_blank">NEW INC</a>, <a href="https://mercatus.org/emergent-ventures" target="_blank">Emergent Ventures</a>, <a href="https://www.mozilla.org" target="_blank">Mozilla</a>.</p>
 `,
-
-            about: `
-                                <p>Hey, I'm <a href="https://shaktimb.com" target="_blank">Shakti Mb</a>, a documentarian, filmmaker, and artist. This web archive contains found objects from my two years of lurking in online spaces where people make AI bots together. The most rigorous experiments around making a bot's personality feel "real" are happening within these spaces. They're learning how to codify personality, how to create an AI character, how to maintain personality consistency in a non-deterministic system, how to compress complex psychology behavior into a word limit.</p>
-                <p>One bot maker I spoke with, a clinical psychology student, told me: "I can finally create the characters I've had in my head for so long." There was longing in how she said it, the desire to take something that only lived in her imagination and make it real enough for someone else to experience.</p>
-                <p>These found objects include discord chat messages, PDF personality creation guides, JSON personality code, and bot requests I collected and saved. The most interesting thing I found was sharing JSON files.</p>
-                <p>This project is supported by <a href="https://rhizome.org" target="_blank">Rhizome</a>, <a href="https://newinc.org" target="_blank">NEW INC</a>, <a href="https://mercatus.org/emergent-ventures" target="_blank">Emergent Ventures</a>.</p>`,
 
             credits: `
                 <div class="inline-credits">
