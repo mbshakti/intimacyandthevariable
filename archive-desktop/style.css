@@ -3633,6 +3633,11 @@ body {
     .landing-video-frame {
         display: none;
     }
+
+    /* Phones only: the film / signup box shows on the landing, not inside a chapter */
+    body.in-chapter .landing-header {
+        display: none;
+    }
 }
 
 /* ===== Desktop icons, desktop-voyeur treatment ===== */
