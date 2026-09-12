@@ -3642,6 +3642,11 @@ body {
         display: none;
     }
 
+    /* Phones: full-width email field with the button on its own row below, both tall enough to tap */
+    .landing-invite-row { flex-direction: column; gap: 10px; }
+    .landing-invite-input { height: 48px; font-size: 16px; padding: 0 14px; }
+    .landing-invite-submit { height: 48px; width: 100%; font-size: 13px; }
+
     /* Phones only: the film / signup box shows on the landing, not inside a chapter */
     body.in-chapter .landing-header {
         display: none;

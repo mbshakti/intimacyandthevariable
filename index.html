@@ -81,7 +81,7 @@
     }
     </script>
     
-    <link href="style.css?v=31" rel="stylesheet">
+    <link href="style.css?v=32" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -92,10 +92,6 @@
 
 
 
-
-    <div class="mini-chat" id="miniChat">
-        <div class="mini-chat-body" id="miniChatBody"></div>
-    </div>
 
     <div class="monologue-chat" id="monologueChat">
         <div class="monologue-chat-header">
@@ -2022,6 +2018,7 @@
 
             const body = document.getElementById('miniChatBody');
             const chat = document.getElementById('miniChat');
+            if (!chat) return; // the mini chat strip is no longer on the page
             const group = miniChatGroups[miniChatGroupIndex];
             const msg = group[miniChatMsgIndex];
 
@@ -2091,6 +2088,7 @@
                 miniChatTimer = null;
             }
             const chat = document.getElementById('miniChat');
+            if (!chat) return; // the mini chat strip is no longer on the page
             const body = document.getElementById('miniChatBody');
             chat.classList.remove('visible');
             body.innerHTML = '';
@@ -4341,6 +4339,38 @@
                 resizeTimer = setTimeout(positionChapterIcons, 150);
             });
         });
+        // ---- Touch: act on the tap itself, not on Safari's synthesized click ----
+        // iOS withholds or delays clicks after scrolling and around hover
+        // emulation, which reads as "tap it three times". A finger that goes
+        // down and comes up in place fires the target straight away; the native
+        // click that would follow is cancelled so nothing runs twice.
+        (function tapFast() {
+            let start = null;
+            const TAP_TARGETS = '[onclick], button, a, .chapter-crumb-home';
+            document.addEventListener('touchstart', e => {
+                if (e.touches.length !== 1) { start = null; return; }
+                const t = e.touches[0];
+                start = { x: t.clientX, y: t.clientY, at: Date.now(), target: e.target };
+            }, { passive: true });
+            document.addEventListener('touchmove', e => {
+                if (!start) return;
+                const t = e.touches[0];
+                if (Math.hypot(t.clientX - start.x, t.clientY - start.y) > 12) start = null;
+            }, { passive: true });
+            document.addEventListener('touchcancel', () => { start = null; }, { passive: true });
+            document.addEventListener('touchend', e => {
+                if (!start) return;
+                const s = start; start = null;
+                if (Date.now() - s.at > 700) return;
+                const el = s.target.closest ? s.target.closest(TAP_TARGETS) : null;
+                if (!el) return;
+                // Leave form controls and text inputs to the browser
+                if (el.closest('form') || el.matches('input, textarea, select, label')) return;
+                e.preventDefault();
+                el.click();
+            }, { passive: false });
+        })();
+
         // scatterIcons() above laid the whole archive out at once; it is kept
         // for reference but no longer runs, the chapters replace it.
 
