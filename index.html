@@ -81,7 +81,7 @@
     }
     </script>
     
-    <link href="style.css?v=28" rel="stylesheet">
+    <link href="style.css?v=29" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -4008,14 +4008,22 @@
                 icon.classList.add('diary-focus');
             }
             const body = document.getElementById(sticky ? 'stickyBody' : 'diaryPanelBody');
-            body.innerHTML = sticky ? '<div class="sticky-editor"></div>' : '<div class="notepad-editor" contenteditable="true" spellcheck="false"></div>';
+            body.innerHTML = sticky ? '<div class="sticky-editor"></div>' : '<div class="notepad-editor"></div>';
             panel.classList.add('open');
             const editor = body.querySelector(sticky ? '.sticky-editor' : '.notepad-editor');
-            if (!sticky) editor.focus({ preventScroll: true });
             const text = await noteTextFor(item);
             if (gen !== notepadGen || !text) return;
             if (sticky) pasteLikeClipboard(editor, text, gen, panel);
-            else typeLikeHuman(editor, text, gen, panel);
+            else renderNoteText(editor, text);
+            body.scrollTop = 0;
+        }
+
+        // Diary entries show whole: ~~struck~~ words keep their strike, blank lines break paragraphs
+        function renderNoteText(editor, text) {
+            const html = esc(text)
+                .replace(/~~([^~]+)~~/g, '<s class="np-strike">$1</s>')
+                .split(/\n\s*\n/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+            editor.innerHTML = html;
         }
 
         // What a note types out: a script beat, a diary entry, or (for a recorded
@@ -4036,43 +4044,6 @@
             }
             const md = await fetchText(diarySrc(item.src || 'script/part-3-bot-requests.md'));
             return /^## BEAT /m.test(md) ? extractBeatQuote(md, item.beat || 7) : md.trim();
-        }
-
-        function typeLikeHuman(editor, text, gen, panel) {
-            const body = editor.parentElement;
-            let i = 0, sentence = null, strike = false, strikeEl = null;
-            const pending = []; let wordsIntoNext = 0;
-            const endSentence = () => { if (sentence) { pending.push(sentence); sentence = null; strikeEl = null; wordsIntoNext = 0; } };
-            const dimPending = () => { pending.forEach(s => s.classList.add('np-done')); pending.length = 0; };
-            const caretToEnd = () => {
-                const sel = window.getSelection(); const range = document.createRange();
-                range.selectNodeContents(editor); range.collapse(false); sel.removeAllRanges(); sel.addRange(range);
-            };
-            (function step() {
-                if (gen !== notepadGen || !editor.isConnected || !panel.classList.contains('open')) return;
-                if (i >= text.length) return;
-                const ch = text[i++];
-                if (ch === '~' && text[i] === '~') { i++; strike = !strike; strikeEl = null; step(); return; }
-                if (ch === '\n') { endSentence(); editor.appendChild(document.createElement('br')); }
-                else {
-                    if (!sentence) { sentence = document.createElement('span'); sentence.className = 'np-sentence'; editor.appendChild(sentence); }
-                    let target = sentence;
-                    if (strike) { if (!strikeEl) { strikeEl = document.createElement('s'); strikeEl.className = 'np-strike'; sentence.appendChild(strikeEl); } target = strikeEl; }
-                    if (target.lastChild && target.lastChild.nodeType === Node.TEXT_NODE) target.lastChild.appendData(ch);
-                    else target.appendChild(document.createTextNode(ch));
-                    if (ch === ' ' && pending.length && ++wordsIntoNext >= 3) dimPending();
-                    const next = text[i], prev = text[i - 2];
-                    if (('.!?'.includes(ch) && (next === undefined || next === ' ' || next === '\n')) || (ch === '"' && prev !== undefined && '.!?'.includes(prev))) endSentence();
-                }
-                caretToEnd();
-                body.scrollTop = body.scrollHeight;
-                let delay = 35 + Math.random() * 90;
-                if (',;:'.includes(ch)) delay = 230 + Math.random() * 180;
-                if ('.!?'.includes(ch)) delay = 450 + Math.random() * 380;
-                if (ch === '\n') delay = 600 + Math.random() * 330;
-                else if (Math.random() < 0.03) delay += 300 + Math.random() * 400;
-                setTimeout(step, delay);
-            })();
         }
 
         // Clippings: one paragraph at a time, pasted in whole. › (or the right arrow key) moves on.

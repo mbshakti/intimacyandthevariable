@@ -3944,21 +3944,17 @@ body {
 .te-stop { position: relative; width: 0; display: flex; justify-content: center; line-height: 1; }
 .te-stop::before { content: ''; position: absolute; top: -6px; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid rgba(0, 0, 0, 0.55); }
 .te-margin::before { border: none; width: 1px; height: 12px; top: -8px; background: rgba(0, 0, 0, 0.55); }
-.diary-panel-body { height: 184px; overflow: hidden; scroll-behavior: smooth; padding: 24px 28px 0; line-height: 1.6; }
+.diary-panel-body { max-height: 320px; overflow-y: auto; padding: 22px 28px 24px; line-height: 1.6; }
 .desktop-icon.diary-focus { z-index: 99; }
 .notepad-editor {
-    min-height: 100%;
-    outline: none;
-    caret-color: var(--accent);
     color: #000000;
     font-family: var(--font-ui-2);
     letter-spacing: 0;
-    font-size: 20px;
-    padding-bottom: 16px;
+    font-size: 17px;
 }
+.notepad-editor p { margin: 0 0 14px; }
+.notepad-editor p:last-child { margin-bottom: 0; }
 .notepad-editor .np-strike { text-decoration: line-through; text-decoration-color: var(--accent); text-decoration-thickness: 3px; }
-.notepad-editor .np-sentence { transition: opacity 0.8s ease; }
-.notepad-editor .np-sentence.np-done { opacity: 0.5; }
 
 /* Clippings card: one note at a time, centred Lekton */
 .sticky-note {
@@ -4237,7 +4233,7 @@ body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
         cursor: pointer;
     }
     .te-close svg { width: 22px; height: 22px; }
-    .diary-panel-body { height: 40vh; }
+    .diary-panel-body { max-height: 46vh; }
 
     /* Clippings sheet */
     .sticky-note.open { display: block; }
