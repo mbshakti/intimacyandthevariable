@@ -1565,7 +1565,8 @@
             } else {
                 const avatarSrc = msg.noAvatar ? null : (msg.avatar || getArchiveAvatar(msg.username));
                 const avatarClass = avatarSrc && avatarSrc.includes('anime-bitmap') ? 'avatar avatar-top' : 'avatar';
-                avatarHtml = avatarSrc ? `<img class="${avatarClass}" src="${avatarSrc}" alt="">` : '';
+                // If an avatar file is missing, swap in one from the pool rather than showing a broken image
+                avatarHtml = avatarSrc ? `<img class="${avatarClass}" src="${avatarSrc}" alt="" onerror="this.onerror=null;this.src=getArchiveAvatar('${String(msg.username || '').replace(/'/g, '')}')">` : '';
             }
 
             let bodyHtml;
@@ -1608,7 +1609,14 @@
                     try {
                         const res = await fetch(`chat/${theme}.json`);
                         const list = await res.json();
-                        list.forEach(t => { data[t.id] = { ...t, label: t.label || t.title, theme }; });
+                        list.forEach(t => {
+                            // Avatar paths in the archive point at desktop-voyeur's img/ folder;
+                            // here those files live under content/img
+                            const messages = (t.messages || []).map(m => m.avatar
+                                ? { ...m, avatar: m.avatar.replace(/^img\/discord(%20| )avatars\//, '../content/img/discord%20avatars/') }
+                                : m);
+                            data[t.id] = { ...t, messages, label: t.label || t.title, theme };
+                        });
                     } catch (err) {
                         console.error(`Failed to load chat/${theme}.json`, err);
                     }
