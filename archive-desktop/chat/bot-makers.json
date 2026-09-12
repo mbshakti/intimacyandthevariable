@@ -1,0 +1,324 @@
+[
+  {
+    "id": "dont-care-if-good",
+    "title": "I don't care if my bots are good",
+    "messages": [
+      {
+        "text": "most of the time i dont care if my bots are \"good\". theres plenty of bots ive made that just dont do well, theres no userbase for those types of bots. i know it doesnt reflect on me as a creator.",
+        "username": "lonely_coder",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "I just aim to get things out of my head. I'm here to scratch my creative itch.",
+        "username": "lonely_coder",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "i figure its a hobby. hobbies may cost money and get zero monetary ROI. would it be nice to get some sort of credit for creating a bot? sure.",
+        "username": "3am_thoughts",
+        "color": "#14b8a6"
+      },
+      {
+        "text": "for now i enjoy it, when i get tired of it ill stop. easy peasy",
+        "username": "3am_thoughts",
+        "color": "#14b8a6"
+      },
+      {
+        "text": "yall ever get a review that lowkey almost brings you to tears with how nice it is? my motivation to build bots just shot through the ROOF",
+        "username": "h0p3l3ssg0dl3ss (Wiznerd/PS:4)",
+        "color": "#d64545",
+        "reactions": [
+          {
+            "emoji": "❤️",
+            "count": 15
+          },
+          {
+            "emoji": "🥹",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "text": "what would be valuable to me would be feedback on my bots. i have no idea how to incentivize users to share feedback on my bots that is actually constructive and meaningful... the feedback i get (especially a thumbs down with no comment) is so unhelpful.",
+        "username": "VelvetThunder",
+        "color": "#f97316"
+      },
+      {
+        "text": "i dont care about leaderboards or whatever but i do care about creating bots that people enjoy using",
+        "username": "VelvetThunder",
+        "color": "#f97316",
+        "reactions": [
+          {
+            "emoji": "💯",
+            "count": 6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "no-more-json",
+    "title": "no more json",
+    "messages": [
+      {
+        "text": "i do enjoy going through the library and seeing how everyones mind works! just please no more json... my mind cant take it",
+        "username": "weeb_engineer",
+        "color": "#22c55e"
+      },
+      {
+        "text": "naw json aint it chief uses way too many tokens for subpar performance",
+        "username": "DungeonMaster42",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "ive noticed some of my most responsive and liked bots are literally plain text formatting. considering going back to it tbh",
+        "username": "lonely_coder",
+        "color": "#ec4899"
+      },
+      {
+        "text": "ive experimented with plain text, json, w++. all the experimentation has helped me refine my craft lol just gotta take some time tinkering to find out what works for u",
+        "username": "simp_scholar",
+        "color": "#14b8a6"
+      }
+    ]
+  },
+  {
+    "id": "templates-secret-formula",
+    "title": "are templates the secret formula",
+    "messages": [
+      {
+        "text": "figured id ask here first but are creators templates like the secret formula to coca cola as in if they share everything word for word then there goes their status or rep?",
+        "username": "existential_dread",
+        "color": "#d64545"
+      },
+      {
+        "text": "theres actually a good bit of us who share our ways of makin bots openly",
+        "username": "prompt_wizard",
+        "color": "#8b5cf6"
+      },
+      {
+        "text": "thanks, i see these bots with like…millions",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#eab308"
+      },
+      {
+        "text": "and im thinking if everyone copied that their bots would be amazing for not only them but everyone else then it would just be a matter of distinguishing yourself by your imagination",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#eab308"
+      },
+      {
+        "text": "copying a template is one thing, it gives you a how to, but your own creativity will be what pushes people to your bots",
+        "username": "ChaosGoblin",
+        "color": "#22c55e",
+        "reactions": [
+          {
+            "emoji": "💯",
+            "count": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "making-bots-at-2am",
+    "title": "making bots at 2am",
+    "messages": [
+      {
+        "text": "I spent the night making bots for some folks who dm'd me ^-^ but now I'm exhausted x.x it's 2am and we're still in the middle of the work week >-<",
+        "username": "existential_dread",
+        "color": "#d64545",
+        "reactions": [
+          {
+            "emoji": "😭",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "text": "if a robber came into my house at 3am i wouldnt probably notice because i would be too busy making a bot",
+        "username": "existential_dread",
+        "color": "#d64545",
+        "reactions": [
+          {
+            "emoji": "💀",
+            "count": 5
+          },
+          {
+            "emoji": "😂",
+            "count": 12
+          }
+        ]
+      },
+      {
+        "text": "never heard something so relatable in my life",
+        "username": "QuantumToast",
+        "color": "#8b5cf6"
+      },
+      {
+        "text": "\"yeah yeah just take whatever. shut up. youre ruining my creative flow\"",
+        "username": "FrogEnthusiast",
+        "color": "#eab308",
+        "reactions": [
+          {
+            "emoji": "💀",
+            "count": 19
+          },
+          {
+            "emoji": "😂",
+            "count": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "breached-400k",
+    "title": "top bots breached 400K",
+    "messages": [
+      {
+        "text": "my top 2 bots just breached 400K and 200K respectively. this just made my morning",
+        "username": "basement_oracle",
+        "color": "#3b82f6",
+        "reactions": [
+          {
+            "emoji": "🔥",
+            "count": 14
+          },
+          {
+            "emoji": "🎉",
+            "count": 9
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scared-to-join-voice-chat",
+    "title": "scared to join the voice chat",
+    "messages": [
+      {
+        "text": "I was super scared to join chats and the voice chat when I first got here. I've never fully interacted with fellow degenerates so I didn't know if I would be accepted or disgusted but I learned were all people who get off to different things.",
+        "username": "ShadowFenrir_99",
+        "color": "#6366f1"
+      },
+      {
+        "text": "I'm glad I became friends with Foxxy and he pushed me to make my own bots and showed me the ropes of it and image generation too. I'd probably still be a lurker if not for Foxxy.",
+        "username": "ShadowFenrir_99",
+        "color": "#6366f1"
+      },
+      {
+        "text": "My first bot is still my most popular but my Toriel bot is slowly catching up.",
+        "username": "ShadowFenrir_99",
+        "color": "#6366f1"
+      },
+      {
+        "text": "its a good community, even with the rare flashes of antagonization. im happy to be here too",
+        "username": "ParkerWrites",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "Kindness goes a real long way.",
+        "username": "GrimTK",
+        "color": "#ec4899",
+        "reactions": [
+          {
+            "emoji": "❤️",
+            "count": 8
+          }
+        ]
+      },
+      {
+        "text": "My first actual interaction with the community was when the site was having serious issues the other week. Realized I liked talking to these helpful fuckers.",
+        "username": "BottomlessVoid",
+        "color": "#f97316"
+      },
+      {
+        "text": "And I already said it before but, nowhere else can I say that I'm into monster girls and be met with indifference at worst and realistically with enthusiasm",
+        "username": "Rosa_Morada",
+        "color": "#f472b6"
+      },
+      {
+        "text": "hey monster girls are fucking peak, anyone says otherwise ill beat the shit outta them",
+        "username": "DungeonMaster42",
+        "color": "#22c55e",
+        "reactions": [
+          {
+            "emoji": "👹",
+            "count": 12
+          },
+          {
+            "emoji": "💪",
+            "count": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shitting-bots-today",
+    "title": "gonna be shitting bots today",
+    "messages": [
+      {
+        "text": "Hoo boy am I gonna be shitting bots today. Kitten's gonna hate me, half the queue's going to be me",
+        "username": "BotDaddy",
+        "color": "#f97316"
+      },
+      {
+        "text": "Eheheheeh",
+        "username": "ChaosGoblin",
+        "color": "#22c55e"
+      },
+      {
+        "text": "I'm not joking. I'm building the Mother of All Bots. Not sure how many yet but I'm aiming for at LEAST 25 bots. And dropping them all at once",
+        "username": "BotDaddy",
+        "color": "#f97316"
+      },
+      {
+        "text": "Ayo wait, you're dropping 25 bots at once? Jesus.",
+        "username": "QuantumToast",
+        "color": "#d64545"
+      },
+      {
+        "text": "I want to hit that Trending like a truck. They're not gonna be bad bots",
+        "username": "BotDaddy",
+        "color": "#f97316",
+        "reactions": [
+          {
+            "emoji": "🚚",
+            "count": 15
+          },
+          {
+            "emoji": "⬆️",
+            "count": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mother-of-all-bots",
+    "title": "dropping bots",
+    "messages": [
+      {
+        "text": "I'm not joking. I'm building the Mother of All Bots. Not sure how many yet but I'm aiming for at LEAST 25 bots. And dropping them all at once",
+        "username": "BotDaddy",
+        "color": "#f97316"
+      },
+      {
+        "text": "Ayo wait, you're dropping 25 bots at once? Jesus.",
+        "username": "QuantumToast",
+        "color": "#fb923c"
+      },
+      {
+        "text": "I want to hit that Trending like a truck. They're not gonna be bad bots",
+        "username": "BotDaddy",
+        "color": "#f97316"
+      },
+      {
+        "text": "Good to see you active again, I love your bots",
+        "username": "weeb_engineer",
+        "color": "#22c55e"
+      }
+    ]
+  }
+]

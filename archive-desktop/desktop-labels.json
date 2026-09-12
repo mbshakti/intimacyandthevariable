@@ -1,0 +1,407 @@
+{
+  "bot-requests": {
+    "diary-notepad-discourse": {
+      "label": "diary",
+      "meta": null,
+      "x": 400
+    },
+    "character-jsons": {
+      "label": "found bots",
+      "meta": "8 bots",
+      "x": 600
+    },
+    "char-requests": {
+      "label": "bot requests",
+      "meta": "3 requests",
+      "x": 600
+    },
+    "msg-making-bots-at-2am": {
+      "label": "making bots at 2am",
+      "meta": "4 messages"
+    },
+    "msg-voice-requests": {
+      "label": "voice requests",
+      "meta": "7 messages"
+    },
+    "mentally-unwell-dad": {
+      "label": "mentally unwell dad & stressed mom",
+      "meta": "bot request"
+    },
+    "bot-request-0": {
+      "label": "Experiment 0682, Ossix Ayto",
+      "meta": "bot request",
+      "x": 900
+    },
+    "seeking-a-bodyguard": {
+      "label": "seeking a bodyguard",
+      "meta": "bot request",
+      "x": 160
+    },
+    "bot-request-5": {
+      "label": "a giant with a golden heart",
+      "meta": "bot request",
+      "x": 560
+    },
+    "bot-request-6": {
+      "label": "Dee Leanne Hopfensperger",
+      "meta": "bot request",
+      "x": 1000
+    },
+    "bot-request-7": {
+      "label": "a succubus who tempts you to be a better person",
+      "meta": "bot request",
+      "x": 220
+    },
+    "bot-request-8": {
+      "label": "undercover stressful job",
+      "meta": "bot request",
+      "x": 720
+    },
+    "bot-request-9": {
+      "label": "haunted costume shop",
+      "meta": "bot request",
+      "x": 300
+    },
+    "bot-request-3": {
+      "label": "Thanos, philosophy and nihilism",
+      "meta": "bot request",
+      "x": 380
+    },
+    "bot-request-4": {
+      "label": "Leonardo/Malcom",
+      "meta": "bot request",
+      "x": 220
+    },
+    "kimono-furry": {
+      "label": "pinned to the floor",
+      "meta": "bot request",
+      "x": 940
+    },
+    "milf-muffet": {
+      "label": "Milf Muffet",
+      "meta": "bot request",
+      "x": 400
+    },
+    "road-96": {
+      "label": "Road 96 RPG",
+      "meta": "bot request",
+      "x": 800
+    },
+    "saladful-robots": {
+      "label": "robot werewolf problem",
+      "meta": "bot request",
+      "x": 140
+    },
+    "found-bot-portrait": {
+      "label": "00137-2557897375.png",
+      "meta": "1200 × 1600",
+      "x": 780
+    }
+  },
+  "bot-makers": {
+    "inbox": {
+      "label": "inbox",
+      "meta": "1 new",
+      "x": 150
+    },
+    "maker-chat": {
+      "label": "maker chat",
+      "meta": "#maker-chat",
+      "x": 180
+    },
+    "maker-help": {
+      "label": "maker help",
+      "meta": "#maker-help"
+    },
+    "msg-reddit-dm-intro": {
+      "label": "the reddit DM",
+      "meta": "2 messages"
+    },
+    "chris-ai-waifus": {
+      "label": "guys want AI waifus",
+      "meta": "interview"
+    },
+    "delta-first-interaction": {
+      "label": "first interaction with chatbots",
+      "meta": "interview"
+    },
+    "delta-psychology": {
+      "label": "what hooked her",
+      "meta": "interview"
+    },
+    "delta-demon": {
+      "label": "the word demon",
+      "meta": "interview"
+    },
+    "delta-structure": {
+      "label": "structure, then let them go",
+      "meta": "interview"
+    },
+    "delta-method": {
+      "label": "thirty or forty characters",
+      "meta": "interview"
+    },
+    "delta-confident": {
+      "label": "the word confident",
+      "meta": "interview"
+    },
+    "diary-notepad-3": {
+      "label": "diary",
+      "meta": null,
+      "x": 820
+    },
+    "delta-guide-pdf": {
+      "label": "delta's character creation guide",
+      "meta": "PDF"
+    },
+    "delta-guide": {
+      "label": "the character creation guide",
+      "meta": "interview"
+    },
+    "delta-guide-underlined": {
+      "label": "highlights from delta's guide",
+      "meta": null,
+      "x": 700
+    },
+    "delta-dms": {
+      "label": "the DMs",
+      "meta": "interview"
+    },
+    "delta-art": {
+      "label": "psychology, then art",
+      "meta": "interview"
+    },
+    "delta-poll": {
+      "label": "the poll",
+      "meta": "interview"
+    },
+    "msg-mother-of-all-bots": {
+      "label": "dropping bots",
+      "meta": "4 messages"
+    },
+    "msg-its-a-hobby": {
+      "label": "philosophy on hobbies",
+      "meta": "7 messages"
+    },
+    "msg-living-at-home": {
+      "label": "living at home",
+      "meta": "8 messages"
+    },
+    "msg-sixty-hour-week": {
+      "label": "the 60-hour week",
+      "meta": "1 message"
+    },
+    "msg-sharing-a-name-with-your-bot": {
+      "label": "sharing a name with your bot",
+      "meta": "3 messages"
+    },
+    "msg-dont-care-if-good": {
+      "label": "making bots for yourself",
+      "meta": "7 messages"
+    },
+    "msg-no-more-json": {
+      "label": "no more json",
+      "meta": "4 messages"
+    },
+    "msg-templates-secret-formula": {
+      "label": "are templates the secret formula",
+      "meta": "5 messages"
+    },
+    "msg-breached-400k": {
+      "label": "top bots breached 400K",
+      "meta": "1 message"
+    },
+    "msg-scared-to-join-voice-chat": {
+      "label": "scared to join the voice chat",
+      "meta": "8 messages"
+    },
+    "msg-shitting-bots-today": {
+      "label": "gonna be shitting bots today",
+      "meta": "5 messages"
+    }
+  },
+  "craft": {
+    "priest": {
+      "label": "judgemental_priest.json",
+      "meta": "706 tokens"
+    },
+    "group-chat": {
+      "label": "bot group chat",
+      "meta": "8 members"
+    },
+    "delta-room-experiment": {
+      "label": "the room experiment",
+      "meta": "interview"
+    },
+    "delta-listening": {
+      "label": "listening to them talk",
+      "meta": "interview"
+    },
+    "delta-vance": {
+      "label": "Vance",
+      "meta": "interview"
+    },
+    "delta-yandere": {
+      "label": "the yandere",
+      "meta": "interview"
+    },
+    "delta-naoka-anthurium": {
+      "label": "Naoka and Anthurium",
+      "meta": "interview"
+    },
+    "creator-guides": {
+      "label": "bot creation guides",
+      "meta": "7 items"
+    },
+    "personality-frameworks": {
+      "label": "personality frameworks",
+      "meta": "3 items"
+    },
+    "msg-persona-design": {
+      "label": "persona design",
+      "meta": "3 messages"
+    },
+    "msg-rude-bots": {
+      "label": "rude bots",
+      "meta": "4 messages"
+    },
+    "msg-rules-on-behalf-of-user": {
+      "label": "pacing the romance",
+      "meta": "2 messages"
+    },
+    "msg-simulating-a-breakup": {
+      "label": "simulating a breakup",
+      "meta": "3 messages"
+    },
+    "msg-essay-length-replies": {
+      "label": "essay-length replies",
+      "meta": "2 messages"
+    },
+    "msg-waluigi-lorebook": {
+      "label": "the Waluigi problem",
+      "meta": "3 messages"
+    },
+    "msg-keyword-collisions": {
+      "label": "keyword collisions",
+      "meta": "2 messages"
+    },
+    "msg-testing-bots": {
+      "label": "testing bots out of character",
+      "meta": "5 messages"
+    },
+    "msg-repetitive-answers": {
+      "label": "repetitive answers",
+      "meta": "3 messages"
+    },
+    "msg-body-measurements": {
+      "label": "body measurements",
+      "meta": "5 messages"
+    },
+    "msg-facial-expression-is-critical": {
+      "label": "facial expression is critical",
+      "meta": "3 messages"
+    },
+    "msg-malicious-compliance-succubus": {
+      "label": "the malicious-compliance succubus",
+      "meta": "6 messages"
+    },
+    "msg-few-tokens-popular": {
+      "label": "few tokens, still popular",
+      "meta": "3 messages"
+    },
+    "msg-improvise-trick": {
+      "label": "the improvise trick",
+      "meta": "3 messages"
+    },
+    "msg-stuck-in-a-loop": {
+      "label": "stuck in a loop",
+      "meta": "8 messages"
+    },
+    "msg-chatting-style-characters": {
+      "label": "chatting-style characters",
+      "meta": "3 messages"
+    },
+    "msg-simpler-bot-setup": {
+      "label": "the simpler bot setup",
+      "meta": "6 messages"
+    },
+    "nadia": {
+      "label": "My diary",
+      "meta": null
+    },
+    "diary-notepad": {
+      "label": "diary",
+      "meta": null
+    },
+    "diary-notepad-2": {
+      "label": "diary",
+      "meta": null
+    }
+  },
+  "user": {
+    "msg-two-theories-of-escape": {
+      "label": "catharsis or reinforcement",
+      "meta": "1 message"
+    },
+    "msg-what-porn-was-filling": {
+      "label": "what the bots replaced",
+      "meta": "3 messages"
+    },
+    "msg-getting-bullied": {
+      "label": "fantasy and reality",
+      "meta": "1 message"
+    },
+    "msg-monster-girls": {
+      "label": "no judgment here",
+      "meta": "2 messages"
+    },
+    "delta-friend": {
+      "label": "the friend",
+      "meta": "interview"
+    },
+    "delta-pulled-back": {
+      "label": "pulling back",
+      "meta": "interview"
+    },
+    "delta-alone": {
+      "label": "two futures",
+      "meta": "interview"
+    },
+    "delta-expectations": {
+      "label": "expectations",
+      "meta": "interview"
+    },
+    "msg-so-many-fetishes": {
+      "label": "so many fetishes",
+      "meta": "4 messages"
+    },
+    "msg-cant-fuck-this-bot": {
+      "label": "you literally can't fuck this bot",
+      "meta": "3 messages"
+    },
+    "msg-for-you-feed": {
+      "label": "the for-you feed argument",
+      "meta": "11 messages"
+    },
+    "msg-get-laid-or-god-destroys-humanity": {
+      "label": "Get Laid or God Destroys Humanity",
+      "meta": "4 messages"
+    },
+    "msg-porn-drives-innovation": {
+      "label": "porn drives innovation",
+      "meta": "2 messages"
+    },
+    "60-minutes": {
+      "label": "60 minutes on AI chatbots",
+      "meta": "video"
+    },
+    "chris-black-box": {
+      "label": "Chris, AI researcher",
+      "meta": null
+    },
+    "the-end": {
+      "label": "My diary",
+      "meta": null
+    }
+  }
+}

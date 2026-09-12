@@ -81,10 +81,7 @@
     }
     </script>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=EB+Garamond&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="style.css?v=7" rel="stylesheet">
+    <link href="style.css?v=21" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -112,12 +109,6 @@
 
         <!-- Landing-page header, restyled in this page's language -->
         <header class="landing-header">
-            <nav class="landing-section-nav" aria-label="Film sections">
-                <a data-landing-section="film" onclick="showLandingSection('film')">Film</a>
-                <a data-landing-section="credits" onclick="showLandingSection('credits')">Team &amp; Thanks</a>
-                <a data-landing-section="filmCredits" onclick="showLandingSection('filmCredits')">Credits</a>
-                <a data-landing-section="contact" onclick="showLandingSection('contact')">Contact</a>
-            </nav>
             <div class="landing-header-grid">
                 <section class="landing-box landing-box-film">
                     <div class="landing-video-frame">
@@ -127,16 +118,6 @@
                     <div class="landing-film-info">
                         <p class="landing-film-title">Intimacy when the other side is a variable</p>
                         <p class="landing-film-by">A film by <a href="https://shaktimb.com" target="_blank" rel="noopener">Shakti Mb</a></p>
-                        <p class="landing-film-status">Film coming soon<br><span class="landing-kaomoji">ʕ✧ᴥ✧ʔ----(✘ᴗ_ᴗ)</span></p>
-                    </div>
-                </section>
-                <section class="landing-box landing-box-desc">
-                    <div class="landing-desc-swap" id="landingBoxDesc">
-                        <p class="landing-desc">In 2022, a new kind of technology arrived into the world — LLM chatbots. It was around this time, I stumbled into a subculture I've started to get obsessed with. A subculture around bot making.</p>
-                        <p class="landing-desc">Hey, I'm <a href="https://shaktimb.com" target="_blank">Shakti Mb</a>, a documentarian, filmmaker, and artist. This web archive contains found objects from my two years of lurking in online spaces where people make AI bots together. The most rigorous experiments around making a bot's personality feel "real" are happening within these spaces. These found objects include discord chat messages, PDF personality creation guides, JSON personality code, and bot requests I collected and saved. The most interesting thing I found was sharing JSON files.</p>
-                        <p class="landing-desc">This film is an invitation for you to be a voyeur in these spaces with me. If you're interested in human behavior, internet subcultures, or the psychology of botmakers — this film is for you.</p>
-                        <p class="landing-desc">This project is supported by <a href="https://rhizome.org" target="_blank">Rhizome</a>, <a href="https://newinc.org" target="_blank">NEW INC</a>, <a href="https://mercatus.org/emergent-ventures" target="_blank">Emergent Ventures</a>, <a href="https://www.mozilla.org" target="_blank">Mozilla</a>.</p>
-                    </div>
                         <form class="landing-invite-form" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                             <input type="hidden" name="form-name" value="screening-invites">
                             <p class="landing-invite-bot-field">
@@ -149,383 +130,26 @@
                                 <button class="landing-invite-submit" type="submit">Sign up</button>
                             </div>
                         </form>
+                        <p class="landing-film-support">This project is supported by <a href="https://rhizome.org" target="_blank" rel="noopener">Rhizome</a>, <a href="https://newinc.org" target="_blank" rel="noopener">NEW INC</a>, <a href="https://mercatus.org/emergent-ventures" target="_blank" rel="noopener">Emergent Ventures</a>, <a href="https://www.mozilla.org" target="_blank" rel="noopener">Mozilla</a>.</p>
+                    </div>
                 </section>
             </div>
         </header>
 
+        <!-- Where you are: "desktop › the bot makers". "desktop" returns to the four folders. -->
+        <div class="chapter-bar" id="chapterBar">
+            <a class="chapter-crumb-home" onclick="closeChapter()">desktop</a>
+            <span class="chapter-crumb-sep">›</span>
+            <span class="chapter-crumb-name" id="chapterCrumbName"></span>
+        </div>
+
+        <!-- Landing: the four chapter folders. Opening one lays out that chapter's icons below. -->
+        <div class="chapter-folders" id="chapterFolders" aria-label="Chapters"></div>
+
         <div class="desktop">
-            <div class="desktop-icon" data-char="chloe" onclick="openCharacterFile('chloe')">
-                <div class="icon">
-                    <img src="img/anime-bitmap/expressionless-woman.png" alt="expressionless woman">
-                </div>
-                <span class="label">expressionless woman</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="ossix" onclick="toggleRequestInline('ossix')">
-                <div class="icon">
-                    <img src="img/icons/monster.png" alt="experiment 0682">
-                </div>
-                <span class="label">experiment 0682 - ossix ayto</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-char="parents" onclick="openCharacterFile('parents')">
-                <div class="icon">
-                    <img src="img/icons/stressed_parents.png" alt="mentally unwell dad and stressed mom">
-                </div>
-                <span class="label">mentally unwell dad and stressed mom</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="costume" onclick="toggleRequestInline('costume')">
-                <div class="icon">
-                    <img src="img/icons/haunted-shop.png" alt="haunted costume shop">
-                </div>
-                <span class="label">haunted costume shop</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-char="luna" onclick="openCharacterFile('luna')">
-                <div class="icon">
-                    <img src="img/anime-bitmap/mental-chastity-girlfriend.png" alt="mental chastity girlfriend">
-                </div>
-                <span class="label">mental chastity girlfriend</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="succubus" onclick="toggleRequestInline('succubus')">
-                <div class="icon">
-                    <img src="img/icons/succubus.png" alt="succubus">
-                </div>
-                <span class="label">a succubus who tempts you to be better</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-char="priest" onclick="openCharacterFile('priest')">
-                <div class="icon">
-                    <img src="img/anime-bitmap/judgemental-priest.png" alt="judgemental priest">
-                </div>
-                <span class="label">judgemental priest</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="thanos" onclick="toggleRequestInline('thanos')">
-                <div class="icon">
-                    <img src="img/icons/thanos.png" alt="thanos">
-                </div>
-                <span class="label">thanos - philosophy and nihilism</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-char="victoria" onclick="openCharacterFile('victoria')">
-                <div class="icon">
-                    <img src="img/anime-bitmap/evil-bully-wife.png" alt="evil bully wife">
-                </div>
-                <span class="label">evil bully wife</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="undercover" onclick="toggleRequestInline('undercover')">
-                <div class="icon">
-                    <img src="img/icons/spy.png" alt="spy">
-                </div>
-                <span class="label">undercover stressful job</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-char="eleanor" onclick="openCharacterFile('eleanor')">
-                <div class="icon">
-                    <img src="img/anime-bitmap/rich-dommy-mommy.png" alt="rich dommy mommy">
-                </div>
-                <span class="label">rich dommy mommy</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="dee" onclick="toggleRequestInline('dee')">
-                <div class="icon">
-                    <img src="img/icons/hopfensperger.png" alt="dee leanne hopfensperger">
-                </div>
-                <span class="label">dee leanne hopfensperger</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="bodyguard" onclick="toggleRequestInline('bodyguard')">
-                <div class="icon">
-                    <img src="img/icons/paw-print.png" alt="paw print">
-                </div>
-                <span class="label">seeking a bodyguard (nsfw)</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-char="logan" onclick="openCharacterFile('logan')">
-                <div class="icon">
-                    <img src="img/anime-bitmap/traumatized_military_man.png" alt="traumatized military man">
-                </div>
-                <span class="label">traumatized military man</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="leonardo" onclick="toggleRequestInline('leonardo')">
-                <div class="icon">
-                    <img src="img/icons/leonardo.png" alt="leonardo">
-                </div>
-                <span class="label">leonardo/malcom</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="giant" onclick="toggleRequestInline('giant')">
-                <div class="icon">
-                    <img src="img/icons/giant.png" alt="giant with golden heart">
-                </div>
-                <span class="label">a giant with golden heart</span>
-                <span class="metadata">request</span>
-            </div>
-
-            <div class="desktop-icon" data-char="minho" onclick="openCharacterFile('minho')">
-                <div class="icon">
-                    <img src="img/icons/loving-korean-boyfriend.png" alt="loving korean boyfriend">
-                </div>
-                <span class="label">loving korean boyfriend</span>
-                <span class="metadata">json</span>
-            </div>
-
-            <div class="desktop-icon" data-doc="road96" onclick="toggleRequestInline('road96')">
-                <div class="icon">
-                    <img src="img/icons/journey.png" alt="journey">
-                </div>
-                <span class="label">road 96 rpg journey bot</span>
-                <span class="metadata">request</span>
-            </div>
+            <!-- Chapter icons are rendered here from desktop-labels.json + desktop-layout.js -->
 
             <!-- Generic inline box for request documents -->
-            <div class="desktop-icon" data-msg="any-requests-for-voices" onclick="toggleMsgInline('any-requests-for-voices')">
-                <div class="icon">
-                    <img src="img/icons/voice.png" alt="any requests for voices?">
-                </div>
-                <span class="label">any requests for voices?</span>
-                <span class="metadata">7 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-9" onclick="toggleMsgInline('community-exchange-9')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="the force of thirst">
-                </div>
-                <span class="label">the force of thirst</span>
-                <span class="metadata">3 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-10" onclick="toggleMsgInline('community-exchange-10')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="dropping 25 bots">
-                </div>
-                <span class="label">dropping 25 bots</span>
-                <span class="metadata">4 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-11" onclick="toggleMsgInline('community-exchange-11')">
-                <div class="icon">
-                    <img src="img/icons/hobby.png" alt="hobbies and ROI">
-                </div>
-                <span class="label">hobbies and ROI</span>
-                <span class="metadata">1 message</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-0" onclick="toggleMsgInline('community-exchange-0')">
-                <div class="icon">
-                    <img src="img/icons/wholesome.png" alt="we believe in generational homes">
-                </div>
-                <span class="label">we believe in generational homes</span>
-                <span class="metadata">8 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-1" onclick="toggleMsgInline('community-exchange-1')">
-                <div class="icon">
-                    <img src="img/icons/mysterious.png" alt="the 27-year-old engineer">
-                </div>
-                <span class="label">the 27-year-old engineer</span>
-                <span class="metadata">1 message</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-2" onclick="toggleMsgInline('community-exchange-2')">
-                <div class="icon">
-                    <img src="img/icons/soft-and-sad.png" alt="living out fantasies online">
-                </div>
-                <span class="label">living out fantasies online</span>
-                <span class="metadata">1 message</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-3" onclick="toggleMsgInline('community-exchange-3')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="real women vs AI women">
-                </div>
-                <span class="label">real women vs AI women</span>
-                <span class="metadata">1 message</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-4" onclick="toggleMsgInline('community-exchange-4')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="voidcoder's confession">
-                </div>
-                <span class="label">voidcoder's confession</span>
-                <span class="metadata">3 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-5" onclick="toggleMsgInline('community-exchange-5')">
-                <div class="icon">
-                    <img src="img/icons/message.png" alt="long responses">
-                </div>
-                <span class="label">long responses</span>
-                <span class="metadata">2 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-6" onclick="toggleMsgInline('community-exchange-6')">
-                <div class="icon">
-                    <img src="img/icons/book.png" alt="lorebook">
-                </div>
-                <span class="label">lorebook</span>
-                <span class="metadata">3 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-7" onclick="toggleMsgInline('community-exchange-7')">
-                <div class="icon">
-                    <img src="img/icons/message.png" alt="same-name roleplay confusion">
-                </div>
-                <span class="label">same-name roleplay confusion</span>
-                <span class="metadata">3 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="community-exchange-8" onclick="toggleMsgInline('community-exchange-8')">
-                <div class="icon">
-                    <img src="img/icons/book.png" alt="lorebook word ambiguity">
-                </div>
-                <span class="label">lorebook word ambiguity</span>
-                <span class="metadata">2 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="welcome-to-bot-dementia" onclick="toggleMsgInline('welcome-to-bot-dementia')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="welcome to bot dementia">
-                </div>
-                <span class="label">welcome to bot dementia</span>
-                <span class="metadata">3 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="how-to-test-your-bot" onclick="toggleMsgInline('how-to-test-your-bot')">
-                <div class="icon">
-                    <img src="img/icons/experiment_0682.png" alt="how to test your bot">
-                </div>
-                <span class="label">how to test your bot</span>
-                <span class="metadata">2 messages</span>
-            </div>
-
-            <!-- hidden
-            <div class="desktop-icon" data-msg="be-careful-not-to-set-so-many-rules" onclick="toggleMsgInline('be-careful-not-to-set-so-many-rules')">
-                <div class="icon">
-                    <img src="img/icons/ruler.png" alt="be careful not to set so many rules">
-                </div>
-                <span class="label">be careful not to set so many rules</span>
-                <span class="metadata">1 message</span>
-            </div>
-            -->
-
-
-            <div class="desktop-icon" data-msg="json-vs-plain-text" onclick="toggleMsgInline('json-vs-plain-text')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="json vs plain text">
-                </div>
-                <span class="label">json vs plain text</span>
-                <span class="metadata">4 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="simulating-a-breakup" onclick="toggleMsgInline('simulating-a-breakup')">
-                <div class="icon">
-                    <img src="img/icons/breakup.png" alt="simulating a breakup">
-                </div>
-                <span class="label">simulating a breakup</span>
-                <span class="metadata">2 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="body-measurements" onclick="toggleMsgInline('body-measurements')">
-                <div class="icon">
-                    <img src="img/icons/body.png" alt="body measurements">
-                </div>
-                <span class="label">body measurements</span>
-                <span class="metadata">2 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="is-there-a-fix-for-bots-stuck-in-a-loop" onclick="toggleMsgInline('is-there-a-fix-for-bots-stuck-in-a-loop')">
-                <div class="icon">
-                    <img src="img/icons/message.png" alt="is there a fix for bots stuck in a loop?">
-                </div>
-                <span class="label">is there a fix for bots stuck in a loop?</span>
-                <span class="metadata">8 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="that-thing-disappeared-into-thin-air" onclick="toggleMsgInline('that-thing-disappeared-into-thin-air')">
-                <div class="icon">
-                    <img src="img/icons/wholesome.png" alt="that thing disappeared into thin air">
-                </div>
-                <span class="label">that thing disappeared into thin air</span>
-                <span class="metadata">3 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="two-conflicting-theories" onclick="toggleMsgInline('two-conflicting-theories')">
-                <div class="icon">
-                    <img src="img/icons/mysterious.png" alt="two conflicting theories">
-                </div>
-                <span class="label">two conflicting theories</span>
-                <span class="metadata">1 message</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="creators-here-know-so-much-more" onclick="toggleMsgInline('creators-here-know-so-much-more')">
-                <div class="icon">
-                    <img src="img/icons/soft-and-sad.png" alt="creators here know so much more">
-                </div>
-                <span class="label">creators here know so much more</span>
-                <span class="metadata">3 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="not-designed-to-grow-up-this-lonely" onclick="toggleMsgInline('not-designed-to-grow-up-this-lonely')">
-                <div class="icon">
-                    <img src="img/icons/soft-and-sad.png" alt="not designed to grow up this lonely">
-                </div>
-                <span class="label">not designed to grow up this lonely</span>
-                <span class="metadata">1 message</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="i-just-aim-to-get-things-out-of-my-head" onclick="toggleMsgInline('i-just-aim-to-get-things-out-of-my-head')">
-                <div class="icon">
-                    <img src="img/icons/leonardo.png" alt="i just aim to get things out of my head">
-                </div>
-                <span class="label">i just aim to get things out of my head</span>
-                <span class="metadata">1 message</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="someone-turned-it-into-an-eco-revolution" onclick="toggleMsgInline('someone-turned-it-into-an-eco-revolution')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="someone turned it into an eco revolution">
-                </div>
-                <span class="label">someone turned it into an eco revolution</span>
-                <span class="metadata">2 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="nowhere-else-can-i-say-this" onclick="toggleMsgInline('nowhere-else-can-i-say-this')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="nowhere else can i say this">
-                </div>
-                <span class="label">nowhere else can i say this</span>
-                <span class="metadata">2 messages</span>
-            </div>
-
-            <div class="desktop-icon" data-msg="real-women-have-more-than-8k-of-memory" onclick="toggleMsgInline('real-women-have-more-than-8k-of-memory')">
-                <div class="icon">
-                    <img src="img/icons/unhinged.png" alt="real women have more than 8k of memory">
-                </div>
-                <span class="label">real women have more than 8k of memory</span>
-                <span class="metadata">1 message</span>
-            </div>
-
             <div class="request-inline-box hidden" id="requestInlineBox">
                 <div class="window-titlebar">
                     <span class="window-title" id="requestInlineTitle"></span>
@@ -541,70 +165,6 @@
                 </div>
                 <div class="msg-inline-body" id="msgInlineContent"></div>
                 <div class="msg-inline-typing" id="msgInlineTyping"></div>
-            </div>
-
-            <div class="desktop-icons-bottom">
-                <div class="desktop-icon" data-doc="bodyguard" onclick="openDocument('bodyguard')">
-                    <div class="icon">
-                        <img src="img/icons/paw-print.png" alt="paw print">
-                    </div>
-                    <span class="label">seeking a bodyguard (nsfw)</span>
-                </div>
-                <div class="desktop-icon" data-doc="ossix" onclick="openDocument('ossix')">
-                    <div class="icon">
-                        <img src="img/icons/monster.png" alt="experiment 0682">
-                    </div>
-                    <span class="label">experiment 0682 - ossix ayto</span>
-                </div>
-                <div class="desktop-icon" data-doc="thanos" onclick="openDocument('thanos')">
-                    <div class="icon">
-                        <img src="img/icons/thanos.png" alt="thanos">
-                    </div>
-                    <span class="label">thanos - philosophy and nihilism</span>
-                </div>
-                <div class="desktop-icon" data-doc="leonardo" onclick="openDocument('leonardo')">
-                    <div class="icon">
-                        <img src="img/icons/leonardo.png" alt="leonardo">
-                    </div>
-                    <span class="label">leonardo/malcom</span>
-                    <span class="metadata">request</span>
-                </div>
-                <div class="desktop-icon" data-doc="giant" onclick="openDocument('giant')">
-                    <div class="icon">
-                        <img src="img/icons/giant.png" alt="giant with golden heart">
-                    </div>
-                    <span class="label">a giant with golden heart</span>
-                </div>
-                <div class="desktop-icon" data-doc="dee" onclick="openDocument('dee')">
-                    <div class="icon">
-                        <img src="img/icons/hopfensperger.png" alt="dee leanne hopfensperger">
-                    </div>
-                    <span class="label">dee leanne hopfensperger</span>
-                </div>
-                <div class="desktop-icon" data-doc="succubus" onclick="openDocument('succubus')">
-                    <div class="icon">
-                        <img src="img/icons/succubus.png" alt="succubus">
-                    </div>
-                    <span class="label">a succubus who tempts you to be better</span>
-                </div>
-                <div class="desktop-icon" data-doc="undercover" onclick="openDocument('undercover')">
-                    <div class="icon">
-                        <img src="img/icons/spy.png" alt="spy">
-                    </div>
-                    <span class="label">undercover stressful job</span>
-                </div>
-                <div class="desktop-icon" data-doc="costume" onclick="openDocument('costume')">
-                    <div class="icon">
-                        <img src="img/icons/haunted-shop.png" alt="haunted costume shop">
-                    </div>
-                    <span class="label">haunted costume shop</span>
-                </div>
-                <div class="desktop-icon" data-doc="road96" onclick="openDocument('road96')">
-                    <div class="icon">
-                        <img src="img/icons/journey.png" alt="journey">
-                    </div>
-                    <span class="label">road 96 rpg journey bot</span>
-                </div>
             </div>
 
             <!-- Demo Section: Chat to reveal JSON -->
@@ -778,6 +338,7 @@
         </div>
     </div>
 
+    <script src="desktop-layout.js"></script>
     <script>
         const characters = {};
         const charKeys = ['victoria', 'chloe', 'eleanor', 'logan', 'priest', 'minho', 'luna', 'parents'];
@@ -794,7 +355,7 @@
         const charFiles = {
             victoria: 'evil_bully_wife.json',
             chloe: 'expressionless_woman.json',
-            eleanor: 'rich_dommy_mommy.json',
+            eleanor: 'rich_dommy_mommy_who_takes_care_of_you.json',
             logan: 'traumatized_military_man.json',
             priest: 'judgemental_priest.json',
             minho: 'loving_korean_boyfriend.json',
@@ -1842,92 +1403,6 @@
             currentRequestDoc = null;
         }
 
-        // ---- Landing page sections (filmmaker's note, credits, contact) ----
-        const landingFilmCredits = [
-            { title: 'Space Transformer', url: 'https://archive.org/details/SpaceTransformer', note: 'Referenced clip: 0:49-0:54' },
-            { title: 'MY LIVING DOLL "Rhoda\'s First Date"', url: 'https://archive.org/details/my-living-doll_20210629_0924', note: 'Referenced clip: 0:09-0:24' },
-            { title: 'Malice@doll', url: 'https://archive.org/details/malice-doll-full-movie' },
-            { title: 'SNAFU 2017 Amy Leaving the room', url: 'https://archive.org/details/youtube-oRTq41F3sjQ' },
-            { title: 'Chatting with a girl', url: 'https://archive.org/details/youtube-qNDUs5jHCPc' },
-            { title: 'Hana and Renko - evening on the sofa "Kigurumi 着ぐるみ"', url: 'https://archive.org/details/youtube-nQ2IKZSCfg4' },
-            { title: 'Kigurumi animegao 38 - Tifa Kig', url: 'https://archive.org/details/youtube-aglKABYUFRk', note: 'Referenced clip: 0:41-0:50' },
-            { title: 'Kigurumi animegao 30 - animexpo Rory mercury Kigurumi', url: 'https://archive.org/details/youtube-EqSqXVwU2mE' },
-            { title: 'Ways of Seeing: Fine Arts and Commerce', url: 'https://archive.org/details/waysofseeingfineartsandcommerce' },
-            { title: 'Color Harmony', url: 'https://archive.org/details/0559_Color_Harmony' }
-        ];
-
-        const landingSectionTitles = {
-            film: 'Film',
-            credits: 'Team & Thanks',
-            filmCredits: 'Credits',
-            contact: 'Contact'
-        };
-
-        const landingSections = {
-            film: `
-                <p class="landing-desc">In 2022, a new kind of technology arrived into the world — LLM chatbots. It was around this time, I stumbled into a subculture I've started to get obsessed with. A subculture around bot making.</p>
-                <p class="landing-desc">Hey, I'm <a href="https://shaktimb.com" target="_blank">Shakti Mb</a>, a documentarian, filmmaker, and artist. This web archive contains found objects from my two years of lurking in online spaces where people make AI bots together. The most rigorous experiments around making a bot's personality feel "real" are happening within these spaces. These found objects include discord chat messages, PDF personality creation guides, JSON personality code, and bot requests I collected and saved. The most interesting thing I found was sharing JSON files.</p>
-                <p class="landing-desc">This film is an invitation for you to be a voyeur in these spaces with me. If you're interested in human behavior, internet subcultures, or the psychology of botmakers — this film is for you.</p>
-                <p class="landing-desc">This project is supported by <a href="https://rhizome.org" target="_blank">Rhizome</a>, <a href="https://newinc.org" target="_blank">NEW INC</a>, <a href="https://mercatus.org/emergent-ventures" target="_blank">Emergent Ventures</a>, <a href="https://www.mozilla.org" target="_blank">Mozilla</a>.</p>
-`,
-
-            credits: `
-                <div class="inline-credits">
-                    <div class="credit-row"><span class="panel-label">Created by</span><span>Shakti Mb</span></div>
-                    <div class="credit-row"><span class="panel-label">Visual Direction &amp; Co-Editor</span><span>Kiana Fernandez</span></div>
-                    <div class="credit-row"><span class="panel-label">Research supported by</span><span>Rhizome, Emergent Ventures, NEW INC, Mozilla</span></div>
-                    <div class="credit-row" style="border-bottom:none"><span class="panel-label">Special thanks ♥</span><span>Chris Hua, Bri Griffin, Tyler Cowen, Tom Donohue, Spencer Yen, Tara Kelton, Delta, Liv Acuña, Michael Connor, Nitcha (Fame) Tothong, Kelly Li, Emmad Mazhari, Nayantara Mb, Léo Serriere, Kalyani Prasad, Lauren Wong Lee, Yuting Duan, Ruth Gebreyesus, Jordan Cooper, Laura Alvear Roa, Aurora Mititelu, Mia Warren, Ella Krings, Michael Candy, Beck Haberstroh, Ari J. Melenciano, Ramsey Nasser, zzyw, Steven Jos Phan, Chris Woebken, Lucilla Grossi, Jason Isolini, Johan Michalove, Sofia Pujol</span></div>
-                </div>`,
-
-            filmCredits: `
-                <div class="inline-credits">
-                    <div class="credit-row">
-                        <span class="panel-label">Music credits</span>
-                        <span>
-                            <a href="https://jonivoid.bandcamp.com/album/epilogue" target="_blank" rel="noopener">epilogue by johnny_ripper</a>
-                            <span class="credit-note">Joni Void, Bandcamp</span>
-                        </span>
-                    </div>
-                    ${landingFilmCredits.map((item, index) => `
-                        <div class="credit-row"${index === landingFilmCredits.length - 1 ? ' style="border-bottom:none"' : ''}>
-                            <span class="panel-label">${index === 0 ? 'Footage credits' : ''}</span>
-                            <span>
-                                <a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>
-                                ${item.note ? `<span class="credit-note">${item.note}</span>` : ''}
-                            </span>
-                        </div>`).join('')}
-                </div>`,
-
-            contact: `
-                <a class="contact-inline" href="mailto:mbshakti@gmail.com">→ mbshakti@gmail.com</a>
-                <p>Please feel free to email me for a link to see the film, screening inquiries, or anything else.</p>`
-        };
-
-        let currentLandingSection = 'film';
-
-        function setLandingNavActive(key) {
-            document.querySelectorAll('.landing-section-nav a').forEach(a => {
-                a.classList.toggle('active', a.dataset.landingSection === key);
-            });
-        }
-
-        function showLandingSection(key) {
-            const box = document.getElementById('landingBoxDesc');
-            if (!box) return;
-
-            // Clicking the active section returns home to the film text
-            if (currentLandingSection === key && key !== 'film') key = 'film';
-
-            const content = landingSections[key];
-            if (!content) return;
-            const heading = key === 'film' ? '' : `<p class="landing-section-title">// ${landingSectionTitles[key] || ''}</p>`;
-            box.innerHTML = heading + content;
-            box.scrollTop = 0;
-            currentLandingSection = key;
-            setLandingNavActive(key);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => setLandingNavActive('film'));
 
         // Screening invite signup — same endpoint the landing page uses
         function initLandingInviteForm() {
@@ -2016,18 +1491,9 @@
             return _archAvatarCache[username];
         }
 
-        const _archPingPool = Array.from({ length: 4 }, () => {
-            const a = new Audio('audio/ping.wav');
-            a.volume = 0.5;
-            return a;
-        });
-        let _archPingIdx = 0;
-        function playArchivePing() {
-            const a = _archPingPool[_archPingIdx % _archPingPool.length];
-            _archPingIdx++;
-            a.currentTime = 0;
-            a.play().catch(() => {});
-        }
+        // Messages arrive silently (the ping sound was removed).
+        const _archPingPool = [];
+        function playArchivePing() {}
 
         function archIsAtBottom(el) {
             return el ? (el.scrollHeight - el.scrollTop - el.clientHeight) < 40 : false;
@@ -2131,13 +1597,47 @@
             `;
         }
 
+        // Threads come from the desktop-voyeur archive (copied in by
+        // scripts/sync-from-voyeur.js): one file per theme, each thread has an
+        // id the desktop icons point at. Threads over there carry a `title`;
+        // the player here reads `label`, so it is mirrored on load.
+        const CHAT_THEMES = ['bot-requests', 'bot-makers', 'craft', 'community', 'user', 'margins', 'misc'];
+        let archiveMsgLoading = null;
+
         async function loadArchiveMessages() {
             if (archiveMsgData) return archiveMsgData;
-            const res = await fetch('archive-messages.json');
-            const json = await res.json();
-            archiveMsgData = {};
-            json.threads.forEach(t => { archiveMsgData[t.id] = t; });
-            return archiveMsgData;
+            if (archiveMsgLoading) return archiveMsgLoading;
+            archiveMsgLoading = (async () => {
+                const data = {};
+                await Promise.all(CHAT_THEMES.map(async theme => {
+                    try {
+                        const res = await fetch(`chat/${theme}.json`);
+                        const list = await res.json();
+                        list.forEach(t => { data[t.id] = { ...t, label: t.label || t.title, theme }; });
+                    } catch (err) {
+                        console.error(`Failed to load chat/${theme}.json`, err);
+                    }
+                }));
+                archiveMsgData = data;
+                return data;
+            })();
+            return archiveMsgLoading;
+        }
+
+        // Threads that only exist in this site's older archive-messages.json.
+        let legacyMsgData = null;
+        async function loadLegacyMessages() {
+            if (legacyMsgData) return legacyMsgData;
+            try {
+                const res = await fetch('archive-messages.json');
+                const json = await res.json();
+                legacyMsgData = {};
+                json.threads.forEach(t => { legacyMsgData[t.id] = t; });
+            } catch (err) {
+                console.error('Failed to load archive-messages.json', err);
+                legacyMsgData = {};
+            }
+            return legacyMsgData;
         }
 
         function stopArchivePlayback() {
@@ -2196,11 +1696,12 @@
             }, typingDelay);
         }
 
-        async function toggleMsgInline(msgId) {
-            const icon = document.querySelector(`.desktop-icon[data-msg="${msgId}"]`);
+        async function toggleMsgInline(msgId, el) {
+            const icon = el || document.querySelector(`.desktop-icon[data-msg="${msgId}"]`);
             if (!icon) return;
             const threads = await loadArchiveMessages();
-            const thread = threads[msgId];
+            let thread = threads[msgId];
+            if (!thread) thread = (await loadLegacyMessages())[msgId];
             if (!thread) return;
             openInlineThread(icon, thread);
         }
@@ -2209,6 +1710,80 @@
         // (Overrides the original static toggleRequestInline defined above.)
         const _requestThreadCache = {};
 
+        // Where each request icon's text lives in the desktop-voyeur data, keyed
+        // by manifest key: a thread in chat/bot-requests.json, or a post in
+        // bot-requests/posts.json. Filled in from desktop-layout.js as icons render.
+        const REQUEST_SOURCES = {};
+        // The copies of the posts written into this file as HTML, for fallback.
+        const LEGACY_REQUEST_DOCS = {
+            'bot-request-0': 'ossix', 'bot-request-3': 'thanos', 'bot-request-4': 'leonardo',
+            'bot-request-5': 'giant', 'bot-request-6': 'dee', 'bot-request-7': 'succubus',
+            'bot-request-8': 'undercover', 'bot-request-9': 'costume',
+            'seeking-a-bodyguard': 'bodyguard', 'road-96': 'road96'
+        };
+
+        let requestPostsData = null;
+        async function loadRequestPosts() {
+            if (requestPostsData) return requestPostsData;
+            try {
+                const res = await fetch('bot-requests/posts.json');
+                const list = await res.json();
+                requestPostsData = {};
+                list.forEach(p => { requestPostsData[p.id] = p; });
+            } catch (err) {
+                console.error('Failed to load bot-requests/posts.json', err);
+                requestPostsData = {};
+            }
+            return requestPostsData;
+        }
+
+        // Turn one archive message into the paragraph-by-paragraph entries the
+        // inline player expects (first paragraph carries the avatar + time).
+        function requestMessagesFrom(msg, time, images) {
+            const username = (msg.username || 'anon').trim();
+            const color = msg.color || 'var(--accent)';
+            const initial = username.charAt(0).toUpperCase();
+            const paras = String(msg.text || '').split(/\n\s*\n/).map(t => t.trim()).filter(Boolean);
+            const out = (paras.length ? paras : ['']).map((p, idx) => ({
+                username,
+                color,
+                text: p,
+                time: idx === 0 ? (time || '') : '',
+                initial: idx === 0 ? initial : null,
+                continuation: idx > 0
+            }));
+            const grid = (images || []).filter(Boolean);
+            if (grid.length) out.push({ username, color, imagesGrid: grid, continuation: true });
+            return out;
+        }
+
+        async function loadRequestThread(docType) {
+            if (_requestThreadCache[docType]) return _requestThreadCache[docType];
+            const source = REQUEST_SOURCES[docType];
+            let thread = null;
+            if (source && source.thread) {
+                const t = (await loadArchiveMessages())[source.thread];
+                if (t && t.messages && t.messages.length) {
+                    const messages = [];
+                    t.messages.filter(m => !m.hidden).forEach(m => {
+                        messages.push(...requestMessagesFrom(m, '', m.images));
+                    });
+                    thread = { id: 'doc:' + docType, label: t.title || t.label || 'Bot request', wordByWord: true, messages };
+                }
+            } else if (source && source.post) {
+                const post = (await loadRequestPosts())[source.post];
+                if (post) {
+                    const messages = requestMessagesFrom(post, post.timestamp, post.image ? [post.image] : []);
+                    (post.comments || []).forEach(c => messages.push(...requestMessagesFrom(c, '', c.images)));
+                    thread = { id: 'doc:' + docType, label: post.title || (documentContents[docType] || {}).title || 'Bot request', wordByWord: true, messages };
+                }
+            }
+            if (!thread) thread = parseRequestPost(LEGACY_REQUEST_DOCS[docType] || docType);
+            if (thread) _requestThreadCache[docType] = thread;
+            return thread;
+        }
+
+        // Fallback: the copies of the posts written into this file as HTML.
         function parseRequestPost(docType) {
             if (_requestThreadCache[docType]) return _requestThreadCache[docType];
             const doc = documentContents[docType];
@@ -2256,9 +1831,9 @@
             return thread;
         }
 
-        function toggleRequestInline(docType) {
-            const icon = document.querySelector(`.desktop-icon[data-doc="${docType}"]`);
-            const thread = parseRequestPost(docType);
+        async function toggleRequestInline(docType, el) {
+            const icon = el || document.querySelector(`.desktop-icon[data-doc="${docType}"]`);
+            const thread = await loadRequestThread(docType);
             if (!icon || !thread) return;
             openInlineThread(icon, thread);
         }
@@ -3971,21 +3546,773 @@
         }
 
 
-        // Run scatterIcons on load
-        document.addEventListener('DOMContentLoaded', () => {
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    scatterIcons();
-                    initParallax();
+        // ---- Chapters: the four folders are the entry point ----
+        // Same four chapters as desktop-voyeur. Which chapter an icon belongs to
+        // comes from its desktop-labels.json manifest (copied by
+        // scripts/sync-from-voyeur.js): message icons via the `msg-<thread id>`
+        // key; bot requests and found bots sit in "bot requests" over there,
+        // with the priest filed under "the craft".
+        const CHAPTERS = [
+            { id: 'bot-requests', label: 'bot requests' },
+            { id: 'bot-makers',   label: 'the bot makers' },
+            { id: 'craft',        label: 'the craft' },
+            { id: 'user',         label: 'the {{user}}' }
+        ];
+        let currentChapter = null;
+
+        function renderChapterFolders() {
+            const host = document.getElementById('chapterFolders');
+            if (!host) return;
+            host.innerHTML = CHAPTERS.map(c => `
+                <div class="desktop-icon chapter-folder positioned" data-chapter="${c.id}" onclick="openChapter('${c.id}')">
+                    <div class="icon"><img src="img/icons/folder.svg" alt=""></div>
+                    <span class="label">${c.label}</span>
+                </div>`).join('');
+        }
+
+        // Manifest keys this site leaves out, even though the Archive lists them.
+        // Kept here (not in the copied manifest) so a re-sync doesn't bring them back.
+        const HIDDEN_KEYS = new Set(['msg-cant-fuck-this-bot']);
+        let chapterManifest = null; // desktop-labels.json: chapter -> { key: { label, meta, x, y } }
+        let chapterItems = [];      // rendered icons of the open chapter, in manifest order
+
+        async function loadChapterManifest() {
+            if (chapterManifest) return chapterManifest;
+            try {
+                const res = await fetch('desktop-labels.json');
+                chapterManifest = await res.json();
+            } catch (err) {
+                console.error('Failed to load desktop-labels.json', err);
+                chapterManifest = {};
+            }
+            return chapterManifest;
+        }
+
+        // desktop-layout.js (copied from desktop-voyeur) gives each manifest key
+        // its type, x position and assets.
+        let layoutItemMap = null;
+        function getLayoutItemMap() {
+            if (layoutItemMap) return layoutItemMap;
+            layoutItemMap = {};
+            const L = window.DESKTOP_LAYOUT;
+            if (!L) return layoutItemMap;
+            const keyOf = it => it.key || it.slug || it.postId || it.folder || it.char || it.channel
+                || (it.type === 'group-chat' ? 'group-chat' : it.msgId ? `msg-${it.msgId}` : null);
+            [...Object.values(L.items || {}), L.botRequests || []].forEach(items => {
+                items.forEach(it => { const k = keyOf(it); if (k) layoutItemMap[k] = it; });
+            });
+            return layoutItemMap;
+        }
+
+        // ---- Delta interviews, diary voice memos, diary notes (data copied from desktop-voyeur) ----
+        const PORTRAIT_ME = 'img/anime-bitmap/shakti.png';
+        const PORTRAIT_DELTA = 'img/anime-bitmap/delta.png';
+        const ME_COLOR = 'var(--accent-2)';
+        let interviewsById = null;
+        async function loadInterviews() {
+            if (interviewsById) return interviewsById;
+            interviewsById = {};
+            try {
+                const res = await fetch('interviews/delta.json');
+                (await res.json()).forEach(t => { interviewsById[t.id] = t; });
+            } catch (err) {
+                console.error('Failed to load interviews/delta.json', err);
+            }
+            return interviewsById;
+        }
+
+        // Diary md lives in content/diary (built for /api/diary); the page's base is /archive-desktop/
+        const diarySrc = src => src.replace(/^diary\//, '../content/diary/');
+        async function fetchText(url) {
+            try { const res = await fetch(encodeURI(url)); return res.ok ? await res.text() : ''; } catch (e) { return ''; }
+        }
+        function extractBeatQuote(md, n) {
+            const lines = md.split('\n');
+            const start = lines.findIndex(l => new RegExp(`^## BEAT ${n}\\b`).test(l));
+            if (start === -1) return '';
+            let out = ''; let prev = -2;
+            for (let i = start + 1; i < lines.length; i++) {
+                if (/^## /.test(lines[i])) break;
+                if (!/^>/.test(lines[i])) continue;
+                const content = lines[i].replace(/^>\s?/, '').replace(/\s+$/, '');
+                if (out) out += (i === prev + 1) ? '\n' : '\n\n';
+                out += content; prev = i;
+            }
+            return out.replace(/🎙\s*[\w ]*VO\s*(\[[^\]]*\])?:\s*/g, '').replace(/\*\*/g, '').trim();
+        }
+
+        let diarySlugs = null;
+        async function loadDiarySlugs() {
+            if (diarySlugs) return diarySlugs;
+            diarySlugs = new Set();
+            try {
+                const res = await fetch('../content/api/diary.json');
+                (await res.json()).forEach(e => diarySlugs.add(e.slug));
+            } catch (e) {}
+            return diarySlugs;
+        }
+
+        // ===== Voice memo player (desktop-voyeur's UI): diary memos and Delta interview clips =====
+        const VM_ICON_PLAY  = '<svg width="8" height="10" viewBox="0 0 8 10" fill="currentColor"><path d="M0 0 L8 5 L0 10 Z"/></svg>';
+        const VM_ICON_PAUSE = '<svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><rect x="0" y="0" width="3" height="10"/><rect x="7" y="0" width="3" height="10"/></svg>';
+        const PLAY_PILL_PLAY = '<svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor" style="display:block;flex-shrink:0"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play';
+        let currentVoiceMemo = null;
+        let activeVoiceMemoIcon = null;
+        let vmQueue = null, vmSeqSlug = null, vmSeqIndex = 0, vmSeqDurations = null;
+        let vmSpeakerName = null, vmLitWords = false, vmCaptionChunks = null, vmCaptionRaf = null;
+
+        function ensureVoiceMemoPlayer() {
+            let player = document.getElementById('voiceMemoPlayer');
+            if (player) return player;
+            player = document.createElement('div');
+            player.className = 'voice-memo-player hidden';
+            player.id = 'voiceMemoPlayer';
+            player.innerHTML = `
+                <button class="vm-play" onclick="vmTogglePlay(event)">${VM_ICON_PLAY}</button>
+                <span class="vm-time" id="vmTime">0:00</span>
+                <button class="vm-close" onclick="closeVoiceMemo()" aria-label="close">×</button>
+                <div class="vm-progress" onclick="vmSeek(event)"><div class="vm-fill" id="vmFill"></div></div>
+                <audio id="vmAudio" preload="metadata"></audio>
+                <div class="vm-captions" id="vmCaptions"></div>`;
+            document.body.appendChild(player);
+            const audio = player.querySelector('#vmAudio');
+            audio.addEventListener('timeupdate', () => {
+                const fill = document.getElementById('vmFill');
+                const time = document.getElementById('vmTime');
+                if (!fill || !time) return;
+                let cur = audio.currentTime, dur = audio.duration;
+                if (vmSeqDurations) {
+                    const total = vmSeqDurations.reduce((a, b) => a + b, 0);
+                    if (total) { cur = vmSeqDurations.slice(0, vmSeqIndex).reduce((a, b) => a + b, 0) + audio.currentTime; dur = total; }
+                }
+                fill.style.width = (dur ? (cur / dur) * 100 : 0) + '%';
+                time.textContent = `${_vmFmt(cur)} / ${_vmFmt(dur)}`;
+                vmSyncCaptions(audio.currentTime);
+            });
+            audio.addEventListener('play', () => { if (!vmCaptionRaf) vmCaptionLoop(); });
+            audio.addEventListener('ended', () => {
+                if (vmQueue && vmQueue.length) { vmSeqIndex++; vmPlayNextTrack(); return; }
+                vmResetSequence();
+                const btn = player.querySelector('.vm-play');
+                if (btn) btn.innerHTML = VM_ICON_PLAY;
+                vmReflectSpeaker(activeVoiceMemoIcon, null, false);
+                activeVoiceMemoIcon = null;
+            });
+            document.addEventListener('click', e => {
+                if (player.classList.contains('hidden') || player.contains(e.target)) return;
+                if (e.target.closest('.voice-memo-icon')) return;
+                closeVoiceMemo();
+            });
+            return player;
+        }
+        const _vmFmt = t => { t = Math.max(0, Math.floor(isFinite(t) ? t : 0)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; };
+
+        function _setPlayPill(icon, state) {
+            const pill = icon?.querySelector('.play-pill');
+            if (!pill) return;
+            pill.innerHTML = state === 'speaking' ? 'speaking' : state === 'asking' ? 'asking' : PLAY_PILL_PLAY;
+        }
+        function vmReflectSpeaker(icon, speaker, playing) {
+            if (!icon) return;
+            const who = icon.dataset.interviewee;
+            if (!who) { _setPlayPill(icon, playing ? 'speaking' : 'play'); return; }
+            _setPlayPill(icon, !playing ? 'play' : speaker === 'me' ? 'asking' : 'speaking');
+        }
+        function vmResetSequence() { vmQueue = null; vmSeqSlug = null; vmSeqIndex = 0; vmSeqDurations = null; vmSpeakerName = null; vmLitWords = false; }
+
+        function vmPlacePlayer(player, icon) {
+            player.classList.remove('docked');
+            if (icon) {
+                const rect = icon.getBoundingClientRect();
+                const playerW = 280;
+                player.style.left = Math.max(12, Math.min(window.innerWidth - playerW - 12, rect.left)) + 'px';
+                player.style.top = Math.min(window.innerHeight - 60, rect.bottom + 10) + 'px';
+            }
+            // Once the page scrolls, the player docks bottom-left so it stays reachable
+            window.addEventListener('scroll', () => { if (!player.classList.contains('hidden')) player.classList.add('docked'); }, { once: true });
+        }
+        function vmShow(player, icon) {
+            player.querySelector('.vm-play').innerHTML = VM_ICON_PAUSE;
+            document.getElementById('vmFill').style.width = '0%';
+            document.getElementById('vmTime').textContent = '0:00';
+            player.classList.remove('hidden');
+            _setPlayPill(icon, 'speaking');
+        }
+
+        // Diary memo: one recording
+        function toggleVoiceMemo(event, slug, audioPath) {
+            if (event) event.stopPropagation();
+            closeNotepad();
+            const player = ensureVoiceMemoPlayer();
+            const audio = document.getElementById('vmAudio');
+            if (currentVoiceMemo === slug && !player.classList.contains('hidden')) { closeVoiceMemo(); return; }
+            if (activeVoiceMemoIcon) { vmReflectSpeaker(activeVoiceMemoIcon, null, false); activeVoiceMemoIcon = null; }
+            activeVoiceMemoIcon = event?.target?.closest?.('.desktop-icon') || null;
+            currentVoiceMemo = slug;
+            vmResetSequence();
+            const resolved = audioPath || `diary vo/${slug}.mp3`;
+            vmLitWords = !/^diary vo\//.test(resolved);
+            audio.src = encodeURI(resolved);
+            audio.load();
+            vmLoadCaptions(resolved, slug);
+            vmPlacePlayer(player, activeVoiceMemoIcon);
+            vmShow(player, activeVoiceMemoIcon);
+            audio.play().catch(() => { player.querySelector('.vm-play').innerHTML = VM_ICON_PLAY; vmReflectSpeaker(activeVoiceMemoIcon, null, false); });
+        }
+
+        // Interview clip: the question, then Delta's answer, as one sequence.
+        // Interview data is loaded when the chapter renders, so play starts inside the click.
+        function toggleInterview(event, id) {
+            if (event) event.stopPropagation();
+            closeNotepad();
+            const t = interviewsById && interviewsById[id];
+            const player = ensureVoiceMemoPlayer();
+            if (!t) return;
+            if (currentVoiceMemo === id && !player.classList.contains('hidden')) { closeVoiceMemo(); return; }
+            if (activeVoiceMemoIcon) { vmReflectSpeaker(activeVoiceMemoIcon, null, false); activeVoiceMemoIcon = null; }
+            activeVoiceMemoIcon = event?.target?.closest?.('.desktop-icon') || null;
+            currentVoiceMemo = id;
+            const q = t.messages.find(m => m.username === 'me') || {};
+            const a = t.messages.find(m => m.username !== 'me') || {};
+            vmQueue = [
+                { audio: q.audio, speaker: 'me' },
+                { audio: a.audio, speaker: t.interviewee || a.username || '' },
+            ].filter(x => x.audio);
+            vmSeqSlug = id; vmSeqIndex = 0; vmSeqDurations = null;
+            Promise.all(vmQueue.map(x => new Promise(res => {
+                const probe = new Audio(); probe.preload = 'metadata';
+                probe.onloadedmetadata = () => res(probe.duration || 0);
+                probe.onerror = () => res(0);
+                probe.src = encodeURI(x.audio);
+            }))).then(ds => { if (vmSeqSlug === id) vmSeqDurations = ds; });
+            vmPlacePlayer(player, activeVoiceMemoIcon);
+            vmShow(player, activeVoiceMemoIcon);
+            vmPlayNextTrack();
+        }
+        function vmPlayNextTrack() {
+            if (!vmQueue || !vmQueue.length) return false;
+            const track = vmQueue.shift();
+            const audio = document.getElementById('vmAudio');
+            vmSpeakerName = track.speaker || null;
+            vmReflectSpeaker(activeVoiceMemoIcon, track.speaker, true);
+            audio.src = encodeURI(track.audio);
+            audio.load();
+            vmLoadCaptions(track.audio, currentVoiceMemo);
+            audio.play().catch(() => {
+                const btn = document.querySelector('.vm-play');
+                if (btn) btn.innerHTML = VM_ICON_PLAY;
+                vmReflectSpeaker(activeVoiceMemoIcon, null, false);
+            });
+            return true;
+        }
+        function vmTogglePlay(event) {
+            if (event) event.stopPropagation();
+            const audio = document.getElementById('vmAudio');
+            const btn = document.querySelector('.vm-play');
+            if (!audio) return;
+            if (audio.paused) { audio.play().catch(() => {}); btn.innerHTML = VM_ICON_PAUSE; vmReflectSpeaker(activeVoiceMemoIcon, vmSpeakerName, true); }
+            else { audio.pause(); btn.innerHTML = VM_ICON_PLAY; vmReflectSpeaker(activeVoiceMemoIcon, vmSpeakerName, false); }
+        }
+        function vmSeek(event) {
+            event.stopPropagation();
+            const audio = document.getElementById('vmAudio');
+            if (!audio || !isFinite(audio.duration)) return;
+            const rect = event.currentTarget.getBoundingClientRect();
+            audio.currentTime = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)) * audio.duration;
+        }
+        function closeVoiceMemo() {
+            const player = document.getElementById('voiceMemoPlayer');
+            const audio = document.getElementById('vmAudio');
+            if (audio) { audio.pause(); audio.currentTime = 0; }
+            if (player) { player.classList.add('hidden'); player.classList.remove('docked'); }
+            const captionEl = document.getElementById('vmCaptions');
+            if (captionEl) { captionEl.classList.remove('visible'); captionEl.textContent = ''; delete captionEl.dataset.key; }
+            vmCaptionChunks = null;
+            currentVoiceMemo = null;
+            vmResetSequence();
+            vmReflectSpeaker(activeVoiceMemoIcon, null, false);
+            activeVoiceMemoIcon = null;
+        }
+
+        // Caption sidecar: 3-word chunks merged into sentence-bounded lines, with per-word timings
+        function vmLoadCaptions(audioPath, guardSlug) {
+            const captionEl = document.getElementById('vmCaptions');
+            vmCaptionChunks = null;
+            if (captionEl) { captionEl.classList.remove('visible'); captionEl.textContent = ''; delete captionEl.dataset.key; }
+            fetch(encodeURI(audioPath.replace(/\.[^.]+$/, '.json')))
+                .then(r => r.ok ? r.json() : null)
+                .then(data => {
+                    if (!data || !Array.isArray(data.chunks) || currentVoiceMemo !== guardSlug) return;
+                    const SOFT_MAX = 16, HARD_MAX = 22;
+                    const words = [];
+                    for (const c of data.chunks) {
+                        const ws = c.text.split(/\s+/).filter(Boolean);
+                        const totalLen = ws.reduce((a, w) => a + w.length + 1, 0);
+                        let t0 = c.start;
+                        ws.forEach(w => { const t1 = t0 + (c.end - c.start) * ((w.length + 1) / totalLen); words.push({ start: t0, end: t1, text: w }); t0 = t1; });
+                    }
+                    const pieces = [];
+                    for (const c of data.chunks) {
+                        const parts = c.text.split(/(?<=[.!?]["')\]]?)\s+/);
+                        if (parts.length === 1) { pieces.push(c); continue; }
+                        const total = c.text.split(/\s+/).filter(Boolean).length;
+                        let t0 = c.start, used = 0;
+                        for (const p of parts) { used += p.split(/\s+/).filter(Boolean).length; const t1 = c.start + (c.end - c.start) * (used / total); pieces.push({ start: t0, end: t1, text: p }); t0 = t1; }
+                    }
+                    const merged = [];
+                    let bucket = [], wordCount = 0, wordCursor = 0;
+                    const flush = () => {
+                        if (!bucket.length) return;
+                        const text = bucket.map(c => c.text).join(' ');
+                        const n = text.split(/\s+/).filter(Boolean).length;
+                        merged.push({ start: bucket[0].start, end: bucket[bucket.length - 1].end, text, words: words.slice(wordCursor, wordCursor + n) });
+                        wordCursor += n; bucket = []; wordCount = 0;
+                    };
+                    for (const c of pieces) {
+                        bucket.push(c);
+                        wordCount += c.text.split(/\s+/).filter(Boolean).length;
+                        const endsAtSentence = /[.!?]["')\]]?$/.test(c.text.trim());
+                        const endsAtClause = /[,;:]["')\]]?$/.test(c.text.trim());
+                        if (endsAtSentence || (wordCount >= SOFT_MAX && endsAtClause) || wordCount >= HARD_MAX) flush();
+                    }
+                    flush();
+                    vmCaptionChunks = merged;
+                    if (captionEl) captionEl.classList.add('visible');
+                })
+                .catch(() => {});
+        }
+        function vmSyncCaptions(t) {
+            if (!vmCaptionChunks) return;
+            const captionEl = document.getElementById('vmCaptions');
+            if (!captionEl) return;
+            const chunk = vmCaptionChunks.find(c => t >= c.start && t <= c.end) || vmCaptionChunks.filter(c => c.start <= t).pop();
+            const speakerPrefix = vmSpeakerName ? `${vmSpeakerName}: ` : '';
+            const litSpeaker = vmLitWords || (vmSpeakerName && vmSpeakerName !== 'me');
+            let body = chunk ? chunk.text : '';
+            let key = chunk ? `${chunk.start}` : '';
+            if (chunk && litSpeaker && chunk.words && chunk.words.length) {
+                let on = -1;
+                chunk.words.forEach((w, i) => { if (t >= w.start) on = i; });
+                key += `:${on}`;
+                body = chunk.words.map((w, i) => i === on ? `<span class="vm-word-on">${w.text}</span>` : w.text).join(' ');
+            }
+            if (captionEl.dataset.key === key) return;
+            captionEl.dataset.key = key;
+            captionEl.innerHTML = chunk ? `${speakerPrefix}<span class="vm-qm">”</span>${body}<span class="vm-qm">”</span>` : '';
+        }
+        function vmCaptionLoop() {
+            const audio = document.getElementById('vmAudio');
+            if (!audio || audio.paused) { vmCaptionRaf = null; return; }
+            vmSyncCaptions(audio.currentTime);
+            vmCaptionRaf = requestAnimationFrame(vmCaptionLoop);
+        }
+
+        // ===== Diary notepad (desktop-voyeur's TextEdit window): entries type themselves out =====
+        let notepadGen = 0;
+        function ensureDiaryPanel() {
+            let panel = document.getElementById('diaryPanel');
+            if (panel) return panel;
+            panel = document.createElement('div');
+            panel.className = 'diary-panel';
+            panel.id = 'diaryPanel';
+            panel.innerHTML = `
+                <div class="te-chrome">
+                    <div class="te-lights">
+                        <button class="traffic-light traffic-close" onclick="closeNotepad()"></button>
+                        <button class="traffic-light traffic-minimize"></button>
+                        <button class="traffic-light traffic-maximize"></button>
+                    </div>
+                    <div class="te-toolbar">
+                        <div class="te-seg"><span class="te-b">B</span><span class="te-i">I</span><span class="te-u">U</span><span class="te-s">S</span></div>
+                        <span class="te-swatch"></span>
+                        <span class="te-btn te-pen"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 2.5l3 3L5 14H2v-3z"/><path d="M9 4l3 3"/><path d="M1.5 15.5h13" stroke="#e0443e"/></svg></span>
+                        <span class="te-select">Regular<span class="te-stepper"><svg viewBox="0 0 8 12" width="8" height="12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 4.5L4 2l2.5 2.5"/><path d="M1.5 7.5L4 10l2.5-2.5"/></svg></span></span>
+                        <span class="te-select te-size">12<span class="te-stepper"><svg viewBox="0 0 8 6" width="8" height="6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4 4.5 7 1.5"/></svg></span></span>
+                    </div>
+                    <div class="te-ruler">
+                        <span class="te-stop te-margin">0</span><span class="te-stop">1</span><span class="te-stop">2</span><span class="te-stop">3</span><span class="te-stop">4</span><span class="te-stop">5</span><span class="te-stop te-margin">6</span>
+                    </div>
+                </div>
+                <div class="diary-panel-body" id="diaryPanelBody"></div>`;
+            document.querySelector('.desktop').appendChild(panel);
+            return panel;
+        }
+        function ensureStickyPanel() {
+            let panel = document.getElementById('stickyPanel');
+            if (panel) return panel;
+            panel = document.createElement('div');
+            panel.className = 'sticky-note';
+            panel.id = 'stickyPanel';
+            panel.innerHTML = `<button class="vm-close sticky-close" onclick="closeNotepad()" aria-label="close">×</button><div class="sticky-body" id="stickyBody"></div>`;
+            document.querySelector('.desktop').appendChild(panel);
+            return panel;
+        }
+        function closeNotepad() {
+            notepadGen++;
+            ['diaryPanel', 'stickyPanel'].forEach(id => { const p = document.getElementById(id); if (p) p.classList.remove('open'); });
+            document.querySelectorAll('.desktop-icon.diary-focus').forEach(i => i.classList.remove('diary-focus'));
+        }
+        document.addEventListener('click', e => {
+            const open = document.querySelector('.diary-panel.open, .sticky-note.open');
+            if (!open || open.contains(e.target) || e.target.closest('.desktop-icon[data-note]')) return;
+            closeNotepad();
+        });
+
+        async function openNotepad(event, key) {
+            if (event) event.stopPropagation();
+            const item = getLayoutItemMap()[key];
+            if (!item) return;
+            const icon = document.querySelector(`.desktop-icon[data-note="${key}"]`);
+            const wasOpen = icon && icon.classList.contains('diary-focus');
+            closeNotepad();
+            closeVoiceMemo(); // one thing playing or typing at a time
+            if (wasOpen) return; // clicking the open note's icon closes it
+            const gen = ++notepadGen;
+            const sticky = item.mode === 'paste';
+            const panel = sticky ? ensureStickyPanel() : ensureDiaryPanel();
+            if (icon) {
+                panel.style.top = (icon.offsetTop + icon.offsetHeight + 28) + 'px';
+                const canvasW = panel.parentElement.clientWidth;
+                const panelW = Math.min(sticky ? 440 : 400, canvasW * 0.92);
+                const centered = icon.offsetLeft + icon.offsetWidth / 2 - panelW / 2;
+                panel.style.left = Math.max(12, Math.min(centered, canvasW - panelW - 12)) + 'px';
+                panel.style.transform = 'none';
+                icon.classList.add('diary-focus');
+            }
+            const body = document.getElementById(sticky ? 'stickyBody' : 'diaryPanelBody');
+            body.innerHTML = sticky ? '<div class="sticky-editor"></div>' : '<div class="notepad-editor" contenteditable="true" spellcheck="false"></div>';
+            panel.classList.add('open');
+            const editor = body.querySelector(sticky ? '.sticky-editor' : '.notepad-editor');
+            if (!sticky) editor.focus({ preventScroll: true });
+            const md = await fetchText(diarySrc(item.src || 'script/part-3-bot-requests.md'));
+            const text = /^## BEAT /m.test(md) ? extractBeatQuote(md, item.beat || 7) : md.trim();
+            if (gen !== notepadGen || !text) return;
+            if (sticky) pasteLikeClipboard(editor, text, gen, panel);
+            else typeLikeHuman(editor, text, gen, panel);
+        }
+
+        function typeLikeHuman(editor, text, gen, panel) {
+            const body = editor.parentElement;
+            let i = 0, sentence = null, strike = false, strikeEl = null;
+            const pending = []; let wordsIntoNext = 0;
+            const endSentence = () => { if (sentence) { pending.push(sentence); sentence = null; strikeEl = null; wordsIntoNext = 0; } };
+            const dimPending = () => { pending.forEach(s => s.classList.add('np-done')); pending.length = 0; };
+            const caretToEnd = () => {
+                const sel = window.getSelection(); const range = document.createRange();
+                range.selectNodeContents(editor); range.collapse(false); sel.removeAllRanges(); sel.addRange(range);
+            };
+            (function step() {
+                if (gen !== notepadGen || !editor.isConnected || !panel.classList.contains('open')) return;
+                if (i >= text.length) return;
+                const ch = text[i++];
+                if (ch === '~' && text[i] === '~') { i++; strike = !strike; strikeEl = null; step(); return; }
+                if (ch === '\n') { endSentence(); editor.appendChild(document.createElement('br')); }
+                else {
+                    if (!sentence) { sentence = document.createElement('span'); sentence.className = 'np-sentence'; editor.appendChild(sentence); }
+                    let target = sentence;
+                    if (strike) { if (!strikeEl) { strikeEl = document.createElement('s'); strikeEl.className = 'np-strike'; sentence.appendChild(strikeEl); } target = strikeEl; }
+                    if (target.lastChild && target.lastChild.nodeType === Node.TEXT_NODE) target.lastChild.appendData(ch);
+                    else target.appendChild(document.createTextNode(ch));
+                    if (ch === ' ' && pending.length && ++wordsIntoNext >= 3) dimPending();
+                    const next = text[i], prev = text[i - 2];
+                    if (('.!?'.includes(ch) && (next === undefined || next === ' ' || next === '\n')) || (ch === '"' && prev !== undefined && '.!?'.includes(prev))) endSentence();
+                }
+                caretToEnd();
+                body.scrollTop = body.scrollHeight;
+                let delay = 35 + Math.random() * 90;
+                if (',;:'.includes(ch)) delay = 230 + Math.random() * 180;
+                if ('.!?'.includes(ch)) delay = 450 + Math.random() * 380;
+                if (ch === '\n') delay = 600 + Math.random() * 330;
+                else if (Math.random() < 0.03) delay += 300 + Math.random() * 400;
+                setTimeout(step, delay);
+            })();
+        }
+
+        // Clippings: one paragraph at a time, pasted in whole. › (or the right arrow key) moves on.
+        function pasteLikeClipboard(editor, text, gen, panel) {
+            const body = editor.parentElement;
+            const paras = text.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+            if (!paras.length) return;
+            const title = paras.shift();
+            const titleEl = document.createElement('div'); titleEl.className = 'np-clip-title'; titleEl.textContent = title;
+            const stage = document.createElement('div'); stage.className = 'np-clip-stage';
+            editor.appendChild(titleEl); editor.appendChild(stage);
+            const next = document.createElement('button');
+            next.className = 'np-clip-next'; next.setAttribute('aria-label', 'next clipping');
+            next.innerHTML = '<svg viewBox="0 0 10 16" width="10" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l6 6-6 6"/></svg>';
+            next.hidden = true;
+            body.appendChild(next);
+            const count = document.createElement('span'); count.className = 'np-clip-count'; body.appendChild(count);
+            let idx = -1;
+            const live = () => gen === notepadGen && editor.isConnected && panel.classList.contains('open');
+            const inline = (target, str) => {
+                str.split(/(\*\*[^*]+\*\*|~~[^~]+~~|==[^=]+==)/).filter(Boolean).forEach(part => {
+                    let m;
+                    if ((m = part.match(/^\*\*([^*]+)\*\*$/))) { const b = document.createElement('strong'); b.className = 'np-lead'; b.textContent = m[1]; target.appendChild(b); }
+                    else if ((m = part.match(/^~~([^~]+)~~$/))) { const x = document.createElement('span'); x.className = 'np-strike'; x.textContent = m[1]; target.appendChild(x); }
+                    else if ((m = part.match(/^==([^=]+)==$/))) { const h = document.createElement('span'); h.className = 'np-hl'; h.textContent = m[1]; target.appendChild(h); }
+                    else target.appendChild(document.createTextNode(part));
+                });
+            };
+            const show = () => {
+                if (!live() || idx + 1 >= paras.length) return;
+                idx++;
+                const para = paras[idx];
+                stage.innerHTML = '';
+                const el = document.createElement('div'); el.className = 'np-clip np-note';
+                para.split('\n').forEach((line, li) => {
+                    const mk = line.match(/^([✓✗])\s+"?(.*?)"?$/);
+                    if (mk) {
+                        const good = mk[1] === '✓';
+                        const row = document.createElement('div'); row.className = 'np-check ' + (good ? 'good' : 'bad');
+                        const q = document.createElement('div'); q.className = 'np-check-line';
+                        q.innerHTML = '<span class="np-qm">”</span>';
+                        inline(q, good ? `==${mk[2]}==` : `~~${mk[2]}~~`);
+                        q.insertAdjacentHTML('beforeend', '<span class="np-qm">”</span>');
+                        const tag = document.createElement('span'); tag.className = 'np-tag'; tag.textContent = good ? 'LLMs like' : "LLMs don't like";
+                        row.appendChild(q); row.appendChild(tag); el.appendChild(row);
+                    } else { if (li > 0) el.appendChild(document.createElement('br')); inline(el, line); }
+                });
+                stage.appendChild(el);
+                const myIdx = idx;
+                setTimeout(() => { if (!live() || idx !== myIdx) return; el.querySelectorAll('.np-hl').forEach(h => h.classList.add('on')); }, 1200);
+                next.hidden = idx + 1 >= paras.length;
+                count.textContent = paras.length > 1 ? `${idx + 1} / ${paras.length}` : '';
+            };
+            next.addEventListener('click', e => { e.stopPropagation(); show(); });
+            const onKey = e => {
+                if (!live()) { document.removeEventListener('keydown', onKey); return; }
+                if (e.key === 'ArrowRight') { e.preventDefault(); show(); }
+            };
+            document.addEventListener('keydown', onKey);
+            setTimeout(show, 220);
+        }
+
+        // Icons, same language as desktop-voyeur
+        const ICON_CHAR_FILE = '<svg viewBox="0 0 24 24" fill="rgba(249,248,248,0.55)" shape-rendering="crispEdges"><path d="M6 2h10v2H6zM16 4h2v2h-2zM18 6h2v14h-2zM6 20h14v2H6zM6 4h2v16H6z"/><path d="M8 4h8v2h2v14H8z" opacity=".12"/><path d="M10 8h2v2h-2zM8 11h2v2H8zM10 14h2v2h-2zM14 8h2v2h-2zM16 11h2v2h-2zM14 14h2v2h-2z"/></svg>';
+        const ICON_CHAR_FILE_PRIEST = '<svg viewBox="0 0 24 24" fill="rgba(249,248,248,0.55)" shape-rendering="crispEdges"><path d="M6 2h10v2H6zM16 4h2v2h-2zM18 6h2v14h-2zM6 20h14v2H6zM6 4h2v16H6z"/><path d="M8 4h8v2h2v14H8z" opacity=".12"/><path d="M12 7h2v10h-2zM9 10h8v2H9z"/></svg>';
+
+        function buildAvatarStack(avatars, opts = {}) {
+            const max = opts.max || 4;
+            const list = (avatars || []).filter(Boolean);
+            const shown = list.slice(0, max);
+            const total = opts.total !== undefined ? opts.total : list.length;
+            const overflow = total - shown.length;
+            const circles = shown.map(a => `<img src="${a}" class="msg-avatar-circle" alt="">`).join('');
+            const extra = overflow > 0 ? `<span class="msg-avatar-overflow">+${overflow}</span>` : '';
+            return `<div class="msg-avatar-stack">${circles}${extra}</div>`;
+        }
+        function randomAvatars(n) {
+            const pool = ARCHIVE_AVATARS.slice();
+            const out = [];
+            for (let i = 0; i < n && pool.length; i++) out.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+            return out;
+        }
+        const encodePath = p => String(p).replace(/ /g, '%20');
+        const esc = v => String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+        // One manifest key -> zero or more icon specs this page can open.
+        // Anything else in the manifest (diary, interviews, guides...) is skipped.
+        const ICON_NOTE = '<svg viewBox="0 0 24 24" fill="none" stroke="rgba(249,248,248,0.55)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>';
+        const PLAY_PILL = '<span class="play-pill"><svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play</span>';
+        const portraitIcon = src => `<img src="${encodePath(src)}" class="portrait-icon" alt="">`;
+
+        function specsForKey(key, item, threads, interviews) {
+            const m = key.match(/^msg-(.+)$/);
+            // Delta interview clip: question + answer, both recorded
+            if (!item && interviews && interviews[key]) {
+                const t = interviews[key];
+                // Reads: name / role / topic. The Archive's label for the key is the topic.
+                return [{ click: `toggleInterview(event, '${key}')`, cls: 'voice-memo-icon interview-icon', data: { interview: key, interviewee: t.interviewee || 'Delta' },
+                          label: t.interviewee || 'Delta', meta: t.meta || 'interview', topic: t.title || key,
+                          iconHtml: portraitIcon(t.portrait || PORTRAIT_DELTA), after: PLAY_PILL, x: 150 + [...key].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 0) % 800 }];
+            }
+            if (item && item.type === 'notepad') {
+                return [{ click: `openNotepad(event, '${key}')`, data: { note: key }, label: item.label, meta: item.meta,
+                          iconHtml: item.portrait ? portraitIcon(item.portrait) : `<div class="icon">${ICON_NOTE}</div>`, x: item.x }];
+            }
+            if (item && item.type === 'voice-memo') {
+                const audio = item.audioPath || `diary vo/${item.slug}.mp3`;
+                if (!/^(diary vo|delta-vo|interview vo)\//.test(audio)) return []; // only the memos copied over
+                return [{ click: `toggleVoiceMemo(event, '${item.slug}', '${audio.replace(/'/g, "\\'")}')`, cls: 'voice-memo-icon', data: { memo: item.slug }, label: item.label, meta: item.meta,
+                          iconHtml: item.portrait ? portraitIcon(item.portrait) : '', after: PLAY_PILL, x: item.x }];
+            }
+            if (item && item.type === 'msg-card') {
+                const t = threads[item.msgId];
+                if (!t) return [];
+                const n = t.messages.filter(mm => !mm.hidden).length;
+                const iconHtml = item.iconImg
+                    ? `<div class="icon"><img src="${encodePath(item.iconImg)}" alt=""></div>`
+                    : buildAvatarStack(randomAvatars(Math.floor(Math.random() * 3) + 1));
+                return [{ click: `toggleMsgInline('${item.msgId}', this)`, data: { msg: item.msgId },
+                          label: item.label || t.title, meta: item.meta || `${n} message${n === 1 ? '' : 's'}`, iconHtml, x: item.x }];
+            }
+            if (!item && m) {
+                const t = threads[m[1]];
+                if (!t) return [];
+                const n = t.messages.filter(mm => !mm.hidden).length;
+                let h = 0; for (let i = 0; i < m[1].length; i++) h = (h * 31 + m[1].charCodeAt(i)) | 0;
+                return [{ click: `toggleMsgInline('${m[1]}', this)`, data: { msg: m[1] },
+                          label: t.title || m[1], meta: `${n} message${n === 1 ? '' : 's'}`,
+                          iconHtml: buildAvatarStack(randomAvatars(Math.floor(Math.random() * 3) + 1)), x: 150 + Math.abs(h) % 800 }];
+            }
+            if (!item) return [];
+            if (item.type === 'bot-request') {
+                REQUEST_SOURCES[key] = { thread: item.threadId };
+                const iconHtml = item.thumbnail ? `<div class="icon img-thumb"><img src="${encodePath(item.thumbnail)}" alt=""></div>` : '';
+                return [{ click: `toggleRequestInline('${key}', this)`, data: { doc: key }, label: item.label, meta: item.meta, iconHtml, x: item.x }];
+            }
+            if (item.type === 'bot-post') {
+                REQUEST_SOURCES[key] = { post: item.postId };
+                let iconHtml = '';
+                if (item.thumbnail) iconHtml = `<div class="icon img-thumb"><img src="${encodePath(item.thumbnail)}" alt=""></div>`;
+                else if (!item.noIcon) {
+                    const initial = (item.label || item.postId || '?')[0].toUpperCase();
+                    iconHtml = `<div class="msg-avatar-stack"><div class="msg-avatar-initial" style="background:${item.color || '#6b7280'}">${initial}</div></div>`;
+                }
+                return [{ click: `toggleRequestInline('${key}', this)`, data: { doc: key }, label: item.label, meta: item.meta, iconHtml, x: item.x }];
+            }
+            if (item.type === 'character' && charFiles[item.char]) {
+                const icon = item.char === 'priest' ? ICON_CHAR_FILE_PRIEST : ICON_CHAR_FILE;
+                return [{ click: `openCharacterFile('${item.char}')`, data: { char: item.char }, label: item.label, meta: item.meta,
+                          iconHtml: `<div class="icon">${icon}</div>`, x: item.x }];
+            }
+            // The found-bots folder (character-jsons) is not shown here; only
+            // the priest, listed on its own under the craft, renders as a character.
+            return [];
+        }
+
+        async function renderChapterIcons(chapterId) {
+            const desktop = document.querySelector('.desktop');
+            if (!desktop) return;
+            const [manifest, threads, interviews] = await Promise.all([loadChapterManifest(), loadArchiveMessages(), loadInterviews()]);
+            const itemMap = getLayoutItemMap();
+            desktop.querySelectorAll('.desktop-icon.chapter-icon').forEach(el => el.remove());
+            chapterItems = [];
+            const entries = manifest[chapterId] || {};
+            Object.keys(entries).forEach(key => {
+                if (HIDDEN_KEYS.has(key)) return;
+                const override = entries[key] || {};
+                const specs = specsForKey(key, itemMap[key], threads, interviews);
+                specs.forEach((spec, i) => {
+                    const single = specs.length === 1;
+                    const hasTopic = spec.topic !== undefined;
+                    const label = single && override.label !== undefined && !hasTopic ? override.label : spec.label;
+                    const topic = hasTopic ? (single && override.label !== undefined ? override.label : spec.topic) : null;
+                    // Interview icons keep the role from the interview data ("ex-bot maker") over the Archive's meta
+                    const meta  = single && override.meta  !== undefined && !hasTopic ? override.meta  : spec.meta;
+                    const x     = specs.length === 1 && override.x     !== undefined ? override.x     : spec.x;
+                    const el = document.createElement('div');
+                    el.className = 'desktop-icon chapter-icon' + (spec.iconHtml ? '' : ' no-icon') + (spec.cls ? ' ' + spec.cls : '');
+                    el.setAttribute('onclick', spec.click);
+                    Object.entries(spec.data || {}).forEach(([k, v]) => { el.dataset[k] = v; });
+                    el.dataset.key = key;
+                    if (label) el.dataset.label = label;
+                    el.innerHTML = (spec.iconHtml || '')
+                        + (label ? `<span class="label">${esc(label)}</span>` : '')
+                        + (meta ? `<span class="metadata">${esc(meta)}</span>` : '')
+                        + (topic ? `<span class="topic">${esc(topic)}</span>` : '')
+                        + (spec.after || '');
+                    desktop.appendChild(el);
+                    chapterItems.push({ el, x: typeof x === 'number' ? x : 400 });
                 });
             });
+            positionChapterIcons();
+            chapterItems.forEach(({ el }, i) => {
+                setTimeout(() => el.classList.add('positioned'), i * 90 + Math.random() * 80);
+            });
+            requestAnimationFrame(() => desktop.classList.add('ready'));
+        }
+
+        // One icon per row, manifest order top to bottom (desktop-voyeur's rhythm);
+        // x comes from the layout file on a ~1100px canvas and is scaled to fit.
+        // On desktop the icons stay left of the fixed signup box.
+        function positionChapterIcons() {
+            const desktop = document.querySelector('.desktop');
+            if (!desktop || !chapterItems.length) return;
+            const isMobile = window.innerWidth <= 768;
+            const ROW = isMobile ? 170 : 230;
+            const PAD = isMobile ? 70 : 80;
+            const iconW = isMobile ? 100 : 130;
+            const width = desktop.clientWidth || window.innerWidth - 80;
+            const usable = Math.max((isMobile ? width : width * 0.72) - iconW, 0);
+            let lastY = PAD;
+            chapterItems.forEach(({ el, x }, i) => {
+                const px = Math.round(Math.min(Math.max(x, 0), 1100) / 1100 * usable);
+                const y = PAD + i * ROW;
+                el.style.position = 'absolute';
+                el.style.left = px + 'px';
+                el.style.top = y + 'px';
+                lastY = y;
+            });
+            desktop.style.minHeight = (lastY + (isMobile ? 360 : 420)) + 'px';
+        }
+
+        function closeOpenInlineBoxes() {
+            if (typeof stopArchivePlayback === 'function') stopArchivePlayback();
+            if (typeof closeVoiceMemo === 'function') closeVoiceMemo();
+            if (typeof closeNotepad === 'function') closeNotepad();
+            ['msgInlineBox', 'requestInlineBox', 'folderInlineBox'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            if (typeof currentMsgId !== 'undefined') currentMsgId = null;
+        }
+
+        const chapterFromHash = () => location.hash.slice(1).split(/[?&]/)[0];
+
+        async function openChapter(id, opts = {}) {
+            const ch = CHAPTERS.find(c => c.id === id);
+            if (!ch) return;
+            closeOpenInlineBoxes();
+            currentChapter = id;
+            document.body.classList.add('in-chapter');
+            document.body.classList.remove('landing');
+            document.body.dataset.chapter = id;
+            const crumb = document.getElementById('chapterCrumbName');
+            if (crumb) crumb.textContent = ch.label;
+            await renderChapterIcons(id);
+            window.scrollTo(0, 0);
+            // Absolute path: with <base href="/archive-desktop/"> a bare '#id' would resolve to /archive-desktop/#id
+            if (chapterFromHash() !== id) history.replaceState(null, '', location.pathname + location.search + '#' + id);
+        }
+
+        function closeChapter() {
+            closeOpenInlineBoxes();
+            currentChapter = null;
+            document.body.classList.remove('in-chapter');
+            document.body.classList.add('landing');
+            delete document.body.dataset.chapter;
+            window.scrollTo(0, 0);
+            if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            renderChapterFolders();
+            await loadChapterManifest();
+            const id = chapterFromHash();
+            if (CHAPTERS.some(c => c.id === id)) await openChapter(id, { silent: true });
+            else document.body.classList.add('landing');
+            initParallax();
+            window.addEventListener('hashchange', () => {
+                const h = chapterFromHash();
+                if (CHAPTERS.some(c => c.id === h)) { if (h !== currentChapter) openChapter(h, { silent: true }); }
+                else if (currentChapter) closeChapter();
+            });
+            let resizeTimer = null;
+            window.addEventListener('resize', () => {
+                if (!currentChapter) return;
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(positionChapterIcons, 150);
+            });
         });
+        // scatterIcons() above laid the whole archive out at once; it is kept
+        // for reference but no longer runs, the chapters replace it.
 
         // Parallax effect for icons
         function initParallax() {
             const desktop = document.querySelector('.desktop');
-            const icons = desktop ? desktop.querySelectorAll('.desktop-icon') : [];
-            if (!icons.length) return;
+            if (!desktop) return;
 
             // Simple hash function for consistent speeds per icon
             function hashString(str) {
@@ -4001,21 +4328,22 @@
             // Much subtler on mobile
             const isMobile = window.innerWidth <= 768;
             const parallaxRange = isMobile ? 0.01 : 0.03;
-            icons.forEach(icon => {
-                const id = icon.dataset.folder || icon.dataset.char || icon.dataset.doc || icon.dataset.special || 'default';
-                const hash = Math.abs(hashString(id));
-                const speed = -parallaxRange + (hash % 1000) / 1000 * (parallaxRange * 2);
-                icon.dataset.parallaxSpeed = speed;
-            });
+            function speedFor(icon) {
+                if (icon.dataset.parallaxSpeed === undefined) {
+                    const id = icon.dataset.key || icon.dataset.char || icon.dataset.doc || icon.dataset.msg || 'default';
+                    const hash = Math.abs(hashString(id));
+                    icon.dataset.parallaxSpeed = -parallaxRange + (hash % 1000) / 1000 * (parallaxRange * 2);
+                }
+                return parseFloat(icon.dataset.parallaxSpeed);
+            }
 
             let lastScrollY = 0;
 
             function update() {
                 const scrollY = window.scrollY;
                 if (scrollY !== lastScrollY) {
-                    icons.forEach(icon => {
-                        const speed = parseFloat(icon.dataset.parallaxSpeed);
-                        icon.style.transform = `translateY(${scrollY * speed}px)`;
+                    desktop.querySelectorAll('.desktop-icon').forEach(icon => {
+                        icon.style.transform = `translateY(${scrollY * speedFor(icon)}px)`;
                     });
                     lastScrollY = scrollY;
                 }

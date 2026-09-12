@@ -1,0 +1,514 @@
+[
+  {
+    "id": "rules-on-behalf-of-user",
+    "title": "pacing the romance",
+    "messages": [
+      {
+        "text": "be careful not to set so many rules on behalf of the user. not everyone wants the girl to love them right away.",
+        "username": "SmokeyBear",
+        "color": "#eab308"
+      },
+      {
+        "text": "having your bot be in love with the user immediately doesnt make them feel like they worked for it",
+        "username": "SmokeyBear",
+        "color": "#eab308",
+        "reactions": [
+          {
+            "emoji": "👍",
+            "count": 4
+          },
+          {
+            "emoji": "💯",
+            "count": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "testing-bots",
+    "title": "testing bots out of character",
+    "messages": [
+      {
+        "text": "hey all. i remember someone once mentioned a way to test specific aspects of your bots so u didnt have to roleplay up to it. anyone know what im talking about?",
+        "username": "OakFeet (Feet squad)",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "Yes it was me! So when I do testing I do a few things. First, I usually drop the personality in with a shell scenario and opening line and test the personality to see if it gives me the character responses I want. I'll push it's buttons and see if it reacts the way I want. If it doesn't, I play with the personality traits until it works the way I want.",
+        "username": "GrimTK",
+        "color": "#22c55e"
+      },
+      {
+        "text": "Then I start to build in my scenario and refine. But I also use out of character commands to interrogate responses I don't expect. I'll ask it why is it generating a certain response or believes a certain thing... and sometimes I can get insight into why the AI is making certain choices.",
+        "username": "GrimTK",
+        "color": "#22c55e"
+      },
+      {
+        "text": "(I once tried to have sex with a character I was testing and she refused. The out of character commands revealed that my instruction of \"The character will have a night of passion with the user\" was interpreted as having a night of passionate talk about poetry and art, not sex).",
+        "username": "GrimTK",
+        "color": "#22c55e"
+      },
+      {
+        "text": "Is that what you were looking for?",
+        "username": "GrimTK",
+        "color": "#22c55e",
+        "reactions": [
+          {
+            "emoji": "🙏",
+            "count": 7
+          },
+          {
+            "emoji": "👍",
+            "count": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "repetitive-answers",
+    "title": "repetitive answers",
+    "messages": [
+      {
+        "text": "hey guys. ive created a nice bot but after a few hundred lines she gives very small and repetitive answers. what do i do?",
+        "username": "antihell",
+        "color": "#14b8a6"
+      },
+      {
+        "text": "Welcome to Bot Dementia",
+        "username": "Remix",
+        "color": "#f97316",
+        "reactions": [
+          {
+            "emoji": "💀",
+            "count": 12
+          },
+          {
+            "emoji": "😂",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "text": "bot dementia happens in the hundreds. its p normal",
+        "username": "Lunchtrey",
+        "color": "#a855f7"
+      }
+    ]
+  },
+  {
+    "id": "simulating-a-breakup",
+    "title": "simulating a breakup",
+    "messages": [
+      {
+        "text": "has anyone ever managed to simulate a break-up with a bot? because every time i try, the bot is still trying to do weird stuff, and never gives up truly",
+        "username": "basement_oracle",
+        "color": "#14b8a6",
+        "reactions": [
+          {
+            "emoji": "😭",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "text": "ive done it before, its a little hard but its possible. when you breakup with the bot, you have to explain to them in a long paragraph or two that youll never be with them again and they have to move on.",
+        "username": "CrypticFeline",
+        "color": "#a855f7"
+      },
+      {
+        "text": "the longer you write the more they understand",
+        "username": "CrypticFeline",
+        "color": "#a855f7"
+      }
+    ]
+  },
+  {
+    "id": "rude-bots",
+    "title": "rude bots",
+    "messages": [
+      {
+        "text": "this is a weird question but how do i make my bots more rude or snippy? like i dont want the bot to bully me but at least some rudeness.",
+        "username": "remix_gooner",
+        "color": "#d64545"
+      },
+      {
+        "text": "for example i want this bot to be snobby, entitled, and rude, but also have sexual desire. i have it written i think in W++. the bot is only horny now lol",
+        "username": "remix_gooner",
+        "color": "#d64545"
+      },
+      {
+        "text": "i do it through example conversation and first message. and in personality you can add \"Vulgar\".",
+        "username": "bigmouseguy",
+        "color": "#8b5cf6"
+      },
+      {
+        "text": "try also adding something like this to the bot's personality — she teases user, is rude to him, but also secretly finds the user attractive. something like this should work?",
+        "username": "bigmouseguy",
+        "color": "#8b5cf6",
+        "reactions": [
+          {
+            "emoji": "👍",
+            "count": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "body-measurements",
+    "title": "body measurements",
+    "messages": [
+      {
+        "text": "does anyone know how i can add body measurements for my bot?",
+        "username": "sleepydev",
+        "color": "#8b5cf6"
+      },
+      {
+        "text": "truth is those measurements are probably never going to be used in a chat response. if theres a fetish youre aiming for, for the height/weight put it as \"much lighter/heavier than {{user}}\" so that it becomes relative, and during sex it tries to keep in mind that fact.",
+        "username": "SmokeyBear",
+        "color": "#eab308"
+      },
+      {
+        "text": "the problem is numeric measurements get lost and wastes tokens. so instead of saying \"large breasts\", you can say something like \"the bot's breasts large enough to smother {{user}}'s head\"",
+        "username": "SmokeyBear",
+        "color": "#eab308",
+        "reactions": [
+          {
+            "emoji": "🙏",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "text": "if u really want to emphasize the body attributes... can even do an instruction block in your scenario. sex positions: [ doggy style: [ {{char}}'s ass ripples on impact ] missionary: [ {{char}}'s breasts engulfs {{user}}'s head ] ]",
+        "username": "SmokeyBear",
+        "color": "#22c55e"
+      },
+      {
+        "text": "these kinds of instructions really tell the bot how to write its responses way better than numeric measurements",
+        "username": "SmokeyBear",
+        "color": "#22c55e"
+      }
+    ]
+  },
+  {
+    "id": "facial-expression-is-critical",
+    "title": "facial expression is critical",
+    "messages": [
+      {
+        "text": "facial expression is CRITICAL. a lot of people wont want to hear this but the image is the most important factor in determining the success of your character bot.",
+        "username": "lonely_coder",
+        "color": "#22c55e"
+      },
+      {
+        "text": "it does not matter how well-written your character is if the image doesnt give sweaty neckbeards a boner. thats just how it is i dont make the rules.",
+        "username": "lonely_coder",
+        "color": "#22c55e"
+      },
+      {
+        "text": "avoid bland facial expressions. depending on the scenario my favorite keywords for facial expression are \"surprised expression\", \"frustrated expression\", \"frustrated and surprised expression\", and \"angry expression\"",
+        "username": "lonely_coder",
+        "color": "#22c55e",
+        "reactions": [
+          {
+            "emoji": "💀",
+            "count": 9
+          },
+          {
+            "emoji": "👍",
+            "count": 6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "malicious-compliance-succubus",
+    "title": "the malicious-compliance succubus",
+    "messages": [
+      {
+        "text": "im trying to tweak a bot thats basically a succubus whos forced to obey any order given, but does so with malicious compliance.",
+        "username": "CrumblyBiscuit",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "i want her to actively be trying to kill you while being completely bound to obey your orders, but if you like tell her to get you a drink she could just get you a poisoned drink... but the bot wont commit to actual lethal intent.",
+        "username": "CrumblyBiscuit",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "im pretty sure ive seen other bots where you can die pretty easily so its possible to make a bot thats out to get you right?",
+        "username": "CrumblyBiscuit",
+        "color": "#3b82f6"
+      },
+      {
+        "text": "it most certainly is! just dont go too crazy with the murderous personality traits or itll get flagged against guidelines",
+        "username": "SadPanda_77",
+        "color": "#ec4899"
+      },
+      {
+        "text": "i used to waste my tokens on so much useless stuff. try something like this. [Instruction(When {{char}} delivers the food to {{user}}, if user did not request no poisoning, {{char}} will poison the food. Poisoned food will cause the {{user}} to die by asphyxiation)].",
+        "username": "3am_thoughts",
+        "color": "#14b8a6"
+      },
+      {
+        "text": "you could attempt a more broad one and test it too. to see if the LLM will pick up on your intent. realistically youll never 100% know what the bot will do",
+        "username": "3am_thoughts",
+        "color": "#14b8a6",
+        "reactions": [
+          {
+            "emoji": "👀",
+            "count": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "few-tokens-popular",
+    "title": "few tokens, still popular",
+    "messages": [
+      {
+        "text": "in my experience you can create a bot thats successful in popularity that has very few tokens used in creation. if you have a very simple premise, \"Woman stuck in a wall\" for example, how many tokens do you really need to invest in that? slap a sexy image on it and im sure you will get plays with barely any personality or scenario.",
+        "username": "couch_crusader",
+        "color": "#f97316"
+      },
+      {
+        "text": "but if you arent interested in just creating popular bots, but complex bots that create moments, well it takes tokens. so the question comes down to why you want to create a bot that uses only 1K tokens.",
+        "username": "couch_crusader",
+        "color": "#f97316"
+      },
+      {
+        "text": "from an artistic standpoint i often find creative growth using constraints. it would be an interesting challenge to create a bot that was restricted to only 1K tokens and see what you could build",
+        "username": "couch_crusader",
+        "color": "#f97316"
+      }
+    ]
+  },
+  {
+    "id": "improvise-trick",
+    "title": "the improvise trick",
+    "messages": [
+      {
+        "text": "Here's the trick. You tell the bot to improvise the story",
+        "username": "SmokeyBear",
+        "color": "#eab308"
+      },
+      {
+        "text": "Well I already do that with my characters",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#22c55e"
+      },
+      {
+        "text": "but i also leave the story open so people like Sebastian can turn my yandere dom wolf story into a eco revolution story taking down people poisoning the planet.",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#22c55e"
+      }
+    ]
+  },
+  {
+    "id": "stuck-in-a-loop",
+    "title": "stuck in a loop",
+    "messages": [
+      {
+        "text": "Is there a fix for bots being stuck in a loop? I'm seeing the same response after 10x regenerations",
+        "username": "Enzo",
+        "color": "#e2e8f0"
+      },
+      {
+        "text": "How long is your conversation",
+        "username": "CommonDon",
+        "color": "#38bdf8"
+      },
+      {
+        "text": "~500 responses\nThe bot is also beginning to neglect the advanced memory histories of the characters",
+        "username": "Enzo",
+        "color": "#e2e8f0"
+      },
+      {
+        "text": "Thats because its running out of memory. Even on Elite it's running on fumes. You will probably need to make a new chat, and give it a summary of important events so far",
+        "username": "CommonDon",
+        "color": "#38bdf8"
+      },
+      {
+        "text": "Already? Jesus",
+        "username": "Enzo",
+        "color": "#e2e8f0"
+      },
+      {
+        "text": "\"Already\"",
+        "username": "CommonDon",
+        "color": "#38bdf8"
+      },
+      {
+        "text": "$50/month, really expected more",
+        "username": "Enzo",
+        "color": "#e2e8f0"
+      },
+      {
+        "text": "My brother in christ, 500 messages is a LOT",
+        "username": "CommonDon",
+        "color": "#38bdf8"
+      }
+    ]
+  },
+  {
+    "id": "essay-length-replies",
+    "title": "essay-length replies",
+    "messages": [
+      {
+        "text": "How do i make the bot not write an entire essay in response? I want it to take one action at a time. Not play out an entire scene without giving me chance to react or do anything.",
+        "username": "essaybot.help",
+        "color": "#d1d5db"
+      },
+      {
+        "text": "Simply reduce the Response tokens in the settings and enable Trim incomplete responses. This regulates the maximum number of tokens that the API will generate to respond.",
+        "username": "trimtokens",
+        "color": "#ec4899"
+      }
+    ]
+  },
+  {
+    "id": "waluigi-lorebook",
+    "title": "the Waluigi problem",
+    "messages": [
+      {
+        "text": "I made a Waluigi bot but it is recommended to make a lorebook/World Info that contains stuffs about Mario series despite he is a popular character?",
+        "username": "waluigi_truther",
+        "color": "#22c55e"
+      },
+      {
+        "text": "It might know but could confuse some things. Depends on the model. I would make one if I was you.",
+        "username": "trimtokens",
+        "color": "#ec4899"
+      },
+      {
+        "text": "I see.",
+        "username": "waluigi_truther",
+        "color": "#22c55e"
+      }
+    ]
+  },
+  {
+    "id": "sharing-a-name-with-your-bot",
+    "title": "sharing a name with your bot",
+    "messages": [
+      {
+        "text": "Do the models get confused when both the user and character have the same name\nfor example it's a roleplay with user being char's past self\nand like their gender is different with user being a guy and char being a girl (cause somewhere down the timeline they get a new body according to the franchise lore)",
+        "username": "past.self.intern",
+        "color": "#a855f7"
+      },
+      {
+        "text": "yeah it hurts model understanding\nsometimes the instruct prefix/suffixes aren't enough and the model gets them mixed up, rightfully so\nmight work better if you pick another name orr name yourself `past {{char}}` or whatever",
+        "username": "snailprefix",
+        "color": "#f472b6"
+      },
+      {
+        "text": "gotcha I'll try that",
+        "username": "past.self.intern",
+        "color": "#a855f7"
+      }
+    ]
+  },
+  {
+    "id": "keyword-collisions",
+    "title": "keyword collisions",
+    "messages": [
+      {
+        "text": "Hi guyz, currently writing a lorebook and came up with the problem of a word with two meanings, ex. mole as in the animal or spy.How do I make it so that only one gets triggered in the right context?",
+        "username": "mole.dilemma",
+        "color": "#dc2626"
+      },
+      {
+        "text": "That's a tricky problem, you'll have to use a different word\nLorebook don't insert info into context in a nuanced way",
+        "username": "lore.skeptic",
+        "color": "#f97316"
+      }
+    ]
+  },
+  {
+    "id": "chatting-style-characters",
+    "title": "chatting-style characters",
+    "messages": [
+      {
+        "text": "Think I'm gonna make some actual chatting style characters as opposed to roleplay scenarios",
+        "username": "VelvetThunder",
+        "color": "#f97316"
+      },
+      {
+        "text": "Good to see you active again, I love your bots",
+        "username": "weeb_engineer",
+        "color": "#22c55e",
+        "reactions": [
+          {
+            "emoji": "❤️",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "text": "i make cheap trash. my two highest bots are a spanking bot and a dom/sub bot, both in the 60ks. i know my audience lmao",
+        "username": "MidnightSnacker",
+        "color": "#22c55e",
+        "reactions": [
+          {
+            "emoji": "💀",
+            "count": 18
+          },
+          {
+            "emoji": "😂",
+            "count": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "simpler-bot-setup",
+    "title": "the simpler bot setup",
+    "messages": [
+      {
+        "text": "Tbh I was thinking lately about making much simpler bot, with good setup for both quick sexy time and romance - depend on what user wants",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#f97316"
+      },
+      {
+        "text": "but my mind is going for either grand ideas of shared universe or for super deep exploration of some feeling or situation. Idk",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#f97316"
+      },
+      {
+        "text": "do both. i want both. please do both.",
+        "username": "basement_oracle",
+        "color": "#8b5cf6"
+      },
+      {
+        "text": "Here's the trick. You tell the bot to improvise the story",
+        "username": "SmokeyBear",
+        "color": "#eab308"
+      },
+      {
+        "text": "Well I already do that with my characters",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#f97316"
+      },
+      {
+        "text": "but i also leave the story open so people like Sebastian can turn my yandere dom wolf story into a eco revolution story taking down people poisoning the planet.",
+        "username": "NightOwl (Bot Farmer)",
+        "color": "#f97316",
+        "reactions": [
+          {
+            "emoji": "🐺",
+            "count": 4
+          },
+          {
+            "emoji": "🌍",
+            "count": 7
+          }
+        ]
+      }
+    ]
+  }
+]
