@@ -81,7 +81,7 @@
     }
     </script>
     
-    <link href="style.css?v=23" rel="stylesheet">
+    <link href="style.css?v=25" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -3669,6 +3669,7 @@
             player.innerHTML = `
                 <button class="vm-play" onclick="vmTogglePlay(event)">${VM_ICON_PLAY}</button>
                 <span class="vm-time" id="vmTime">0:00</span>
+                <button class="vm-mute" id="vmMute" onclick="vmToggleMute(event)">unmute</button>
                 <button class="vm-close" onclick="closeVoiceMemo()" aria-label="close">×</button>
                 <div class="vm-progress" onclick="vmSeek(event)"><div class="vm-fill" id="vmFill"></div></div>
                 <audio id="vmAudio" preload="metadata"></audio>
@@ -3730,7 +3731,21 @@
             // Once the page scrolls, the player docks bottom-left so it stays reachable
             window.addEventListener('scroll', () => { if (!player.classList.contains('hidden')) player.classList.add('docked'); }, { once: true });
         }
+        // Every clip starts muted; captions carry it until the viewer unmutes
+        function vmToggleMute(event) {
+            if (event) event.stopPropagation();
+            const audio = document.getElementById('vmAudio');
+            const btn = document.getElementById('vmMute');
+            if (!audio || !btn) return;
+            audio.muted = !audio.muted;
+            btn.textContent = audio.muted ? 'unmute' : 'mute';
+            btn.classList.toggle('is-muted', audio.muted);
+        }
         function vmShow(player, icon) {
+            const audio = document.getElementById('vmAudio');
+            const mute = document.getElementById('vmMute');
+            if (audio) audio.muted = true;
+            if (mute) { mute.textContent = 'unmute'; mute.classList.add('is-muted'); }
             player.querySelector('.vm-play').innerHTML = VM_ICON_PAUSE;
             document.getElementById('vmFill').style.width = '0%';
             document.getElementById('vmTime').textContent = '0:00';
@@ -3969,12 +3984,14 @@
             const sticky = item.mode === 'paste';
             const panel = sticky ? ensureStickyPanel() : ensureDiaryPanel();
             if (icon) {
-                panel.style.top = (icon.offsetTop + icon.offsetHeight + 28) + 'px';
+                // Sit just below the icon in layout coordinates, then ride the same
+                // parallax drift as the icon (the scroll loop keeps them in step)
                 const canvasW = panel.parentElement.clientWidth;
                 const panelW = Math.min(sticky ? 440 : 400, canvasW * 0.92);
+                panel.style.top = (icon.offsetTop + icon.offsetHeight + 20) + 'px';
                 const centered = icon.offsetLeft + icon.offsetWidth / 2 - panelW / 2;
-                panel.style.left = Math.max(12, Math.min(centered, canvasW - panelW - 12)) + 'px';
-                panel.style.transform = 'none';
+                panel.style.left = Math.round(Math.max(12, Math.min(centered, canvasW - panelW - 12))) + 'px';
+                panel.style.transform = icon.style.transform || 'none';
                 icon.classList.add('diary-focus');
             }
             const body = document.getElementById(sticky ? 'stickyBody' : 'diaryPanelBody');
@@ -4362,6 +4379,10 @@
                     desktop.querySelectorAll('.desktop-icon').forEach(icon => {
                         icon.style.transform = `translateY(${scrollY * speedFor(icon)}px)`;
                     });
+                    // An open diary note drifts with its icon
+                    const focus = desktop.querySelector('.desktop-icon.diary-focus');
+                    const note = document.querySelector('.diary-panel.open, .sticky-note.open');
+                    if (focus && note) note.style.transform = focus.style.transform;
                     lastScrollY = scrollY;
                 }
                 requestAnimationFrame(update);

@@ -3793,6 +3793,22 @@ body {
     font-variant-numeric: tabular-nums;
     font-size: var(--font-small);
 }
+.vm-mute {
+    background: none;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-2);
+    font-family: var(--font-main);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.2s, border-color 0.2s;
+}
+.vm-mute.is-muted { color: var(--accent); border-color: rgba(255, 138, 247, 0.55); }
+.vm-mute:hover { color: var(--accent); border-color: var(--accent); }
 .vm-close {
     background: none;
     border: none;
@@ -4060,7 +4076,9 @@ body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
     .chapter-folders .desktop-icon:nth-child(3) { left: 27%; top: 44%; }
     .chapter-folders .desktop-icon:nth-child(4) { left: 73%; top: 48%; }
     .chapter-folders .desktop-icon .icon { width: 64px; height: 64px; }
-    .chapter-bar { top: 14px; left: 16px; }
+    /* Bigger tap target on phones */
+    .chapter-bar { top: 10px; left: 10px; font-size: 16px; gap: 10px; }
+    .chapter-crumb-home { padding: 8px 6px; margin: -8px -6px; }
 }
 
 /* Bot requests played through the inline message engine */
