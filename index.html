@@ -81,7 +81,7 @@
     }
     </script>
     
-    <link href="style.css?v=32" rel="stylesheet">
+    <link href="style.css?v=34" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -2148,9 +2148,7 @@
             const targetIndex = charKeys.indexOf(charKey);
             if (targetIndex !== -1) {
                 currentCharIndex = targetIndex;
-                investigateFile(charKey);
-                openMiniMonologue(charKey);
-                initMiniChatForCharacter(charKey);
+                investigateFile(charKey); // just the file, no chat alongside it
             }
         }
 
@@ -3066,12 +3064,8 @@
             return obj;
         }
 
-        function getJsonRevealPercent() {
-            // Reveal proportionally based on messages sent vs total in queue
-            const totalMessages = monologueMsgQueue.length || MAX_MONOLOGUE_MSGS;
-            if (monologueMsgCount === 0) return 0;
-            return Math.min(Math.round((monologueMsgCount / totalMessages) * 100), 100);
-        }
+        // The JSON shows in full: no redaction, nothing to reveal
+        function getJsonRevealPercent() { return 100; }
 
         // Current character being displayed in JSON window
         let currentJsonCharKey = null;

@@ -2536,87 +2536,8 @@ body {
         width: 80%;
     }
 
-    /* Mobile layout: JSON full screen, Discord floats over faded bottom */
-    body:has(.file-window:not(.hidden)) {
-        position: relative;
-        height: 100vh;
-        overflow: hidden;
-    }
+    /* (The old full-screen JSON + chat layout is gone; the file window is a bottom sheet, see below) */
 
-    body:has(.file-window:not(.hidden)) .file-window {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        transform: none;
-        border-radius: 0;
-        border: none;
-        display: flex;
-        flex-direction: column;
-    }
-
-    body:has(.file-window:not(.hidden)) .file-window .file-body {
-        flex: 1;
-        min-height: 0;
-        max-height: none;
-        overflow-y: auto;
-    }
-
-    body:has(.file-window:not(.hidden)) .file-window .file-footer {
-        display: none;
-    }
-
-    /* Black gradient fade over bottom 60% of JSON */
-    body:has(.file-window:not(.hidden)) .file-window::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 60%;
-        background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 40%, black 70%);
-        pointer-events: none;
-        z-index: 5001;
-    }
-
-    /* Discord messages float over the faded bottom */
-    body:has(.file-window:not(.hidden)) .mini-chat {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 35%;
-        width: 100%;
-        opacity: 1;
-        overflow-y: auto;
-        scrollbar-width: none;
-        z-index: 5002;
-        margin-bottom: 24px;
-    }
-
-    body:has(.file-window:not(.hidden)) .mini-chat .mini-chat-body {
-        justify-content: flex-end;
-        padding: 0;
-    }
-
-    body:has(.file-window:not(.hidden)) .mini-chat .mini-chat-msg {
-        padding: 2px 12px;
-        font-size: 13px;
-    }
-
-    body:has(.file-window:not(.hidden)) .monologue-chat {
-        display: none;
-    }
-
-    body:has(.file-window:not(.hidden)) #main-content,
-    body:has(.file-window:not(.hidden)) .window-overlay,
-    body:has(.file-window:not(.hidden)) .about-link,
-
-    /* Side panel hidden on mobile - using monologue-chat instead */
     .side-panel {
         display: none !important;
     }
@@ -3644,8 +3565,8 @@ body {
 
     /* Phones: full-width email field with the button on its own row below, both tall enough to tap */
     .landing-invite-row { flex-direction: column; gap: 10px; }
-    .landing-invite-input { height: 48px; font-size: 16px; padding: 0 14px; }
-    .landing-invite-submit { height: 48px; width: 100%; font-size: 13px; }
+    .landing-invite-input { flex: none; height: 48px; min-height: 48px; box-sizing: border-box; font-size: 16px; padding: 0 14px; }
+    .landing-invite-submit { flex: none; height: 48px; min-height: 48px; width: 100%; font-size: 13px; }
 
     /* Phones only: the film / signup box shows on the landing, not inside a chapter */
     body.in-chapter .landing-header {
@@ -4185,6 +4106,7 @@ body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
     .msg-inline-box,
     .request-inline-box,
     .folder-inline-box,
+    .file-window:not(.hidden),
     .diary-panel.open,
     .sticky-note.open,
     .voice-memo-player:not(.hidden) {
@@ -4224,6 +4146,13 @@ body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
     .request-inline-box .window-close svg,
     .folder-inline-box .window-close svg { width: 22px; height: 22px; }
     .msg-inline-body { max-height: calc(72vh - 60px); }
+
+    /* JSON file sheet */
+    .file-window:not(.hidden) { height: auto !important; display: flex; flex-direction: column; }
+    .file-window .file-body { flex: 1; min-height: 0; max-height: calc(72vh - 96px); overflow-y: auto; }
+    .file-window .file-footer { display: none; }
+    .file-window .window-close { width: 44px; height: 44px; color: var(--text); }
+    .file-window .window-close svg { width: 22px; height: 22px; }
 
     /* Notepad sheet: a big X in the chrome, the lights stay decorative */
     .diary-panel.open { display: flex; }
