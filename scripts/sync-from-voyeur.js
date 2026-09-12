@@ -59,9 +59,9 @@ copyDir(path.join(src, 'script'), path.join(site, 'script'), f => f.endsWith('.m
 for (const f of ['img/icons/diary-book.png', 'img/anime-bitmap/shakti.png', 'img/anime-bitmap/delta.png']) {
   copyFile(path.join(src, f), path.join(site, f));
 }
-// Diary voice memos the desktop plays (audio + caption sidecar).
+// Diary memos open as text here, so only their caption sidecars come over (the transcript source).
 for (const base of ['nadia', 'the end']) {
-  for (const ext of ['.mp3', '.json']) copyFile(path.join(src, 'diary vo', base + ext), path.join(site, 'diary vo', base + ext));
+  copyFile(path.join(src, 'diary vo', base + '.json'), path.join(site, 'diary vo', base + '.json'));
 }
 // Delta interview clips: only the ones the desktop manifest lists.
 copyFile(path.join(src, 'interviews', 'delta.json'), path.join(site, 'interviews', 'delta.json'));

@@ -3982,11 +3982,30 @@
             panel.classList.add('open');
             const editor = body.querySelector(sticky ? '.sticky-editor' : '.notepad-editor');
             if (!sticky) editor.focus({ preventScroll: true });
-            const md = await fetchText(diarySrc(item.src || 'script/part-3-bot-requests.md'));
-            const text = /^## BEAT /m.test(md) ? extractBeatQuote(md, item.beat || 7) : md.trim();
+            const text = await noteTextFor(item);
             if (gen !== notepadGen || !text) return;
             if (sticky) pasteLikeClipboard(editor, text, gen, panel);
             else typeLikeHuman(editor, text, gen, panel);
+        }
+
+        // What a note types out: a script beat, a diary entry, or (for a recorded
+        // memo) the diary entry of the same name, else its caption text joined up.
+        async function noteTextFor(item) {
+            if (item.type === 'voice-memo') {
+                const slug = item.slug;
+                if ((await loadDiarySlugs()).has(slug)) {
+                    const md = (await fetchText(diarySrc(`diary/${slug}.md`))).trim();
+                    if (md) return md;
+                }
+                const audio = item.audioPath || `diary vo/${slug}.mp3`;
+                try {
+                    const res = await fetch(encodeURI(audio.replace(/\.[^.]+$/, '.json')));
+                    const cues = (await res.json()).chunks || [];
+                    return cues.map(c => c.text).join(' ').replace(/\s+/g, ' ').trim();
+                } catch (e) { return ''; }
+            }
+            const md = await fetchText(diarySrc(item.src || 'script/part-3-bot-requests.md'));
+            return /^## BEAT /m.test(md) ? extractBeatQuote(md, item.beat || 7) : md.trim();
         }
 
         function typeLikeHuman(editor, text, gen, panel) {
@@ -4129,11 +4148,11 @@
                 return [{ click: `openNotepad(event, '${key}')`, data: { note: key }, label: item.label, meta: item.meta,
                           iconHtml: item.portrait ? portraitIcon(item.portrait) : `<div class="icon">${ICON_NOTE}</div>`, x: item.x }];
             }
+            // Diary entries are text only here: the recorded memos open as notes, never as audio
             if (item && item.type === 'voice-memo') {
-                const audio = item.audioPath || `diary vo/${item.slug}.mp3`;
-                if (!/^(diary vo|delta-vo|interview vo)\//.test(audio)) return []; // only the memos copied over
-                return [{ click: `toggleVoiceMemo(event, '${item.slug}', '${audio.replace(/'/g, "\\'")}')`, cls: 'voice-memo-icon', data: { memo: item.slug }, label: item.label, meta: item.meta,
-                          iconHtml: item.portrait ? portraitIcon(item.portrait) : '', after: PLAY_PILL, x: item.x }];
+                if (!/my diary/i.test(item.meta || '')) return []; // other people's recordings stay out
+                return [{ click: `openNotepad(event, '${key}')`, data: { note: key }, label: item.label, meta: item.meta,
+                          iconHtml: item.portrait ? portraitIcon(item.portrait) : `<div class="icon">${ICON_NOTE}</div>`, x: item.x }];
             }
             if (item && item.type === 'msg-card') {
                 const t = threads[item.msgId];
