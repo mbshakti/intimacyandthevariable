@@ -37,6 +37,14 @@
     --ls-ui: 0.7px;                                   /* letter spacing Tahoma wants */
 }
 
+/* Phones have no Tahoma: everything is set in Lekton there, without the spacing */
+@media (max-width: 768px) {
+    :root {
+        --font-main: 'Lekton', monospace;
+        --ls-ui: 0;
+    }
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
