@@ -4252,3 +4252,15 @@ body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
     .vm-play { width: 34px; height: 34px; }
     .vm-captions { font-size: 17px; }
 }
+
+/* ===== Touch devices: one tap should be one tap =====
+   iOS treats the first tap on anything with a hover effect as a hover, and
+   waits for double-tap zoom unless told not to. */
+@media (hover: none) {
+    .desktop-icon:hover .icon { opacity: 1; }
+    .desktop-icon:hover .play-pill { border-color: rgba(249, 248, 248, 0.28); color: var(--text-2); }
+}
+body, .desktop-icon, .chapter-bar a, .window-close, .vm-play, .vm-mute, .vm-close, .te-close, .sticky-close, .np-clip-next, .landing-invite-submit {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}

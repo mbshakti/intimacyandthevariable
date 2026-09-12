@@ -81,7 +81,7 @@
     }
     </script>
     
-    <link href="style.css?v=30" rel="stylesheet">
+    <link href="style.css?v=31" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -4208,11 +4208,28 @@
             desktop.querySelectorAll('.desktop-icon.chapter-icon').forEach(el => el.remove());
             chapterItems = [];
             const entries = manifest[chapterId] || {};
+            // Collect rows in Archive order, then spread Delta's clips evenly among
+            // everything else so they don't bunch up in one stretch of the folder.
+            const rows = [];
             Object.keys(entries).forEach(key => {
                 if (HIDDEN_KEYS.has(key)) return;
                 const override = entries[key] || {};
-                const specs = specsForKey(key, itemMap[key], threads, interviews);
-                specs.forEach((spec, i) => {
+                specsForKey(key, itemMap[key], threads, interviews).forEach((spec, i, specs) => rows.push({ key, override, spec, specs }));
+            });
+            const clips = rows.filter(r => r.spec.topic !== undefined);
+            const others = rows.filter(r => r.spec.topic === undefined);
+            const ordered = [];
+            if (clips.length && others.length) {
+                let ci = 0;
+                others.forEach((row, i) => {
+                    ordered.push(row);
+                    // after this row, place every clip whose slot has come up
+                    while (ci < clips.length && (i + 1) >= Math.round((ci + 1) * others.length / (clips.length + 1))) ordered.push(clips[ci++]);
+                });
+                while (ci < clips.length) ordered.push(clips[ci++]);
+            } else ordered.push(...rows);
+            ordered.forEach(({ key, override, spec, specs }) => {
+                {
                     const single = specs.length === 1;
                     const hasTopic = spec.topic !== undefined;
                     const label = single && override.label !== undefined && !hasTopic ? override.label : spec.label;
@@ -4233,7 +4250,7 @@
                         + (spec.after || '');
                     desktop.appendChild(el);
                     chapterItems.push({ el, x: typeof x === 'number' ? x : 400 });
-                });
+                }
             });
             positionChapterIcons();
             chapterItems.forEach(({ el }, i) => {
@@ -4331,6 +4348,8 @@
         function initParallax() {
             const desktop = document.querySelector('.desktop');
             if (!desktop) return;
+            // No parallax on phones: icons that keep moving after a scroll make taps miss
+            if (window.innerWidth <= 768) return;
 
             // Simple hash function for consistent speeds per icon
             function hashString(str) {
