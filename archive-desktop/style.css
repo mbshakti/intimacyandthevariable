@@ -3620,21 +3620,6 @@ body {
     transform: translateY(1px);
 }
 
-.landing-film-support {
-    color: var(--text-2);
-    font-size: var(--font-small);
-    margin-top: 12px;
-}
-
-.landing-film-support a {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.landing-film-support a:hover {
-    text-decoration: underline;
-}
-
 @media (max-width: 768px) {
     .landing-header {
         right: 12px;

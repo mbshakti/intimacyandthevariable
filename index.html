@@ -81,7 +81,7 @@
     }
     </script>
     
-    <link href="style.css?v=21" rel="stylesheet">
+    <link href="style.css?v=22" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -130,7 +130,6 @@
                                 <button class="landing-invite-submit" type="submit">Sign up</button>
                             </div>
                         </form>
-                        <p class="landing-film-support">This project is supported by <a href="https://rhizome.org" target="_blank" rel="noopener">Rhizome</a>, <a href="https://newinc.org" target="_blank" rel="noopener">NEW INC</a>, <a href="https://mercatus.org/emergent-ventures" target="_blank" rel="noopener">Emergent Ventures</a>, <a href="https://www.mozilla.org" target="_blank" rel="noopener">Mozilla</a>.</p>
                     </div>
                 </section>
             </div>
@@ -3572,7 +3571,7 @@
 
         // Manifest keys this site leaves out, even though the Archive lists them.
         // Kept here (not in the copied manifest) so a re-sync doesn't bring them back.
-        const HIDDEN_KEYS = new Set(['msg-cant-fuck-this-bot']);
+        const HIDDEN_KEYS = new Set(['msg-cant-fuck-this-bot', 'diary-notepad-discourse']);
         let chapterManifest = null; // desktop-labels.json: chapter -> { key: { label, meta, x, y } }
         let chapterItems = [];      // rendered icons of the open chapter, in manifest order
 
@@ -3772,10 +3771,9 @@
             if (activeVoiceMemoIcon) { vmReflectSpeaker(activeVoiceMemoIcon, null, false); activeVoiceMemoIcon = null; }
             activeVoiceMemoIcon = event?.target?.closest?.('.desktop-icon') || null;
             currentVoiceMemo = id;
-            const q = t.messages.find(m => m.username === 'me') || {};
+            // Only Delta's answer plays; the narrator's questions are left out
             const a = t.messages.find(m => m.username !== 'me') || {};
             vmQueue = [
-                { audio: q.audio, speaker: 'me' },
                 { audio: a.audio, speaker: t.interviewee || a.username || '' },
             ].filter(x => x.audio);
             vmSeqSlug = id; vmSeqIndex = 0; vmSeqDurations = null;
