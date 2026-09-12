@@ -28,21 +28,13 @@
     --font-title: 14px;
     --font-small: 11px;
     --line-height: 1.5;
-    --font-main: 'Tahoma', 'Geneva', sans-serif;      /* primary UI (desktop-voyeur --font-ui) */
+    --font-main: 'Lekton', monospace;                 /* primary UI: Lekton everywhere */
     --font-ui-2: 'Lekton', monospace;                 /* chat message text */
     --font-window: 'Lekton', monospace;               /* window titlebars */
     --font-quote: 'Lekton', monospace;                /* quotes / captions */
     --font-code: 'IBM Plex Mono', monospace;          /* code / JSON */
     --font-mono: var(--font-code);
-    --ls-ui: 0.7px;                                   /* letter spacing Tahoma wants */
-}
-
-/* Phones have no Tahoma: everything is set in Lekton there, without the spacing */
-@media (max-width: 768px) {
-    :root {
-        --font-main: 'Lekton', monospace;
-        --ls-ui: 0;
-    }
+    --ls-ui: 0;                                       /* no tracking on Lekton */
 }
 
 * {
@@ -3498,13 +3490,15 @@ body {
 
 .landing-invite-row {
     display: flex;
+    flex-direction: column;
     gap: 8px;
 }
 
 .landing-invite-input {
-    flex: 1;
-    min-width: 0;
-    height: 36px;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
     background: rgba(249, 248, 248, 0.04);
     border: 1px solid var(--border-strong);
     border-radius: 6px;
@@ -3526,7 +3520,9 @@ body {
 }
 
 .landing-invite-submit {
-    height: 36px;
+    flex: none;
+    width: 100%;
+    height: 40px;
     background: var(--accent);
     border: 1px solid var(--accent);
     border-radius: 6px;
@@ -4147,8 +4143,8 @@ body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
     .folder-inline-box .window-close svg { width: 22px; height: 22px; }
     .msg-inline-body { max-height: calc(72vh - 60px); }
 
-    /* JSON file sheet */
-    .file-window:not(.hidden) { height: auto !important; display: flex; flex-direction: column; }
+    /* JSON file sheet (above the dimming overlay the window opens with) */
+    .file-window:not(.hidden) { height: auto !important; display: flex; flex-direction: column; z-index: 5001; }
     .file-window .file-body { flex: 1; min-height: 0; max-height: calc(72vh - 96px); overflow-y: auto; }
     .file-window .file-footer { display: none; }
     .file-window .window-close { width: 44px; height: 44px; color: var(--text); }
