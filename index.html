@@ -81,7 +81,7 @@
     }
     </script>
     
-    <link href="style.css?v=25" rel="stylesheet">
+    <link href="style.css?v=27" rel="stylesheet">
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
     <!-- / Fathom -->
@@ -1848,6 +1848,8 @@
             }
 
             stopArchivePlayback();
+            if (typeof closeNotepad === 'function') closeNotepad();
+            if (typeof closeVoiceMemo === 'function') closeVoiceMemo();
 
             const messages = thread.messages.filter(m => !m.hidden);
             if (!messages.length) return;
@@ -3651,6 +3653,13 @@
             return diarySlugs;
         }
 
+        function hideInlineMessageBox() {
+            if (typeof stopArchivePlayback === 'function') stopArchivePlayback();
+            const box = document.getElementById('msgInlineBox');
+            if (box) box.classList.add('hidden');
+            if (typeof currentMsgId !== 'undefined') currentMsgId = null;
+        }
+
         // ===== Voice memo player (desktop-voyeur's UI): diary memos and Delta interview clips =====
         const VM_ICON_PLAY  = '<svg width="8" height="10" viewBox="0 0 8 10" fill="currentColor"><path d="M0 0 L8 5 L0 10 Z"/></svg>';
         const VM_ICON_PAUSE = '<svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><rect x="0" y="0" width="3" height="10"/><rect x="7" y="0" width="3" height="10"/></svg>';
@@ -3757,6 +3766,7 @@
         function toggleVoiceMemo(event, slug, audioPath) {
             if (event) event.stopPropagation();
             closeNotepad();
+            hideInlineMessageBox();
             const player = ensureVoiceMemoPlayer();
             const audio = document.getElementById('vmAudio');
             if (currentVoiceMemo === slug && !player.classList.contains('hidden')) { closeVoiceMemo(); return; }
@@ -3779,6 +3789,7 @@
         function toggleInterview(event, id) {
             if (event) event.stopPropagation();
             closeNotepad();
+            hideInlineMessageBox();
             const t = interviewsById && interviewsById[id];
             const player = ensureVoiceMemoPlayer();
             if (!t) return;
@@ -3930,6 +3941,7 @@
             panel.id = 'diaryPanel';
             panel.innerHTML = `
                 <div class="te-chrome">
+                    <button class="te-close" onclick="closeNotepad()" aria-label="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
                     <div class="te-lights">
                         <button class="traffic-light traffic-close" onclick="closeNotepad()"></button>
                         <button class="traffic-light traffic-minimize"></button>
@@ -3979,6 +3991,7 @@
             const wasOpen = icon && icon.classList.contains('diary-focus');
             closeNotepad();
             closeVoiceMemo(); // one thing playing or typing at a time
+            hideInlineMessageBox();
             if (wasOpen) return; // clicking the open note's icon closes it
             const gen = ++notepadGen;
             const sticky = item.mode === 'paste';
@@ -4265,8 +4278,8 @@
             const desktop = document.querySelector('.desktop');
             if (!desktop || !chapterItems.length) return;
             const isMobile = window.innerWidth <= 768;
-            const ROW = isMobile ? 170 : 230;
-            const PAD = isMobile ? 70 : 80;
+            const ROW = isMobile ? 215 : 230;
+            const PAD = isMobile ? 80 : 80;
             const iconW = isMobile ? 100 : 130;
             const width = desktop.clientWidth || window.innerWidth - 80;
             const usable = Math.max((isMobile ? width : width * 0.72) - iconW, 0);

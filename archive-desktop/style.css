@@ -3742,9 +3742,10 @@ body {
     transition: border-color 0.2s, color 0.2s;
 }
 
+/* The pill stays quiet: gray in every state, including "speaking" */
 .desktop-icon:hover .play-pill {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: rgba(249, 248, 248, 0.4);
+    color: var(--text);
 }
 
 /* ===== Voice memo player (desktop-voyeur's UI) ===== */
@@ -4164,4 +4165,81 @@ body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
 .landing-invite-status {
     color: var(--accent-2);
     margin-top: 8px;
+}
+
+/* ===== Phones: everything that opens is a bottom sheet, not an inline box =====
+   The inline boxes and the notepad get placed next to their icon by script
+   (inline left/top/bottom/transform), so the overrides below need !important. */
+.te-close { display: none; }
+
+@media (max-width: 768px) {
+    .msg-inline-box,
+    .request-inline-box,
+    .folder-inline-box,
+    .diary-panel.open,
+    .sticky-note.open,
+    .voice-memo-player:not(.hidden) {
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        bottom: 0 !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 72vh;
+        transform: none !important;
+        border-radius: 16px 16px 0 0;
+        z-index: 600;
+        box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .msg-inline-box.hidden,
+    .request-inline-box.hidden,
+    .folder-inline-box.hidden { display: none !important; }
+
+    /* Message / request sheet: body scrolls inside the sheet */
+    .msg-inline-box .window-titlebar { padding-right: 4px; }
+    .msg-inline-box .window-close,
+    .request-inline-box .window-close,
+    .folder-inline-box .window-close {
+        width: 44px;
+        height: 44px;
+        color: var(--text);
+    }
+    .msg-inline-box .window-close svg,
+    .request-inline-box .window-close svg,
+    .folder-inline-box .window-close svg { width: 22px; height: 22px; }
+    .msg-inline-body { max-height: calc(72vh - 60px); }
+
+    /* Notepad sheet: a big X in the chrome, the lights stay decorative */
+    .diary-panel.open { display: flex; }
+    .te-chrome { position: relative; }
+    .te-close {
+        display: flex;
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        color: #1d1d1f;
+        cursor: pointer;
+    }
+    .te-close svg { width: 22px; height: 22px; }
+    .diary-panel-body { height: 40vh; }
+
+    /* Clippings sheet */
+    .sticky-note.open { display: block; }
+    .sticky-close { top: 8px; right: 8px; width: 44px; height: 44px; font-size: 26px; }
+    .sticky-body { min-height: 200px; padding: 40px 48px 36px 24px; }
+
+    /* Voice memo sheet */
+    .voice-memo-player { padding: 14px 16px 16px; gap: 12px; }
+    .voice-memo-player.docked { left: 0 !important; bottom: 0 !important; }
+    .vm-close { width: 44px; height: 44px; font-size: 26px; display: flex; align-items: center; justify-content: center; margin: -8px -10px -8px 0; }
+    .vm-play { width: 34px; height: 34px; }
+    .vm-captions { font-size: 17px; }
 }
