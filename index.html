@@ -4216,18 +4216,24 @@
                 const override = entries[key] || {};
                 specsForKey(key, itemMap[key], threads, interviews).forEach((spec, i, specs) => rows.push({ key, override, spec, specs }));
             });
-            const clips = rows.filter(r => r.spec.topic !== undefined);
-            const others = rows.filter(r => r.spec.topic === undefined);
-            const ordered = [];
-            if (clips.length && others.length) {
-                let ci = 0;
-                others.forEach((row, i) => {
-                    ordered.push(row);
-                    // after this row, place every clip whose slot has come up
-                    while (ci < clips.length && (i + 1) >= Math.round((ci + 1) * others.length / (clips.length + 1))) ordered.push(clips[ci++]);
+            // Diary notes and Delta's clips are each spread evenly through the rest,
+            // so no two diaries (and no two clips) sit next to each other.
+            const spread = (base, extras) => {
+                if (!extras.length) return base.slice();
+                if (!base.length) return extras.slice();
+                const out = [];
+                let ei = 0;
+                base.forEach((row, i) => {
+                    out.push(row);
+                    while (ei < extras.length && (i + 1) >= Math.round((ei + 1) * base.length / (extras.length + 1))) out.push(extras[ei++]);
                 });
-                while (ci < clips.length) ordered.push(clips[ci++]);
-            } else ordered.push(...rows);
+                while (ei < extras.length) out.push(extras[ei++]);
+                return out;
+            };
+            const isClip = r => r.spec.topic !== undefined;
+            const isNote = r => !!(r.spec.data && r.spec.data.note);
+            const plain = rows.filter(r => !isClip(r) && !isNote(r));
+            const ordered = spread(spread(plain, rows.filter(isNote)), rows.filter(isClip));
             ordered.forEach(({ key, override, spec, specs }) => {
                 {
                     const single = specs.length === 1;
