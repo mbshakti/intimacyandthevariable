@@ -3467,6 +3467,21 @@ body {
     text-decoration: underline;
 }
 
+.landing-film-support {
+    color: var(--text-2);
+    font-size: var(--font-small);
+    margin-top: 12px;
+}
+
+.landing-film-support a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.landing-film-support a:hover {
+    text-decoration: underline;
+}
+
 .landing-invite-bot-field {
     display: none;
 }
@@ -3498,51 +3513,78 @@ body {
     flex: none;
     width: 100%;
     box-sizing: border-box;
-    height: 40px;
-    background: rgba(249, 248, 248, 0.04);
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
+    height: 46px;
+    background: rgba(255, 138, 247, 0.06);
+    border: 1px solid rgba(255, 138, 247, 0.45);
+    border-radius: 8px;
     color: var(--text);
     font-family: var(--font-ui-2);
-    font-size: 13px;
-    padding: 0 12px;
+    font-size: 14px;
+    padding: 0 14px;
     outline: none;
-    transition: border-color 0.2s, background 0.2s;
+    cursor: text;
+    box-shadow: 0 0 0 0 rgba(255, 138, 247, 0), inset 0 1px 0 rgba(249, 248, 248, 0.04);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.landing-invite-input:hover {
+    border-color: rgba(255, 138, 247, 0.7);
+    background: rgba(255, 138, 247, 0.09);
 }
 
 .landing-invite-input:focus {
-    border-color: rgba(255, 138, 247, 0.6);
-    background: rgba(249, 248, 248, 0.06);
+    border-color: var(--accent);
+    background: rgba(255, 138, 247, 0.1);
+    box-shadow: 0 0 0 3px rgba(255, 138, 247, 0.22), 0 0 18px rgba(255, 138, 247, 0.25);
 }
 
 .landing-invite-input::placeholder {
-    color: var(--text-3);
+    color: rgba(249, 248, 248, 0.45);
 }
 
 .landing-invite-submit {
     flex: none;
     width: 100%;
-    height: 40px;
+    height: 46px;
     background: var(--accent);
     border: 1px solid var(--accent);
-    border-radius: 6px;
+    border-radius: 8px;
     color: var(--bg);
     font-family: var(--font-ui-2);
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     padding: 0 14px;
     cursor: pointer;
-    transition: filter 0.2s, transform 0.2s;
+    box-shadow: 0 0 16px rgba(255, 138, 247, 0.3), 0 2px 0 rgba(0, 0, 0, 0.25);
+    animation: landing-invite-glow 2.8s ease-in-out infinite;
+    transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.landing-invite-submit::after {
+    content: " \2192";
 }
 
 .landing-invite-submit:hover {
     filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 0 28px rgba(255, 138, 247, 0.55), 0 3px 0 rgba(0, 0, 0, 0.25);
+    animation: none;
 }
 
 .landing-invite-submit:active {
     transform: translateY(1px);
+    box-shadow: 0 0 10px rgba(255, 138, 247, 0.3), 0 0 0 rgba(0, 0, 0, 0.25);
+}
+
+@keyframes landing-invite-glow {
+    0%, 100% { box-shadow: 0 0 12px rgba(255, 138, 247, 0.25), 0 2px 0 rgba(0, 0, 0, 0.25); }
+    50%      { box-shadow: 0 0 26px rgba(255, 138, 247, 0.5), 0 2px 0 rgba(0, 0, 0, 0.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-invite-submit { animation: none; }
 }
 
 @media (max-width: 768px) {
@@ -3561,8 +3603,8 @@ body {
 
     /* Phones: full-width email field with the button on its own row below, both tall enough to tap */
     .landing-invite-row { flex-direction: column; gap: 10px; }
-    .landing-invite-input { flex: none; height: 48px; min-height: 48px; box-sizing: border-box; font-size: 16px; padding: 0 14px; }
-    .landing-invite-submit { flex: none; height: 48px; min-height: 48px; width: 100%; font-size: 13px; }
+    .landing-invite-input { flex: none; height: 52px; min-height: 52px; box-sizing: border-box; font-size: 16px; padding: 0 16px; }
+    .landing-invite-submit { flex: none; height: 52px; min-height: 52px; width: 100%; font-size: 16px; }
 
     /* Phones only: the film / signup box shows on the landing, not inside a chapter */
     body.in-chapter .landing-header {
