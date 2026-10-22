@@ -350,11 +350,14 @@
         if (!NARROW.matches) return;
         var after = ['overview', 'teaser', 'team', 'notes'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
         if (!after.length) return;
+        // everything that scatters: the margins' things and the desk scenes' (the scenes themselves stay off a phone),
+        // pictures and icons each dealt out evenly, so no strip is all pictures and none all text
+        var pics = [], icons = [];
+        MARGIN.forEach(function (m) { if (m.pic) pics.push(m.pic); else if (m.icon) icons.push(m.icon); });
+        ['craft', 'windows'].forEach(function (k) { var L = LAYOUTS[k]; if (!L) return; L.pics.forEach(function (p) { if (pics.indexOf(p.t) < 0) pics.push(p.t); }); L.icons.forEach(function (ic) { icons.push(ic); }); });
         var groups = after.map(function () { return { icons: [], pics: [], wins: [] }; });
-        MARGIN.forEach(function (m, i) {
-            var g = groups[i % groups.length];
-            if (m.pic) g.pics.push(pic(m.pic, 0, 0, 230)); else if (m.icon) g.icons.push(m.icon);
-        });
+        pics.forEach(function (t, i) { groups[i % groups.length].pics.push(pic(t, 0, 0, 230)); });
+        icons.forEach(function (ic, i) { groups[(i + 2) % groups.length].icons.push(ic); });
         after.forEach(function (sec, i) {
             var host = document.createElement('div'); host.className = 'desktop strip'; host.dataset.layout = 'strip-' + i;
             sec.insertAdjacentElement('afterend', host);
