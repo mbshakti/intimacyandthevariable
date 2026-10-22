@@ -183,12 +183,6 @@ main > section + section { margin-top: clamp(64px, 9vw, 120px); }
 .desks .desktop.mobile + .desktop.mobile { margin-top: 10px; }
 .scene-desk .win.closed { display: none; }
 .scene-desk .win > img { cursor: pointer; }
-/* a file open on the desk: the start of a character's JSON, or of a diary entry */
-.win.code .text, .win.note .text { margin: 0; padding: 14px 16px 16px; max-height: 300px; overflow: hidden; cursor: pointer; font-size: 12.5px; line-height: 1.55; color: rgba(249,248,248,0.85); white-space: pre-wrap; overflow-wrap: anywhere; -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
-.win.code .text { font-family: var(--font-code, var(--font-meta)); }
-.win.note .text { font-family: var(--font-quote, var(--font-ui)); font-size: 13.5px; line-height: 1.6; }
-.desktop-icon.char-file-icon .icon.pixel-icon img { image-rendering: pixelated; }
-.desktop.mobile .win.code .text, .desktop.mobile .win.note .text { max-height: 260px; }
 .scene-desk .win .bar .close { background: none; border: 0; padding: 0; cursor: pointer; }
 .scene-desk .win .bar .close:hover { color: #FFFFFF; }
 .scene-desk .sim { position: absolute; height: 54px; aspect-ratio: 24 / 30; transform: translate(-8.3%, -6.7%); z-index: 200; pointer-events: none; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
