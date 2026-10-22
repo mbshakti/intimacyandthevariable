@@ -257,7 +257,12 @@
             sim.style.left = L.rest[0] + 'px'; sim.style.top = L.rest[1] + 'px'; desk.appendChild(sim);
         }
         wire(host);
-        var fit = function () { if (desk.isConnected) desk.style.transform = 'scale(' + host.clientWidth / 1600 + ')'; };
+        var fit = function () {
+            if (!desk.isConnected) return;
+            var s = host.clientWidth / 1600;
+            desk.style.transform = 'scale(' + s + ')';
+            host.style.setProperty('--desk-scale', s);   // the icons' type divides this back out (landing.css)
+        };
         if ('ResizeObserver' in window) new ResizeObserver(fit).observe(host); else addEventListener('resize', fit);
         fit();
     }
@@ -300,13 +305,13 @@
     // ---- the margins of the lower sections: the archive desk's things, left and right of the windows, as the hero's icons sit round the title ----
     // x and y are of the lower block; icons centre on the point, windows hang from it, anchored to their side
     var MARGIN = [
-        { icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '7.5%', y: '7%' },
-        { icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '92.5%', y: '6%' },
-        { icon: folder('bot-requests', 'bot requests', 0, 0), x: '7.5%', y: '34%' },
-        { icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '92.5%', y: '36%' },
+        { icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '6.5%', y: '7%' },
+        { icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '93.5%', y: '6%' },
+        { icon: folder('bot-requests', 'bot requests', 0, 0), x: '6.5%', y: '34%' },
+        { icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '93.5%', y: '36%' },
         { pic: '23', side: 'left', y: '52%' },
         { pic: '04', side: 'right', y: '50%' },
-        { icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '7.5%', y: '90%' },
+        { icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '6.5%', y: '90%' },
         { win: codewin('loving_korean_boyfriend', 0, 0, 0), side: 'right', y: '78%' }
     ];
     function buildMargin() {
@@ -315,7 +320,7 @@
         MARGIN.forEach(function (m) {
             var el = m.icon ? makeIcon(m.icon) : m.pic ? makePicWin(m.pic) : makeFileWin(m.win);
             el.style.top = m.y;
-            if (m.icon) el.style.left = m.x; else el.style[m.side] = '2.5%';
+            if (m.icon) el.style.left = m.x; else el.style[m.side] = '1.5%';
             host.appendChild(el);
         });
     }

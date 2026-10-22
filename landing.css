@@ -25,11 +25,22 @@ h3 { font-size: 17px; }
 .caret.typing { animation: none; opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
 
+/* ---- the icons' type, one size everywhere: the label under an icon and the line of meta under that ----
+   The desk scenes are drawn on a 1600px canvas and scaled to fit (desktop.js sets --desk-scale on each), with the
+   icons at zoom 1.2 in desk coordinates, so there the size is divided back out to land at the same rendered size. */
+:root { --icon-label: 12px; --icon-meta: 11px; }
+.desktop-icon .label, .desktop-icon .topic { font-size: var(--icon-label); }
+.desktop-icon .meta, .desktop-icon .metadata, .desktop-icon.interview-icon .meta { font-size: var(--icon-meta); }
+.scene-desk .desktop-icon .label, .scene-desk .desktop-icon .topic { font-size: calc(var(--icon-label) / (1.2 * var(--desk-scale, 1))); }
+.scene-desk .desktop-icon .meta { font-size: calc(var(--icon-meta) / (1.2 * var(--desk-scale, 1))); }
+.desktop.mobile .desktop-icon .label, .desktop.mobile .desktop-icon .topic { font-size: var(--icon-label); }
+.desktop.mobile .desktop-icon .meta { font-size: var(--icon-meta); }
+
 /* ---- Delta, the botmaker, as the site draws her clips: name / role / the topic in quotes, and a play pill ---- */
 .desktop-icon.interview-icon .label { font-weight: 700; letter-spacing: 0.5px; }
 .desktop-icon.interview-icon .meta-group { margin-top: 0; }
-.desktop-icon.interview-icon .meta { font-size: 11px; text-transform: lowercase; }
-.desktop-icon .topic { display: block; margin-top: 6px; max-width: 150px; text-align: center; font-family: var(--font-ui-2, var(--font-ui)); letter-spacing: 0; font-size: 13px; line-height: 1.3; color: var(--accent); overflow-wrap: anywhere; }
+.desktop-icon.interview-icon .meta { text-transform: lowercase; }
+.desktop-icon .topic { display: block; margin-top: 6px; max-width: 150px; text-align: center; font-family: var(--font-ui-2, var(--font-ui)); letter-spacing: 0; line-height: 1.3; color: var(--accent); overflow-wrap: anywhere; }
 .desktop-icon .topic::before { content: '\201C'; }
 .desktop-icon .topic::after { content: '\201D'; }
 .desktop-icon.interview-icon.playing .play-pill { color: var(--accent); border-color: rgba(255,138,247,0.6); }
@@ -114,12 +125,12 @@ h3 { font-size: 17px; }
 .hero { position: relative; min-height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; }
 .title { max-width: 100%; box-sizing: border-box; }
 .desk { position: absolute; inset: 0; }
-/* the desktop's icons at the desktop's own zoom on a wide screen (styles.css zooms it up to 1.45) */
+/* the desktop's icons, at zoom 1 like everywhere else on the page */
 /* width: max-content, so an icon near the right edge is not squeezed into the space left of the edge before it is centred */
-.desk .desktop-icon { left: var(--x); top: var(--y); transform: translate(-50%, -50%); width: max-content; zoom: 1.2; text-decoration: none; color: inherit; }
+.desk .desktop-icon { left: var(--x); top: var(--y); transform: translate(-50%, -50%); width: max-content; zoom: 1; text-decoration: none; color: inherit; }
 .desk .desktop-icon .label { color: var(--text); }
 .desk .desktop-icon.folder .icon { width: 72px; height: 72px; }
-.desk .desktop-icon.folder .label { font-size: 15px; margin-top: 12px; }
+.desk .desktop-icon.folder .label { margin-top: 12px; }
 .title { position: relative; z-index: 1; text-align: center; padding: 0 16px; }
 .title h1 { font-size: clamp(30px, 7.6vw, 100px); line-height: 1; letter-spacing: 0.02em; margin: 0; text-transform: uppercase; }
 .title h1 .line { display: block; white-space: nowrap; }
@@ -144,14 +155,20 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .lower { position: relative; }
 .margin-desk { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; display: none; }
 .margin-desk > * { position: absolute; pointer-events: auto; margin: 0; }
-.margin-desk .desktop-icon { transform: translate(-50%, -50%); width: max-content; zoom: 1.1; }
-.margin-desk .win { width: clamp(160px, 13vw, 210px); }
+.margin-desk .desktop-icon { transform: translate(-50%, -50%); width: max-content; zoom: 1; }
+.margin-desk .win { width: clamp(120px, 12vw, 210px); }
 .margin-desk .win .bar { font-size: 15px; padding: 10px 14px; }
 .margin-desk .win .bar .close { width: 14px; height: 14px; margin-left: 10px; background: none; border: 0; padding: 0; cursor: pointer; }
 .margin-desk .win .bar .close:hover { color: #FFFFFF; }
-.margin-desk .win.code { width: clamp(200px, 15vw, 250px); }
+.margin-desk .win.code { width: clamp(150px, 15vw, 250px); }
 .margin-desk .win.code .text { font-size: 11px; max-height: 230px; padding: 10px 12px 12px; }
-@media (min-width: 1360px) { .margin-desk { display: block; } #archive { display: none; } }
+@media (min-width: 1024px) {
+    .margin-desk { display: block; }
+    #archive { display: none; }
+    /* the lower column keeps clear of the margins: 150px each side at the narrow end */
+    .lower .people { width: min(1000px, 100vw - 380px); }
+    .lower .stack { width: min(900px, 100vw - 380px); }
+}
 .narrow { width: min(820px, 100%); margin-left: auto; margin-right: auto; }
 /* two windows on the desk: the first to the left, the second laid over its lower right corner */
 .stack { width: min(900px, 100%); margin-left: auto; margin-right: auto; position: relative; }
