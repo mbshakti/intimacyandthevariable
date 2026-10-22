@@ -102,7 +102,14 @@
     // ---- the windows (main.js: setOverlay, openFolder, closeFolder, openLightbox, closeLightbox, closeAllWindows) ----
     var overlay = document.getElementById('desktopOverlay'), folderWindow = document.getElementById('folderWindow'), lightbox = document.getElementById('lightbox');
     var threadWindow = document.getElementById('threadWindow');
-    function setOverlay(visible) { overlay.classList.toggle('active', visible); }
+    // while a window is open the page behind holds still (on a phone a swipe on the sheet would scroll it otherwise)
+    var lockedAt = null;
+    function setOverlay(visible) {
+        overlay.classList.toggle('active', visible);
+        var html = document.documentElement;
+        if (visible && lockedAt === null) { lockedAt = window.scrollY; html.classList.add('modal-open'); document.body.style.top = -lockedAt + 'px'; }
+        else if (!visible && lockedAt !== null) { html.classList.remove('modal-open'); document.body.style.top = ''; window.scrollTo(0, lockedAt); lockedAt = null; }
+    }
     function openFolder(id) {
         var folder = FOLDERS[id]; if (!folder) return;
         closeAllWindows(true);

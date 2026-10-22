@@ -269,7 +269,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note])   { left: 25%; top: 77%; }
     .desk a[data-chapter="user"]:not([data-thread]):not([data-note])         { left: 75%; top: 77%; }
     .sim { left: 56%; top: 65%; height: 4.5vh; min-height: 28px; }
-    .down { bottom: 14px; }
+    .down { bottom: calc(100px + env(safe-area-inset-bottom)); }   /* above the sign-up bar */
     .down .down-text { display: none; }   /* on a phone the chevron alone, so no stray word at the fold */
     .down .down-chev { width: 20px; height: 12px; }
     /* the longer title on a phone: smaller type, and the subtitle may wrap */
@@ -288,6 +288,10 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note]), .desk a[data-chapter="user"]:not([data-thread]):not([data-note]) { top: 82%; }
     .sim { top: 68%; }
 }
+
+/* the page holds still under an open window (desktop.js sets this); the sheet's body is what scrolls */
+html.modal-open body { position: fixed; left: 0; right: 0; overflow: hidden; }
+.thread-body, .folder-window .folder-body { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 
 /* ---- the screening sign-up: the input and the button, in the desktop's dress; bottom right on a desktop, a bar along the bottom on a phone ---- */
 .signup { position: fixed; right: 20px; bottom: 20px; z-index: 90; width: 340px; max-width: calc(100vw - 32px); display: flex; flex-direction: column; gap: 8px; padding: 12px; background: var(--bg); border: 1px solid rgba(249,248,248,0.28); border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.65); font-family: var(--font-ui); letter-spacing: 0; }
