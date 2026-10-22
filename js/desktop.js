@@ -161,8 +161,7 @@
             el.querySelector('.meta').textContent = ic.name;
             el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveCharacter) window.openArchiveCharacter(ic.char, ic.char + '.json', ic.name); });
         } else if (ic.entry) {
-            el.innerHTML = '<img src="' + DIARY_ICON + '" class="portrait-icon" alt=""><span class="label">My diary</span><div class="meta-group"><span class="meta"></span></div>';
-            el.querySelector('.meta').textContent = ic.date;
+            el.innerHTML = '<img src="' + DIARY_ICON + '" class="portrait-icon" alt=""><span class="label">My diary</span>';
             el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveDiary) window.openArchiveDiary(ic.entry); });
         } else if (ic.folder) {
             el.innerHTML = '<div class="icon"><img src="' + FOLDER + '" alt=""></div><span class="label"></span>';
