@@ -177,12 +177,12 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .margin-desk .win.code .text { font-size: 11px; max-height: 230px; padding: 10px 12px 12px; }
 @media (min-width: 1024px) {
     .margin-desk { display: block; }
+    /* the lower column keeps clear of the margins: 190px each side at the narrow end */
+    .lower .people { width: min(1000px, 100vw - 380px); }
+    .lower .stack { width: min(900px, 100vw - 380px); }
 }
 @media (max-width: 1023px) {
     #visuals { display: none; }   /* on a phone the desk scenes' things are dealt out between the sections instead */
-    /* the lower column keeps clear of the margins: 150px each side at the narrow end */
-    .lower .people { width: min(1000px, 100vw - 380px); }
-    .lower .stack { width: min(900px, 100vw - 380px); }
 }
 .narrow { width: min(820px, 100%); margin-left: auto; margin-right: auto; }
 /* two windows on the desk: the first to the left, the second laid over its lower right corner */
