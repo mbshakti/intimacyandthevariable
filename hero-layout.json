@@ -61,11 +61,6 @@
       "x": 87.8,
       "y": 71.9
     },
-    "note-diary": {
-      "zone": "page",
-      "x": 88.4,
-      "y": 13.7
-    },
     "margin-thread-making-bots": {
       "zone": "page",
       "x": 16,
@@ -95,11 +90,6 @@
       "zone": "page",
       "x": 79.6,
       "y": 79.4
-    },
-    "margin-note-diary": {
-      "zone": "page",
-      "x": 22.4,
-      "y": 91.5
     },
     "scene-craft-icon-3": {
       "x": 366,
@@ -180,11 +170,6 @@
       "zone": "hero",
       "x": 24.9,
       "y": 30.2
-    },
-    "note-diary": {
-      "zone": "hero",
-      "x": 62.8,
-      "y": 14.8
     },
     "folder-bot-makers": {
       "zone": "hero",

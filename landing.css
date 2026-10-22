@@ -265,7 +265,6 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .desk a[data-chapter="craft"]:not([data-thread]):not([data-note])        { left: 75%; top: 12%; }
     .desk a[data-thread="voice-requests"]                   { left: 25%; top: 29%; }
     .desk a[data-thread="get-laid-or-god-destroys-humanity"] { display: none; }
-    .desk a[data-note]                                       { left: 75%; top: 29%; }
     .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note])   { left: 25%; top: 77%; }
     .desk a[data-chapter="user"]:not([data-thread]):not([data-note])         { left: 75%; top: 77%; }
     .sim { left: 56%; top: 65%; height: 4.5vh; min-height: 28px; }
@@ -283,7 +282,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
    the folders pushed to the corners, one thread and the diary between the top folders and the title */
 @media (max-width: 520px) and (max-height: 700px) {
     .desk .desktop-icon { zoom: 0.85; }
-    .desk a[data-thread="voice-requests"], .desk a[data-note] { top: 31%; }
+    .desk a[data-thread="voice-requests"] { top: 31%; }
     .desk a[data-chapter="bot-requests"]:not([data-thread]):not([data-note]), .desk a[data-chapter="craft"]:not([data-thread]):not([data-note]) { top: 12%; }
     .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note]), .desk a[data-chapter="user"]:not([data-thread]):not([data-note]) { top: 82%; }
     .sim { top: 68%; }

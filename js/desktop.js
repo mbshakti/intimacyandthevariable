@@ -329,7 +329,6 @@
         { id: 'file-ossix', icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '93.5%', y: '74.3%' },
         { id: 'picture-stew', pic: '23', side: 'left', y: '80.7%' },
         { id: 'picture-dragon', pic: '04', side: 'right', y: '79.9%' },
-        { id: 'note-diary', icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '6.5%', y: '96.0%' },
         { id: 'file-minho', icon: char('loving_korean_boyfriend', null, 'JSON', 0, 0, 'loving korean boyfriend'), x: '93.5%', y: '91.2%' },   // its name alone, no face,
         // more of the found bots, by name alone, beside the overview and the teaser
         { id: 'file-victoria', icon: char('evil_bully_wife', null, 'JSON', 0, 0, 'evil bully wife'), x: '6.5%', y: '4%' },
