@@ -16,6 +16,10 @@ A one-page site in the desktop's own dress, at the repository root. No build ste
 
 The icons round the title are the desktop's own: its four chapter folders and threads from the archive's manifest, drawn with the desktop's folder icon, the avatar pool under `content/img/discord avatars/` and the bot-request thumbnails under `archive-desktop/`.
 
+## Moving the icons: the layout admin
+
+Where the hero's icons and the margins' things sit is in `hero-layout.json`: a desktop layout and a phone layout for the hero (x, y in % of the hero; `hide: true` leaves an icon out of that layout), and one for the margins (% of the lower block). Open the page with `?admin=1` to move them: drag an icon, switch the phone preview on to lay out the phone, tick "hidden in this layout" for an icon that shouldn't show there. The draft keeps in that browser; when it looks right, copy or download `hero-layout.json`, put it at the site's root, and push. `?admin=0` or the panel's exit turns the mode off. `js/admin.js` does all of this; without a layout file the page falls back to the positions in the markup and stylesheet.
+
 ## The desktop (the previous site)
 
 The interactive desktop that was the homepage lives on at `desktop/index.html`, reachable at `/desktop/`. It keeps its `<base href="/archive-desktop/">`, so it loads its stylesheet, script and data from `archive-desktop/` wherever it sits. The homepage's icons fall back to it (`desktop/#chapter`) when JavaScript is off. Its signup form (the Netlify form `screening-invites`) is on that page only.

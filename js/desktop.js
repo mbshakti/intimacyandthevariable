@@ -305,20 +305,21 @@
     // ---- the margins of the lower sections: the archive desk's things, left and right of the windows, as the hero's icons sit round the title ----
     // x and y are of the lower block; icons centre on the point, windows hang from it, anchored to their side
     var MARGIN = [
-        { icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '6.5%', y: '7%' },
-        { icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '93.5%', y: '6%' },
-        { icon: folder('bot-requests', 'bot requests', 0, 0), x: '6.5%', y: '34%' },
-        { icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '93.5%', y: '36%' },
-        { pic: '23', side: 'left', y: '52%' },
-        { pic: '04', side: 'right', y: '50%' },
-        { icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '6.5%', y: '90%' },
-        { win: codewin('loving_korean_boyfriend', 0, 0, 0), side: 'right', y: '78%' }
+        { id: 'thread-making-bots', icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '6.5%', y: '7%' },
+        { id: 'clip-delta-demon', icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '93.5%', y: '6%' },
+        { id: 'folder-bot-requests', icon: folder('bot-requests', 'bot requests', 0, 0), x: '6.5%', y: '34%' },
+        { id: 'file-ossix', icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '93.5%', y: '36%' },
+        { id: 'picture-stew', pic: '23', side: 'left', y: '52%' },
+        { id: 'picture-dragon', pic: '04', side: 'right', y: '50%' },
+        { id: 'note-diary', icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '6.5%', y: '90%' },
+        { id: 'file-minho', win: codewin('loving_korean_boyfriend', 0, 0, 0), side: 'right', y: '78%' }
     ];
     function buildMargin() {
         var host = document.getElementById('marginDesk'); if (!host) return;
         host.innerHTML = '';
         MARGIN.forEach(function (m) {
             var el = m.icon ? makeIcon(m.icon) : m.pic ? makePicWin(m.pic) : makeFileWin(m.win);
+            el.dataset.id = m.id; el.dataset.anchor = m.icon ? 'centre' : 'left';   // how a layout's x places it (js/admin.js)
             el.style.top = m.y;
             if (m.icon) el.style.left = m.x; else el.style[m.side] = '1.5%';
             host.appendChild(el);

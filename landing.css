@@ -131,7 +131,7 @@ h3 { font-size: 17px; }
 .desk .desktop-icon .label { color: var(--text); }
 .desk .desktop-icon.folder .icon { width: 72px; height: 72px; }
 .desk .desktop-icon.folder .label { margin-top: 12px; }
-.title { position: relative; z-index: 1; text-align: center; padding: 0 16px; }
+.title { position: relative; z-index: 1; text-align: center; padding: 0 16px; pointer-events: none; }   /* an icon laid under the title still takes the click */
 .title h1 { font-size: clamp(30px, 7.6vw, 100px); line-height: 1; letter-spacing: 0.02em; margin: 0; text-transform: uppercase; }
 .title h1 .line { display: block; white-space: nowrap; }
 .title h1 .caret { width: 0.12em; height: 0.85em; vertical-align: -0.04em; margin-left: 0.06em; margin-right: -0.18em; }
@@ -275,3 +275,21 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note]), .desk a[data-chapter="user"]:not([data-thread]):not([data-note]) { top: 82%; }
     .sim { top: 68%; }
 }
+
+/* ---- the layout admin (?admin=1, js/admin.js): drag the hero's icons and the margins' things; a phone preview for the phone layout ---- */
+.admin-panel { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 500; width: 320px; padding: 14px 16px; background: rgba(17,11,17,0.94); border: 1px solid rgba(249,248,248,0.28); border-radius: 12px; font-family: var(--font-meta); font-size: 12px; line-height: 1.5; color: var(--text); box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+.admin-panel .adm-head { font-family: var(--font-ui); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+.admin-panel .adm-status { color: var(--accent); margin-bottom: 10px; }
+.admin-panel .adm-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.admin-panel button { font: inherit; padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(249,248,248,0.3); background: rgba(249,248,248,0.06); color: var(--text); cursor: pointer; }
+.admin-panel button:hover, .admin-panel button.on { background: rgba(255,138,247,0.18); border-color: var(--accent); color: #FFFFFF; }
+.admin-panel .adm-sel { margin: 4px 0 10px; padding: 8px 10px; border: 1px solid rgba(249,248,248,0.14); border-radius: 8px; display: flex; flex-direction: column; gap: 4px; }
+.admin-panel .adm-sel-name { color: var(--accent); }
+.admin-panel .adm-help { color: rgba(226,225,225,0.5); font-size: 11px; }
+html.admin .hero .desk [data-id], html.admin #marginDesk [data-id] { cursor: move; outline: 1px dashed rgba(255,138,247,0.35); outline-offset: 6px; user-select: none; }
+html.admin .hero .desk [data-id].admin-selected, html.admin #marginDesk [data-id].admin-selected { outline: 1px solid var(--accent); }
+/* the phone preview: the hero in a phone's frame, so the phone layout can be laid out on a desktop screen */
+html.admin-phone .hero { width: 390px; min-height: 0; height: 780px; margin: 24px auto 0; border: 1px dashed rgba(249,248,248,0.3); border-radius: 24px; }
+html.admin-phone .title h1 { font-size: 30px; }
+html.admin-phone .title .by { font-size: 14px; }
+html.admin-phone .sim { display: none; }
