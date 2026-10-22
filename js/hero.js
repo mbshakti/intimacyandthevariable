@@ -35,12 +35,13 @@
     }
     function manifest() { return getJSON(SITE + 'desktop-labels.json').catch(function () { return {}; }); }
     function getText(url) { return cache['t:' + url] || (cache['t:' + url] = fetch(encodeURI(url)).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })); }
-    // the diary entries this site has (content/diary), by slug
-    function diarySlugs() {
+    // the diary entries this site has (content/api/diary.json), by slug
+    function diaryEntries() {
         return cache.diary || (cache.diary = getJSON('content/api/diary.json').then(function (list) {
-            var set = {}; list.forEach(function (e) { set[e.slug] = true; }); return set;
+            var map = {}; list.forEach(function (e) { map[e.slug] = e; }); return map;
         }).catch(function () { return {}; }));
     }
+    function diarySlugs() { return diaryEntries(); }
     // Delta's clips: a question of mine and her answer, both recorded; only her answer plays here, as on the site
     function interviews() {
         return cache.interviews || (cache.interviews = getJSON(SITE + 'interviews/delta.json').then(function (list) {
@@ -164,14 +165,25 @@
 
     // ---- a character file: the bot's JSON, as written ----
     var CHAR_FILES = { priest: 'judgemental_priest.json' };
-    function openCharacter(key, chapter, it, label, meta) {
-        var file = CHAR_FILES[it.char] || (it.char + '.json');
+    function openCharacterFile(file, label, meta, chapter, key) {
         return getJSON(SITE + 'character-data/' + file).then(function (data) {
             stopClip();
-            var body = openWin(label || file, '<pre class="code"></pre>', chapter, key, meta || '');
+            var body = openWin(label || file, '<pre class="code"></pre>', chapter || 'bot-requests', key || file.replace(/\.json$/, ''), meta || (data.name ? data.name : 'character file'));
             body.querySelector('pre').textContent = JSON.stringify(data, null, 2);
             return true;
         }).catch(function () { return false; });
+    }
+    function openCharacter(key, chapter, it, label, meta) {
+        return openCharacterFile(CHAR_FILES[it.char] || (it.char + '.json'), label, meta, chapter, key);
+    }
+    // a diary entry by its slug, from the site's diary
+    function openDiaryEntry(slug) {
+        return diaryEntries().then(function (map) {
+            var e = map[slug]; if (!e || !e.content) return false;
+            stopClip();
+            openWin('My diary', noteHtml(e.content.trim(), false), 'user', slug, e.displayDate || 'My diary');
+            return true;
+        });
     }
     function openThread(id, chapter) {
         return threads().then(function (map) {
@@ -266,6 +278,8 @@
     if (closeAll) window.closeAllWindows = function (quiet) { stopClip(); return closeAll(quiet); };
     window.openArchiveThread = openThread;   // the desk scenes (desktop.js) open their threads through this
     window.openArchiveChapter = openChapter; // and their folders, the chapter's listing from the site's manifest
+    window.openArchiveCharacter = function (file, label, meta) { return openCharacterFile(file + '.json', label, meta); };   // the found bots' files
+    window.openArchiveDiary = openDiaryEntry;   // the diary's entries
 
     // what a manifest key opens: a thread (its own, or the request's), a post, or nothing this page can show
     var interviewMap = {};   // filled once the interviews arrive, so the listing can open them
