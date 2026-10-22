@@ -56,28 +56,17 @@
                 pic('00', 920, 450, 560), pic('15', 1330, 600, 220), pic('10', 600, 130, 380), pic('17', 1460, 300, 140), pic('03', 540, 650, 330),
                 pic('06', 780, 20, 160), pic('02', 330, 250, 260), pic('04', 1250, 330, 250), pic('20', 440, 520, 200), pic('13', 640, 300, 440)]
         },
-        // the found bots: their character files on the desk, two of them open, and Delta on the characters
-        bots: {
-            rest: [770, 560],
-            icons: [char('evil_bully_wife', 'evil-bully-wife', 'Victoria', 160, 110), char('expressionless_woman', 'expressionless-woman', 'Chloe', 420, 140),
-                clip('delta-demon', 'bot-makers', 'the word demon', 810, 90),
-                char('judgemental_priest', 'judgemental-priest', 'Father Michael', 1180, 110), char('loving_korean_boyfriend', 'loving-korean-bf', 'Min-ho', 1440, 150),
-                char('mental_chastity_girlfriend', 'mental-chastity-gf', 'Luna', 170, 700), char('mentally_unwell_dad_and_stressed_mom', 'stressed-parents', 'Mom and Dad', 430, 740),
-                clip('delta-yandere', 'craft', 'the yandere', 830, 720),
-                char('rich_dommy_mommy', 'rich-dommy-mommy', 'Eleanor', 1210, 800), char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 1470, 800)],
-            pics: [],
-            wins: [codewin('evil_bully_wife', 560, 290, 440), codewin('loving_korean_boyfriend', 1020, 370, 420)]
-        },
-        // the diary: the entries on the desk, two of them open, and Delta on the two futures
-        diary: {
-            rest: [720, 640],
-            icons: [entry('2023-07-14', 'July 14, 2023', 160, 110), entry('2023-10-02', 'October 2, 2023', 400, 110),
-                entry('2024-01-19', 'January 19, 2024', 1200, 110), entry('2024-03-08', 'March 8, 2024', 1440, 110),
-                entry('2024-06-27', 'June 27, 2024', 160, 720), entry('2024-09-14', 'September 14, 2024', 400, 720),
-                clip('delta-alone', 'user', 'two futures', 820, 700),
-                entry('2026-02-02', 'February 2, 2026', 1200, 720), entry('2026-05-09', 'May 9, 2026', 1440, 720)],
-            pics: [],
-            wins: [notewin('2026-09-11', 'September 11, 2026', 560, 250, 480), notewin('2023-08-08', 'August 8, 2023', 1090, 420, 380)]
+        // from the archive, at the bottom of the page: a mix, as the craft desk is. Two pictures, Min-ho's character file
+        // open, Ossix Ayto's as a file, a diary entry, one of Delta's clips, a thread and a folder
+        archive: {
+            rest: [1300, 760],
+            icons: [thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 210, 120, 'making-bots-at-2am', 'bot-makers'),
+                clip('delta-demon', 'bot-makers', 'the word demon', 1000, 110),
+                char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 1420, 130),
+                folder('bot-requests', 'bot requests', 240, 640),
+                entry('2026-09-11', 'September 11, 2026', 900, 700)],
+            pics: [pic('23', 440, 110, 300), pic('04', 560, 480, 230)],
+            wins: [codewin('loving_korean_boyfriend', 1060, 330, 420)]
         },
         // seven windows on the empty desk
         windows: {
