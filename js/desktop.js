@@ -128,8 +128,12 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAllWindows(); });
 
     // ---- the desks ----
+    var PHONE = matchMedia('(max-width: 700px)');
     function build(host) {
         var L = LAYOUTS[host.dataset.layout]; if (!L) return;
+        host.innerHTML = '';
+        if (PHONE.matches) return buildPhone(host, L);
+        host.classList.remove('mobile');
         var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
         var place = function (el, x, y) { el.style.left = Math.round(x / ZOOM) + 'px'; el.style.top = Math.round(y / ZOOM) + 'px'; };
         L.icons.forEach(function (ic) {
@@ -186,10 +190,63 @@
             var sim = document.createElement('div'); sim.className = 'sim on'; sim.innerHTML = CURSOR; sim.setAttribute('aria-hidden', 'true');
             sim.style.left = L.rest[0] + 'px'; sim.style.top = L.rest[1] + 'px'; desk.appendChild(sim);
         }
-        host.addEventListener('click', function () { closeAllWindows(); });   // the empty desk closes everything, as the site's does
-        var fit = function () { desk.style.transform = 'scale(' + host.clientWidth / 1600 + ')'; };
+        wire(host);
+        var fit = function () { if (desk.isConnected) desk.style.transform = 'scale(' + host.clientWidth / 1600 + ')'; };
         if ('ResizeObserver' in window) new ResizeObserver(fit).observe(host); else addEventListener('resize', fit);
         fit();
     }
-    document.querySelectorAll('.desktop[data-layout]').forEach(build);
+    function wire(host) {
+        if (host.dataset.wired) return; host.dataset.wired = '1';
+        host.addEventListener('click', function () { closeAllWindows(); });   // the empty desk closes everything, as the site's does
+    }
+    // the same desk on a phone: the pictures as windows in two columns at a size you can see, the folders, threads
+    // and Delta's clip between them, the scene as tall as it needs; the first picture of a scene gets the full width
+    function buildPhone(host, L) {
+        host.classList.add('mobile');
+        var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
+        var icons = L.icons.slice(), pics = L.pics.slice(), cells = [];
+        // pictures and icons take turns: two pictures, then an icon, until both run out
+        while (pics.length || icons.length) {
+            if (pics.length) cells.push({ pic: pics.shift() });
+            if (pics.length) cells.push({ pic: pics.shift() });
+            if (icons.length) cells.push({ icon: icons.shift() });
+        }
+        var first = true;
+        cells.forEach(function (c) {
+            if (c.pic) {
+                var p = c.pic, meta = PIC[p.t];
+                var win = document.createElement('div');
+                win.className = 'win' + (first ? ' wide' : ''); first = false;
+                win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="" loading="lazy">';
+                win.querySelector('.name').textContent = meta[0];
+                win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
+                win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + p.t + '.jpg'); });
+                win.addEventListener('click', function (e) { e.stopPropagation(); });
+                desk.appendChild(win);
+                return;
+            }
+            var ic = c.icon, el = document.createElement('div');
+            el.className = 'desktop-icon' + (ic.folder ? ' folder' : ic.clip ? ' interview-icon' : ' thread');
+            if (ic.clip) {
+                el.innerHTML = '<img src="archive-desktop/img/anime-bitmap/delta.png" class="portrait-icon" alt=""><span class="label">Delta</span><div class="meta-group"><span class="meta">ex-bot maker</span></div><span class="topic"></span><span class="play-pill"><svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor" style="display:block;flex-shrink:0"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play</span>';
+                el.querySelector('.topic').textContent = ic.topic;
+                el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveInterview) window.openArchiveInterview(ic.clip, ic.chapter, el); });
+            } else if (ic.folder) {
+                el.innerHTML = '<div class="icon"><img src="' + FOLDER + '" alt=""></div><span class="label"></span>';
+                el.querySelector('.label').textContent = ic.label;
+                el.addEventListener('click', function (e) { e.stopPropagation(); openFolder(ic.folder); });
+            } else {
+                el.innerHTML = '<div class="msg-avatar-stack">' + ic.faces.map(function (f) { return '<img src="' + FACES + f + '.jpg" class="msg-avatar-circle" alt="">'; }).join('') + '</div><span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
+                el.querySelector('.label').textContent = ic.label;
+                el.querySelector('.meta').textContent = ic.meta;
+                if (ic.id) el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveThread) window.openArchiveThread(ic.id, ic.chapter); });
+            }
+            desk.appendChild(el);
+        });
+        wire(host);
+    }
+    var hosts = document.querySelectorAll('.desktop[data-layout]');
+    hosts.forEach(build);
+    // crossing the phone width rebuilds the desks the other way
+    (PHONE.addEventListener ? PHONE.addEventListener('change', function () { hosts.forEach(build); }) : PHONE.addListener(function () { hosts.forEach(build); }));
 })();
