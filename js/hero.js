@@ -165,11 +165,19 @@
 
     // ---- a character file: the bot's JSON, as written ----
     var CHAR_FILES = { priest: 'judgemental_priest.json' };
+    // JSON as an editor shows it: keys, strings, numbers, booleans and punctuation each their own colour
+    function jsonHtml(data) {
+        return esc(JSON.stringify(data, null, 2)).replace(/(&quot;(?:[^&]|&(?!quot;))*&quot;)(\s*:)?|\b(true|false|null)\b|-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/gi, function (m, str, colon, kw) {
+            if (str) return colon ? '<span class="j-key">' + str + '</span>' + colon : '<span class="j-str">' + str + '</span>';
+            if (kw) return '<span class="j-kw">' + m + '</span>';
+            return '<span class="j-num">' + m + '</span>';
+        });
+    }
     function openCharacterFile(file, label, meta, chapter, key) {
         return getJSON(SITE + 'character-data/' + file).then(function (data) {
             stopClip();
             var body = openWin(label || file, '<pre class="code"></pre>', chapter || 'bot-requests', key || file.replace(/\.json$/, ''), meta || (data.name ? data.name : 'character file'));
-            body.querySelector('pre').textContent = JSON.stringify(data, null, 2);
+            body.querySelector('pre').innerHTML = jsonHtml(data);
             return true;
         }).catch(function () { return false; });
     }
@@ -192,12 +200,12 @@
             return true;
         });
     }
-    function openPost(id, chapter) {
+    function openPost(id, chapter, title) {
         return posts().then(function (map) {
             var p = map[id]; if (!p) return false;
             var first = { username: p.username, color: p.color, text: p.text, time: p.timestamp, images: p.image ? [p.image] : [], reactions: p.reactions };
             var rest = (p.comments || []).map(function (c) { return { username: c.username, color: c.color, text: c.text, time: c.timestamp, images: c.image ? [c.image] : [], reactions: c.reactions }; });
-            showThread(p.title || p.label || id, [first].concat(rest), chapter, id);
+            showThread(title || p.title || p.label || id, [first].concat(rest), chapter, id);
             return true;
         });
     }
@@ -280,6 +288,7 @@
     window.openArchiveChapter = openChapter; // and their folders, the chapter's listing from the site's manifest
     window.openArchiveCharacter = function (file, label, meta) { return openCharacterFile(file + '.json', label, meta); };   // the found bots' files
     window.openArchiveDiary = openDiaryEntry;   // the diary's entries
+    window.openArchivePost = function (id, title) { return openPost(id, 'bot-requests', title); };   // a bot request made as a post
 
     // what a manifest key opens: a thread (its own, or the request's), a post, or nothing this page can show
     var interviewMap = {};   // filled once the interviews arrive, so the listing can open them

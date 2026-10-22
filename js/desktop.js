@@ -25,7 +25,9 @@
     // one of Delta's clips on a desk: the site's interview icon, opening the recording (js/hero.js)
     var clip = function (id, chapter, topic, x, y) { return { clip: id, chapter: chapter, topic: topic, x: x, y: y }; };
     // a found bot's character file (archive-desktop/character-data), with its pixel face; opens the JSON (js/hero.js)
-    var char = function (file, face, name, x, y) { return { char: file, face: face, name: name, x: x, y: y }; };
+    // a bot request: the thread (or the post) it was made in; with its picture when it has one, by name alone otherwise
+    var request = function (id, label, x, y, thumb, post) { return { req: id, label: label, thumb: thumb, post: !!post, x: x, y: y }; };
+    var char = function (file, face, name, x, y, label) { return { char: file, face: face, name: name, x: x, y: y, label: label }; };   // label: shown instead of the file's name
     // a diary entry (content/api/diary.json), the desktop's notebook; opens the entry as a note (js/hero.js)
     var entry = function (slug, date, x, y) { return { entry: slug, date: date, x: x, y: y }; };
     // a window open on the desk showing the start of a character file, or of a diary entry; click for the whole thing
@@ -55,18 +57,6 @@
             pics: [pic('23', 60, 70, 420), pic('12', 1190, 20, 300), pic('16', 470, 40, 170), pic('22', 30, 430, 330), pic('11', 1040, 110, 230),
                 pic('00', 920, 450, 560), pic('15', 1330, 600, 220), pic('10', 600, 130, 380), pic('17', 1460, 300, 140), pic('03', 540, 650, 330),
                 pic('06', 780, 20, 160), pic('02', 330, 250, 260), pic('04', 1250, 330, 250), pic('20', 440, 520, 200), pic('13', 640, 300, 440)]
-        },
-        // from the archive, at the bottom of the page: a mix, as the craft desk is. Two pictures, Min-ho's character file
-        // open, Ossix Ayto's as a file, a diary entry, one of Delta's clips, a thread and a folder
-        archive: {
-            rest: [1300, 760],
-            icons: [thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 210, 120, 'making-bots-at-2am', 'bot-makers'),
-                clip('delta-demon', 'bot-makers', 'the word demon', 1000, 110),
-                char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 1420, 130),
-                folder('bot-requests', 'bot requests', 240, 640),
-                entry('2026-09-11', 'September 11, 2026', 900, 700)],
-            pics: [pic('23', 440, 110, 300), pic('04', 560, 480, 230)],
-            wins: [codewin('loving_korean_boyfriend', 1060, 330, 420)]
         },
         // seven windows on the empty desk
         windows: {
@@ -155,9 +145,15 @@
             el.innerHTML = '<img src="archive-desktop/img/anime-bitmap/delta.png" class="portrait-icon" alt=""><span class="label">Delta</span><div class="meta-group"><span class="meta">ex-bot maker</span></div><span class="topic"></span><span class="play-pill"><svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor" style="display:block;flex-shrink:0"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play</span>';
             el.querySelector('.topic').textContent = ic.topic;
             el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveInterview) window.openArchiveInterview(ic.clip, ic.chapter, el); });
+        } else if (ic.req) {
+            el.innerHTML = (ic.thumb ? '<div class="icon img-thumb"><img src="archive-desktop/' + ic.thumb + '" alt=""></div>' : '') + '<span class="label"></span><div class="meta-group"><span class="meta">bot request</span></div>';
+            el.querySelector('.label').textContent = ic.label;
+            if (!ic.thumb) el.classList.add('no-icon');
+            el.addEventListener('click', function (e) { e.stopPropagation(); if (ic.post) { if (window.openArchivePost) window.openArchivePost(ic.req, ic.label); } else if (window.openArchiveThread) window.openArchiveThread(ic.req, 'bot-requests'); });
         } else if (ic.char) {
-            el.innerHTML = '<div class="icon pixel-icon"><img src="' + FACE + ic.face + '.png" alt=""></div><span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
-            el.querySelector('.label').textContent = ic.char + '.json';
+            el.innerHTML = (ic.face ? '<div class="icon pixel-icon"><img src="' + FACE + ic.face + '.png" alt=""></div>' : '') + '<span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
+            if (!ic.face) el.classList.add('no-icon');
+            el.querySelector('.label').textContent = ic.label || (ic.char + '.json');
             el.querySelector('.meta').textContent = ic.name;
             el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveCharacter) window.openArchiveCharacter(ic.char, ic.char + '.json', ic.name); });
         } else if (ic.entry) {
@@ -221,9 +217,11 @@
         host.classList.remove('mobile');
         var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
         var place = function (el, x, y) { el.style.left = Math.round(x / ZOOM) + 'px'; el.style.top = Math.round(y / ZOOM) + 'px'; };
-        L.icons.forEach(function (ic) { var el = makeIcon(ic); place(el, ic.x, ic.y); desk.appendChild(el); });
+        var scene = host.dataset.layout;
+        L.icons.forEach(function (ic, i) { var el = makeIcon(ic); el.dataset.id = 'scene-' + scene + '-icon-' + i; el.dataset.anchor = 'centre'; place(el, ic.x, ic.y); desk.appendChild(el); });
         (L.wins || []).forEach(function (w, i) {
             var win = makeFileWin(w);
+            win.dataset.id = 'scene-' + scene + '-window-' + (w.code || w.note); win.dataset.anchor = 'left';
             win.style.cssText = 'left:' + w.x + 'px; top:' + w.y + 'px; width:' + w.w + 'px; z-index:' + (10 + i) + ';';
             desk.appendChild(win);
         });
@@ -235,6 +233,7 @@
             th.className = 'desktop-icon';
             th.innerHTML = '<div class="icon img-thumb"><img src="' + THUMBS + p.t + '.jpg" alt=""></div><span class="label"></span>';
             th.querySelector('.label').textContent = meta[0];
+            th.dataset.id = 'scene-' + scene + '-file-' + p.t; th.dataset.anchor = 'centre';
             // the file opens its own window on the desk (or brings it to the front if it is already open)
             th.addEventListener('click', function (e) {
                 e.stopPropagation();
@@ -244,6 +243,7 @@
             place(th, p.x + p.w / 2, p.y + (BAR + p.w * meta[2] / meta[1]) / 2 - 14); desk.appendChild(th);
             win = document.createElement('div');
             win.className = 'win';
+            win.dataset.id = 'scene-' + scene + '-picture-' + p.t; win.dataset.anchor = 'left';
             win.style.cssText = 'left:' + p.x + 'px; top:' + p.y + 'px; width:' + p.w + 'px; z-index:' + (10 + i) + ';';
             win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="">';
             win.querySelector('.name').textContent = meta[0];
@@ -274,6 +274,7 @@
     // and Delta's clip between them, the scene as tall as it needs; the first picture of a scene gets the full width
     function buildPhone(host, L) {
         host.classList.add('mobile');
+        host.innerHTML = '';
         var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
         var icons = L.icons.slice(), pics = L.pics.slice(), wins = (L.wins || []).slice(), cells = [];
         // pictures (or file windows) and icons take turns: two windows, then an icon, until all run out
@@ -284,50 +285,93 @@
             if (icons.length && !pics.length && !wins.length) cells.push({ icon: icons.shift() });
         }
         var first = true;
-        cells.forEach(function (c) {
+        // a desk, not a grid: each thing nudged off its cell a little, and each icon pulled toward one side or the other
+        var seed = 0; for (var si = 0; si < host.dataset.layout.length; si++) seed = (seed * 31 + host.dataset.layout.charCodeAt(si)) | 0;
+        var rnd = function (i, k) { var h = Math.sin(seed + i * 127.1 + k * 311.7) * 43758.5453; return h - Math.floor(h); };   // the same every time, different per thing
+        var dishevel = function (node, i, isWin) {
+            var side = isWin ? 'center' : ['start', 'center', 'end'][Math.floor(rnd(i, 3) * 3)];
+            var dx = (rnd(i, 1) - 0.5) * (isWin ? 24 : side === 'center' ? 70 : 20), dy = (rnd(i, 2) - 0.5) * (isWin ? 30 : 56);   // pulled to a side already: only a small nudge, so it stays on screen
+            node.style.transform = 'translate(' + Math.round(dx) + 'px, ' + Math.round(dy) + 'px)';
+            if (!isWin) node.style.justifySelf = side;
+        };
+        cells.forEach(function (c, ci) {
             if (c.pic) {
                 var p = c.pic, meta = PIC[p.t];
                 var win = document.createElement('div');
-                win.className = 'win' + (first ? ' wide' : ''); first = false;
+                win.className = 'win';   // never the full width: a picture keeps to its column, as a window on a desk would
                 win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="" loading="lazy">';
                 win.querySelector('.name').textContent = meta[0];
                 win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
                 win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + p.t + '.jpg'); });
                 win.addEventListener('click', function (e) { e.stopPropagation(); });
+                dishevel(win, ci, true);
                 desk.appendChild(win);
                 return;
             }
-            if (c.win) { var fw = makeFileWin(c.win); fw.classList.toggle('wide', first); first = false; desk.appendChild(fw); return; }
-            desk.appendChild(makeIcon(c.icon));
+            if (c.win) { desk.appendChild(makeFileWin(c.win)); return; }
+            var icon = makeIcon(c.icon); dishevel(icon, ci, false); desk.appendChild(icon);
         });
         wire(host);
     }
     // ---- the margins of the lower sections: the archive desk's things, left and right of the windows, as the hero's icons sit round the title ----
-    // x and y are of the lower block; icons centre on the point, windows hang from it, anchored to their side
+    // x is of the page width, y of the main column below the hero; icons centre on the point, windows hang from it, anchored to their side
     var MARGIN = [
-        { id: 'thread-making-bots', icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '6.5%', y: '7%' },
-        { id: 'clip-delta-demon', icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '93.5%', y: '6%' },
-        { id: 'folder-bot-requests', icon: folder('bot-requests', 'bot requests', 0, 0), x: '6.5%', y: '34%' },
-        { id: 'file-ossix', icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '93.5%', y: '36%' },
-        { id: 'picture-stew', pic: '23', side: 'left', y: '52%' },
-        { id: 'picture-dragon', pic: '04', side: 'right', y: '50%' },
-        { id: 'note-diary', icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '6.5%', y: '90%' },
-        { id: 'file-minho', win: codewin('loving_korean_boyfriend', 0, 0, 0), side: 'right', y: '78%' }
+        { id: 'thread-making-bots', icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '6.5%', y: '62.7%' },
+        { id: 'clip-delta-demon', icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '93.5%', y: '62.3%' },
+        { id: 'folder-bot-requests', icon: folder('bot-requests', 'bot requests', 0, 0), x: '6.5%', y: '73.5%' },
+        { id: 'file-ossix', icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '93.5%', y: '74.3%' },
+        { id: 'picture-stew', pic: '23', side: 'left', y: '80.7%' },
+        { id: 'picture-dragon', pic: '04', side: 'right', y: '79.9%' },
+        { id: 'note-diary', icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '6.5%', y: '96.0%' },
+        { id: 'file-minho', icon: char('loving_korean_boyfriend', null, 'JSON', 0, 0, 'loving korean boyfriend'), x: '93.5%', y: '91.2%' },   // its name alone, no face,
+        // more of the found bots, by name alone, beside the overview and the teaser
+        { id: 'file-victoria', icon: char('evil_bully_wife', null, 'JSON', 0, 0, 'evil bully wife'), x: '6.5%', y: '4%' },
+        { id: 'file-eleanor', icon: char('rich_dommy_mommy', null, 'JSON', 0, 0, 'rich dommy mommy'), x: '93.5%', y: '9%' },
+        { id: 'file-luna', icon: char('mental_chastity_girlfriend', null, 'JSON', 0, 0, 'mental chastity girlfriend'), x: '6.5%', y: '22%' },
+        { id: 'file-priest', icon: char('judgemental_priest', null, 'JSON', 0, 0, 'judgemental priest'), x: '93.5%', y: '26%' },
+        { id: 'file-parents', icon: char('mentally_unwell_dad_and_stressed_mom', null, 'JSON', 0, 0, 'mentally unwell dad & stressed mom'), x: '6.5%', y: '40%' },
+        // two more threads from the bot makers, and three requests
+        { id: 'thread-breached-400k', icon: thread('top bots breached 400K', '1 message', ['face-021'], 0, 0, 'breached-400k', 'bot-makers'), x: '93.5%', y: '44%' },
+        { id: 'thread-voice-chat', icon: thread('scared to join the voice chat', '8 messages', ['face-09', 'face-017'], 0, 0, 'scared-to-join-voice-chat', 'bot-makers'), x: '6.5%', y: '52%' },
+        { id: 'request-costume-shop', icon: request('haunted-costume-shop', 'haunted costume shop', 0, 0), x: '93.5%', y: '15%' },
+        { id: 'request-succubus', icon: request('succubus-better-person', 'a succubus who tempts you to be a better person', 0, 0), x: '93.5%', y: '34%' }
     ];
+    // on a screen with no margins (under 1024px), the margins' things go between the window sections instead: a few
+    // after the overview, after the teaser, after the team and after the support stack, each group a small desk flow
+    var NARROW = matchMedia('(max-width: 1023px)');
+    function buildStrips() {
+        document.querySelectorAll('.desktop.strip').forEach(function (s) { s.remove(); });
+        if (!NARROW.matches) return;
+        var after = ['overview', 'teaser', 'team', 'notes'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+        if (!after.length) return;
+        var groups = after.map(function () { return { icons: [], pics: [], wins: [] }; });
+        MARGIN.forEach(function (m, i) {
+            var g = groups[i % groups.length];
+            if (m.pic) g.pics.push(pic(m.pic, 0, 0, 230)); else if (m.icon) g.icons.push(m.icon);
+        });
+        after.forEach(function (sec, i) {
+            var host = document.createElement('div'); host.className = 'desktop strip'; host.dataset.layout = 'strip-' + i;
+            sec.insertAdjacentElement('afterend', host);
+            buildPhone(host, groups[i]);
+        });
+    }
     function buildMargin() {
         var host = document.getElementById('marginDesk'); if (!host) return;
         host.innerHTML = '';
         MARGIN.forEach(function (m) {
             var el = m.icon ? makeIcon(m.icon) : m.pic ? makePicWin(m.pic) : makeFileWin(m.win);
-            el.dataset.id = m.id; el.dataset.anchor = m.icon ? 'centre' : 'left';   // how a layout's x places it (js/admin.js)
-            el.style.top = m.y;
-            if (m.icon) el.style.left = m.x; else el.style[m.side] = '1.5%';
+            el.dataset.id = 'margin-' + m.id; el.dataset.anchor = m.icon ? 'centre' : 'left';   // how a layout's x places it (js/admin.js)
+            el.style.top = m.y; el.dataset.homeY = m.y;
+            if (m.icon) { el.style.left = m.x; el.dataset.homeX = m.x; } else { el.style[m.side] = '1.5%'; el.dataset.homeSide = m.side; }
             host.appendChild(el);
         });
     }
     buildMargin();
-    var hosts = document.querySelectorAll('.desktop[data-layout]');
+    var hosts = document.querySelectorAll('.desktop[data-layout]:not(.strip)');
     hosts.forEach(build);
+    buildStrips();
+    (NARROW.addEventListener ? NARROW.addEventListener('change', buildStrips) : NARROW.addListener(buildStrips));
     // crossing the phone width rebuilds the desks the other way
-    (PHONE.addEventListener ? PHONE.addEventListener('change', function () { hosts.forEach(build); }) : PHONE.addListener(function () { hosts.forEach(build); }));
+    var rebuild = function () { hosts.forEach(build); if (window.applyLayout) window.applyLayout(); };
+    (PHONE.addEventListener ? PHONE.addEventListener('change', rebuild) : PHONE.addListener(rebuild));
 })();

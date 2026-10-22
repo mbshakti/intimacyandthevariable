@@ -52,6 +52,22 @@
     });
 })();
 
+// The screening sign-up: the address goes to the same sheet the desktop's form fed (the Apps Script endpoint),
+// and the form becomes a line of thanks. Netlify keeps a copy too (data-netlify), as before.
+(function () {
+    var form = document.getElementById('signup'); if (!form) return;
+    var endpoint = 'https://script.google.com/macros/s/AKfycbxhqH0y36PICJiRVloJxEDyZKgg8oSJw4UjG1N_CpoJ4VDfI5BWZIfy69o8BuPhaWYf/exec';
+    form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var submit = form.querySelector('.signup-submit'), email = (form.querySelector('[name="email"]').value || '').trim();
+        if (!email) return;
+        submit.disabled = true; submit.textContent = 'Sending\u2026';
+        fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ email: email, source: 'screening-invites', page: location.href }) })
+            .then(function () { form.classList.add('done'); form.innerHTML = '<p class="signup-done">You\u2019re on the list.</p>'; })
+            .catch(function () { submit.disabled = false; submit.textContent = 'Sign up'; var s = form.querySelector('.signup-status') || document.createElement('p'); s.className = 'signup-status'; s.textContent = 'Something went wrong. Try again?'; form.appendChild(s); });
+    });
+})();
+
 // The teaser: the poster frame waits with its play pill; pressing it swaps in the Vimeo player, playing.
 (function () {
     var host = document.getElementById('teaserVideo'); if (!host) return;

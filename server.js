@@ -10,6 +10,15 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 // Serve the primary static site from the repo root.
 app.use(express.static(__dirname));
+// the layout admin lives at /admin (the same page; js/admin.js turns the mode on there), and saves hero-layout.json
+// back here as things are moved; on the static host there is no such route, and the admin keeps the moves in the browser
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.post('/api/layout', (req, res) => {
+  const L = req.body;
+  if (!L || typeof L !== 'object' || !L.desktop || !L.phone) return res.status(400).json({ error: 'not a layout' });
+  fs.writeFileSync(path.join(__dirname, 'hero-layout.json'), JSON.stringify(L, null, 2) + '\n');
+  res.json({ ok: true });
+});
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,

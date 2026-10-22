@@ -1,140 +1,228 @@
 {
-  "_about": "Where the icons sit. hero.desktop and hero.phone: x and y in % of the hero; margins: in % of the lower block. hide: true leaves an item out in that layout. Edited in the admin mode (?admin=1), which copies this file out.",
-  "hero": {
-    "desktop": {
-      "folder-bot-requests": {
-        "x": 20,
-        "y": 18
-      },
-      "thread-facial-expression": {
-        "x": 36,
-        "y": 15
-      },
-      "thread-persona-design": {
-        "x": 47,
-        "y": 19
-      },
-      "request-ossix-ayto": {
-        "x": 63,
-        "y": 14
-      },
-      "thread-catharsis": {
-        "x": 82,
-        "y": 16
-      },
-      "thread-voice-requests": {
-        "x": 12,
-        "y": 42
-      },
-      "folder-craft": {
-        "x": 88,
-        "y": 38
-      },
-      "folder-bot-makers": {
-        "x": 10,
-        "y": 72
-      },
-      "folder-user": {
-        "x": 16,
-        "y": 90
-      },
-      "thread-body-measurements": {
-        "x": 28,
-        "y": 78
-      },
-      "thread-fantasy-and-reality": {
-        "x": 76,
-        "y": 78
-      },
-      "thread-get-laid": {
-        "x": 88,
-        "y": 88
-      },
-      "note-diary": {
-        "x": 90,
-        "y": 60
-      }
-    },
-    "phone": {
-      "folder-bot-requests": {
-        "x": 25,
-        "y": 12
-      },
-      "folder-craft": {
-        "x": 75,
-        "y": 12
-      },
-      "thread-voice-requests": {
-        "x": 25,
-        "y": 29
-      },
-      "note-diary": {
-        "x": 75,
-        "y": 29
-      },
-      "folder-bot-makers": {
-        "x": 25,
-        "y": 77
-      },
-      "folder-user": {
-        "x": 75,
-        "y": 77
-      },
-      "thread-facial-expression": {
-        "hide": true
-      },
-      "thread-persona-design": {
-        "hide": true
-      },
-      "request-ossix-ayto": {
-        "hide": true
-      },
-      "thread-catharsis": {
-        "hide": true
-      },
-      "thread-body-measurements": {
-        "hide": true
-      },
-      "thread-fantasy-and-reality": {
-        "hide": true
-      },
-      "thread-get-laid": {
-        "hide": true
-      }
-    }
-  },
-  "margins": {
-    "thread-making-bots": {
-      "x": 6.5,
-      "y": 7
-    },
-    "clip-delta-demon": {
-      "x": 93.5,
-      "y": 6
-    },
+  "_about": "Where every movable thing sits, in the desktop layout and the phone layout. zone: 'hero' puts it on the hero's desk (x, y in % of the hero), 'page' anywhere below the hero (x in % of the page width, y in % of the main column). hide: true leaves it out of that layout. Things with no entry stay where the markup puts them. Edited at /admin, which saves this file out.",
+  "desktop": {
     "folder-bot-requests": {
-      "x": 6.5,
-      "y": 34
+      "zone": "hero",
+      "x": 20,
+      "y": 18
     },
-    "file-ossix": {
-      "x": 93.5,
-      "y": 36
+    "thread-facial-expression": {
+      "zone": "hero",
+      "x": 41,
+      "y": 15.2
     },
-    "picture-stew": {
-      "x": 1.5,
-      "y": 52
+    "thread-persona-design": {
+      "zone": "hero",
+      "x": 60.8,
+      "y": 17.2
     },
-    "picture-dragon": {
-      "x": 85,
-      "y": 50
+    "request-ossix-ayto": {
+      "zone": "page",
+      "x": 91,
+      "y": 6.7
+    },
+    "thread-catharsis": {
+      "zone": "hero",
+      "x": 84.6,
+      "y": 20.2
+    },
+    "thread-voice-requests": {
+      "zone": "hero",
+      "x": 12,
+      "y": 42
+    },
+    "folder-craft": {
+      "zone": "page",
+      "x": 58.3,
+      "y": 57
+    },
+    "folder-bot-makers": {
+      "zone": "hero",
+      "x": 10,
+      "y": 72
+    },
+    "folder-user": {
+      "zone": "page",
+      "x": 15.8,
+      "y": 1.5
+    },
+    "thread-body-measurements": {
+      "zone": "hero",
+      "x": 28,
+      "y": 78
+    },
+    "thread-fantasy-and-reality": {
+      "zone": "hero",
+      "x": 80.5,
+      "y": 92.6
+    },
+    "thread-get-laid": {
+      "zone": "hero",
+      "x": 87.8,
+      "y": 71.9
     },
     "note-diary": {
-      "x": 6.5,
-      "y": 90
+      "zone": "page",
+      "x": 88.4,
+      "y": 13.7
     },
-    "file-minho": {
-      "x": 83,
-      "y": 78
+    "margin-thread-making-bots": {
+      "zone": "page",
+      "x": 16,
+      "y": 57.7
+    },
+    "margin-clip-delta-demon": {
+      "zone": "page",
+      "x": 74.3,
+      "y": 65.3
+    },
+    "margin-folder-bot-requests": {
+      "zone": "page",
+      "x": 36.3,
+      "y": 73
+    },
+    "margin-file-ossix": {
+      "zone": "page",
+      "x": 15.3,
+      "y": 74.7
+    },
+    "margin-picture-stew": {
+      "zone": "page",
+      "x": 15.8,
+      "y": 77.6
+    },
+    "margin-picture-dragon": {
+      "zone": "page",
+      "x": 79.6,
+      "y": 79.4
+    },
+    "margin-note-diary": {
+      "zone": "page",
+      "x": 22.4,
+      "y": 91.5
+    },
+    "scene-craft-icon-3": {
+      "x": 366,
+      "y": 716
+    },
+    "scene-windows-picture-01": {
+      "x": 516,
+      "y": 341
+    },
+    "margin-file-minho": {
+      "zone": "hero",
+      "x": 91.2,
+      "y": 47.7
+    },
+    "margin-file-victoria": {
+      "zone": "page",
+      "x": 10.1,
+      "y": 7.7
+    },
+    "margin-file-eleanor": {
+      "zone": "page",
+      "x": 88.4,
+      "y": 93.4
+    },
+    "margin-file-luna": {
+      "zone": "page",
+      "x": 6.5,
+      "y": 22
+    },
+    "margin-file-priest": {
+      "zone": "page",
+      "x": 93.5,
+      "y": 26
+    },
+    "margin-file-parents": {
+      "zone": "page",
+      "x": 6.5,
+      "y": 40
+    },
+    "margin-thread-breached-400k": {
+      "zone": "page",
+      "x": 93.5,
+      "y": 44
+    },
+    "margin-thread-voice-chat": {
+      "zone": "page",
+      "x": 75.7,
+      "y": 98.2
+    },
+    "margin-request-costume-shop": {
+      "zone": "page",
+      "x": 84.5,
+      "y": 60.9
+    },
+    "margin-request-succubus": {
+      "zone": "page",
+      "x": 93.5,
+      "y": 34
+    },
+    "margin-request-bodyguard": {
+      "zone": "page",
+      "x": 16.6,
+      "y": 96.9
+    }
+  },
+  "phone": {
+    "folder-bot-requests": {
+      "zone": "hero",
+      "x": 25,
+      "y": 12
+    },
+    "folder-craft": {
+      "zone": "hero",
+      "x": 81,
+      "y": 27.6
+    },
+    "thread-voice-requests": {
+      "zone": "hero",
+      "x": 24.9,
+      "y": 30.2
+    },
+    "note-diary": {
+      "zone": "hero",
+      "x": 62.8,
+      "y": 14.8
+    },
+    "folder-bot-makers": {
+      "zone": "hero",
+      "x": 25,
+      "y": 77
+    },
+    "folder-user": {
+      "zone": "hero",
+      "x": 75,
+      "y": 77
+    },
+    "thread-facial-expression": {
+      "zone": "hero",
+      "hide": true
+    },
+    "thread-persona-design": {
+      "zone": "hero",
+      "hide": true
+    },
+    "request-ossix-ayto": {
+      "zone": "hero",
+      "hide": true
+    },
+    "thread-catharsis": {
+      "zone": "hero",
+      "hide": true
+    },
+    "thread-body-measurements": {
+      "zone": "hero",
+      "hide": true
+    },
+    "thread-fantasy-and-reality": {
+      "zone": "hero",
+      "hide": true
+    },
+    "thread-get-laid": {
+      "zone": "hero",
+      "hide": true
     }
   }
 }

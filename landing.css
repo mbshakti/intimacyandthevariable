@@ -77,7 +77,11 @@ h3 { font-size: 17px; }
 .thread-body .note p:last-child { margin-bottom: 0; }
 .thread-body .note .np-strike { text-decoration: line-through; }
 .thread-body .note .note-title { font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(226,225,225,0.5); margin: 0 0 14px; }
-.thread-body pre.code { margin: 4px 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-code, var(--font-meta)); font-size: 12px; line-height: 1.55; color: rgba(249,248,248,0.85); }
+.thread-body pre.code { margin: 4px 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-code, var(--font-meta)); font-size: 12px; line-height: 1.55; color: rgba(249,248,248,0.55); }
+.thread-body pre.code .j-key { color: var(--accent-2, #90F1EF); }
+.thread-body pre.code .j-str { color: rgba(249,248,248,0.92); }
+.thread-body pre.code .j-num { color: #FFB86C; }
+.thread-body pre.code .j-kw { color: var(--accent); }
 /* the diary on the desk: the desktop's pixel notebook */
 .desktop-icon.note-icon .portrait-icon { width: 44px; height: 44px; }
 @media (max-width: 860px) { .folder-window.archive { width: min(92vw, 620px); } }
@@ -149,11 +153,12 @@ h3 { font-size: 17px; }
 @media (prefers-reduced-motion: reduce) { .down .down-chev { animation: none; } }
 
 /* ---- the page ---- */
-main { width: min(1120px, 100% - 32px); margin: 0 auto; padding-top: clamp(64px, 9vw, 120px); }
+main { width: min(1120px, 100% - 32px); margin: 0 auto; padding-top: clamp(64px, 9vw, 120px); position: relative; }
 main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
-/* the archive's things in the margins of the lower sections, on a screen wide enough to have margins; the desk of them otherwise */
-.lower { position: relative; }
-.margin-desk { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; display: none; }
+#teaser { margin-top: clamp(96px, 14vw, 200px); }   /* more room between the overview and the teaser */
+/* the archive's things in the margins below the hero, on a screen wide enough to have margins; the desk of them otherwise.
+   y is of the whole main column, so they can sit beside the overview and the teaser as well as the lower sections */
+.margin-desk { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; display: none; z-index: 3; }   /* above the sections, so a thing laid over one still takes the pointer; the layer itself lets clicks through */
 .margin-desk > * { position: absolute; pointer-events: auto; margin: 0; }
 .margin-desk .desktop-icon { transform: translate(-50%, -50%); width: max-content; zoom: 1; }
 .margin-desk .win { width: clamp(120px, 12vw, 210px); }
@@ -161,10 +166,17 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .margin-desk .win .bar .close { width: 14px; height: 14px; margin-left: 10px; background: none; border: 0; padding: 0; cursor: pointer; }
 .margin-desk .win .bar .close:hover { color: #FFFFFF; }
 .margin-desk .win.code { width: clamp(150px, 15vw, 250px); }
+/* a thing dragged from the margins onto the hero's desk, or a hero icon dragged onto the page: both layers draw them the same */
+.desk > .win { position: absolute; width: clamp(120px, 12vw, 210px); }
+.desk > .win.code { width: clamp(150px, 15vw, 250px); }
+.desk > .win .bar { font-size: 15px; padding: 10px 14px; }
+.desk > .win .bar .close { width: 14px; height: 14px; margin-left: 10px; background: none; border: 0; padding: 0; cursor: pointer; }
+.margin-desk .desktop-icon.folder .icon { width: 72px; height: 72px; }
+.margin-desk .desktop-icon.folder .label { margin-top: 12px; }
+.margin-desk a.desktop-icon { text-decoration: none; color: inherit; }
 .margin-desk .win.code .text { font-size: 11px; max-height: 230px; padding: 10px 12px 12px; }
 @media (min-width: 1024px) {
     .margin-desk { display: block; }
-    #archive { display: none; }
     /* the lower column keeps clear of the margins: 150px each side at the narrow end */
     .lower .people { width: min(1000px, 100vw - 380px); }
     .lower .stack { width: min(900px, 100vw - 380px); }
@@ -192,7 +204,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 /* the visuals: the frames plain, one to a row */
 /* the desks run the full width of the browser, out of the page's column, one under the other */
 .desks { width: 100vw; margin-left: calc(50% - 50vw); margin-top: 28px; display: grid; gap: 0; }
-.desktop { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg); }
+.desktop { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: visible; background: transparent; }   /* nothing clipped at the edge of a scene */
 /* ---- the desktop, working (js/desktop.js): a 1600x900 desk scaled to its row, the site's own parts on it ---- */
 .scene-desk { position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0; }
 .scene-desk .desktop-icon { zoom: 1.2; transform: translate(-50%, -50%); z-index: 2; }
@@ -202,14 +214,15 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .scene-desk .win { position: absolute; }
 /* the desk on a phone (desktop.js builds it this way under 700px): two columns, the pictures as windows you can see */
 .desktop.mobile { aspect-ratio: auto; height: auto; overflow: visible; background: none; }
-.desktop.mobile .scene-desk { position: static; width: auto; height: auto; transform: none; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 14px; align-items: center; padding: 8px 16px 16px; }
+.desktop.mobile .scene-desk { position: static; width: auto; height: auto; transform: none; display: grid; grid-template-columns: 1fr 1fr; gap: 30px 14px; align-items: center; padding: 8px 16px 24px; }
 .desktop.mobile .win { position: static; width: 100%; }
-.desktop.mobile .win.wide { grid-column: 1 / -1; }
 .desktop.mobile .win .bar { font-size: 14px; padding: 9px 12px; }
 .desktop.mobile .win .bar .close { width: 14px; height: 14px; margin-left: 10px; }
-.desktop.mobile .desktop-icon { position: static; transform: none; zoom: 1; justify-self: center; width: max-content; max-width: 100%; }
+.desktop.mobile .desktop-icon { position: static; zoom: 1; justify-self: center; width: max-content; max-width: 100%; padding: 0 10px; }   /* the nudge off the cell is set per icon (desktop.js) */
 .desktop.mobile .desktop-icon .label { max-width: 150px; }
 .desks .desktop.mobile + .desktop.mobile { margin-top: 10px; }
+.desktop.strip { width: 100vw; margin-left: calc(50% - 50vw); }
+.desktop.strip .scene-desk { padding: 0 16px; }
 .scene-desk .win.closed { display: none; }
 .scene-desk .win > img { cursor: pointer; }
 /* a file open on the desk: the start of a character's JSON, or of a diary entry */
@@ -276,20 +289,29 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .sim { top: 68%; }
 }
 
-/* ---- the layout admin (?admin=1, js/admin.js): drag the hero's icons and the margins' things; a phone preview for the phone layout ---- */
-.admin-panel { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 500; width: 320px; padding: 14px 16px; background: rgba(17,11,17,0.94); border: 1px solid rgba(249,248,248,0.28); border-radius: 12px; font-family: var(--font-meta); font-size: 12px; line-height: 1.5; color: var(--text); box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
-.admin-panel .adm-head { font-family: var(--font-ui); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-.admin-panel .adm-status { color: var(--accent); margin-bottom: 10px; }
-.admin-panel .adm-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-.admin-panel button { font: inherit; padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(249,248,248,0.3); background: rgba(249,248,248,0.06); color: var(--text); cursor: pointer; }
-.admin-panel button:hover, .admin-panel button.on { background: rgba(255,138,247,0.18); border-color: var(--accent); color: #FFFFFF; }
-.admin-panel .adm-sel { margin: 4px 0 10px; padding: 8px 10px; border: 1px solid rgba(249,248,248,0.14); border-radius: 8px; display: flex; flex-direction: column; gap: 4px; }
-.admin-panel .adm-sel-name { color: var(--accent); }
-.admin-panel .adm-help { color: rgba(226,225,225,0.5); font-size: 11px; }
-html.admin .hero .desk [data-id], html.admin #marginDesk [data-id] { cursor: move; outline: 1px dashed rgba(255,138,247,0.35); outline-offset: 6px; user-select: none; }
-html.admin .hero .desk [data-id].admin-selected, html.admin #marginDesk [data-id].admin-selected { outline: 1px solid var(--accent); }
-/* the phone preview: the hero in a phone's frame, so the phone layout can be laid out on a desktop screen */
-html.admin-phone .hero { width: 390px; min-height: 0; height: 780px; margin: 24px auto 0; border: 1px dashed rgba(249,248,248,0.3); border-radius: 24px; }
-html.admin-phone .title h1 { font-size: 30px; }
-html.admin-phone .title .by { font-size: 14px; }
-html.admin-phone .sim { display: none; }
+/* ---- the screening sign-up: the input and the button, in the desktop's dress; bottom right on a desktop, a bar along the bottom on a phone ---- */
+.signup { position: fixed; right: 20px; bottom: 20px; z-index: 90; width: 340px; max-width: calc(100vw - 32px); display: flex; flex-direction: column; gap: 8px; padding: 12px; background: var(--bg); border: 1px solid rgba(249,248,248,0.28); border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.65); font-family: var(--font-ui); letter-spacing: 0; }
+.signup .signup-bot { position: absolute; left: -9999px; }
+.signup .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.signup-input { width: 100%; box-sizing: border-box; height: 46px; background: rgba(255,138,247,0.06); border: 1px solid rgba(255,138,247,0.45); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 14px; padding: 0 14px; outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; }
+.signup-input:focus { border-color: var(--accent); background: rgba(255,138,247,0.1); box-shadow: 0 0 0 3px rgba(255,138,247,0.18); }
+.signup-input::placeholder { color: rgba(226,225,225,0.45); }
+.signup-submit { width: 100%; height: 46px; background: var(--accent); border: 1px solid var(--accent); border-radius: 8px; color: var(--bg); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 0 16px rgba(255,138,247,0.3), 0 2px 0 rgba(0,0,0,0.25); animation: signup-glow 2.8s ease-in-out infinite; }
+.signup-submit:hover { filter: brightness(1.08); }
+.signup-submit:disabled { opacity: 0.7; cursor: default; animation: none; }
+@keyframes signup-glow { 0%, 100% { box-shadow: 0 0 16px rgba(255,138,247,0.3), 0 2px 0 rgba(0,0,0,0.25); } 50% { box-shadow: 0 0 28px rgba(255,138,247,0.55), 0 2px 0 rgba(0,0,0,0.25); } }
+@media (prefers-reduced-motion: reduce) { .signup-submit { animation: none; } }
+.signup-done, .signup-status { margin: 0; padding: 6px 2px; font-size: 14px; color: var(--text); }
+.signup-status { color: rgba(226,225,225,0.6); font-size: 12px; }
+html.admin .signup { display: none; }   /* out of the way while laying things out */
+@media (max-width: 700px) {
+    /* a bar along the bottom: the input and the button side by side */
+    .signup { right: 0; left: 0; bottom: 0; width: auto; max-width: none; flex-direction: row; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); border-radius: 0; border-width: 1px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,0.6); }
+    .signup-input { flex: 1; min-width: 0; height: 44px; font-size: 16px; }
+    .signup-submit { width: auto; flex: none; height: 44px; padding: 0 16px; }
+    .signup.done { justify-content: center; }
+    body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }   /* the page scrolls clear of the bar */
+}
+
+/* ---- the layout admin (/admin, js/admin.js): everything draggable, nothing else on screen ---- */
+html.admin .hero .desk [data-id], html.admin #marginDesk [data-id], html.admin .scene-desk [data-id] { cursor: move; user-select: none; touch-action: none; -webkit-user-select: none; -webkit-touch-callout: none; }   /* a finger on a thing drags it; the page scrolls from anywhere else */

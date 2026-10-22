@@ -47,6 +47,8 @@
 </header>
 
 <main>
+<!-- the archive's things in the margins, anywhere below the hero (desktop.js lays them out, the admin moves them) -->
+<div class="margin-desk" id="marginDesk"></div>
 
 <section class="win narrow" id="overview">
     <div class="bar"><span class="name">overview</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
@@ -84,7 +86,6 @@
 <!-- the lower sections, with the archive's things in the margins round them on a wide screen (desktop.js lays them out);
      narrower than that, the same things as a desk of their own at the end -->
 <div class="lower">
-<div class="margin-desk" id="marginDesk"></div>
 
 <section id="team">
     <div class="people">
@@ -135,12 +136,6 @@
 </section>
 </div>
 
-<!-- the same things as a desk, where the screen has no margins for them -->
-<section id="archive">
-    <div class="desks">
-        <div class="desktop" data-layout="archive"></div>
-    </div>
-</section>
 
 </main>
 
@@ -184,10 +179,18 @@
     <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
 </div>
 
+<!-- the screening sign-up, as the desktop had it: the input and the button alone. Bottom right on a desktop; a bar along the bottom on a phone -->
+<form class="signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up for the screening">
+    <input type="hidden" name="form-name" value="screening-invites">
+    <p class="signup-bot"><label>Do not fill this out: <input name="bot-field"></label></p>
+    <label class="sr-only" for="signupEmail">Email address for the screening invitation</label>
+    <input id="signupEmail" class="signup-input" type="email" name="email" placeholder="email for the NYC screening" autocomplete="email" required>
+    <button class="signup-submit" type="submit">Sign up</button>
+</form>
 <script src="js/main.js"></script>
 <script src="js/desktop.js"></script>
 <script src="archive-desktop/desktop-layout.js"></script>
 <script src="js/hero.js"></script>
-<script src="js/admin.js"></script>   <!-- ?admin=1: move the icons, keep the layout in hero-layout.json -->
+<script src="js/admin.js"></script>   <!-- /admin: move the icons, keep the layout in hero-layout.json -->
 </body>
 </html>
