@@ -81,6 +81,11 @@
     </div>
 </section>
 
+<!-- the lower sections, with the archive's things in the margins round them on a wide screen (desktop.js lays them out);
+     narrower than that, the same things as a desk of their own at the end -->
+<div class="lower">
+<div class="margin-desk" id="marginDesk"></div>
+
 <section id="team">
     <div class="people">
     <div class="win">
@@ -107,13 +112,6 @@
     </div>
 </section>
 
-<!-- from the archive, one more desk at the bottom: pictures, a character file open, Ossix Ayto's file, a diary entry, Delta, a thread, a folder -->
-<section id="archive">
-    <div class="desks">
-        <div class="desktop" data-layout="archive"></div>
-    </div>
-</section>
-
 <!-- two smaller windows, one over the other, as they would lie on the desk -->
 <section class="stack" id="notes">
     <section class="win" id="support">
@@ -134,6 +132,14 @@
 <section class="contact" id="contact">
     <h2>thank you<span class="caret" aria-hidden="true"></span></h2>
     <p>Email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> for inquiries.</p>
+</section>
+</div>
+
+<!-- the same things as a desk, where the screen has no margins for them -->
+<section id="archive">
+    <div class="desks">
+        <div class="desktop" data-layout="archive"></div>
+    </div>
 </section>
 
 </main>

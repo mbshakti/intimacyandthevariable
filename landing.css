@@ -139,7 +139,19 @@ h3 { font-size: 17px; }
 
 /* ---- the page ---- */
 main { width: min(1120px, 100% - 32px); margin: 0 auto; padding-top: clamp(64px, 9vw, 120px); }
-main > section + section { margin-top: clamp(64px, 9vw, 120px); }
+main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
+/* the archive's things in the margins of the lower sections, on a screen wide enough to have margins; the desk of them otherwise */
+.lower { position: relative; }
+.margin-desk { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; display: none; }
+.margin-desk > * { position: absolute; pointer-events: auto; margin: 0; }
+.margin-desk .desktop-icon { transform: translate(-50%, -50%); width: max-content; zoom: 1.1; }
+.margin-desk .win { width: clamp(160px, 13vw, 210px); }
+.margin-desk .win .bar { font-size: 15px; padding: 10px 14px; }
+.margin-desk .win .bar .close { width: 14px; height: 14px; margin-left: 10px; background: none; border: 0; padding: 0; cursor: pointer; }
+.margin-desk .win .bar .close:hover { color: #FFFFFF; }
+.margin-desk .win.code { width: clamp(200px, 15vw, 250px); }
+.margin-desk .win.code .text { font-size: 11px; max-height: 230px; padding: 10px 12px 12px; }
+@media (min-width: 1360px) { .margin-desk { display: block; } #archive { display: none; } }
 .narrow { width: min(820px, 100%); margin-left: auto; margin-right: auto; }
 /* two windows on the desk: the first to the left, the second laid over its lower right corner */
 .stack { width: min(900px, 100%); margin-left: auto; margin-right: auto; position: relative; }

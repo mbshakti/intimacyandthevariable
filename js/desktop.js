@@ -175,6 +175,17 @@
         }
         return el;
     }
+    // a picture open in a window: the file's name in the bar, the lightbox on click, the X closes it
+    function makePicWin(t) {
+        var meta = PIC[t], win = document.createElement('div');
+        win.className = 'win';
+        win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + t + '.jpg" alt="" loading="lazy">';
+        win.querySelector('.name').textContent = meta[0];
+        win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
+        win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + t + '.jpg'); });
+        win.addEventListener('click', function (e) { e.stopPropagation(); });
+        return win;
+    }
     // a window on the desk holding the start of a file: a character's JSON, or a diary entry; the whole thing on click
     function makeFileWin(w) {
         var win = document.createElement('div');
@@ -286,6 +297,29 @@
         });
         wire(host);
     }
+    // ---- the margins of the lower sections: the archive desk's things, left and right of the windows, as the hero's icons sit round the title ----
+    // x and y are of the lower block; icons centre on the point, windows hang from it, anchored to their side
+    var MARGIN = [
+        { icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '7.5%', y: '7%' },
+        { icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '92.5%', y: '6%' },
+        { icon: folder('bot-requests', 'bot requests', 0, 0), x: '7.5%', y: '34%' },
+        { icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '92.5%', y: '36%' },
+        { pic: '23', side: 'left', y: '52%' },
+        { pic: '04', side: 'right', y: '50%' },
+        { icon: entry('2026-09-11', 'September 11, 2026', 0, 0), x: '7.5%', y: '90%' },
+        { win: codewin('loving_korean_boyfriend', 0, 0, 0), side: 'right', y: '78%' }
+    ];
+    function buildMargin() {
+        var host = document.getElementById('marginDesk'); if (!host) return;
+        host.innerHTML = '';
+        MARGIN.forEach(function (m) {
+            var el = m.icon ? makeIcon(m.icon) : m.pic ? makePicWin(m.pic) : makeFileWin(m.win);
+            el.style.top = m.y;
+            if (m.icon) el.style.left = m.x; else el.style[m.side] = '2.5%';
+            host.appendChild(el);
+        });
+    }
+    buildMargin();
     var hosts = document.querySelectorAll('.desktop[data-layout]');
     hosts.forEach(build);
     // crossing the phone width rebuilds the desks the other way
