@@ -225,6 +225,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .desktop.mobile .desktop-icon .label { max-width: 150px; }
 .desks .desktop.mobile + .desktop.mobile { margin-top: 10px; }
 .desktop.strip { width: 100vw; margin-left: calc(50% - 50vw); }
+.hero + .desktop.strip { margin-top: 24px; margin-left: 0; }   /* the one right under the hero, before main's column */
 .desktop.strip .scene-desk { padding: 0 16px; }
 .scene-desk .win.closed { display: none; }
 .scene-desk .win > img { cursor: pointer; }

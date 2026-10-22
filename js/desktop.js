@@ -284,12 +284,11 @@
         host.innerHTML = '';
         var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
         var icons = L.icons.slice(), pics = L.pics.slice(), wins = (L.wins || []).slice(), cells = [];
-        // pictures (or file windows) and icons take turns: two windows, then an icon, until all run out
+        // pictures (or file windows) and icons take turns: one window, then two icons, until all run out
         while (pics.length || icons.length || wins.length) {
             if (pics.length) cells.push({ pic: pics.shift() }); else if (wins.length) cells.push({ win: wins.shift() });
-            if (pics.length) cells.push({ pic: pics.shift() }); else if (wins.length) cells.push({ win: wins.shift() });
             if (icons.length) cells.push({ icon: icons.shift() });
-            if (icons.length && !pics.length && !wins.length) cells.push({ icon: icons.shift() });
+            if (icons.length) cells.push({ icon: icons.shift() });
         }
         var first = true;
         // a desk, not a grid: each thing nudged off its cell a little, and each icon pulled toward one side or the other
@@ -348,7 +347,7 @@
     function buildStrips() {
         document.querySelectorAll('.desktop.strip').forEach(function (s) { s.remove(); });
         if (!NARROW.matches) return;
-        var after = ['overview', 'teaser', 'team', 'notes'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+        var after = ['top', 'overview', 'teaser', 'team', 'notes'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
         if (!after.length) return;
         // everything that scatters: the margins' things and the desk scenes' (the scenes themselves stay off a phone),
         // pictures and icons each dealt out evenly, so no strip is all pictures and none all text
