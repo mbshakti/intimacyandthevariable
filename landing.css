@@ -292,7 +292,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 /* ---- the screening sign-up: the input and the button, in the desktop's dress; bottom right on a desktop, a bar along the bottom on a phone ---- */
 .signup { position: fixed; right: 20px; bottom: 20px; z-index: 90; width: 340px; max-width: calc(100vw - 32px); display: flex; flex-direction: column; gap: 8px; padding: 12px; background: var(--bg); border: 1px solid rgba(249,248,248,0.28); border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.65); font-family: var(--font-ui); letter-spacing: 0; }
 .signup .signup-bot { position: absolute; left: -9999px; }
-.signup .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.signup-heading { font-size: 13px; color: var(--text); padding: 2px 2px 0; }
 .signup-input { width: 100%; box-sizing: border-box; height: 46px; background: rgba(255,138,247,0.06); border: 1px solid rgba(255,138,247,0.45); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 14px; padding: 0 14px; outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; }
 .signup-input:focus { border-color: var(--accent); background: rgba(255,138,247,0.1); box-shadow: 0 0 0 3px rgba(255,138,247,0.18); }
 .signup-input::placeholder { color: rgba(226,225,225,0.45); }
@@ -306,11 +306,12 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 html.admin .signup { display: none; }   /* out of the way while laying things out */
 @media (max-width: 700px) {
     /* a bar along the bottom: the input and the button side by side */
-    .signup { right: 0; left: 0; bottom: 0; width: auto; max-width: none; flex-direction: row; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); border-radius: 0; border-width: 1px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,0.6); }
+    .signup { right: 0; left: 0; bottom: 0; width: auto; max-width: none; flex-direction: row; flex-wrap: wrap; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); border-radius: 0; border-width: 1px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,0.6); }
+    .signup-heading { flex: 0 0 100%; padding: 0 2px; font-size: 12px; }
     .signup-input { flex: 1; min-width: 0; height: 44px; font-size: 16px; }
     .signup-submit { width: auto; flex: none; height: 44px; padding: 0 16px; }
     .signup.done { justify-content: center; }
-    body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }   /* the page scrolls clear of the bar */
+    body { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }   /* the page scrolls clear of the bar */
 }
 
 /* ---- the layout admin (/admin, js/admin.js): everything draggable, nothing else on screen ---- */
