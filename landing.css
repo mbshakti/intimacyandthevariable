@@ -1,0 +1,213 @@
+/* The landing page's own rules, on top of the desktop's stylesheet (styles.css,
+   copied as it is). Only what a scrolling page needs: the desktop's sheet is
+   for a fixed screen. The window is the deck's plain dialog from the film's
+   scenes (diary-scene.html), the caret the diary's, the cursor the film's. */
+
+html, body { height: auto; overflow: visible; font-size: 17px; font-weight: 400; color: var(--text); line-height: 1.5; }
+body { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: #FFFFFF; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p { margin: 0 0 1em; max-width: 36rem; }
+p:last-child { margin-bottom: 0; }
+
+/* white type with the film's bloom; the lit phrase goes pink, like a label under the cursor */
+.glow { color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 10px rgba(255,255,255,0.2); }
+.lit { color: var(--accent); text-shadow: 0 0 2px var(--accent), 0 0 12px rgba(255,138,247,0.3); }
+h1, h2, h3 { font-family: var(--font-ui); font-weight: 700; line-height: 1.2; margin: 0 0 1rem; color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 10px rgba(255,255,255,0.2); }
+h2 { font-size: 24px; }
+h3 { font-size: 17px; }
+/* the diary's caret: a block that holds solid while keys go in and blinks at rest */
+.caret { display: inline-block; width: 0.5em; height: 0.95em; vertical-align: text-bottom; margin-left: 0.06em; background: currentColor; box-shadow: 0 0 6px currentColor; animation: caret-blink 1s steps(1) infinite; }
+@keyframes caret-blink { 50% { opacity: 0; } }
+/* a text cursor holds solid while keys are going in and blinks only at rest */
+.caret.typing { animation: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+
+/* ---- Delta, the botmaker, as the site draws her clips: name / role / the topic in quotes, and a play pill ---- */
+.desktop-icon.interview-icon .label { font-weight: 700; letter-spacing: 0.5px; }
+.desktop-icon.interview-icon .meta-group { margin-top: 0; }
+.desktop-icon.interview-icon .meta { font-size: 11px; text-transform: lowercase; }
+.desktop-icon .topic { display: block; margin-top: 6px; max-width: 150px; text-align: center; font-family: var(--font-ui-2, var(--font-ui)); letter-spacing: 0; font-size: 13px; line-height: 1.3; color: var(--accent); overflow-wrap: anywhere; }
+.desktop-icon .topic::before { content: '\201C'; }
+.desktop-icon .topic::after { content: '\201D'; }
+.desktop-icon.interview-icon.playing .play-pill { color: var(--accent); border-color: rgba(255,138,247,0.6); }
+/* the clip in the thread window: the question, her answer with the words lighting as she says them, and the player under it */
+.thread-body .dc-text .w.on { color: var(--accent); text-shadow: 0 0 2px var(--accent), 0 0 10px rgba(255,138,247,0.3); }
+.thread-body .dc-text .w.said { color: rgba(249,248,248,0.92); }
+.thread-body .dc-text.captioned { color: rgba(249,248,248,0.6); }
+.dc-player { display: flex; align-items: center; gap: 12px; margin: 12px 0 4px; }
+.dc-player .pp { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border: 1px solid rgba(249,248,248,0.32); border-radius: 999px; background: rgba(249,248,248,0.05); color: var(--text); font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.dc-player .pp:hover { background: rgba(249,248,248,0.12); }
+.dc-player .pp svg { width: 8px; height: 10px; fill: currentColor; display: block; }
+.dc-player .bar { flex: 1; height: 3px; border-radius: 2px; background: rgba(249,248,248,0.14); cursor: pointer; position: relative; }
+.dc-player .bar .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 2px; background: var(--accent); box-shadow: 0 0 6px rgba(255,138,247,0.6); }
+.dc-player .t { flex: none; font-family: var(--font-meta); font-size: 11px; color: rgba(226,225,225,0.45); min-width: 72px; text-align: right; }
+
+/* ---- the hero's windows: a chapter folder lists the archive's items; a thread shows its messages (styles.css draws both) ---- */
+/* the chapter listing: a file list, one line per item, its kind's icon, the name, what it is on the right; a hairline between rows */
+/* the listing and the thread windows share one height; what is longer scrolls inside */
+.folder-window.archive, .thread-window { max-height: min(520px, 72vh); }
+.folder-window.archive { width: 44%; max-width: 620px; }
+.folder-window.archive .folder-list { padding: 6px 10px 10px; }
+.folder-window.archive .folder-item { display: flex; align-items: center; gap: 12px; padding: 9px 12px; margin: 0; border-radius: 6px; border-bottom: 1px solid rgba(249,248,248,0.07); }
+.folder-window.archive .folder-item:last-child { border-bottom: 0; }
+.folder-window.archive .folder-item:hover { background: rgba(249,248,248,0.04); }
+.folder-window.archive .folder-item .item-icon { width: 20px; height: 20px; flex: none; color: rgba(249,248,248,0.55); display: block; }
+.folder-window.archive .folder-item .item-icon svg { width: 100%; height: 100%; display: block; }
+.folder-window.archive .folder-item .item-icon.thumb { width: 26px; height: 26px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(249,248,248,0.18); }
+.folder-window.archive .folder-item .item-icon.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.folder-window.archive .folder-item .item-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.folder-window.archive .folder-item .item-desc { flex: none; font-family: var(--font-meta); font-size: 12px; color: rgba(226,225,225,0.4); white-space: nowrap; }
+/* a diary note in the window, and a character file */
+.thread-body .note { padding: 6px 2px 4px; }
+.thread-body .note p { font-family: var(--font-quote, var(--font-ui)); font-size: 15px; line-height: 1.65; color: rgba(249,248,248,0.88); margin: 0 0 14px; }
+.thread-body .note p:last-child { margin-bottom: 0; }
+.thread-body .note .np-strike { text-decoration: line-through; }
+.thread-body .note .note-title { font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(226,225,225,0.5); margin: 0 0 14px; }
+.thread-body pre.code { margin: 4px 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-code, var(--font-meta)); font-size: 12px; line-height: 1.55; color: rgba(249,248,248,0.85); }
+/* the diary on the desk: the desktop's pixel notebook */
+.desktop-icon.note-icon .portrait-icon { width: 44px; height: 44px; }
+@media (max-width: 860px) { .folder-window.archive { width: min(92vw, 620px); } }
+.thread-window { width: 46%; max-width: 640px; }
+.thread-body { padding: 10px 22px 16px; }
+.thread-body .dc-msg { cursor: default; }
+.thread-body .dc-images { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.thread-body .dc-images img { width: 96px; height: 96px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); cursor: zoom-in; }
+@media (max-width: 860px) { .thread-window { width: min(92vw, 640px); } }
+
+/* ---- the deck's plain window, as the film draws it ---- */
+.win { display: flex; flex-direction: column; background: var(--bg); border: 1px solid rgba(249,248,248,0.28); border-radius: 13px; overflow: hidden; }
+.win .bar { display: flex; align-items: center; justify-content: space-between; flex: none; font-family: var(--font-window); font-size: 20px; line-height: 1; padding: 14px 22px; border-bottom: 1px solid rgba(249,248,248,0.14); background: var(--surface); }
+.win .bar .name { color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 10px rgba(255,255,255,0.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win .bar .close { width: 18px; height: 18px; flex: none; margin-left: 14px; display: block; color: var(--text-muted); }
+.win .bar .close svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; }
+.win .page { padding: clamp(24px, 4vw, 48px) clamp(20px, 5vw, 60px); }
+.win > img { width: 100%; }
+/* a picture window's picture: the film keeps the window the picture's own shape; a grid of them keeps one shape */
+.win.still > img { aspect-ratio: 16 / 9; object-fit: cover; }
+/* a video window: the player fills the window below the bar */
+.win .video { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+.win .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+/* the poster frame: the film's own still, a little dimmed, and the play pill in the desktop's dress over it */
+.win .video .play { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: #000; cursor: pointer; display: block; }
+.win .video .play img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.72; transition: opacity 0.25s; }
+.win .video .play:hover img, .win .video .play:focus-visible img { opacity: 0.9; }
+.play-pill-big { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px 14px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.7); background: rgba(0,0,0,0.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #FFFFFF; font-family: var(--font-ui); font-size: clamp(14px, 1.4vw, 19px); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; text-shadow: 0 0 2px #FFFFFF, 0 0 12px rgba(255,255,255,0.25); box-shadow: 0 0 0 0 rgba(255,255,255,0.35), 0 12px 40px rgba(0,0,0,0.5); transition: background 0.2s, box-shadow 0.2s, transform 0.2s; }
+.play-pill-big svg { width: 0.75em; height: 0.9em; fill: currentColor; filter: drop-shadow(0 0 4px rgba(255,255,255,0.6)); }
+.play-pill-big .dur { font-family: var(--font-meta); font-size: 0.75em; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); text-shadow: none; text-transform: none; }
+.win .video .play:hover .play-pill-big, .win .video .play:focus-visible .play-pill-big { background: rgba(0,0,0,0.7); box-shadow: 0 0 0 6px rgba(255,255,255,0.12), 0 12px 40px rgba(0,0,0,0.5); transform: translate(-50%, -50%) scale(1.04); }
+
+/* ---- the hero: the desktop ---- */
+.hero { position: relative; min-height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; }
+.title { max-width: 100%; box-sizing: border-box; }
+.desk { position: absolute; inset: 0; }
+/* the desktop's icons at the desktop's own zoom on a wide screen (styles.css zooms it up to 1.45) */
+/* width: max-content, so an icon near the right edge is not squeezed into the space left of the edge before it is centred */
+.desk .desktop-icon { left: var(--x); top: var(--y); transform: translate(-50%, -50%); width: max-content; zoom: 1.2; text-decoration: none; color: inherit; }
+.desk .desktop-icon .label { color: var(--text); }
+.desk .desktop-icon.folder .icon { width: 72px; height: 72px; }
+.desk .desktop-icon.folder .label { font-size: 15px; margin-top: 12px; }
+.title { position: relative; z-index: 1; text-align: center; padding: 0 16px; }
+.title h1 { font-size: clamp(30px, 7.6vw, 100px); line-height: 1; letter-spacing: 0.02em; margin: 0; text-transform: uppercase; }
+.title h1 .line { display: block; white-space: nowrap; }
+.title h1 .caret { width: 0.12em; height: 0.85em; vertical-align: -0.04em; margin-left: 0.06em; margin-right: -0.18em; }
+.title .by { margin: clamp(24px, 3.4vw, 48px) auto 0; font-size: clamp(18px, 2vw, 30px); text-transform: uppercase; letter-spacing: 0.12em; color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 12px rgba(255,255,255,0.25); max-width: none; }
+.title .sub { margin: clamp(10px, 1.2vw, 16px) auto 0; font-size: clamp(15px, 1.6vw, 24px); letter-spacing: 0.06em; color: var(--text); max-width: none; }
+.typed .ch { visibility: hidden; }
+.typed .ch.on { visibility: visible; }
+/* the film's cursor, resting on the desk */
+.sim { position: absolute; left: 58%; top: 82%; height: 6vh; min-height: 36px; aspect-ratio: 24 / 30; transform: translate(-8.3%, -6.7%); z-index: 2; pointer-events: none; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
+.sim svg { width: 100%; height: 100%; display: block; }
+.down { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 1; font-size: 13px; color: var(--text-muted); text-decoration: none; }
+.down:hover { color: var(--accent); }
+
+/* ---- the page ---- */
+main { width: min(1120px, 100% - 32px); margin: 0 auto; padding-top: clamp(64px, 9vw, 120px); }
+main > section + section { margin-top: clamp(64px, 9vw, 120px); }
+.narrow { width: min(820px, 100%); margin-left: auto; margin-right: auto; }
+/* two windows on the desk: the first to the left, the second laid over its lower right corner */
+.stack { width: min(900px, 100%); margin-left: auto; margin-right: auto; position: relative; }
+.stack .win { width: min(600px, 100%); }
+.stack .win + .win { width: min(560px, 100%); margin: -40px 0 0 auto; position: relative; z-index: 2; box-shadow: 0 24px 60px rgba(0,0,0,0.7); }
+@media (max-width: 860px) { .stack .win { width: 100%; } .stack .win + .win { margin-top: 24px; box-shadow: none; } }
+.lede + .lede { margin-top: 0.9em; }
+.lede { font-size: clamp(17px, 1rem + 0.45vw, 21px); line-height: 1.5; color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 12px rgba(255,255,255,0.25); max-width: 30em; }
+.facts { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 28px 0 0; padding-top: 20px; border-top: 1px solid rgba(249,248,248,0.14); }
+.facts div { margin: 0; }
+.facts dt { font-family: var(--font-meta); color: rgba(226, 225, 225, 0.34); font-size: 13px; }
+.facts dd { margin: 0; color: #FFFFFF; }
+.split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }   /* the text sits level with the middle of the picture */
+.split h2 { max-width: 16em; }
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid li { min-width: 0; }
+.grid.two { gap: 12px; }
+.grid.two .win .bar { font-size: 15px; padding: 10px 14px; }
+.grid.two .win .bar .close { width: 14px; height: 14px; }
+.grid.two .win.still > img { aspect-ratio: 3 / 2; }
+/* the visuals: the frames plain, one to a row */
+/* the desks run the full width of the browser, out of the page's column, one under the other */
+.desks { width: 100vw; margin-left: calc(50% - 50vw); margin-top: 28px; display: grid; gap: 0; }
+.desktop { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg); }
+/* ---- the desktop, working (js/desktop.js): a 1600x900 desk scaled to its row, the site's own parts on it ---- */
+.scene-desk { position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0; }
+.scene-desk .desktop-icon { zoom: 1.2; transform: translate(-50%, -50%); z-index: 2; }
+.scene-desk .desktop-icon.thread { cursor: default; }
+.scene-desk .desktop-icon.folder .icon { width: 72px; height: 72px; }
+.scene-desk .desktop-icon .label { max-width: 175px; }
+.scene-desk .win { position: absolute; }
+.scene-desk .win.closed { display: none; }
+.scene-desk .win > img { cursor: pointer; }
+.scene-desk .win .bar .close { background: none; border: 0; padding: 0; cursor: pointer; }
+.scene-desk .win .bar .close:hover { color: #FFFFFF; }
+.scene-desk .sim { position: absolute; height: 54px; aspect-ratio: 24 / 30; transform: translate(-8.3%, -6.7%); z-index: 200; pointer-events: none; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
+.scene-desk .sim svg { width: 100%; height: 100%; display: block; }
+.note { color: var(--text-muted); }
+.meta-line { font-family: var(--font-meta); color: rgba(226, 225, 225, 0.34); font-size: 13px; margin-top: 10px; }
+/* the two windows on the desk: Shakti's to the left, Kiana's a little smaller, lower, laid over its right edge */
+.people { width: min(1000px, 100%); margin: 0 auto; position: relative; }
+.people .win { width: min(580px, 100%); }
+.people .win + .win { width: min(500px, 100%); margin: -44px 0 0 auto; position: relative; z-index: 2; box-shadow: 0 24px 60px rgba(0,0,0,0.7); }
+@media (max-width: 860px) { .people .win { width: 100%; } .people .win + .win { margin-top: 20px; box-shadow: none; } }
+.person img { height: 136px; width: auto; margin-bottom: 20px; border-radius: var(--border-radius, 6px); }
+.person h3 .role { display: block; font-weight: 400; color: var(--text); text-shadow: none; margin-top: 4px; }
+.person p { font-size: 15px; }
+.contact { text-align: center; padding: clamp(64px, 12vw, 140px) 16px clamp(80px, 14vw, 180px); }
+.contact p { margin-left: auto; margin-right: auto; }
+/* the desktop's play pill (styles.css draws it only under a .desktop-icon), for the download */
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; margin-top: 28px; border: 1px solid rgba(249,248,248,0.28); border-radius: 999px; background: rgba(249,248,248,0.05); color: rgba(249,248,248,0.7); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; line-height: 1; transition: background 120ms, color 120ms, border-color 120ms; }
+.pill:hover { background: rgba(249,248,248,0.12); color: var(--text); border-color: rgba(249,248,248,0.45); }
+.foot { display: flex; justify-content: space-between; gap: 8px; padding: 24px 16px 32px; margin-top: clamp(64px, 9vw, 120px); font-family: var(--font-meta); font-size: 13px; color: rgba(226, 225, 225, 0.34); border-top: 1px solid rgba(249,248,248,0.14); }
+
+@media (max-width: 860px) {
+    .split, .grid { grid-template-columns: 1fr; }
+    .grid.two { grid-template-columns: 1fr 1fr; }
+    .desk .desktop-icon { zoom: 1; }
+    .desk .desktop-icon.hide-m { display: none; }
+}
+@media (max-width: 520px) {
+    /* the phone's desk: the four folders in the corners, two threads between, the title in the middle band */
+    .desk .desktop-icon .label { max-width: 170px; }
+    .desk a[data-chapter="bot-requests"]:not([data-thread]):not([data-note]) { left: 25%; top: 12%; }
+    .desk a[data-chapter="craft"]:not([data-thread]):not([data-note])        { left: 75%; top: 12%; }
+    .desk a[data-thread="voice-requests"]                   { left: 25%; top: 29%; }
+    .desk a[data-thread="get-laid-or-god-destroys-humanity"] { display: none; }
+    .desk a[data-note]                                       { left: 75%; top: 29%; }
+    .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note])   { left: 25%; top: 77%; }
+    .desk a[data-chapter="user"]:not([data-thread]):not([data-note])         { left: 75%; top: 77%; }
+    .sim { left: 56%; top: 65%; height: 4.5vh; min-height: 28px; }
+    /* the longer title on a phone: smaller type, and the subtitle may wrap */
+    .title h1 { font-size: clamp(22px, 7vw, 112px); }
+    .title .by { font-size: 16px; letter-spacing: 0.08em; }
+    .title .sub { font-size: 13px; letter-spacing: 0.08em; white-space: normal; }
+    .desk .desktop-icon.hide-s { display: none; }
+    .foot { flex-direction: column; }
+}
+/* a short phone (an SE, or a phone in landscape): the four folders alone, pushed to the corners */
+@media (max-width: 520px) and (max-height: 700px) {
+    .desk a[data-thread], .desk a[data-note] { display: none; }
+    .desk a[data-chapter="bot-requests"]:not([data-thread]):not([data-note]), .desk a[data-chapter="craft"]:not([data-thread]):not([data-note]) { top: 13%; }
+    .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note]), .desk a[data-chapter="user"]:not([data-thread]):not([data-note]) { top: 80%; }
+    .sim { top: 68%; }
+}

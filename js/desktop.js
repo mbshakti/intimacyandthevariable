@@ -1,0 +1,195 @@
+// The desktops, working, inside the page, one per frame the deck shows: the same parts as the desktop-voyeur
+// site and the same behaviour, duplicated from its main.js so this folder stands
+// on its own. Folders open the desktop's folder window over the blurred overlay;
+// a picture (a thumbnail on the desk, or a file in a folder) opens the lightbox;
+// the X on a picture window closes it; Esc, the overlay or a click on the empty
+// desk closes everything; the desktop's own open and close tones play.
+(function () {
+    var ZOOM = 1.2, BAR = 48;
+    var THUMBS = 'img/thumbs/', FACES = 'img/avatars/', FOLDER = 'img/icons/folder.png';
+    var CLOSE = '<svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg>';
+    var CURSOR = '<svg viewBox="0 0 24 30" fill="#FFFFFF" stroke="#17111A" stroke-width="1.4" stroke-linejoin="round"><path d="M2 2 L2 24 L8 18.5 L12 27 L16 25.2 L12.2 17 L20 17 Z"/></svg>';
+    // the found pictures: the thumb's file, the name its window shows, and its shape
+    var PIC = {
+        '00': ['00005-3114799947.png', 800, 600], '01': ['00137-2557897375.png', 600, 800], '02': ['1ae111ac-ad9a-4cdb.png', 800, 547], '03': ['2025-12-29-073550.png', 800, 480],
+        '04': ['2026-02-24-201537_prefect.png', 600, 800], '06': ['4d405574-a120-45af.png', 800, 800], '08': ['a-woo.jpg', 800, 800], '10': ['a81cd40b-328d-49dd.png', 800, 533],
+        '11': ['b344f719-82c0-464f.png', 480, 800], '12': ['bodyguard 1.png', 514, 800], '13': ['c2c96d44-1e1a-4f67.png', 800, 533], '14': ['c7d61dfd-dc69-4328.png', 533, 800],
+        '15': ['f66d83d4-b598-47da.png', 800, 450], '16': ['god_why.jpg', 800, 800], '17': ['kitty_cat.jpg', 800, 800], '20': ['popping_a_squat.jpg', 800, 800],
+        '22': ['SPOILER_view.png', 600, 800], '23': ['why_is_there_lime_on_the_stew.jpg', 800, 800], '24': ['00063-2713696236.png', 1344, 1728]
+    };
+    // the desks, the frames the deck shows; each one a working desktop
+    var folder = function (id, label, x, y) { return { folder: id, label: label, x: x, y: y }; };
+    // a thread on a desk: its label and faces as the deck drew them, plus the archive thread it opens (js/hero.js) and its chapter
+    var thread = function (label, meta, faces, x, y, id, chapter) { return { label: label, meta: meta, faces: faces, x: x, y: y, id: id, chapter: chapter }; };
+    var pic = function (t, x, y, w) { return { t: t, x: x, y: y, w: w }; };
+    // one of Delta's clips on a desk: the site's interview icon, opening the recording (js/hero.js)
+    var clip = function (id, chapter, topic, x, y) { return { clip: id, chapter: chapter, topic: topic, x: x, y: y }; };
+    var LAYOUTS = {
+        // the bot requests desktop: the chapter folders, threads, five pictures open
+        requests: {
+            rest: [900, 335],
+            icons: [folder('bot-requests', 'bot requests', 180, 118), folder('bot-makers', 'bot makers', 970, 126), folder('the-craft', 'the craft', 1124, 752),
+                thread('catharsis or reinforcement', '1 message', ['face-09'], 684, 235, 'two-theories-of-escape', 'user'), thread('pacing the romance', '2 messages', ['face-07'], 1455, 97, 'rules-on-behalf-of-user', 'craft'),
+                thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 1500, 300, 'making-bots-at-2am', 'bot-makers'), thread('simulating a breakup', '3 messages', ['face-03', 'face-05'], 985, 530, 'simulating-a-breakup', 'craft'),
+                thread('philosophy on hobbies', '7 messages', ['face-01', 'face-017', 'face-021', 'face-09'], 189, 760, 'dont-care-if-good', 'bot-makers')],
+            pics: [pic('00', 193, 264, 327), pic('20', 273, 369, 222), pic('14', 507, 419, 195), pic('16', 1162, 298, 201), pic('01', 1266, 436, 222)]
+        },
+        // the craft desktop: four pictures among the folders
+        craft: {
+            rest: [280, 344],
+            icons: [thread('facial expression is critical', '3 messages', ['face-07'], 208, 112, 'facial-expression-is-critical', 'craft'), clip('delta-psychology', 'craft', 'what hooked her', 1180, 120), folder('bot-makers', 'bot makers', 896, 320), thread('what the bots replaced', '3 messages', ['face-07'], 1408, 376, 'what-porn-was-filling', 'user'),
+                folder('the-craft', 'the craft', 235, 656), thread('rude bots', '4 messages', ['face-09', 'face-05'], 752, 656, 'rude-bots', 'craft'), folder('the-user', 'the {{user}}', 1032, 704)],
+            pics: [pic('12', 480, 144, 208), pic('17', 429, 360, 208), pic('24', 1080, 328, 221), pic('08', 1240, 560, 205)]
+        },
+        // the hoard: fifteen pictures covering the desk
+        hoard: {
+            rest: [1288, 360],
+            icons: [],
+            pics: [pic('23', 60, 70, 420), pic('12', 1190, 20, 300), pic('16', 470, 40, 170), pic('22', 30, 430, 330), pic('11', 1040, 110, 230),
+                pic('00', 920, 450, 560), pic('15', 1330, 600, 220), pic('10', 600, 130, 380), pic('17', 1460, 300, 140), pic('03', 540, 650, 330),
+                pic('06', 780, 20, 160), pic('02', 330, 250, 260), pic('04', 1250, 330, 250), pic('20', 440, 520, 200), pic('13', 640, 300, 440)]
+        },
+        // seven windows on the empty desk
+        windows: {
+            icons: [],
+            pics: [pic('03', 125, 419, 208), pic('12', 477, 141, 208), pic('01', 528, 352, 211), pic('22', 848, 232, 208), pic('20', 1104, 72, 208), pic('00', 1120, 419, 312), pic('08', 1232, 560, 208)]
+        }
+    };
+    // what each folder holds (the site's folderContents): the found pictures of that chapter
+    var FOLDERS = {
+        'bot-requests': { title: 'bot requests', path: 'bot requests', files: ['00', '20', '14', '16', '01'] },
+        'bot-makers':   { title: 'bot makers',   path: 'bot makers',   files: ['12', '17', '24', '08'] },
+        'the-craft':    { title: 'the craft',    path: 'the craft',    files: ['23', '12', '16', '22', '11', '00', '15', '10', '17', '03', '06', '02', '04', '20', '13'] },
+        'the-user':     { title: 'the {{user}}', path: 'the user',     files: ['03', '22', '04', '23', '08'] }
+    };
+
+    // ---- the desktop's sounds (main.js: getAudio, tone, rtone, playSound) ----
+    var audioCtx = null;
+    function getAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); return audioCtx; }
+    function tone(freq, startTime, attack, sustain, release, volume, detune) {
+        var ctx = getAudio(), osc = ctx.createOscillator(), gain = ctx.createGain();
+        osc.type = 'sine'; osc.frequency.value = freq; if (detune) osc.detune.value = detune;
+        osc.connect(gain); gain.connect(ctx.destination);
+        var peak = startTime + attack;
+        gain.gain.setValueAtTime(0.0001, startTime);
+        gain.gain.linearRampToValueAtTime(volume, peak);
+        if (sustain > 0) gain.gain.setValueAtTime(volume, peak + sustain);
+        gain.gain.exponentialRampToValueAtTime(0.0001, peak + sustain + release);
+        osc.start(startTime); osc.stop(peak + sustain + release + 0.1);
+    }
+    function rtone(freq, startTime, attack, sustain, release, volume, detune) {
+        tone(freq, startTime, attack, sustain, release, volume, detune);
+        tone(freq, startTime + 0.15, attack * 0.8, 0, release * 0.7, volume * 0.22, detune);
+        tone(freq, startTime + 0.35, attack * 0.6, 0, release * 0.5, volume * 0.07, detune);
+    }
+    function playSound(type) {
+        var t;
+        try { t = getAudio().currentTime; } catch (e) { return; }
+        if (type === 'open') { rtone(523.25, t, 0.06, 0, 1.0, 0.044); rtone(659.25, t + 0.10, 0.06, 0, 0.9, 0.037); rtone(783.99, t + 0.20, 0.06, 0, 1.1, 0.031); }
+        else if (type === 'close') { rtone(783.99, t, 0.05, 0, 0.75, 0.031); rtone(659.25, t + 0.09, 0.05, 0, 0.70, 0.026); rtone(523.25, t + 0.18, 0.05, 0, 0.85, 0.022); }
+        else if (type === 'folder') { rtone(440.00, t, 0.07, 0, 0.85, 0.040); rtone(554.37, t + 0.12, 0.06, 0, 0.95, 0.032); }
+    }
+
+    // ---- the windows (main.js: setOverlay, openFolder, closeFolder, openLightbox, closeLightbox, closeAllWindows) ----
+    var overlay = document.getElementById('desktopOverlay'), folderWindow = document.getElementById('folderWindow'), lightbox = document.getElementById('lightbox');
+    var threadWindow = document.getElementById('threadWindow');
+    function setOverlay(visible) { overlay.classList.toggle('active', visible); }
+    function openFolder(id) {
+        var folder = FOLDERS[id]; if (!folder) return;
+        closeAllWindows(true);
+        document.getElementById('folderTitle').textContent = folder.title;
+        var list = document.getElementById('folderList'); list.innerHTML = '';
+        folder.files.forEach(function (t) {
+            var item = document.createElement('div');
+            item.className = 'folder-item';
+            item.innerHTML = '<div class="item-main"><span class="item-name"></span></div>';
+            item.querySelector('.item-name').textContent = PIC[t][0];
+            item.onclick = function () { openLightbox(THUMBS + t + '.jpg'); };
+            list.appendChild(item);
+        });
+        document.getElementById('folderPath').textContent = '/users/shakti/' + folder.path + '/';
+        document.getElementById('folderStatus').textContent = folder.files.length + ' item' + (folder.files.length === 1 ? '' : 's');
+        folderWindow.classList.remove('archive');
+        folderWindow.classList.add('active');
+        playSound('open'); setOverlay(true);
+    }
+    function closeFolder() { if (!folderWindow.classList.contains('active')) return; folderWindow.classList.remove('active'); playSound('close'); setOverlay(false); }
+    function openLightbox(src) { document.getElementById('lightboxImg').src = src; lightbox.classList.add('active'); playSound('open'); }
+    function closeLightbox() { if (!lightbox.classList.contains('active')) return; lightbox.classList.remove('active'); document.getElementById('lightboxImg').src = ''; playSound('close'); }
+    function closeAllWindows(quiet) {
+        var open = folderWindow.classList.contains('active') || lightbox.classList.contains('active') || (threadWindow && threadWindow.classList.contains('active'));
+        folderWindow.classList.remove('active'); lightbox.classList.remove('active'); document.getElementById('lightboxImg').src = '';
+        if (threadWindow) threadWindow.classList.remove('active');
+        setOverlay(false);
+        if (open && !quiet) playSound('close');
+    }
+    window.closeFolder = closeFolder; window.closeLightbox = closeLightbox; window.closeAllWindows = closeAllWindows;
+    window.deskSound = playSound; window.deskOverlay = setOverlay;   // the hero's own windows (js/hero.js) use the same
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAllWindows(); });
+
+    // ---- the desks ----
+    function build(host) {
+        var L = LAYOUTS[host.dataset.layout]; if (!L) return;
+        var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
+        var place = function (el, x, y) { el.style.left = Math.round(x / ZOOM) + 'px'; el.style.top = Math.round(y / ZOOM) + 'px'; };
+        L.icons.forEach(function (ic) {
+            var el = document.createElement('div');
+            el.className = 'desktop-icon' + (ic.folder ? ' folder' : ic.clip ? ' interview-icon' : ' thread');
+            if (ic.clip) {
+                el.innerHTML = '<img src="archive-desktop/img/anime-bitmap/delta.png" class="portrait-icon" alt=""><span class="label">Delta</span><div class="meta-group"><span class="meta">ex-bot maker</span></div><span class="topic"></span><span class="play-pill"><svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor" style="display:block;flex-shrink:0"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play</span>';
+                el.querySelector('.topic').textContent = ic.topic;
+                el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveInterview) window.openArchiveInterview(ic.clip, ic.chapter, el); });
+                place(el, ic.x, ic.y); desk.appendChild(el); return;
+            }
+            if (ic.folder) el.innerHTML = '<div class="icon"><img src="' + FOLDER + '" alt=""></div><span class="label"></span>';
+            else el.innerHTML = '<div class="msg-avatar-stack">' + ic.faces.map(function (f) { return '<img src="' + FACES + f + '.jpg" class="msg-avatar-circle" alt="">'; }).join('') + '</div><span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
+            el.querySelector('.label').textContent = ic.label;
+            if (!ic.folder) el.querySelector('.meta').textContent = ic.meta;
+            // a folder opens its chapter's real listing (js/hero.js); the deck's picture list only if that is not there
+            if (ic.folder) el.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var chapter = { 'bot-requests': 'bot-requests', 'bot-makers': 'bot-makers', 'the-craft': 'craft', 'the-user': 'user' }[ic.folder];
+                if (chapter && window.openArchiveChapter) window.openArchiveChapter(chapter); else openFolder(ic.folder);
+            });
+            else if (ic.id) el.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (window.openArchiveThread) window.openArchiveThread(ic.id, ic.chapter);   // the real messages, in the thread window
+            });
+            place(el, ic.x, ic.y); desk.appendChild(el);
+        });
+        // the pictures sit on the desk as files, each under the middle of its window, the window open over it
+        var top = 10 + L.pics.length;   // the front-most window on this desk
+        L.pics.forEach(function (p, i) {
+            var meta = PIC[p.t], win;
+            var th = document.createElement('div');
+            th.className = 'desktop-icon';
+            th.innerHTML = '<div class="icon img-thumb"><img src="' + THUMBS + p.t + '.jpg" alt=""></div><span class="label"></span>';
+            th.querySelector('.label').textContent = meta[0];
+            // the file opens its own window on the desk (or brings it to the front if it is already open)
+            th.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (win.classList.contains('closed')) { win.classList.remove('closed'); playSound('open'); }
+                win.style.zIndex = ++top;
+            });
+            place(th, p.x + p.w / 2, p.y + (BAR + p.w * meta[2] / meta[1]) / 2 - 14); desk.appendChild(th);
+            win = document.createElement('div');
+            win.className = 'win';
+            win.style.cssText = 'left:' + p.x + 'px; top:' + p.y + 'px; width:' + p.w + 'px; z-index:' + (10 + i) + ';';
+            win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="">';
+            win.querySelector('.name').textContent = meta[0];
+            win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
+            win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + p.t + '.jpg'); });
+            win.addEventListener('click', function (e) { e.stopPropagation(); });
+            desk.appendChild(win);
+        });
+        if (L.rest) {
+            var sim = document.createElement('div'); sim.className = 'sim on'; sim.innerHTML = CURSOR; sim.setAttribute('aria-hidden', 'true');
+            sim.style.left = L.rest[0] + 'px'; sim.style.top = L.rest[1] + 'px'; desk.appendChild(sim);
+        }
+        host.addEventListener('click', function () { closeAllWindows(); });   // the empty desk closes everything, as the site's does
+        var fit = function () { desk.style.transform = 'scale(' + host.clientWidth / 1600 + ')'; };
+        if ('ResizeObserver' in window) new ResizeObserver(fit).observe(host); else addEventListener('resize', fit);
+        fit();
+    }
+    document.querySelectorAll('.desktop[data-layout]').forEach(build);
+})();

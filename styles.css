@@ -1,0 +1,3507 @@
+
+@font-face {
+    font-family: 'Lekton';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('font/lekton/Lekton-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Lekton';
+    font-style: normal;
+    font-weight: 700;
+    font-display: block;
+    src: url('font/lekton/Lekton-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('font/ibmplexmono/ibmplexmono-regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-display: block;
+    src: url('font/ibmplexmono/ibmplexmono-bold.woff2') format('woff2');
+}
+
+:root {
+    /* ===== Neon palette — pink / cyan / yellow on near-black ===== */
+
+    /* Base */
+    --bg:            #000000;              /* black */
+    --surface:       #1b131c;             /* panel */
+    --surface-high:  #251b27;             /* raised surface */
+    --border:        rgba(249,248,248,0.07);
+    --border-strong: rgba(249,248,248,0.15);
+    --border-radius: 12px;
+    --padding: 12px;        /* standard interior inset for windows/panes */
+    --ls-ui: 0;             /* --font-ui / --font-meta are Lekton now; the 0.7px was for Tahoma */
+
+    /* Text — near-white */
+    --text:          rgba(255, 255, 255, 0.78);
+    --text-muted:    rgba(249, 247, 247, 0.31);
+    --text-faint:    rgba(249,248,248,0.25);
+
+    /* Accents */
+    --accent:        #FF8AF7;             /* pink — primary (palette: 2026_IWTOSIAV) */
+    --accent-soft:   #90F1EF;             /* cyan */
+    --accent-deep:   #EAF000;             /* yellow */
+    --glow:          0 0 7px rgba(255,138,247,0.55), 0 0 18px rgba(255,138,247,0.35);
+
+    /* Surfaces meant to read as light (message bubbles) */
+    --bubble:        rgba(255, 255, 255, 0.09); /* translucent white bubble */
+    --bubble-text:   #FFFFFF;                    /* white text on bubble */
+
+    /* Type */
+    --font-code:    'IBM Plex Mono', monospace;             /* code / JSON viewers */
+    --font-diary:   'Lekton', monospace;                    /* diary body text + notepad */
+    --font-ui:      'Lekton', monospace;                    /* primary UI: Lekton, everywhere on the desktop */
+    --font-ui-2:    'Lekton', monospace;    /* chat messages + handles */
+    --font-meta:    'Lekton', monospace;              /* metadata */
+    --font-quote:   'Lekton', monospace;              /* voice-memo caption/quote text */
+    --font-window:  'Lekton', monospace;              /* window titlebar + footer chrome */
+    --font-size:    13px;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+::selection {
+    background: var(--accent);
+    color: #FFFFFF;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    overflow: hidden;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-size: var(--font-size);
+    font-weight: 200;
+}
+
+input, button, textarea, select {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    gap: 20px;
+}
+
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    overflow: hidden;
+}
+
+/* === LEFT PANEL: DESKTOP === */
+.desktop {
+    flex: 2;
+    background: var(--bg);
+    position: relative;
+    border: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 100%;
+}
+
+.desktop-canvas {
+    position: relative;
+    min-height: 11700px;
+    padding-bottom: 200px;
+}
+
+/* Desktop icons - plaintext style */
+.desktop-icon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.desktop-icon .icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.desktop-icon .icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.desktop-icon .icon > img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.desktop-icon .icon.face-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.desktop-icon .icon.pixel-icon {
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.desktop-icon .icon.pixel-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.msg-avatar-stack {
+    display: flex;
+    align-items: center;
+}
+
+.msg-avatar-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: -10px;
+    border: 2px solid var(--bg);
+}
+
+.msg-avatar-stack .msg-avatar-circle:first-child {
+    margin-left: 0;
+}
+
+.msg-avatar-overflow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(249,248,248,0.15);
+    border: 2px solid var(--bg);
+    margin-left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-size: 10px;
+    color: rgba(249,248,248,0.6);
+}
+
+.portrait-icon {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    margin-bottom: 2px;
+    border-radius: var(--border-radius);
+}
+
+.desktop-icon .label {
+    font-family: var(--font-ui);
+    color: var(--text);
+    text-align: center;
+    font-size: 13px;
+    margin-top: 10px;
+    max-width: 140px;
+    letter-spacing: 0.5px;
+    transition: color 0.15s ease;
+}
+
+.desktop-icon:hover .label, .desktop-icon.hover .label {   /* .hover: the film's drawn cursor */
+    color: var(--accent);
+}
+
+/* Card wrapper so the icon cluster sits ON the background instead of floating
+   over it (used for Delta icons, filmed over video). Inverted palette: paper
+   white, ink text — flat colors only, no gradients, so it stays banding-free
+   on video. */
+.desktop-icon.icon-card {
+    width: 280px;
+    height: 294px;
+    padding: 20px 24px;
+    border: 1px solid var(--bg);
+    background: #F9F8F8; /* stays flat/opaque so it doesn't band over video, independent of --text */
+}
+
+.desktop-icon.icon-card .label,
+.desktop-icon.icon-card:hover .label { color: var(--bg); }
+
+.desktop-icon.icon-card .meta { color: rgba(17, 11, 17, 0.55); }
+
+.desktop-icon.icon-card .play-pill {
+    border-color: rgba(17, 11, 17, 0.35);
+    background: rgba(17, 11, 17, 0.05);
+    color: rgba(17, 11, 17, 0.75);
+}
+.desktop-icon.icon-card:hover .play-pill {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--bg);
+}
+
+
+.desktop-icon .meta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-top: 4px;
+}
+.desktop-icon .meta {
+    font-family: var(--font-meta);
+    letter-spacing: var(--ls-ui);
+    color: rgba(226, 225, 225, 0.34);
+    text-align: center;
+    line-height: 1.4;
+}
+.desktop-icon .play-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 4px 10px;
+    margin-top: 6px;
+    border: 1px solid rgba(249,248,248, 0.28);
+    border-radius: 999px;
+    background: rgba(249,248,248, 0.05);
+    color: rgba(249,248,248, 0.7);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+    pointer-events: none;
+    transition: background 120ms, color 120ms, border-color 120ms;
+}
+.desktop-icon:hover .play-pill, .desktop-icon.hover .play-pill {   /* .hover: the film's drawn cursor */
+    background: rgba(249,248,248, 0.12);
+    color: var(--text);
+    border-color: rgba(249,248,248, 0.45);
+}
+/* the press: solid, and it holds that way until the cut */
+.desktop-icon .play-pill[data-state="pressed"], .desktop-icon.hover .play-pill[data-state="pressed"] {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+    transition: none;
+}
+
+/* ===== Chapters: four folders on landing, one chapter's bands when open ===== */
+.chapter-folders { display: none; position: absolute; inset: 0; }
+body.landing .chapter-folders { display: block; }
+body.landing .desktop-canvas { display: none; }
+/* Loosely placed, like someone dragged them there (same as folders.html) */
+.chapter-folders .desktop-icon { position: absolute; width: 140px; transform: translate(-50%, -50%); }
+.chapter-folders .desktop-icon:nth-child(1) { left: 22%; top: 46%; }
+.chapter-folders .desktop-icon:nth-child(2) { left: 38%; top: 55%; }
+.chapter-folders .desktop-icon:nth-child(3) { left: 58%; top: 51%; }
+.chapter-folders .desktop-icon:nth-child(4) { left: 79%; top: 42%; }
+.chapter-folders .desktop-icon .icon { width: 72px; height: 72px; }
+.chapter-folders .desktop-icon .label { font-size: 15px; margin-top: 12px; }
+.desktop-canvas .desktop-icon.chapter-hidden { display: none !important; }
+/* Band anchors sit at absolute band tops; inside a chapter they would pad the scroll */
+body.in-chapter .band-banner { display: none; }
+
+/* Breadcrumb, top left: "desktop › the bot makers" */
+.chapter-bar {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    z-index: 60;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    color: var(--text-faint);
+    user-select: none;
+}
+body.in-chapter .chapter-bar { display: flex; align-items: baseline; gap: 8px; }
+.chapter-crumb-home { color: var(--text-muted); cursor: pointer; transition: color 0.2s ease; }
+.chapter-crumb-home:hover { color: var(--accent); }
+.chapter-crumb-name { color: var(--text); }
+.capture-mode .chapter-bar, .capture-mode .chapter-folders { display: none !important; }
+
+@media (max-width: 768px) {
+    .chapter-folders .desktop-icon { width: 44%; }
+    .chapter-folders .desktop-icon:nth-child(1) { left: 27%; top: 36%; }
+    .chapter-folders .desktop-icon:nth-child(2) { left: 73%; top: 40%; }
+    .chapter-folders .desktop-icon:nth-child(3) { left: 27%; top: 62%; }
+    .chapter-folders .desktop-icon:nth-child(4) { left: 73%; top: 66%; }
+    .chapter-folders .desktop-icon .icon { width: 64px; height: 64px; }
+    .chapter-bar { top: 14px; left: 16px; }
+}
+
+/* Topic markers — invisible scroll anchors for the timeline navigator */
+.band-banner {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    font-size: 0;
+    color: transparent;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Image thumbnail desktop icon */
+.desktop-icon .icon.img-thumb {
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.desktop-icon .icon.img-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 88vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.8);
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.icon-spin img {
+    animation: spin-slow 6s linear infinite;
+}
+
+/* Chat icon with badge */
+.desktop-icon .badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--surface);
+    color: var(--text-muted);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Click-catcher behind open windows (closes them on click). Blurs the whole desktop. */
+.desktop-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    backdrop-filter: blur(10px) brightness(0.85);
+    -webkit-backdrop-filter: blur(10px) brightness(0.85);
+    z-index: 98;
+    pointer-events: all;
+}
+.desktop-overlay.active { display: block; }
+
+/* Diary windows: pure black backdrop (no blur) for clean screencaps */
+.desktop-overlay.blackout {
+    background: #000000;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* Message threads (msgCardWindow) + requests (botRequestPanel): a flat,
+   solid screen in the same color as the desktop (no blur, no see-through
+   desktop behind) — the messages float on their own dedicated backdrop. */
+.desktop-overlay.no-blur {
+    background: var(--bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* ── shared window chrome — one component, used by every window ── */
+.window {
+    background: rgba(17, 11, 17, 0.82);
+    -webkit-backdrop-filter: blur(22px) saturate(1.1);
+    backdrop-filter: blur(22px) saturate(1.1);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+}
+
+/* File viewer window */
+.file-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44%;
+    height: 75%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+}
+
+.file-window.hidden {
+    display: none;
+}
+
+/* Character card (.png) window */
+.card-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    max-height: 78%;              /* as tall as its contents, up to this */
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.card-window.hidden { display: none; }
+
+.card-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 0;
+}
+.card-window.show-side {
+    width: 64%;
+}
+.card-window.show-side .card-body {
+    grid-template-columns: 1fr 500px;
+}
+/* Title-bar toggles: "comments" / "chat with bot" buttons */
+/* Visuals come from the unified button system at the end of this file */
+/* Card footer tabs: the play pill's language, lowercase, pink when open */
+.card-footer .card-side-toggle.btn-secondary {
+    white-space: nowrap;
+    z-index: 2;
+    margin: 0;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    text-transform: none;
+    font-size: 12px;
+    line-height: 1;
+    padding: 5px 11px;
+}
+.card-footer .card-side-toggle.btn-secondary:hover, .card-footer .card-side-toggle.btn-secondary.hover { color: var(--text); border-color: rgba(249,248,248,0.35); background: transparent; }
+.card-footer .card-side-toggle.btn-secondary.active { color: var(--accent); border-color: rgba(255,138,247,0.6); background: rgba(255,138,247,0.08); }
+
+.card-data-pane {
+    padding: var(--padding);
+    overflow-y: auto;
+    min-height: 0;
+    background-color: var(--bg);
+}
+
+.card-data-pane pre#cardJsonPretty {
+    margin: 0;
+    font-family: var(--font-code);
+    letter-spacing: normal;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    color: var(--text);
+    font-size: 13px;
+}
+
+.card-comments-pane {
+    padding: var(--padding) var(--padding) 0;
+    display: none; /* hidden by default — toggled on via .card-window.show-side */
+    flex-direction: column;
+    gap: 14px;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    color: var(--text);
+    min-height: 0;
+}
+.card-window.show-side .card-comments-pane {
+    display: flex;
+}
+/* the chat on its own: the JSON steps aside while the chat is open, and the
+   window is one column of conversation */
+.card-window.show-side.chat-open { width: 30%; min-width: 380px; }   /* the card's own width, not the two-pane one */
+.card-window.chat-open .card-data-pane { display: none; }
+.card-window.chat-open .card-body { grid-template-columns: 1fr; }
+.card-window.chat-open #cardChatMessages { min-height: 160px; }
+/* the chat's lines: "Name: what they said", the bot's in cyan and pink, the
+   user's set to the right in white; a line comes in with a short fade */
+#cardChatMessages { gap: 14px; font-size: 14px; line-height: 1.5; }
+.cc-line { opacity: 0; transition: opacity 0.25s ease; max-width: 86%; }
+.cc-line.visible { opacity: 1; }
+.cc-bot { align-self: flex-start; color: var(--accent); }
+.cc-bot .cc-who { color: var(--accent-soft); }
+.cc-user { align-self: flex-end; text-align: right; color: #FFFFFF; }
+.cc-user .cc-who { color: var(--text-muted); }
+/* the prompt: a chevron, the line being typed, a block caret while it's
+   empty, and a plain send pill at the right; the footer's tabs go while the
+   chat is open (you are in it) */
+.card-window.chat-open .card-footer { display: none; }
+.card-chat-input-wrap { position: relative; align-items: center; gap: 10px; border-top: 1px solid var(--border); }
+.card-chat-input-wrap::before { content: '\203A'; color: var(--text-muted); font-size: 16px; line-height: 1; }
+.card-chat-input-wrap .bot-chat-send { font-size: 12px; padding: 5px 12px; text-transform: none; }
+.card-chat-input-wrap .bot-chat-send:hover, .card-chat-input-wrap .bot-chat-send.hover { color: var(--text); border-color: rgba(249,248,248,0.35); }
+.card-chat-input-wrap .bot-chat-send.pressed { background: var(--text); border-color: var(--text); color: var(--bg); transition: none; }
+.card-chat-input-wrap:has(#cardChatInput:placeholder-shown)::after { content: ''; position: absolute; left: 22px; top: 50%; width: 9px; height: 17px; margin-top: -9px; background: #FFFFFF; box-shadow: 0 0 6px rgba(255,255,255,0.5); animation: cc-blink 1s steps(1) infinite; }
+@keyframes cc-blink { 50% { opacity: 0; } }
+.card-view-tabs {
+    display: flex;
+    gap: 6px;
+}
+.card-view-tab {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    text-transform: lowercase;
+    transition: all 0.15s ease;
+}
+.card-view-tab:hover { color: var(--text); border-color: var(--border-strong); }
+.card-view-tab.active { color: var(--accent-soft); border-color: var(--accent-soft); }
+.card-view-tab .tab-count { color: var(--text-faint); margin-left: 5px; }
+.card-view-tab.active .tab-count { color: var(--text-muted); }
+
+.card-view { display: none; flex: 1; min-height: 0; }
+.card-view.active { display: flex; flex-direction: column; }
+
+#cardCommentsView { overflow-y: auto; gap: 16px; padding-right: 4px; }
+#cardCommentsList { display: flex; flex-direction: column; gap: 16px; }
+
+#cardChatView { gap: 0; }
+#cardChatMessages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 4px;
+    margin-bottom: 8px;
+}
+#cardChatTyping {
+    color: var(--text-faint);
+    min-height: 14px;
+    margin-bottom: 6px;
+}
+.card-chat-input-wrap {
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
+}
+.card-chat-input-wrap {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+#cardChatInput {
+    flex: 1;
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 12px;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    outline: none;
+}
+#cardChatInput:focus { border-color: var(--accent); }
+#cardChatInput::placeholder { color: var(--text-faint); }
+/* the prompt line is bare: no box around what's typed (this comes after the boxed rule above and wins) */
+#cardChatInput, #cardChatInput:focus { background: transparent; border: 0; box-shadow: none; outline: none; border-radius: 0; padding: 6px 0; font-size: 14px; color: #FFFFFF; caret-color: #FFFFFF; }
+.card-comments-pane .comments-header {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.card-comments-pane .comments-header .sort {
+    color: var(--text-faint);
+    text-transform: none;
+}
+.card-comment {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 4px;
+}
+.card-comment:last-child { padding-bottom: 0; }
+/* Unified avatar — used everywhere a username appears */
+.avatar {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    background: var(--bg);
+    display: block;
+}
+.avatar.avatar-top { object-position: top; }
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+}
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 16px;
+    margin-bottom: 4px;
+    font-family: var(--font-meta);
+    letter-spacing: var(--ls-ui);
+}
+.comment-handle {
+    color: var(--accent);
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+}
+.comment-handle.op { color: var(--accent); }
+.comment-time { color: var(--text-faint); font-family: var(--font-meta); letter-spacing: var(--ls-ui); }
+/* Comment bodies use the same bubble treatment as chat messages (.msg-bubble) */
+/* Comment bodies are chat bubbles — shared rule lives with .msg-bubble */
+.comment-body {
+    display: inline-block;
+}
+.comment-likes {
+    color: var(--text-faint);
+}
+.comment-likes.hot { color: var(--accent); }
+
+.reddit-card {
+    width: 380px;
+    padding: 16px 18px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--bg);
+    cursor: pointer;
+    color: var(--text-muted);
+    font-family: var(--font-meta);
+    letter-spacing: var(--ls-ui);
+    font-size: var(--font-size);
+    line-height: 1.5;
+}
+.reddit-card-meta { margin-bottom: 10px; }
+.reddit-card-title {
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+.reddit-card-body {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.reddit-card-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+}
+
+/* OP / "bot request" original-poster comment — same bubble, with a small accent tag */
+.card-comment.op .comment-handle { color: var(--accent); }
+.op-tag {
+    color: var(--text-faint);
+    margin-left: 4px;
+}
+/* Rich content (h3 / paragraphs) inside any comment bubble */
+.comment-body h3 {
+    font-weight: 600;
+    color: var(--accent);
+    margin: 2px 0 8px 0;
+}
+.comment-body p {
+    margin: 0 0 8px 0;
+    line-height: 1.55;
+}
+.comment-body p:last-child { margin-bottom: 0; }
+.comment-body strong { color: var(--text); }
+.comment-body em { color: var(--text); }
+/* Rich content inside a message bubble (e.g. bot-request OP title) — inherits the dark bubble text */
+.msg-bubble h3 { font-weight: 700; margin: 2px 0 8px 0; }
+.msg-bubble p { margin: 0 0 8px 0; }
+.msg-bubble p:last-child { margin-bottom: 0; }
+.card-data-pane .reveal-caption {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.card-data-pane .reveal-caption .arrow { color: var(--accent); }
+.card-data-pane .reveal-caption .step { color: var(--accent-soft); }
+/* Voice memo mini-player — floats near the clicked icon */
+.voice-memo-player {
+    position: fixed;
+    background: #191119;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    color: var(--text);
+    width: 280px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.65);
+    z-index: 70;
+}
+.voice-memo-player.docked {
+    left: 40px !important;
+    top: auto !important;
+    bottom: 40px;
+    transition: left 0.3s ease, bottom 0.3s ease;
+}
+
+/* Docked inside a Delta icon-card: the player becomes a section of the card
+   (bleeds to the card edges; card padding is 0 24px 20px) */
+.voice-memo-player.in-card {
+    position: static;
+    width: auto;
+    align-self: stretch;
+    margin: auto -24px -20px;   /* auto top: pin the player to the card bottom */
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    z-index: auto;
+    cursor: default;
+}
+
+/* Fixed caption area (fits a five-line sentence) so the card doesn't bounce
+   as chunks change length */
+.voice-memo-player.in-card .vm-captions {
+    height: 116px;
+    overflow: hidden;
+    color: rgba(17, 11, 17, 0.85);
+}
+
+/* Ink-on-paper versions of the player readouts inside the card */
+.voice-memo-player.in-card .vm-time { color: rgba(17, 11, 17, 0.45); }
+.voice-memo-player.in-card .vm-progress::before { background: rgba(17, 11, 17, 0.15); }
+
+/* In-card: just time + progress — no controls (the card itself toggles playback) */
+.voice-memo-player.in-card .vm-play,
+.voice-memo-player.in-card .vm-close { display: none; }
+.vm-captions {
+    flex-basis: 100%;
+    width: 100%;
+    margin: 4px 0 0;
+    padding: 8px 4px 2px;
+    font-family: var(--font-quote);
+    letter-spacing: normal;
+    font-size: 16px;
+    line-height: 1.3;
+    text-align: center;
+    color: rgba(249,248,248,0.78);
+    min-height: 18px;
+    display: none;
+}
+.vm-captions.visible { display: block; }
+.vm-captions .vm-word-on { color: var(--accent); }
+.vm-qm {
+    font-family: var(--font-quote);
+    letter-spacing: normal;
+    font-size: 1.6em;
+    line-height: 0;
+    vertical-align: -0.1em;
+    margin: 0;
+}
+.voice-memo-player.hidden { display: none; }
+.vm-play {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+}
+.vm-play:hover { border-color: var(--text-muted); }
+.vm-transcript {
+    border: none;
+    background: transparent;
+    color: var(--text-faint);
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    padding: 0 4px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    flex-shrink: 0;
+}
+.vm-transcript:hover { color: var(--text); }
+.vm-progress {
+    flex: 1;
+    min-width: 0;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.vm-progress::before {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: rgba(249,248,248,0.12);
+    border-radius: 2px;
+    position: relative;
+}
+.vm-progress {
+    position: relative;
+}
+.vm-progress::before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.vm-fill {
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    width: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+.vm-time {
+    color: var(--text-faint);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+.vm-close {
+    background: none;
+    border: none;
+    color: var(--text-faint);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+}
+.vm-close:hover { color: var(--text); }
+
+/* Inline bot-request post-it panel (no overlay, lives on the desktop canvas) */
+/* The bot-request panel IS a .chat-float-window (same geometry/behavior);
+   this class only carries its content-specific bits (see .bot-request-body). */
+.bot-request-body { padding: var(--padding); }
+
+/* Reference images attached to a comment — render inside the bubble */
+.comment-body .comment-images,
+.msg-bubble .comment-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-top: 12px;
+}
+.comment-body .comment-images img,
+.msg-bubble .comment-images img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    display: block;
+}
+.comment-body .comment-images img:hover,
+.msg-bubble .comment-images img:hover {
+    transform: scale(1.02);
+    border-color: var(--border-strong);
+}
+
+/* Video window */
+.video-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 62%;
+    height: auto;
+    max-height: 88vh;
+    z-index: 100;
+    background: #000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.video-window.active { display: flex; }
+
+.video-window video {
+    width: 100%;
+    display: block;
+    background: #000;
+}
+
+/* Iframe window */
+.iframe-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 46%;
+    height: 80vh;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.iframe-window.active {
+    display: flex;
+}
+
+.iframe-window iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: #fff;
+}
+
+.iframe-window .iframe-blocked {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--text-faint);
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+}
+
+.iframe-window .iframe-blocked.visible {
+    display: flex;
+}
+
+/* Comments arrive as IM-style messages pinned to the bottom-right of the
+   screen while the document stays centered. No window chrome — each comment
+   is its own floating bubble, stacking upward as they land. */
+.iframe-comments-panel {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    top: auto;
+    left: auto;
+    width: 340px;
+    max-height: 70vh;
+    z-index: 101;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    padding: 0;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 14px;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    color: var(--text);
+}
+.iframe-comments-panel.visible { display: flex; }
+/* IM view: handle + bubble only (markup omits avatar/time/likes); no extra spacing */
+.iframe-comments-panel .chat-message {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+/* Animation handled by unified rule above. */
+
+.iframe-open-tab {
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    color: var(--text-faint);
+    background: none;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--border-radius);
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.iframe-open-tab:hover {
+    color: var(--accent-soft);
+    border-color: var(--accent-soft);
+}
+
+/* Window title bar — canonical: centered title, traffic lights pinned right */
+.window-titlebar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 var(--padding);
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+    background-color: color(srgb 0.104 0.0682 0.11);
+    font-family: var(--font-window);
+    letter-spacing: normal;
+    font-size: 14px;
+    user-select: none;
+}
+
+.window-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.window-traffic-lights {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    z-index: 1;
+}
+
+.traffic-light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    transition: filter 0.12s;
+}
+
+.traffic-light:hover { filter: brightness(0.78); }
+
+.traffic-close    { background: #FF5F57; }
+.traffic-minimize { background: #FEBC2E; }
+.traffic-maximize { background: #28C840; }
+
+.window-titlebar-spacer { flex: 1; }
+
+/* Window footer — path + status, shared across windows */
+.window-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    padding: 0 var(--padding);
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    font-family: var(--font-window);
+    letter-spacing: normal;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.window-footer .footer-path {
+    color: var(--text-faint);
+    white-space: nowrap;
+}
+.window-footer .footer-status {
+    color: rgba(255, 255, 255, 0.51);
+    white-space: nowrap;
+}
+/* Card window footer holds the view toggles, left-aligned */
+.card-footer {
+    justify-content: flex-start;
+    gap: 8px;
+    height: 38px;
+}
+
+/* Document window */
+.document-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 70%;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.document-window.active {
+    display: flex;
+}
+
+.document-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--padding);
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* Diary windows read as paper: white chrome, black text */
+.document-window.diary-mode { background: #ffffff; }
+.document-window.diary-mode .window-titlebar {
+    background: #ffffff;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+.document-window.diary-mode .window-title { color: rgba(0, 0, 0, 0.55); }
+.document-window.diary-mode .document-body { color: #000000; }
+
+/* Inline diary pad — sits on the desktop canvas directly below its icon */
+.diary-panel {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(400px, 92%);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    background: #ffffff;
+    overflow: hidden; /* clip the chrome to the window's border-radius */
+}
+.diary-panel.open { display: flex; }
+
+/* TextEdit chrome: lights top-left, format toolbar, ruler */
+.te-chrome {
+    background: #ececec;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    color: #1d1d1f;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    user-select: none;
+}
+.te-lights {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 12px 0;
+}
+.te-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 12px 8px;
+    font-size: 12px;
+}
+.te-seg {
+    display: inline-flex;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #ffffff;
+}
+.te-seg span {
+    width: 26px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border-right: 1px solid rgba(0, 0, 0, 0.14);
+}
+.te-seg span:last-child { border-right: none; }
+.te-seg .te-b { font-weight: 700; background: rgba(0, 0, 0, 0.09); }
+.te-seg .te-u { text-decoration: underline; }
+.te-seg .te-s { text-decoration: line-through; }
+.te-swatch {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    background: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+}
+.te-swatch::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 3px;
+    background: #e8b8dc;
+}
+.te-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.te-select {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 24px;
+    padding: 0 8px 0 10px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    background: #ffffff;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+.te-stepper { display: inline-flex; color: rgba(0, 0, 0, 0.7); }
+.te-ruler {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 28px 0;
+    height: 26px;
+    box-sizing: border-box;
+    font-size: 9px;
+    color: rgba(0, 0, 0, 0.7);
+    /* tick every 1/8 of the span between numbers, along the bottom edge */
+    background-image: repeating-linear-gradient(to right, rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 100%);
+    background-size: calc(100% / 48) 4px;
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+    background-origin: content-box;
+    background-clip: content-box;
+}
+.te-stop {
+    position: relative;
+    width: 0;
+    display: flex;
+    justify-content: center;
+    line-height: 1;
+}
+.te-stop::before {
+    /* tab stop marker */
+    content: '';
+    position: absolute;
+    top: -6px;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, 0.55);
+}
+.te-margin::before {
+    /* indent marker */
+    border: none;
+    width: 1px;
+    height: 12px;
+    top: -8px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+/* Shallow teleprompter body: the line being typed stays in view; earlier
+   lines shift up and out as the text wraps (smooth programmatic scroll) */
+.diary-panel-body {
+    height: 184px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    padding: 24px 28px 0;
+    line-height: 1.6;
+}
+
+/* While the diary is open its icon stays lit above the blackout */
+.desktop-icon.diary-focus { z-index: 99; }
+
+/* Notepad: typing surface for on-camera diary entries; nothing saves.
+   Small bottom padding = the live line rides the bottom of the body,
+   with the previous lines visible above it. */
+.notepad-editor {
+    min-height: 100%;
+    outline: none;
+    caret-color: var(--accent);
+    color: #000000;
+    font-family: var(--font-diary);
+    letter-spacing: normal;
+    font-size: 20px;
+    padding-bottom: 16px;
+}
+
+/* The sentence being typed holds full strength; finished ones settle back */
+.notepad-editor .np-strike,
+.diary-entry s {
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 3px;
+}
+.notepad-editor .np-sentence { transition: opacity 0.8s ease; }
+.notepad-editor .np-sentence.np-done { opacity: 0.5; }
+
+/* Dark TextEdit: the diary window as capture mode opens it (index.html?diary=<slug>) */
+.diary-panel.dark { background: #1e1e1e; }
+.diary-panel.dark .te-chrome { background: #2c2c2e; border-bottom-color: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.82); }
+.diary-panel.dark .te-seg, .diary-panel.dark .te-swatch, .diary-panel.dark .te-btn, .diary-panel.dark .te-select { background: #3a3a3c; border-color: rgba(255, 255, 255, 0.12); }
+.diary-panel.dark .te-seg span { border-right-color: rgba(255, 255, 255, 0.1); }
+.diary-panel.dark .te-seg .te-b { background: rgba(255, 255, 255, 0.12); }
+.diary-panel.dark .te-stepper { color: rgba(255, 255, 255, 0.6); }
+.diary-panel.dark .te-ruler { color: rgba(255, 255, 255, 0.55); background-image: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.3) 0 1px, transparent 1px 100%); }
+.diary-panel.dark .te-stop::before { border-top-color: rgba(255, 255, 255, 0.5); }
+.diary-panel.dark .te-margin::before { background: rgba(255, 255, 255, 0.5); }
+.diary-panel.dark .diary-panel-body { height: 132px; }
+.diary-panel.dark .notepad-editor { color: rgba(255, 255, 255, 0.85); }
+.diary-panel.dark .notepad-editor .np-sentence.np-done { opacity: 0.55; }
+/* The word Ophelia is saying */
+.notepad-editor .np-word.on { color: var(--accent); }
+/* In capture mode the window hangs under the centred icon, fixed like it */
+.diary-capture .capture-icon { top: 24% !important; transform: translate(-50%, 0); }
+.diary-panel.capture-panel { position: fixed; z-index: 121; width: min(440px, 92%); }
+
+/* ===== Highlight card: clippings from someone else's document =====
+   The voice memo card, holding one note at a time, set like the film's
+   caption frames: centred Lekton, pink as the narrator's marker. */
+.sticky-note {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 440px;
+    max-width: 92vw;
+    z-index: 100;
+    display: none;
+    background: #191119;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.65);
+}
+.sticky-note.open { display: block; }
+.sticky-note .np-clip-title { display: none; }
+.sticky-body {
+    position: relative;
+    min-height: 260px;
+    padding: 34px 48px 36px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sticky-editor {
+    width: 100%;
+    font-family: var(--font-quote);
+    letter-spacing: normal;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--text);
+    text-align: center;
+}
+.np-clip-stage { width: 100%; }
+.np-clip { animation: np-paste-in 160ms ease-out; transform-origin: center top; }
+.np-lead { font-weight: 700; color: #FFFFFF; }
+/* ~~don't~~ reads red; ==do== fades to green a beat after the note lands */
+.np-strike { color: #FF6B62; }
+.np-hl { transition: color 0.5s ease; }
+.np-hl.on { color: #4CD57A; }
+@media (prefers-reduced-motion: reduce) { .np-hl { transition: none; } }
+/* verdict rows: the quoted example, then what the model made of it */
+.np-check { margin: 26px 0 0; }
+.np-check-line { max-width: 42ch; margin: 0 auto; }
+.np-qm { font-size: 1.6em; line-height: 0; vertical-align: -0.1em; }
+.np-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-size: 12px;
+    line-height: 1;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,138,247,0.55);
+    border-radius: 999px;
+    color: var(--accent);
+    white-space: nowrap;
+}
+.np-check.good .np-tag { color: var(--accent-soft); border-color: rgba(144,241,239,0.55); }
+.np-clip-next {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+.np-clip-next:hover { color: var(--accent); background: rgba(255, 138, 247, 0.12); }
+.np-clip-count {
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-size: 12px;
+    color: var(--text-faint);
+}
+@keyframes np-paste-in {
+    from { opacity: 0; transform: translateY(4px) scale(0.985); }
+    to   { opacity: 1; transform: none; }
+}
+.document-body h1 {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    font-weight: normal;
+    text-transform: none;
+}
+
+.document-body h2 {
+    color: var(--text-muted);
+    margin: 20px 0 10px 0;
+    font-weight: normal;
+    text-transform: none;
+}
+
+.document-body p {
+    margin-bottom: 12px;
+}
+
+.document-body .diary-entry p {
+    margin-bottom: 32px;
+}
+.document-body .diary-entry p:last-child {
+    margin-bottom: 0;
+}
+
+.document-body ul {
+    margin: 10px 0;
+    padding-left: 16px;
+    list-style: none;
+}
+
+.document-body li {
+    margin-bottom: 6px;
+}
+
+.document-body li::before {
+    content: '· ';
+    color: var(--text-faint);
+}
+
+.document-body code {
+    background: transparent;
+    padding: 0;
+    font-family: var(--font-code);
+    letter-spacing: normal;
+    color: var(--text-muted);
+}
+
+.document-body a {
+    color: var(--text-muted);
+    text-decoration: underline;
+}
+
+.document-body a:hover {
+    color: var(--accent);
+}
+
+/* Folder window */
+.folder-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 38%;
+    height: auto;
+    max-height: 82vh;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.folder-window.active {
+    display: flex;
+    animation: window-open 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes window-open {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.94); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+
+.folder-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* List view header */
+.folder-list-header {
+    display: none;
+}
+
+/* List view */
+.folder-list {
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+}
+
+.folder-item {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.folder-item:hover .item-name, .folder-item.hover .item-name {   /* .hover: the film's drawn cursor */
+    color: var(--accent);
+}
+
+.folder-item .item-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.folder-item .item-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.folder-item .item-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.folder-item .item-name {
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.folder-item .item-desc {
+    color: var(--text-faint);
+}
+
+.folder-item .item-size,
+.folder-item .item-date {
+    font-family: var(--font-code);
+    letter-spacing: normal;
+    color: var(--text-faint);
+}
+
+.file-footer {
+    padding: 8px var(--padding);
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.file-path {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    letter-spacing: normal;
+}
+
+.file-path .highlight {
+    color: var(--text-muted);
+}
+
+.file-meta {
+    display: flex;
+    gap: 20px;
+    color: var(--text-faint);
+}
+
+.file-meta span {
+    opacity: 0.7;
+}
+
+.file-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--padding);
+    position: relative;
+    background: var(--bg);
+}
+
+#jsonContent {
+    font-family: var(--font-code);
+    letter-spacing: normal;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    color: var(--text);
+}
+
+.json-key { color: var(--text-muted); }
+.json-string { color: var(--accent); }
+.json-number { color: var(--accent); }
+.json-bracket { color: var(--text-faint); }
+.json-cursor {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background: var(--text-muted);
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    animation: cursor-blink 0.8s step-end infinite;
+}
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+
+
+/* === RIGHT PANEL: CHAT === */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--padding);
+}
+
+.chat-line {
+    line-height: 1.5;
+    padding: 2px 0;
+}
+
+.chat-name {
+    color: var(--accent);
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.chat-text { color: var(--text); }
+
+.typing-indicator-container {
+    min-height: 28px;
+    padding: 8px 16px 12px 16px;
+    transition: all 0.2s ease;
+}
+
+.typing-indicator {
+    color: var(--text);
+    font-size: 13px;
+}
+
+.typing-dots {
+    animation: blink 1s infinite;
+}
+
+/* Typing speed variations */
+.typing-dots.fast {
+    animation: blink 0.4s infinite;
+}
+.typing-dots.medium {
+    animation: blink 0.7s infinite;
+}
+.typing-dots.slow {
+    animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Multiple typers */
+.typing-indicator-line {
+    display: block;
+    margin-bottom: 2px;
+}
+.typing-indicator-line:last-child {
+    margin-bottom: 0;
+}
+
+/* Scrollbar */
+.file-body::-webkit-scrollbar,
+.chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+.file-body::-webkit-scrollbar-thumb,
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--surface-high);
+    border-radius: 2px;
+}
+
+/* Status bar for file viewer */
+.status-bar {
+    padding: 4px 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Panel header for chat */
+.panel-header {
+    padding: 8px var(--padding);
+    text-transform: lowercase;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-faint);
+    flex-shrink: 0;
+}
+
+/* Group chat header */
+.group-chat-header {
+    padding: 24px var(--padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.avatar-cluster {
+    position: relative;
+    width: 180px;
+    height: 100px;
+    margin-bottom: 16px;
+}
+
+.avatar-cluster .avatar {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--surface-high);
+    overflow: hidden;
+    border: 2px solid var(--bg);
+}
+
+.avatar-cluster .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-cluster .avatar-center {
+    width: 56px;
+    height: 56px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 7;
+}
+
+.avatar-cluster .avatar-1 { width: 36px; height: 36px; top: 20px; left: 25px; z-index: 1; }
+.avatar-cluster .avatar-2 { width: 40px; height: 40px; top: 0; left: 55px; z-index: 2; }
+.avatar-cluster .avatar-3 { width: 36px; height: 36px; top: 0; right: 55px; z-index: 3; }
+.avatar-cluster .avatar-4 { width: 40px; height: 40px; top: 18px; right: 25px; z-index: 4; }
+.avatar-cluster .avatar-5 { width: 32px; height: 32px; bottom: 10px; left: 35px; z-index: 5; }
+.avatar-cluster .avatar-6 { width: 32px; height: 32px; bottom: 10px; right: 35px; z-index: 6; }
+
+.group-chat-title {
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.group-chat-title .tm {
+    color: var(--text);
+    margin-left: 2px;
+}
+
+.group-chat-subtitle {
+    color: var(--accent);
+}
+
+/* === CREATOR CHAT WINDOW === */
+/* Transparent floating chat window — no background, no border, no titlebar */
+.chat-float-window {
+    position: fixed;
+    /* Anchored where a full-height (620px) centered window's top edge sits,
+       so the window grows downward as messages arrive instead of jittering
+       around a moving center. Short chats simply end sooner. */
+    top: max(7.5vh, calc(50% - 310px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    max-width: 90vw;
+    height: auto;
+    max-height: min(620px, 85vh);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.chat-float-window.active {
+    display: flex;
+}
+
+/* Sticky titlebar so the window stays the scroll container (matches .card-window chrome) */
+.chat-float-window .window-titlebar {
+    position: sticky;
+    top: 0;
+    background: rgba(17, 11, 17, 0.92);
+    -webkit-backdrop-filter: blur(22px) saturate(1.1);
+    backdrop-filter: blur(22px) saturate(1.1);
+    z-index: 2;
+}
+
+/* Scrolled content would otherwise hard-clip at the titlebar seam;
+   the container's top padding scrolls away with the first message. */
+.chat-float-window .window-titlebar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 14px;
+    background: linear-gradient(rgba(17, 11, 17, 0.92), rgba(17, 11, 17, 0));
+    pointer-events: none;
+}
+
+/* msgCardWindow + botRequestPanel + creatorChatWindow: chrome-less floating
+   text — no box, border, or blur behind it. Scoped to these ids so it
+   doesn't affect groupChatWindow, which keeps its titlebar/background.
+   Overrides the shared .window rule. */
+#msgCardWindow,
+#botRequestPanel,
+#creatorChatWindow {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* msgCardWindow only: no height cap, so the window grows to fit its content
+   instead of capping at .chat-float-window's max-height and scrolling. */
+#msgCardWindow {
+    max-height: none;
+    overflow-y: visible;
+}
+
+.chat-float-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-faint);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    transition: color 0.15s;
+    z-index: 101;
+}
+
+.chat-float-close:hover { color: var(--text); }
+
+
+
+/* Messages area — used inside .chat-float-window which handles scroll.
+   No fixed height: the window fits its content up to the cap. */
+.creator-messages {
+    display: flex;
+    flex-direction: column;
+    min-height: 60px;
+    padding: var(--padding) var(--padding) calc(var(--padding) + 12px);
+}
+
+/* === UNIFIED MESSAGE ENTER ANIMATION ===
+   JS adds .visible to trigger; staggered per-item. */
+.chat-message {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.chat-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.chat-message { margin-bottom: 20px; }
+
+/* === SMS-style chat bubbles (chat pop-ups, bot chat, group chat) ===
+   Alternating sides: .msg-left / .msg-right set by JS (first left, second right). */
+.msg-left, .msg-right { display: flex; align-items: flex-end; gap: 8px; margin-bottom: 16px; }
+.msg-left  { justify-content: flex-start; }
+.msg-right { justify-content: flex-end; }
+/* Profile pic sits at the outer edge, bottom-aligned with the bubble */
+.msg-left .avatar, .msg-right .avatar {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+}
+.msg-col { display: flex; flex-direction: column; max-width: 78%; min-width: 0; }
+.msg-left  .msg-col { align-items: flex-start; }
+.msg-right .msg-col { align-items: flex-end; }
+.msg-handle {
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    margin: 0 0 8px;
+    opacity: 0.9;
+}
+/* Scene narration / roleplay actions — rendered outside the bubble */
+.msg-action {
+    font-family: var(--font-ui-2);
+    letter-spacing: normal;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--text-muted);
+    max-width: 100%;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* The chat bubble — ONE component. Owns its own typography so containers
+   can't leak differing line-heights/sizes into it. Comments reuse it. */
+.msg-bubble,
+.comment-body {
+    background: var(--bubble);
+    color: var(--bubble-text);
+    font-family: var(--font-ui-2);
+    letter-spacing: normal;
+    font-size: 13px;
+    line-height: 1.65;
+    padding: 9px 14px;
+    border-radius: var(--border-radius);
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    width: fit-content;
+    max-width: 100%;
+}
+.msg-bubble { position: relative; }
+/* Reactions */
+.chat-reactions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.chat-reactions:has(.chat-reaction.visible) {
+    margin-top: 6px;
+}
+
+.chat-reaction {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface-high);
+    padding: 6px;
+    border-radius: var(--border-radius);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.chat-reaction.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.chat-reaction-emoji {
+}
+
+.chat-reaction-count {
+    color: var(--text-muted);
+    font-family: var(--font-meta);
+    letter-spacing: var(--ls-ui);
+}
+
+/* Timestamp divider */
+.chat-divider {
+    text-align: center;
+    margin: 16px 0;
+    color: var(--text-faint);
+    font-family: var(--font-meta);
+    letter-spacing: var(--ls-ui);
+}
+
+.chat-divider span::before {
+    content: '-- ';
+    color: var(--text-faint);
+}
+
+.chat-divider span::after {
+    content: ' --';
+    color: var(--text-faint);
+}
+
+/* Typing indicator */
+.chat-typing {
+    padding: 8px var(--padding);
+    color: var(--text);
+    min-height: 28px;
+    text-align: center;
+    font-family: var(--font-ui-2);
+    letter-spacing: normal;
+    margin-bottom: 8px;
+}
+
+.chat-float-window .chat-typing {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-typing .typing-cursor {
+    animation: blink 1s infinite;
+}
+
+/* New messages indicator */
+.new-messages-bar {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.new-messages-bar::before {
+    content: '[ ';
+}
+
+.new-messages-bar::after {
+    content: ' ]';
+}
+
+.new-messages-bar.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Face icons in folder */
+.item-icon-face {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.item-icon-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* === CHAT VIEW TOGGLE === */
+.chat-view-tabs {
+    display: none;
+    border-bottom: 1px solid var(--border);
+    padding: 0 8px;
+}
+
+.chat-view-tabs.visible {
+    display: flex;
+}
+
+.chat-view-tab {
+    padding: 10px 16px;
+    color: var(--text-faint);
+    cursor: pointer;
+    border-bottom: 1px dashed transparent;
+    transition: all 0.2s;
+}
+
+.chat-view-tab:hover {
+    color: var(--text-muted);
+}
+
+.chat-view-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+.chat-view-tab.hidden {
+    display: none;
+}
+
+/* Hide inactive views */
+.chat-view {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.chat-view.active {
+    display: flex;
+}
+
+/* === 1:1 BOT CHAT VIEW === */
+.bot-chat-header {
+    display: none;
+}
+
+.bot-chat-avatar {
+    display: none;
+}
+
+.bot-chat-avatar img {
+    display: none;
+}
+
+.bot-chat-info {
+    flex: 1;
+}
+
+.bot-chat-name {
+    color: var(--accent);
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.bot-chat-status {
+    color: var(--accent);
+}
+
+.bot-chat-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--padding) var(--padding) 0;
+}
+
+/* === GROUP CHAT: the bots' room as a log, in the current window ===
+   One line per message, the bot's name in its own colour, then a colon and
+   what it said, in the type the rest of the desktop uses. Lines land one at
+   a time with "x is typing" under the log while the next one is written. */
+.gc-member-count {
+    color: var(--text-faint);
+    margin-left: 6px;
+}
+
+.gc-chat-frame {
+    position: relative;
+    height: 530px;
+}
+
+#groupChatMessages {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    padding: calc(var(--padding) + 4px) var(--padding) 48px;
+    color: var(--text);
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#groupChatTyping {
+    position: absolute;
+    left: var(--padding);
+    right: var(--padding);
+    bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.gc-typing {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--text);
+}
+
+.gc-message {
+    margin: 0 0 7px;
+    opacity: 0;
+    transition: opacity 0.06s ease;
+    overflow-wrap: anywhere;
+}
+.gc-message.visible { opacity: 1; }
+
+.gc-name { font-weight: 700; }
+.gc-sep { color: var(--text-faint); }
+
+.bot-chat-input-area {
+    padding: 0 var(--padding) var(--padding);
+}
+
+.bot-chat-input-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+
+.bot-chat-input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: 0;
+    padding: 6px;
+    color: var(--text);
+    outline: none;
+}
+
+.bot-chat-input::placeholder {
+    color: var(--text-faint);
+}
+
+.bot-chat-input:focus {
+    border-color: var(--accent);
+}
+
+/* Visuals come from the unified button system at the end of this file */
+.bot-chat-send svg {
+    display: none;
+}
+
+/* Empty state */
+.bot-chat-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-faint);
+    text-align: center;
+    padding: 40px;
+}
+
+.bot-chat-empty-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+
+/* === MOBILE STYLES === */
+@media (max-width: 768px) {
+    :root { --padding: 12px; }   /* tighter interior inset on small screens */
+    .split-container {
+        padding: 12px;
+        gap: 0;
+    }
+
+    /* Desktop takes full width */
+    .desktop {
+        flex: 1;
+        width: 100%;
+        position: relative;
+    }
+
+    .desktop-icon .icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .desktop-icon .label {
+        max-width: 80px;
+    }
+
+    /* All windows become modals on mobile */
+    .file-window,
+    .document-window,
+    .folder-window,
+    .file-window {
+        height: 70vh !important;
+    }
+
+    .file-window .window-titlebar,
+    .document-window .window-titlebar,
+    .folder-window .window-titlebar {
+        padding: 12px var(--padding);
+    }
+
+    .traffic-light {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Document body padding */
+    .document-body {
+        padding: var(--padding);
+    }
+
+    /* Folder list adjustments */
+    .folder-list-header {
+        grid-template-columns: 1fr 60px;
+    }
+
+    .folder-list-header span:last-child {
+        display: none;
+    }
+
+
+
+    /* Floating chat bubble */
+    .mobile-chat-bubble {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        background: #9B30FF;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 900;
+        box-shadow: 0 4px 16px rgba(155, 48, 255, 0.4);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .mobile-chat-bubble:active {
+        transform: scale(0.95);
+    }
+
+    .mobile-chat-bubble svg {
+        width: 24px;
+        height: 24px;
+        fill: #fff;
+    }
+
+    .mobile-chat-bubble .bubble-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        width: 18px;
+        height: 18px;
+        background: var(--surface);
+        color: var(--text-muted);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Mobile chat overlay - modal style */
+    .mobile-chat-overlay {
+        display: none;
+        position: fixed;
+        bottom: 90px;
+        right: 16px;
+        width: calc(100% - 32px);
+        max-width: 360px;
+        height: 70vh;
+        max-height: 500px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--border-radius);
+        z-index: 1001;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-chat-overlay.active {
+        display: flex;
+    }
+
+    .mobile-chat-overlay .chat-view-tabs {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-chat-overlay .chat-view {
+        flex: 1;
+        overflow: hidden;
+        display: none;
+        flex-direction: column;
+    }
+
+    .mobile-chat-overlay .chat-view.active {
+        display: flex;
+    }
+
+    .mobile-chat-overlay .group-chat-header {
+        padding: var(--padding);
+    }
+
+    .mobile-chat-overlay .avatar-cluster {
+        transform: scale(0.8);
+    }
+
+    /* === Mobile: keep the desktop layout, just make it scrollable === */
+    html, body {
+        overflow-x: auto !important;
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100%;
+    }
+    .split-container {
+        height: auto !important;
+        min-height: 100vh;
+        padding: 0 !important;
+        gap: 0 !important;
+    }
+    .panel.desktop {
+        flex: none;
+        width: 100%;
+        height: auto !important;
+        min-height: 100vh;
+        overflow: visible !important;
+        border: none;
+        position: relative;
+    }
+    /* Canvas adapts to viewport width — JS reflows icons into a narrower, taller scatter */
+    .desktop-canvas {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    /* Smaller labels/icons so the scatter still has breathing room at narrow widths */
+    .desktop-icon .label { max-width: 100px; line-height: 1.3; }
+    .desktop-icon .icon { width: 36px; height: 36px; }
+    .desktop-icon .icon.img-thumb { width: 44px; height: 44px; }
+    .desktop-icon .meta { }
+
+    /* Modals: full-screen on phones */
+    .card-window,
+    .bot-request-panel,
+    .document-window,
+    .file-window,
+    .folder-window {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        position: fixed !important;
+    }
+    .card-body {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: minmax(40vh, 50vh) 1fr !important;
+    }
+    .card-data-pane {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border);
+    }
+    .bot-request-body {
+        padding: 22px 20px !important;
+    }
+    .comment-body .comment-images {
+        grid-template-columns: 1fr !important;
+    }
+    .document-body {
+        padding: 28px 22px 60px !important;
+    }
+    .diary-entry {
+        line-height: 1.65 !important;
+    }
+    .document-body .diary-entry p {
+        margin-bottom: 22px !important;
+    }
+}
+
+/* Hide mobile-only elements on desktop */
+.mobile-only {
+    display: none;
+}
+
+.mobile-chat-bubble {
+    display: none;
+}
+
+#mobileChatOverlay.mobile-chat-overlay {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 560px;
+    max-height: 85vh;
+    border-color: var(--border);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+    z-index: 1002;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#mobileChatOverlay.mobile-chat-overlay.active {
+    display: flex;
+}
+
+.mobile-chat-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 11, 17, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1001;
+}
+
+.mobile-chat-backdrop.active {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: flex;
+    }
+}
+
+/* Windows stay fixed while desktop scrolls */
+.file-window,
+.document-window,
+.folder-window { position: fixed; }
+
+/* ======= DENSITY + VERDANA LAYER ======= */
+
+:root {
+    --border:        rgba(249,248,248,0.14);
+    --border-strong: rgba(249,248,248,0.28);
+}
+
+/* All windows share the one unified border (var(--border)) from .window */
+
+/* JSON viewer */
+#jsonContent { line-height: 1.55; }
+.file-body   { padding: 8px var(--padding); }
+.file-footer { padding: 5px var(--padding); }
+.file-meta   { }
+
+/* Folder */
+.folder-item            { padding: 4px 10px; }
+.folder-item .item-name { font-family: var(--font-ui); letter-spacing: var(--ls-ui); }
+
+/* Plain folders (found bots): bare names, tighter rows, gray text */
+.folder-plain .folder-item            { padding: 3px 0; margin-bottom: 0; }
+.folder-plain .folder-item .item-name { color: var(--text-muted); }
+.folder-plain .folder-item:hover .item-name, .folder-plain .folder-item.hover .item-name { color: var(--accent); }
+.folder-item .item-size,
+.folder-item .item-date { }
+.folder-footer          { padding: 5px var(--padding); }
+
+/* Group chat header */
+.group-chat-header  { padding: 12px var(--padding); }
+.group-chat-title   { }
+.group-chat-subtitle{ }
+
+/* Panel header */
+.panel-header { padding: 5px var(--padding); }
+
+/* Chat messages (right panel group chat) */
+.chat-messages  { padding: 8px var(--padding); }
+.chat-line      { }
+.typing-indicator        { }
+.typing-indicator-container { padding: 4px 10px 8px 10px; }
+
+/* Creator chat */
+.creator-chat-header              { padding: 6px var(--padding); }
+.creator-chat-header .channel-title { font-family: var(--font-ui); letter-spacing: var(--ls-ui); }
+.creator-chat-header .channel-desc  { font-family: var(--font-ui); letter-spacing: var(--ls-ui); }
+.creator-chat-header .online-count  { }
+.creator-messages     { padding: var(--padding) var(--padding) 22px; }
+.chat-typing          { padding: 4px 12px; min-height: 22px; }
+
+/* Bot chat */
+.bot-chat-name       { }
+.bot-chat-messages   { padding: var(--padding) var(--padding) 0; }
+.bot-chat-input-area { padding: 0 var(--padding) var(--padding); }
+.bot-chat-input      { padding: 5px 8px; }
+.bot-chat-send       { font-family: var(--font-ui); letter-spacing: var(--ls-ui); padding: 5px 10px; }
+.bot-chat-empty      { }
+
+/* Status / misc */
+.status-bar      { padding: 3px 10px; }
+.new-messages-bar{ }
+
+/* Bot posts (Discord image posts from char-requests) */
+.msg-avatar-initial {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    flex-shrink: 0;
+}
+.msg-avatar-spacer {
+    width: 42px;
+    flex-shrink: 0;
+}
+.msg-tag {
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-size: 9px;
+    background: rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    padding: 1px 4px;
+    border-radius: var(--border-radius);
+    margin-left: 4px;
+    vertical-align: middle;
+}
+.bot-post-image-bubble {
+    background: rgba(249,248,248, 0.06);
+    border-radius: var(--border-radius);
+    border-top-left-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    max-width: 240px;
+}
+.bot-post-image-bubble img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+/* Admin mode: draggable icons */
+/* Small badge so it's obvious drag-to-place is on */
+body.admin-mode::after {
+    content: 'admin: drag icons to place';
+    position: fixed; left: 24px; bottom: 20px; z-index: 60;
+    font-family: var(--font-ui); letter-spacing: var(--ls-ui); font-size: 12px;
+    color: var(--accent); pointer-events: none;
+}
+.admin-mode .desktop-icon { cursor: grab; }
+.admin-mode .desktop-icon:active { cursor: grabbing; }
+
+#adminToast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.92);
+    color: var(--text);
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+    font-size: 12px;
+    padding: 6px 16px;
+    border-radius: var(--border-radius);
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+#adminToast.visible { opacity: 1; }
+
+/* No italics anywhere; <em>/<i> render upright */
+em, i { font-style: normal; }
+
+/* ===== Inbox — outgoing DMs, mostly unanswered ===== */
+.inbox-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 720px;
+    max-width: 92vw;
+    height: 64vh;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+.inbox-window.active { display: flex; }
+.inbox-body {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+.inbox-list {
+    width: 240px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 8px 0;
+}
+.inbox-row {
+    padding: 10px var(--padding);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.inbox-row:hover { background: rgba(249, 248, 248, 0.03); }
+.inbox-row.active { background: var(--surface); }
+.inbox-user {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.inbox-unread-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+.inbox-snippet {
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.inbox-snippet.unread { color: var(--text); }
+.inbox-noreply { color: var(--text-faint); }
+.inbox-user.muted { color: var(--text-muted); }
+.inbox-time { color: var(--text-faint); font-size: 11px; }
+.inbox-thread {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--padding);
+}
+.inbox-msg-status {
+    color: var(--text-faint);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+/* Floating hover preview for folder links (guide screenshots) */
+#guidePreview {
+    position: fixed;
+    z-index: 300;
+    display: none;
+    pointer-events: none;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--border-radius);
+    padding: 4px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65);
+}
+#guidePreview img {
+    display: block;
+    width: 320px;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: calc(var(--border-radius) - 3px);
+}
+
+/* ===== Buttons — one system ===== */
+/* Primary action buttons: white, raised hard shadow, uppercase Lekton.
+   Hover fills accent red; pressing sinks the button into its shadow. */
+.bot-chat-send {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(249, 248, 248, 0.18);
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    letter-spacing: 0;
+    padding: 6px 12px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.bot-chat-send:hover {
+    background: var(--accent);
+    color: var(--text);
+    border-color: var(--accent);
+}
+.bot-chat-send:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+/* Secondary buttons: quiet outline, no raised shadow. Hover and the selected
+   state (.active) go accent red — text and border only, no fill. */
+.btn-secondary {
+    background: var(--surface-high);
+    color: var(--text-muted);
+    border-radius: 4px;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 12px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn-secondary:hover,
+.btn-secondary.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(255, 138, 247, 0.06);
+}
+
+/* Quiet icon/text controls: muted at rest, accent red on hover */
+.vm-play {
+    box-shadow: 2px 2px 0 rgba(249, 248, 248, 0.32);
+}
+.vm-play:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+.vm-play:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+.vm-transcript:hover,
+.vm-close:hover,
+.chat-float-close:hover {
+    color: var(--accent);
+}
+
+/* === SENTENCE FRAMES (msgCardWindow + creatorChatWindow) ===
+   Found chat plays as title cards: one sentence in a bubble, handle beneath,
+   centered on the dark backdrop. .frame-mode is set by JS on open. */
+.chat-float-window.frame-mode {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 560px;
+    max-height: none;
+    overflow: visible;
+    justify-content: center;
+}
+.chat-float-window.frame-mode .creator-messages {
+    min-height: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+.chat-float-window.frame-mode .chat-typing { display: none; }
+
+.sentence-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;  /* keep in step with FRAME_FADE_MS */
+}
+.sentence-frame.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.sentence-frame .frame-line {
+    font-family: var(--font-ui-2);
+    letter-spacing: normal;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--text);
+    text-align: center;
+    /* Measure: subtitle guidelines cap a line around 42 characters. ch scales
+       with the font, so bumping font-size keeps the same character count. */
+    max-width: min(42ch, 100%);
+    overflow-wrap: anywhere;
+}
+.sentence-frame .frame-line h3 { font-size: inherit; font-weight: 700; margin: 0; }
+/* The word being spoken, when a voice plays (playSentenceFramesSynced) */
+.sentence-frame .frame-word.on { color: var(--accent); }
+/* no channel name when a thread plays as a scene (capture mode) */
+.capture-mode .frame-channel { display: none !important; }
+/* Channel name, small, top centre of the screen while a card plays (no
+   longer shown anywhere; main.js keeps it hidden) */
+.frame-channel {
+    position: fixed;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-code);
+    font-size: 15px;
+    letter-spacing: 0;
+    color: var(--text-faint);
+    z-index: 101;
+    pointer-events: none;
+}
+.sentence-frame .msg-action {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+    max-width: min(48ch, 100%);
+}
+.sentence-frame .frame-handle {
+    font-family: var(--font-code);
+    font-size: 13px;
+    letter-spacing: 0;
+    margin-top: 6px;
+    opacity: 0.9;
+}
+/* Inline layout: "handle: sentence" as one block, each line centred on the
+   screen's middle (a left-aligned block sat visibly off centre once its last
+   line was short). The CRT takes keep the left edge, see below. */
+.sentence-frame.frame-inline { align-items: center; }
+.sentence-frame.frame-inline .frame-line { text-align: center; width: fit-content; }
+.sentence-frame.frame-inline .frame-handle {
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    opacity: 1;
+}
+.sentence-frame .frame-image img {
+    max-width: 100%;
+    max-height: 50vh;
+    border-radius: var(--border-radius);
+    display: block;
+}
+
+/* Capture mode (index.html?thread=...): nothing on screen but the frames */
+.capture-mode .chat-float-close { display: none !important; }
+
+/* === CRT MODE (index.html?thread=<id>&style=crt) ===
+   The sentence frames in the dress of the character-bits slides: Lekton,
+   handle pink, text white, the spoken word with a caret after it, the
+   channel name yellow, all with a bloom and scanlines over the whole
+   screen (no vignette: its gradient bands into rings on the plum). Playback is untouched. */
+/* the screen texture is on the whole time in CRT mode, before and during playback */
+.crt-mode body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 200;
+}
+.crt-mode body::before {
+    background: none;
+    mix-blend-mode: multiply;
+}
+.crt-mode .chat-float-window.frame-mode { width: 920px; }
+.crt-mode .sentence-frame .frame-line {
+    font-family: 'Lekton', var(--font-code);
+    font-size: 34px;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    text-shadow: 0 0 2px #FFFFFF, 0 0 14px rgba(255,255,255,0.27);
+    max-width: min(46ch, 100%);
+}
+.crt-mode .sentence-frame .msg-action {
+    font-family: 'Lekton', var(--font-code);
+    font-size: 23px;
+    color: rgba(255,255,255,0.7);
+    text-shadow: 0 0 10px rgba(255,255,255,0.35);
+}
+.crt-mode .sentence-frame .frame-handle {
+    color: var(--accent) !important;   /* the speaker colour is set inline per speaker */
+    text-shadow: 0 0 2px var(--accent), 0 0 14px rgba(255,138,247,0.27);
+}
+/* a voiced frame types in: words are hidden until the voice reaches them
+   (every dress, on the desktop and in a take; the caret beside the word is
+   the CRT's alone) */
+.sentence-frame.synced .frame-word:not(.on):not(.said) { opacity: 0; }
+.crt-mode .sentence-frame .frame-word.on {
+    color: #FFFFFF;
+    text-shadow: 0 0 2px #FFFFFF, 0 0 14px rgba(255,255,255,0.33);
+}
+.crt-mode .sentence-frame .frame-word.on::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.95em;
+    margin-left: 0.1em;
+    vertical-align: text-bottom;
+    background: #FFFFFF;
+    box-shadow: 0 0 6px #FFFFFF;
+    animation: crt-blink 1s steps(1) infinite;
+}
+@keyframes crt-blink { 50% { opacity: 0; } }
+/* the frames hold still while they type in: no rise on each new sentence, one
+   fixed measure so the left edge never moves between sentences, and the caret
+   drawn beside the word instead of in the line, so it can't rewrap the text */
+.crt-mode .sentence-frame, .crt-mode .sentence-frame.visible { transform: none; }
+.crt-mode .sentence-frame.frame-inline .frame-line { width: min(46ch, 100%); text-align: left; }
+/* the first line always starts at the same height: the frame is four lines
+   tall whatever the sentence, and the text hangs from its top */
+.crt-mode .sentence-frame.frame-inline { justify-content: flex-start; min-height: calc(34px * 1.25 * 4); }
+.crt-mode .sentence-frame .frame-word.on { position: relative; }
+.crt-mode .sentence-frame .frame-word.on::after { position: absolute; left: 100%; top: 0.12em; }
+/* The screen before the click: no photos on a CRT. The title in white, no
+   caret, the kind of thing in cyan, in the same face. */
+/* the desktop look (index.html?thread=<id>&look=desktop): the icon as the
+   folder draws it, at the size of any icon alone in the middle of a frame
+   (2.6 times the desktop's own on a 1080p viewport: what speaking-slide.html
+   draws Delta at), and the frames in type to match (34px, the CRT's measure) */
+.capture-icon.desktop-look { zoom: 2.6; }
+.capture-icon.desktop-look .meta-group { pointer-events: none; }
+html.desktop-look .chat-float-window.frame-mode { width: 920px; }
+html.desktop-look .sentence-frame .frame-line { font-size: 34px; line-height: 1.3; max-width: min(46ch, 100%); }
+html.desktop-look .sentence-frame.frame-inline .frame-line { width: min(46ch, 100%); }
+html.desktop-look .sentence-frame .msg-action { font-size: 23px; }
+.crt-mode .capture-icon { width: 640px; cursor: pointer; }
+.crt-mode .capture-icon .msg-avatar-stack,
+.crt-mode .capture-icon .portrait-icon { display: none; }
+.crt-mode .capture-icon .label {
+    font-family: 'Lekton', var(--font-code);
+    font-size: 33px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    text-shadow: 0 0 2px #FFFFFF, 0 0 14px rgba(255,255,255,0.27);
+    white-space: normal;
+    max-width: none;
+    overflow: visible;
+}
+.crt-mode .capture-icon .meta-group { margin-top: 10px; }
+
+/* The chat pre-roll keeps the desktop message icon's skeleton, the faces of
+   everyone in the thread above the title, in the CRT's own dress: Lekton, the
+   title in white. No caret, no message count. A crowded thread packs its
+   faces tighter. */
+.crt-mode .capture-icon.thread-icon .msg-avatar-stack { display: flex; justify-content: center; margin-bottom: 18px; }
+.crt-mode .capture-icon.thread-icon .msg-avatar-circle { width: 56px; height: 56px; margin-left: -14px; }
+.crt-mode .capture-icon.thread-icon .msg-avatar-circle:first-child { margin-left: 0; }
+.crt-mode .capture-icon.thread-icon .msg-avatar-stack.many .msg-avatar-circle { margin-left: -22px; }
+.crt-mode .capture-icon.thread-icon .msg-avatar-stack.many .msg-avatar-circle:first-child { margin-left: 0; }
+.crt-mode .capture-icon.thread-icon .label { margin: 0 auto; max-width: 560px; }
+
+/* --- CRT voice memo: an interview, not a chat frame ---
+   The desktop's interview card on the dark screen: her pixel portrait, the
+   clip's title in white, "interview" dimmed under it, the pill as a bare
+   readout. No player controls at all: just her answer typed in beneath in
+   white as she says it. */
+.crt-mode .voice-memo-player {
+    background: transparent;
+    box-shadow: none;
+    width: 720px;
+    padding: 0;
+    font-family: 'Lekton', var(--font-code);
+    letter-spacing: 0.01em;
+    color: var(--accent);
+}
+.crt-mode .vm-play, .crt-mode .vm-time, .crt-mode .vm-transcript,
+.crt-mode .vm-close, .crt-mode .vm-progress { display: none !important; }
+.crt-mode .capture-icon.voice-memo-icon .portrait-icon {
+    display: block;
+    width: 96px; height: 96px;
+    margin: 0 auto 22px;
+    border-radius: 0;
+}
+.crt-mode .capture-icon.voice-memo-icon .label {
+    color: #FFFFFF;
+    font-size: 30px;
+    text-shadow: 0 0 2px #FFFFFF, 0 0 14px rgba(255,255,255,0.27);
+}
+.crt-mode .capture-icon.voice-memo-icon .meta { color: rgba(255,255,255,0.45); font-size: 24px; text-shadow: none; font-family: 'Lekton', var(--font-code); letter-spacing: 0.01em; text-transform: none; }
+/* The play button on every CRT icon, the chat threads and the interviews
+   alike: a rounded pill with one dim white rule and the glyph, no fill and no
+   glow. On the interview icon the pill alone takes the pointer; on a thread
+   icon the whole thing does, and hovering anywhere lights the pill. */
+.crt-mode .capture-icon.voice-memo-icon { cursor: default; }
+.crt-mode .capture-icon .play-pill {
+    pointer-events: auto;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 7px 22px 6px;
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 999px;
+    background: none;
+    box-shadow: none;
+    font-family: 'Lekton', var(--font-code);
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-shadow: none;
+    transition: color 0.12s ease, border-color 0.12s ease;
+}
+.crt-mode .capture-icon .play-pill svg { display: block; width: 10px; height: 13px; }
+.crt-mode .capture-icon .play-pill::before { content: none; }
+.crt-mode .capture-icon .play-pill:hover,
+.crt-mode .capture-icon .play-pill.hover,
+.crt-mode .capture-icon.thread-icon:hover .play-pill,
+.crt-mode .capture-icon.thread-icon.hover .play-pill { border-color: #fff; color: #fff; text-shadow: 0 0 2px #fff, 0 0 12px rgba(255,255,255,0.33); }
+/* pressed: the pill fills solid white with black text and holds until the cut
+   (the .hover twin too, or the film's hover paints the text white on white) */
+.crt-mode .capture-icon .play-pill[data-state="pressed"],
+.crt-mode .capture-icon.thread-icon:hover .play-pill[data-state="pressed"],
+.crt-mode .capture-icon.thread-icon.hover .play-pill[data-state="pressed"] {
+    background: #fff;
+    border-color: #fff;
+    color: var(--bg);
+    text-shadow: none;
+    box-shadow: 0 0 14px rgba(255,255,255,0.45);
+    transition: none;
+}
+.crt-mode .capture-icon.pressed { cursor: default; }
+/* while a voice is on, the pill is a readout, not a control */
+.crt-mode .capture-icon .play-pill[data-state="speaking"],
+.crt-mode .capture-icon .play-pill[data-state="asking"] { cursor: default; border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.6); }
+.crt-mode .capture-icon .play-pill[data-state="speaking"]::before,
+.crt-mode .capture-icon .play-pill[data-state="asking"]::before {
+    content: '\25CF  ';
+    color: var(--accent);
+    animation: crt-blink 1s steps(1) infinite;
+}
+.crt-mode .vm-captions {
+    font-family: 'Lekton', var(--font-code);
+    font-size: 26px;
+    line-height: 1.25;
+    color: #FFFFFF;
+    text-shadow: 0 0 2px #FFFFFF, 0 0 14px rgba(255,255,255,0.27);
+    padding: 40px 0 0;   /* a breath between the speaking pill and her words */
+    min-height: 3.75em;
+}
+.crt-mode .vm-captions .vm-speaker { display: none; }
+.crt-mode .vm-captions .vm-qm {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    vertical-align: baseline;
+    color: var(--accent);
+    text-shadow: 0 0 2px var(--accent), 0 0 12px rgba(255,138,247,0.24);
+}
+.crt-mode .vm-captions .vm-word.next { opacity: 0; }
+/* the closing quote waits until every word before it has been said */
+.crt-mode .vm-captions .vm-word.next ~ .vm-qm { opacity: 0; }
+.crt-mode .vm-captions .vm-word.on { color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 14px rgba(255,255,255,0.33); }
+.crt-mode .vm-captions .vm-word.on::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.95em;
+    margin-left: 0.1em;
+    vertical-align: text-bottom;
+    background: #FFFFFF;
+    box-shadow: 0 0 6px #FFFFFF;
+    animation: crt-blink 1s steps(1) infinite;
+}
+.crt-mode .capture-icon .meta {
+    font-family: 'Lekton', var(--font-code);
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 0 0 2px #FFFFFF, 0 0 12px rgba(255,255,255,0.24);
+}
+.crt-mode .frame-channel {
+    font-family: 'Lekton', var(--font-code);
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 0 0 2px #FFFFFF, 0 0 12px rgba(255,255,255,0.24);
+}
+.capture-mode .desktop-overlay { cursor: default; }
+
+/* Capture pre-roll: the thread's icon centered on the dark screen. The play
+   button goes solid when it's pressed and holds that way until the cut. */
+.capture-icon .play-pill[data-state="pressed"],
+.capture-icon:hover .play-pill[data-state="pressed"] {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+    transition: none;
+}
+.capture-icon.pressed { cursor: default; }
+.capture-icon {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+    z-index: 120;
+    width: 200px;
+    text-align: center;
+}
+.capture-icon .msg-avatar-stack { margin-bottom: 8px; }
+/* Interview capture: the voice memo player sits centered under the icon */
+.capture-mode .voice-memo-player { left: 50% !important; transform: translateX(-50%); z-index: 130; }
+
+/* === Maker chat: Discord-style channel room (#makerChatWindow) === */
+.discord-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(820px, 94vw);
+    height: min(600px, 86vh);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+    font-family: var(--font-ui);
+    letter-spacing: var(--ls-ui);
+}
+.discord-window.active { display: flex; }
+.dc-body { flex: 1; min-height: 0; display: flex; }
+
+/* Server sidebar */
+.dc-sidebar {
+    width: 180px;
+    flex-shrink: 0;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+}
+.dc-server {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+    padding: 0 var(--padding);
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+.dc-chev { color: var(--text-muted); font-size: 12px; }
+.dc-category {
+    padding: 14px var(--padding) 4px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+.dc-channel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 1px 8px;
+    padding: 5px 8px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+.dc-channel:hover { color: var(--text); background: rgba(249,248,248,0.04); }
+.dc-channel.active { color: var(--text); background: rgba(249,248,248,0.08); }
+.dc-hash { color: var(--text-faint); font-size: 15px; line-height: 1; }
+
+/* Channel column */
+.dc-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.dc-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 var(--padding);
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text);
+    flex-shrink: 0;
+}
+.dc-channel-name { color: var(--text); }
+.dc-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; }
+.dc-topic { color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+.dc-members { color: var(--text-muted); font-size: 12px; white-space: nowrap; }
+
+.dc-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--padding) var(--padding) 8px;
+    font-size: 13px;
+}
+.dc-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 10px;
+    color: var(--text-faint);
+    font-size: 11px;
+    white-space: nowrap;
+}
+.dc-divider::before, .dc-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.dc-msg {
+    display: flex;
+    gap: 12px;
+    padding: 6px 8px 2px;
+    margin: 6px -8px 0;
+    border-radius: 6px;
+}
+.dc-msg:hover { background: rgba(249,248,248,0.025); }
+.dc-avatar { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; object-fit: cover; margin-top: 2px; }
+.dc-col { min-width: 0; flex: 1; }
+.dc-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+.dc-name { font-size: 13px; }
+.dc-time { color: var(--text-faint); font-size: 11px; }
+.dc-text {
+    color: var(--text);
+    line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+/* Follow-up from the same speaker: no avatar, time shows on hover in the gutter */
+.dc-msg-cont { display: block; padding-left: 56px; margin-top: 0; position: relative; }
+.dc-time-hover {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 40px;
+    font-size: 10px;
+    color: var(--text-faint);
+    opacity: 0;
+    text-align: center;
+}
+.dc-msg-cont:hover .dc-time-hover { opacity: 1; }
+.dc-reactions { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.dc-reaction {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 7px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(249,248,248,0.04);
+    font-size: 12px;
+}
+.dc-reaction span { color: var(--text-muted); font-size: 11px; }
+
+/* Composer: looks live, does nothing */
+.dc-composer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 var(--padding) var(--padding);
+    padding: 0 14px;
+    height: 42px;
+    border-radius: 8px;
+    background: rgba(249,248,248,0.05);
+    color: var(--text-faint);
+    font-size: 13px;
+    flex-shrink: 0;
+}
+.dc-plus {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    color: var(--bg);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 15px; line-height: 1;
+}
+
+@media (max-width: 640px) {
+    .dc-sidebar { display: none; }
+}
+
+/* === FILM TAKE (index.html?thread=<id>&style=crt&auto=1) ===
+   Black before the screen wakes and after the cut; the film's cursor, a drawn
+   arrow the script moves, the real one hidden. Its box is offset so the tip
+   sits on the point it's sent to. Same drawing as folders-slide.html. */
+html.film, html.film * { cursor: none !important; }
+/* the icon waits unseen until the take starts, so the first frame is the icon in full */
+html.film .capture-icon { opacity: 0; }
+html.film .capture-icon.shown { opacity: 1; }
+/* a CRT frame cuts in; no fade, no rise: each line arrives as the voice reaches it */
+.crt-mode .sentence-frame { transition: none; transform: none; }
+.film-black { position: fixed; inset: 0; background: #000; z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.7s ease; }
+.film-black.on { opacity: 1; }
+.film-black.instant { transition: none; }
+.film-black.fast { transition-duration: 0.25s; }
+.film-sim {
+    position: fixed;
+    left: 0; top: 0;
+    width: 52px; height: 65px;
+    transform: translate(-8.3%, -6.7%);
+    opacity: 0;
+    z-index: 9990;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+    transition: left 0.9s cubic-bezier(0.4, 0, 0.2, 1), top 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+.film-sim.in { opacity: 1; }
+.film-sim.slow { transition-duration: 1.2s, 1.2s, 0.3s; }
+.film-sim svg { width: 100%; height: 100%; display: block; }
+
+/* === PICTURES THAT OPEN AS A THREAD PLAYS (capture mode) ===
+   The deck's plain dialog, as found-pictures-scene.html draws it: a thin
+   rule, a Lekton bar with the file's name and a close x, the picture inside.
+   It opens like a desktop window, up out of a slight scale, and stays. */
+.capture-picture {
+    position: fixed;
+    z-index: 120;
+    display: flex; flex-direction: column;
+    background: var(--bg);
+    border: 1px solid rgba(249,248,248,0.28);
+    border-radius: 13px;
+    overflow: hidden;
+    opacity: 0; transform: scale(0.94);
+    pointer-events: none;
+}
+.capture-picture.open { opacity: 1; transform: none; transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.16, 1, 0.3, 1); }
+.capture-picture .bar {
+    display: flex; align-items: center; justify-content: space-between; flex: none;
+    font-family: var(--font-window); font-size: 20px; line-height: 1;
+    padding: 14px 22px;
+    border-bottom: 1px solid rgba(249,248,248,0.14);
+    background: var(--surface);
+}
+.capture-picture .bar .name { color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 10px rgba(255,255,255,0.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.capture-picture .bar .close { width: 18px; height: 18px; flex: none; margin-left: 16px; display: block; color: var(--text-muted); }
+.capture-picture .bar .close svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; }
+.capture-picture img { display: block; width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) { .capture-picture.open { transition: none; } }
