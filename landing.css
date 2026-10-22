@@ -70,6 +70,17 @@ h3 { font-size: 17px; }
 /* the diary on the desk: the desktop's pixel notebook */
 .desktop-icon.note-icon .portrait-icon { width: 44px; height: 44px; }
 @media (max-width: 860px) { .folder-window.archive { width: min(92vw, 620px); } }
+/* on a phone the listing and thread windows are bottom sheets (styles.css makes them full screen; this overrides it),
+   with one close control big enough for a thumb in place of the three lights */
+@media (max-width: 700px) {
+    .folder-window.archive, .thread-window { top: auto !important; bottom: 0 !important; left: 0 !important; width: 100vw !important; max-width: none !important; height: 86vh !important; max-height: 86vh !important; border-radius: 18px 18px 0 0 !important; border: 0 !important; border-top: 1px solid rgba(249,248,248,0.2) !important; transform: none !important; position: fixed !important; }
+    .folder-window.archive .window-titlebar, .thread-window .window-titlebar { padding: 8px 10px 8px 20px; min-height: 56px; align-items: center; }
+    .folder-window.archive .traffic-minimize, .folder-window.archive .traffic-maximize, .thread-window .traffic-minimize, .thread-window .traffic-maximize { display: none; }
+    .folder-window.archive .traffic-close, .thread-window .traffic-close { width: 44px; height: 44px; border-radius: 50%; background: rgba(249,248,248,0.08); position: relative; }
+    .folder-window.archive .traffic-close::before, .folder-window.archive .traffic-close::after, .thread-window .traffic-close::before, .thread-window .traffic-close::after { content: ''; position: absolute; left: 50%; top: 50%; width: 16px; height: 1.6px; background: rgba(249,248,248,0.85); border-radius: 1px; transform: translate(-50%, -50%) rotate(45deg); }
+    .folder-window.archive .traffic-close::after, .thread-window .traffic-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+    .thread-body { padding: 10px 16px 24px; }
+}
 .thread-window { width: 46%; max-width: 640px; }
 .thread-body { padding: 10px 22px 16px; }
 .thread-body .dc-msg { cursor: default; }
