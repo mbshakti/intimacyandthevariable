@@ -24,6 +24,13 @@
     var pic = function (t, x, y, w) { return { t: t, x: x, y: y, w: w }; };
     // one of Delta's clips on a desk: the site's interview icon, opening the recording (js/hero.js)
     var clip = function (id, chapter, topic, x, y) { return { clip: id, chapter: chapter, topic: topic, x: x, y: y }; };
+    // a found bot's character file (archive-desktop/character-data), with its pixel face; opens the JSON (js/hero.js)
+    var char = function (file, face, name, x, y) { return { char: file, face: face, name: name, x: x, y: y }; };
+    // a diary entry (content/api/diary.json), the desktop's notebook; opens the entry as a note (js/hero.js)
+    var entry = function (slug, date, x, y) { return { entry: slug, date: date, x: x, y: y }; };
+    // a window open on the desk showing the start of a character file, or of a diary entry; click for the whole thing
+    var codewin = function (file, x, y, w) { return { code: file, x: x, y: y, w: w }; };
+    var notewin = function (slug, date, x, y, w) { return { note: slug, date: date, x: x, y: y, w: w }; };
     var LAYOUTS = {
         // the bot requests desktop: the chapter folders, threads, five pictures open
         requests: {
@@ -48,6 +55,29 @@
             pics: [pic('23', 60, 70, 420), pic('12', 1190, 20, 300), pic('16', 470, 40, 170), pic('22', 30, 430, 330), pic('11', 1040, 110, 230),
                 pic('00', 920, 450, 560), pic('15', 1330, 600, 220), pic('10', 600, 130, 380), pic('17', 1460, 300, 140), pic('03', 540, 650, 330),
                 pic('06', 780, 20, 160), pic('02', 330, 250, 260), pic('04', 1250, 330, 250), pic('20', 440, 520, 200), pic('13', 640, 300, 440)]
+        },
+        // the found bots: their character files on the desk, two of them open, and Delta on the characters
+        bots: {
+            rest: [770, 560],
+            icons: [char('evil_bully_wife', 'evil-bully-wife', 'Victoria', 160, 110), char('expressionless_woman', 'expressionless-woman', 'Chloe', 420, 140),
+                clip('delta-demon', 'bot-makers', 'the word demon', 810, 90),
+                char('judgemental_priest', 'judgemental-priest', 'Father Michael', 1180, 110), char('loving_korean_boyfriend', 'loving-korean-bf', 'Min-ho', 1440, 150),
+                char('mental_chastity_girlfriend', 'mental-chastity-gf', 'Luna', 170, 700), char('mentally_unwell_dad_and_stressed_mom', 'stressed-parents', 'Mom and Dad', 430, 740),
+                clip('delta-yandere', 'craft', 'the yandere', 830, 720),
+                char('rich_dommy_mommy', 'rich-dommy-mommy', 'Eleanor', 1210, 800), char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 1470, 800)],
+            pics: [],
+            wins: [codewin('evil_bully_wife', 560, 290, 440), codewin('loving_korean_boyfriend', 1020, 370, 420)]
+        },
+        // the diary: the entries on the desk, two of them open, and Delta on the two futures
+        diary: {
+            rest: [720, 640],
+            icons: [entry('2023-07-14', 'July 14, 2023', 160, 110), entry('2023-10-02', 'October 2, 2023', 400, 110),
+                entry('2024-01-19', 'January 19, 2024', 1200, 110), entry('2024-03-08', 'March 8, 2024', 1440, 110),
+                entry('2024-06-27', 'June 27, 2024', 160, 720), entry('2024-09-14', 'September 14, 2024', 400, 720),
+                clip('delta-alone', 'user', 'two futures', 820, 700),
+                entry('2026-02-02', 'February 2, 2026', 1200, 720), entry('2026-05-09', 'May 9, 2026', 1440, 720)],
+            pics: [],
+            wins: [notewin('2026-09-11', 'September 11, 2026', 560, 250, 480), notewin('2023-08-08', 'August 8, 2023', 1090, 420, 380)]
         },
         // seven windows on the empty desk
         windows: {
@@ -127,6 +157,62 @@
     window.deskSound = playSound; window.deskOverlay = setOverlay;   // the hero's own windows (js/hero.js) use the same
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAllWindows(); });
 
+    // ---- an icon on a desk: folder, thread, Delta's clip, a character file, a diary entry ----
+    var DIARY_ICON = 'archive-desktop/img/icons/diary-book.png', FACE = 'archive-desktop/img/face/';
+    function makeIcon(ic) {
+        var el = document.createElement('div');
+        el.className = 'desktop-icon' + (ic.folder ? ' folder' : ic.clip ? ' interview-icon' : ic.char ? ' char-file-icon' : ic.entry ? ' note-icon' : ' thread');
+        if (ic.clip) {
+            el.innerHTML = '<img src="archive-desktop/img/anime-bitmap/delta.png" class="portrait-icon" alt=""><span class="label">Delta</span><div class="meta-group"><span class="meta">ex-bot maker</span></div><span class="topic"></span><span class="play-pill"><svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor" style="display:block;flex-shrink:0"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play</span>';
+            el.querySelector('.topic').textContent = ic.topic;
+            el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveInterview) window.openArchiveInterview(ic.clip, ic.chapter, el); });
+        } else if (ic.char) {
+            el.innerHTML = '<div class="icon pixel-icon"><img src="' + FACE + ic.face + '.png" alt=""></div><span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
+            el.querySelector('.label').textContent = ic.char + '.json';
+            el.querySelector('.meta').textContent = ic.name;
+            el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveCharacter) window.openArchiveCharacter(ic.char, ic.char + '.json', ic.name); });
+        } else if (ic.entry) {
+            el.innerHTML = '<img src="' + DIARY_ICON + '" class="portrait-icon" alt=""><span class="label">My diary</span><div class="meta-group"><span class="meta"></span></div>';
+            el.querySelector('.meta').textContent = ic.date;
+            el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveDiary) window.openArchiveDiary(ic.entry); });
+        } else if (ic.folder) {
+            el.innerHTML = '<div class="icon"><img src="' + FOLDER + '" alt=""></div><span class="label"></span>';
+            el.querySelector('.label').textContent = ic.label;
+            el.addEventListener('click', function (e) { e.stopPropagation(); openFolder(ic.folder); });
+        } else {
+            el.innerHTML = '<div class="msg-avatar-stack">' + ic.faces.map(function (f) { return '<img src="' + FACES + f + '.jpg" class="msg-avatar-circle" alt="">'; }).join('') + '</div><span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
+            el.querySelector('.label').textContent = ic.label;
+            el.querySelector('.meta').textContent = ic.meta;
+            if (ic.id) el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveThread) window.openArchiveThread(ic.id, ic.chapter); });
+        }
+        return el;
+    }
+    // a window on the desk holding the start of a file: a character's JSON, or a diary entry; the whole thing on click
+    function makeFileWin(w) {
+        var win = document.createElement('div');
+        win.className = 'win ' + (w.code ? 'code' : 'note');
+        win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div>' + (w.code ? '<pre class="text"></pre>' : '<div class="text"></div>');
+        win.querySelector('.name').textContent = w.code ? w.code + '.json' : 'My diary \u00b7 ' + w.date;
+        win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
+        win.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (w.code && window.openArchiveCharacter) window.openArchiveCharacter(w.code, w.code + '.json', '');
+            if (w.note && window.openArchiveDiary) window.openArchiveDiary(w.note);
+        });
+        var text = win.querySelector('.text');
+        if (w.code) fetch('archive-desktop/character-data/' + w.code + '.json').then(function (r) { return r.json(); }).then(function (d) {
+            text.textContent = JSON.stringify(d, null, 2).split('\n').slice(0, 16).join('\n') + '\n  \u2026';
+        }).catch(function () {});
+        else fetch('content/api/diary.json').then(function (r) { return r.json(); }).then(function (list) {
+            var e = list.filter(function (x) { return x.slug === w.note; })[0]; if (!e) return;
+            var paras = e.content.replace(/\*\*|~~|==/g, '').split(/\n\s*\n/).map(function (p) { return p.trim(); }).filter(Boolean);
+            var out = '', i = 0; while (i < paras.length && out.length < 380) { out += (out ? '\n\n' : '') + paras[i++]; }
+            if (out.length > 420) out = out.slice(0, 420).replace(/\s+\S*$/, '') + ' \u2026'; else if (i < paras.length) out += ' \u2026';
+            text.textContent = out;
+        }).catch(function () {});
+        return win;
+    }
+
     // ---- the desks ----
     var PHONE = matchMedia('(max-width: 700px)');
     function build(host) {
@@ -136,30 +222,11 @@
         host.classList.remove('mobile');
         var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
         var place = function (el, x, y) { el.style.left = Math.round(x / ZOOM) + 'px'; el.style.top = Math.round(y / ZOOM) + 'px'; };
-        L.icons.forEach(function (ic) {
-            var el = document.createElement('div');
-            el.className = 'desktop-icon' + (ic.folder ? ' folder' : ic.clip ? ' interview-icon' : ' thread');
-            if (ic.clip) {
-                el.innerHTML = '<img src="archive-desktop/img/anime-bitmap/delta.png" class="portrait-icon" alt=""><span class="label">Delta</span><div class="meta-group"><span class="meta">ex-bot maker</span></div><span class="topic"></span><span class="play-pill"><svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor" style="display:block;flex-shrink:0"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play</span>';
-                el.querySelector('.topic').textContent = ic.topic;
-                el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveInterview) window.openArchiveInterview(ic.clip, ic.chapter, el); });
-                place(el, ic.x, ic.y); desk.appendChild(el); return;
-            }
-            if (ic.folder) el.innerHTML = '<div class="icon"><img src="' + FOLDER + '" alt=""></div><span class="label"></span>';
-            else el.innerHTML = '<div class="msg-avatar-stack">' + ic.faces.map(function (f) { return '<img src="' + FACES + f + '.jpg" class="msg-avatar-circle" alt="">'; }).join('') + '</div><span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
-            el.querySelector('.label').textContent = ic.label;
-            if (!ic.folder) el.querySelector('.meta').textContent = ic.meta;
-            // a folder opens its chapter's real listing (js/hero.js); the deck's picture list only if that is not there
-            if (ic.folder) el.addEventListener('click', function (e) {
-                e.stopPropagation();
-                var chapter = { 'bot-requests': 'bot-requests', 'bot-makers': 'bot-makers', 'the-craft': 'craft', 'the-user': 'user' }[ic.folder];
-                if (chapter && window.openArchiveChapter) window.openArchiveChapter(chapter); else openFolder(ic.folder);
-            });
-            else if (ic.id) el.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (window.openArchiveThread) window.openArchiveThread(ic.id, ic.chapter);   // the real messages, in the thread window
-            });
-            place(el, ic.x, ic.y); desk.appendChild(el);
+        L.icons.forEach(function (ic) { var el = makeIcon(ic); place(el, ic.x, ic.y); desk.appendChild(el); });
+        (L.wins || []).forEach(function (w, i) {
+            var win = makeFileWin(w);
+            win.style.cssText = 'left:' + w.x + 'px; top:' + w.y + 'px; width:' + w.w + 'px; z-index:' + (10 + i) + ';';
+            desk.appendChild(win);
         });
         // the pictures sit on the desk as files, each under the middle of its window, the window open over it
         var top = 10 + L.pics.length;   // the front-most window on this desk
@@ -204,12 +271,13 @@
     function buildPhone(host, L) {
         host.classList.add('mobile');
         var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
-        var icons = L.icons.slice(), pics = L.pics.slice(), cells = [];
-        // pictures and icons take turns: two pictures, then an icon, until both run out
-        while (pics.length || icons.length) {
-            if (pics.length) cells.push({ pic: pics.shift() });
-            if (pics.length) cells.push({ pic: pics.shift() });
+        var icons = L.icons.slice(), pics = L.pics.slice(), wins = (L.wins || []).slice(), cells = [];
+        // pictures (or file windows) and icons take turns: two windows, then an icon, until all run out
+        while (pics.length || icons.length || wins.length) {
+            if (pics.length) cells.push({ pic: pics.shift() }); else if (wins.length) cells.push({ win: wins.shift() });
+            if (pics.length) cells.push({ pic: pics.shift() }); else if (wins.length) cells.push({ win: wins.shift() });
             if (icons.length) cells.push({ icon: icons.shift() });
+            if (icons.length && !pics.length && !wins.length) cells.push({ icon: icons.shift() });
         }
         var first = true;
         cells.forEach(function (c) {
@@ -225,23 +293,8 @@
                 desk.appendChild(win);
                 return;
             }
-            var ic = c.icon, el = document.createElement('div');
-            el.className = 'desktop-icon' + (ic.folder ? ' folder' : ic.clip ? ' interview-icon' : ' thread');
-            if (ic.clip) {
-                el.innerHTML = '<img src="archive-desktop/img/anime-bitmap/delta.png" class="portrait-icon" alt=""><span class="label">Delta</span><div class="meta-group"><span class="meta">ex-bot maker</span></div><span class="topic"></span><span class="play-pill"><svg width="7" height="9" viewBox="0 0 7 9" fill="currentColor" style="display:block;flex-shrink:0"><path d="M0 0 L7 4.5 L0 9 Z"/></svg>play</span>';
-                el.querySelector('.topic').textContent = ic.topic;
-                el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveInterview) window.openArchiveInterview(ic.clip, ic.chapter, el); });
-            } else if (ic.folder) {
-                el.innerHTML = '<div class="icon"><img src="' + FOLDER + '" alt=""></div><span class="label"></span>';
-                el.querySelector('.label').textContent = ic.label;
-                el.addEventListener('click', function (e) { e.stopPropagation(); openFolder(ic.folder); });
-            } else {
-                el.innerHTML = '<div class="msg-avatar-stack">' + ic.faces.map(function (f) { return '<img src="' + FACES + f + '.jpg" class="msg-avatar-circle" alt="">'; }).join('') + '</div><span class="label"></span><div class="meta-group"><span class="meta"></span></div>';
-                el.querySelector('.label').textContent = ic.label;
-                el.querySelector('.meta').textContent = ic.meta;
-                if (ic.id) el.addEventListener('click', function (e) { e.stopPropagation(); if (window.openArchiveThread) window.openArchiveThread(ic.id, ic.chapter); });
-            }
-            desk.appendChild(el);
+            if (c.win) { var fw = makeFileWin(c.win); fw.classList.toggle('wide', first); first = false; desk.appendChild(fw); return; }
+            desk.appendChild(makeIcon(c.icon));
         });
         wire(host);
     }
