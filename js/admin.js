@@ -35,7 +35,8 @@
     var page = function () { return document.getElementById('marginDesk'); };
     function items() { return document.querySelectorAll('.hero .desk [data-id], #marginDesk [data-id], .scene-desk [data-id], main [data-win]'); }
     // a window of the page (data-win) keeps its place in the flow and is nudged from it; the rest are laid on a desk
-    function homeZone(el) { return el.hasAttribute('data-win') ? 'flow' : /^scene-/.test(el.dataset.id) ? 'scene' : /^margin-/.test(el.dataset.id) ? 'page' : 'hero'; }
+    function homeZone(el) { return el.hasAttribute('data-win') ? 'flow' : /^phone-/.test(el.dataset.id) ? 'grid' : /^scene-/.test(el.dataset.id) ? 'scene' : /^margin-/.test(el.dataset.id) ? 'page' : 'hero'; }
+    var gridWidth = function (el) { var h = el.closest('.desktop'); return h ? h.getBoundingClientRect().width : 1; };
     var column = function () { var m = document.querySelector('main'); return m ? m.getBoundingClientRect().width : 1; };
     function zoneOf(el) { return el.closest('.scene-desk') ? 'scene' : el.closest('#marginDesk') ? 'page' : 'hero'; }
     // a desk scene is drawn on a 1600px canvas and scaled to fit; its things are placed in those px
@@ -52,6 +53,14 @@
             var nudged = !!(e && (e.x || e.y));
             el.style.transform = nudged ? 'translate(' + (e.x || 0) / 100 * column() + 'px, ' + (e.y || 0) + 'px)' : '';
             el.classList.toggle('nudged', nudged);   // forward, so a section after it in the page does not paint over it and take the pointer
+            return;
+        }
+        if (homeZone(el) === 'grid') {    // a phone desk's thing, nudged within its cell on top of the small nudge the desk gave it: x in % of the desk's width, y in px
+            if (e && e.hide) { el.style.display = 'none'; return; }
+            el.style.display = '';
+            var moved = !!(e && (e.x || e.y));
+            el.style.transform = (el.dataset.base || '') + (moved ? ' translate(' + (e.x || 0) / 100 * gridWidth(el) + 'px, ' + (e.y || 0) + 'px)' : '');
+            el.classList.toggle('nudged', moved);
             return;
         }
         if (homeZone(el) === 'scene') {   // stays on its scene; x, y in the scene's px
@@ -122,8 +131,9 @@
     document.addEventListener('pointermove', function (ev) {
         if (!drag) return;
         var el = drag.el, d = draftFor(el);
-        if (homeZone(el) === 'flow') {    // the nudge grows with the pointer's travel from where it took hold
-            d.x = Math.round((drag.ex + (ev.clientX - drag.x0) / column() * 100) * 10) / 10; d.y = Math.round(drag.ey + (ev.clientY - drag.y0));
+        if (homeZone(el) === 'flow' || homeZone(el) === 'grid') {    // the nudge grows with the pointer's travel from where it took hold
+            var span = homeZone(el) === 'flow' ? column() : gridWidth(el);
+            d.x = Math.round((drag.ex + (ev.clientX - drag.x0) / span * 100) * 10) / 10; d.y = Math.round(drag.ey + (ev.clientY - drag.y0));
             drag.moved = true; place(el, d); return;
         }
         if (homeZone(el) === 'scene') {   // within its scene, in the scene's px

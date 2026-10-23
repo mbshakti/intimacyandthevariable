@@ -8,8 +8,8 @@
       },
       "thread-facial-expression": {
         "zone": "hero",
-        "x": 37.5,
-        "y": 20.3
+        "x": 8.2,
+        "y": 33.8
       },
       "thread-persona-design": {
         "zone": "hero",
@@ -172,23 +172,23 @@
       },
       "folder-craft": {
         "zone": "hero",
-        "x": 81,
-        "y": 27.6
+        "x": 85.2,
+        "y": 23.9
       },
       "thread-voice-requests": {
         "zone": "hero",
-        "x": 24.9,
-        "y": 30.2
+        "x": 54.2,
+        "y": 22.8
       },
       "folder-bot-makers": {
         "zone": "hero",
-        "x": 25,
-        "y": 77
+        "x": 25.6,
+        "y": 66.8
       },
       "folder-user": {
         "zone": "hero",
-        "x": 75,
-        "y": 77
+        "x": 85.3,
+        "y": 69.6
       },
       "thread-facial-expression": {
         "zone": "hero",
@@ -217,6 +217,139 @@
       "thread-get-laid": {
         "zone": "hero",
         "hide": true
+      },
+      "cursor": {
+        "zone": "hero",
+        "x": 17.9,
+        "y": 25.2
+      },
+      "win-overview": {
+        "x": 0.6,
+        "y": -167
+      },
+      "phone-strip-0-folder-bot-requests": {
+        "x": 14.9,
+        "y": -238
+      },
+      "phone-strip-0-pic-23": {
+        "x": 6.5,
+        "y": -36
+      },
+      "phone-strip-0-pic-24": {
+        "x": -7.9,
+        "y": -151
+      },
+      "phone-strip-0-file-rich_dommy_mommy": {
+        "x": 6.7,
+        "y": -22
+      },
+      "phone-strip-0-thread-facial-expression-is-critical": {
+        "x": -5.6,
+        "y": -121
+      },
+      "phone-strip-0-folder-the-craft": {
+        "x": 15,
+        "y": 126
+      },
+      "phone-strip-0-pic-22": {
+        "x": 7,
+        "y": -9
+      },
+      "phone-strip-1-pic-04": {
+        "x": 3.1,
+        "y": 16
+      },
+      "phone-strip-1-file-experiment_0682": {
+        "x": -2.7,
+        "y": -57
+      },
+      "phone-strip-1-pic-08": {
+        "x": -6.6,
+        "y": -89
+      },
+      "phone-strip-1-clip-delta-psychology": {
+        "x": 8.8,
+        "y": -81
+      },
+      "phone-strip-1-thread-scared-to-join-voice-chat": {
+        "x": -1.1,
+        "y": -65
+      },
+      "phone-strip-1-thread-rude-bots": {
+        "x": 17.8,
+        "y": 81
+      },
+      "phone-strip-1-pic-20": {
+        "x": 7.6,
+        "y": -24
+      },
+      "win-credits": {
+        "x": 0.2,
+        "y": -8
+      },
+      "win-shakti": {
+        "x": 0,
+        "y": -54
+      },
+      "win-kiana": {
+        "x": -0.3,
+        "y": -54
+      },
+      "phone-strip-2-pic-12": {
+        "x": 2.6,
+        "y": -87
+      },
+      "phone-strip-2-thread-making-bots-at-2am": {
+        "x": 12.2,
+        "y": -162
+      },
+      "phone-strip-2-pic-03": {
+        "x": -32.3,
+        "y": -269
+      },
+      "phone-strip-2-file-loving_korean_boyfriend": {
+        "x": 49.7,
+        "y": -105
+      },
+      "phone-strip-2-file-judgemental_priest": {
+        "x": 12.5,
+        "y": -140
+      },
+      "phone-strip-2-request-haunted-costume-shop": {
+        "x": -14.4,
+        "y": -37
+      },
+      "phone-strip-2-pic-00": {
+        "x": 8.9,
+        "y": -41
+      },
+      "phone-strip-2-folder-bot-makers": {
+        "x": -6.4,
+        "y": 13
+      },
+      "phone-strip-3-clip-delta-demon": {
+        "x": 10.1,
+        "y": 643
+      },
+      "phone-strip-3-pic-17": {
+        "x": 11.1,
+        "y": -1
+      },
+      "phone-strip-3-pic-01": {
+        "x": -14.8,
+        "y": -104
+      },
+      "phone-strip-3-request-succubus-better-person": {
+        "x": 10.1,
+        "y": -522
+      },
+      "phone-strip-3-file-mentally_unwell_dad_and_stressed_mom": {
+        "x": 18.9,
+        "y": -38
+      },
+      "phone-strip-3-thread-what-porn-was-filling": {
+        "x": 16.3,
+        "y": -63
       }
     }
   },
@@ -334,7 +467,13 @@
         "y": 353
       }
     },
-    "phone": {}
+    "phone": {
+      "thread-voice-requests": {
+        "zone": "hero",
+        "x": 54,
+        "y": 27
+      }
+    }
   },
   "_about": "Where every movable thing sits, on each side of the toggle (film, performance) and in each of the desktop layout and the phone layout. zone: 'hero' puts it on the hero's desk (x, y in % of the hero), 'page' anywhere below the hero (x in % of the page width, y in % of the main column). A window of the page itself (win-…) keeps its place in the flow and is nudged from it: x in % of the column's width, y in px. hide: true leaves it out of that layout. A thing with no entry on the performance side sits where the film side puts it; with no entry anywhere it stays where the markup puts it. Edited at /admin, which saves this file out."
 }

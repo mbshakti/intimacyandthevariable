@@ -301,6 +301,9 @@
             node.style.transform = 'translate(' + Math.round(dx) + 'px, ' + Math.round(dy) + 'px)';
             if (!isWin) node.style.justifySelf = side;
         };
+        // each thing's id in the layout (js/admin.js nudges it within its cell): the scene, then what it is
+        var ident = function (node, key) { node.dataset.id = 'phone-' + host.dataset.layout + '-' + key; node.dataset.anchor = 'left'; node.dataset.base = node.style.transform || ''; };
+        var iconKey = function (ic) { return ic.folder ? 'folder-' + ic.folder : ic.id ? 'thread-' + ic.id : ic.clip ? 'clip-' + ic.clip : ic.req ? 'request-' + ic.req : ic.char ? 'file-' + ic.char : ic.note ? 'note-' + ic.note : 'icon-' + String(ic.label || '').replace(/\W+/g, '-'); };
         cells.forEach(function (c, ci) {
             if (c.pic) {
                 var p = c.pic, meta = PIC[p.t];
@@ -311,12 +314,12 @@
                 win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
                 win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + p.t + '.jpg'); });
                 win.addEventListener('click', function (e) { e.stopPropagation(); });
-                dishevel(win, ci, true);
+                dishevel(win, ci, true); ident(win, 'pic-' + p.t);
                 desk.appendChild(win);
                 return;
             }
-            if (c.win) { desk.appendChild(makeFileWin(c.win)); return; }
-            var icon = makeIcon(c.icon); dishevel(icon, ci, false); desk.appendChild(icon);
+            if (c.win) { var fw = makeFileWin(c.win); ident(fw, 'win-' + (c.win.code || c.win.note || ci)); desk.appendChild(fw); return; }
+            var icon = makeIcon(c.icon); dishevel(icon, ci, false); ident(icon, iconKey(c.icon)); desk.appendChild(icon);
         });
         wire(host);
     }
@@ -348,7 +351,7 @@
     function buildStrips() {
         document.querySelectorAll('.desktop.strip').forEach(function (s) { s.remove(); });
         if (!NARROW.matches) return;
-        var after = ['top', 'overview', 'teaser', 'team', 'notes'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+        var after = ['overview', 'teaser', 'team', 'notes'].map(function (id) { return document.getElementById(id); }).filter(Boolean);   // none right under the hero: the overview comes first there
         if (!after.length) return;
         // everything that scatters: the margins' things and the desk scenes' (the scenes themselves stay off a phone),
         // pictures and icons each dealt out evenly, so no strip is all pictures and none all text
@@ -363,6 +366,7 @@
             sec.insertAdjacentElement('afterend', host);
             buildPhone(host, groups[i]);
         });
+        if (window.applyLayout) window.applyLayout();   // the strips rebuilt: their things take their nudges again (js/admin.js)
     }
     function buildMargin() {
         var host = document.getElementById('marginDesk'); if (!host) return;

@@ -114,7 +114,7 @@ h3 { font-size: 17px; }
 .grid.two .win .badge { right: 8px; bottom: 8px; font-size: 10px; padding: 5px 8px; }
 /* the mark at the top left, fixed like the toggle: whose work this is, in the scroll cue's small capitals; it follows the side */
 .mark { position: fixed; left: 20px; top: 44px; z-index: 81; margin: 0; max-width: none; font-family: var(--font-ui); font-size: 14px; letter-spacing: 0.02em; line-height: 1; color: rgba(226,225,225,0.6); text-shadow: 0 0 8px rgba(0,0,0,0.8); white-space: nowrap; pointer-events: none; }
-@media (max-width: 520px) { .mark { left: 16px; top: calc(82px + env(safe-area-inset-top)); font-size: 13px; } }   /* under the toggle, which takes the top on a phone */
+@media (max-width: 520px) { .mark { display: none; } }   /* not on a phone: the toggle has the top */
 /* the way into the admin, and out: the same badge, fixed at the top right, faint until the pointer finds it */
 .admin-link { display: none; position: fixed; right: 16px; top: 39px; z-index: 81; text-decoration: none; opacity: 0.45; transition: opacity 150ms, color 150ms; }
 html.local .admin-link, html.admin .admin-link { display: inline-block; }   /* only with the site running locally (js/admin.js), or once the admin is on; never on the live site */
@@ -386,4 +386,5 @@ html.admin .hero .desk [data-id], html.admin #marginDesk [data-id], html.admin .
 html.admin .sim { pointer-events: auto; }   /* the cursors take the pointer in the admin, to be dragged; on the page they never do */
 html.admin main [data-win] { cursor: move; user-select: none; -webkit-user-select: none; touch-action: none; }   /* the page's windows drag as a whole, from anywhere on them */
 main [data-win].nudged { position: relative; z-index: 1; }   /* a window moved from its place lies over the sections after it, under the margins' things */
+.desktop.mobile .nudged { position: relative; z-index: 1; }   /* and a thing nudged out of its cell in a phone desk lies over its neighbours */
 html.admin main [data-win] a, html.admin main [data-win] button { pointer-events: none; }
