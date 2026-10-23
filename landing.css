@@ -4,6 +4,10 @@
    scenes (diary-scene.html), the caret the diary's, the cursor the film's. */
 
 html, body { height: auto; overflow: visible; font-size: 17px; font-weight: 400; color: var(--text); line-height: 1.5; }
+/* nothing on the page clips: an icon or a window dragged over an edge hangs over it. The page as a whole never scrolls
+   sideways, so a thing past the right edge is simply off the screen there, not a reason to clip the section it is in */
+html { overflow-x: clip; }
+@supports not (overflow: clip) { html { overflow-x: hidden; } }
 body { margin: 0; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: #FFFFFF; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
@@ -140,7 +144,9 @@ html.admin .admin-link { border-color: var(--accent); color: var(--accent); }
 .win .video .play:hover .play-pill-big, .win .video .play:focus-visible .play-pill-big { background: rgba(0,0,0,0.7); box-shadow: 0 0 0 6px rgba(255,255,255,0.12), 0 12px 40px rgba(0,0,0,0.5); transform: translate(-50%, -50%) scale(1.04); }
 
 /* ---- the hero: the desktop ---- */
-.hero { position: relative; min-height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; }
+.hero { position: relative; z-index: 2; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; pointer-events: none; }
+/* the hero's box itself takes no pointer, only the things on it: so a thing from lower down the page, nudged up into the hero's area, can still be grabbed */
+.hero .desk > *, .hero .down, .hero .mode, .hero .admin-link { pointer-events: auto; }   /* no overflow hidden, and above the page and its moved windows (1): a thing dragged past its foot hangs over what is below, whole and on top */
 .title { max-width: 100%; box-sizing: border-box; }
 .desk { position: absolute; inset: 0; }
 /* the desktop's icons, at zoom 1 like everywhere else on the page */
@@ -170,7 +176,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 #teaser { margin-top: clamp(96px, 14vw, 200px); }   /* more room between the overview and the teaser */
 /* the archive's things in the margins below the hero, on a screen wide enough to have margins; the desk of them otherwise.
    y is of the whole main column, so they can sit beside the overview and the teaser as well as the lower sections */
-.margin-desk { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; display: none; z-index: 3; }   /* above the sections, so a thing laid over one still takes the pointer; the layer itself lets clicks through */
+.margin-desk { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; z-index: 3; }   /* the page layer, at every width: anything dragged below the hero lives here, anywhere down the page. Above the sections, so a thing laid over one still takes the pointer; the layer itself lets clicks through */
 .margin-desk > * { position: absolute; pointer-events: auto; margin: 0; }
 .margin-desk .desktop-icon { transform: translate(-50%, -50%); width: max-content; zoom: 1; }
 .margin-desk .win { width: clamp(120px, 12vw, 210px); }
@@ -188,13 +194,13 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .margin-desk a.desktop-icon { text-decoration: none; color: inherit; }
 .margin-desk .win.code .text { font-size: 11px; max-height: 230px; padding: 10px 12px 12px; }
 @media (min-width: 1024px) {
-    .margin-desk { display: block; }
     /* the lower column keeps clear of the margins: 190px each side at the narrow end */
     .lower .people { width: min(1000px, 100vw - 380px); }
     .lower .stack { width: min(900px, 100vw - 380px); }
 }
 @media (max-width: 1023px) {
-    #visuals { display: none; }   /* on a phone the desk scenes' things are dealt out between the sections instead */
+    #visuals { display: none; }
+    .margin-desk > [data-id^="margin-"] { display: none !important; }   /* the margins' own things are dealt into the strips here; the layer stays, for anything dragged below the hero */   /* on a phone the desk scenes' things are dealt out between the sections instead */
 }
 .narrow { width: min(820px, 100%); margin-left: auto; margin-right: auto; }
 /* two windows on the desk: the first to the left, the second laid over its lower right corner */

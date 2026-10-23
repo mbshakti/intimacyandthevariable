@@ -123,7 +123,7 @@
         var t = target(ev); if (!t || ev.button !== 0) return;
         ev.preventDefault(); ev.stopPropagation();
         var a = anchorPoint(t), e0 = entryFor(t) || {};
-        drag = { el: t, dx: ev.clientX - a.x, dy: ev.clientY - a.y, moved: false, zone: zoneOf(t), x0: ev.clientX, y0: ev.clientY, ex: e0.x || 0, ey: e0.y || 0 };
+        drag = { el: t, dx: ev.clientX - a.x, dy: ev.clientY - a.y, moved: false, zone: zoneOf(t), x0: ev.pageX, y0: ev.pageY, ex: e0.x || 0, ey: e0.y || 0 };   // a nudge is measured on the page, so the page scrolling under the pointer counts
         if (selected) selected.classList.remove('admin-selected');
         selected = t; t.classList.add('admin-selected'); status();
         try { t.setPointerCapture(ev.pointerId); } catch (e) {}
@@ -133,23 +133,23 @@
         var el = drag.el, d = draftFor(el);
         if (homeZone(el) === 'flow' || homeZone(el) === 'grid') {    // the nudge grows with the pointer's travel from where it took hold
             var span = homeZone(el) === 'flow' ? column() : gridWidth(el);
-            d.x = Math.round((drag.ex + (ev.clientX - drag.x0) / span * 100) * 10) / 10; d.y = Math.round(drag.ey + (ev.clientY - drag.y0));
+            d.x = Math.round((drag.ex + (ev.pageX - drag.x0) / span * 100) * 10) / 10; d.y = Math.round(drag.ey + (ev.pageY - drag.y0));
             drag.moved = true; place(el, d); return;
         }
         if (homeZone(el) === 'scene') {   // within its scene, in the scene's px
-            var sb = el.closest('.scene-desk').getBoundingClientRect(), sc = sceneScale(el);
+            var sb = el.closest('.scene-desk').getBoundingClientRect(), sc = sceneScale(el) * (parseFloat(getComputedStyle(el).zoom) || 1);   // the scene's scale, and the thing's own zoom (its left and top are in that zoomed space)
             d.x = Math.round((ev.clientX - drag.dx - sb.left) / sc); d.y = Math.round((ev.clientY - drag.dy - sb.top) / sc);
             drag.moved = true; place(el, d); return;
         }
-        // which zone the pointer is in (the phone layout is the hero's alone)
+        // which zone the pointer is in: on the hero while it is over the hero, on the page anywhere below it, at every width
         var heroRect = document.querySelector('.hero').getBoundingClientRect();
-        var zone = mode() === 'phone' || !page() || getComputedStyle(page()).display === 'none' ? 'hero'
-                 : (ev.clientY >= heroRect.top && ev.clientY <= heroRect.bottom ? 'hero' : 'page');
+        var zone = !page() ? 'hero' : (ev.clientY <= heroRect.bottom ? 'hero' : 'page');
         if (zone !== drag.zone) { drag.zone = zone; (zone === 'page' ? page() : hero()).appendChild(el); }
         var box = (zone === 'page' ? page() : hero()).getBoundingClientRect();
         var x = (ev.clientX - drag.dx - box.left) / box.width * 100, y = (ev.clientY - drag.dy - box.top) / box.height * 100;
         d.zone = zone;
-        d.x = Math.round(Math.max(0, Math.min(100, x)) * 10) / 10; d.y = Math.round(Math.max(0, Math.min(100, y)) * 10) / 10;
+        // nothing caps where a thing goes: a little past an edge is allowed (it hangs over), far past it is not, so nothing is lost off the page
+        d.x = Math.round(Math.max(-30, Math.min(130, x)) * 10) / 10; d.y = Math.round(Math.max(-30, Math.min(130, y)) * 10) / 10;
         drag.moved = true;
         place(el, Object.assign({}, entryFor(el), d));
     }, true);
