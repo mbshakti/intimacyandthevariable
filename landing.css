@@ -111,10 +111,7 @@ h3 { font-size: 17px; }
 .win { display: flex; flex-direction: column; background: var(--bg); border: 1px solid rgba(249,248,248,0.28); border-radius: 13px; overflow: hidden; }
 .win .bar { display: flex; align-items: center; justify-content: space-between; flex: none; font-family: var(--font-window); font-size: 20px; line-height: 1; padding: 14px 22px; border-bottom: 1px solid rgba(249,248,248,0.14); background: var(--surface); }
 .win .bar .name { color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 10px rgba(255,255,255,0.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* a badge on a reference picture (another artist's event, not this work), bottom right, over the picture */
-.win.ref { position: relative; }
 .badge { display: inline-block; padding: 6px 10px; border: 1px solid rgba(249,248,248,0.28); border-radius: 999px; background: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-family: var(--font-meta); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(249,248,248,0.7); line-height: 1; }
-.win .badge { position: absolute; right: 12px; bottom: 12px; z-index: 1; pointer-events: none; }
 .grid.two .win .badge { right: 8px; bottom: 8px; font-size: 10px; padding: 5px 8px; }
 /* the mark at the top left, fixed like the toggle: whose work this is, in the scroll cue's small capitals; it follows the side */
 .mark { position: fixed; left: 20px; top: 44px; z-index: 81; margin: 0; max-width: none; font-family: var(--font-ui); font-size: 14px; letter-spacing: 0.02em; line-height: 1; color: rgba(226,225,225,0.6); text-shadow: 0 0 8px rgba(0,0,0,0.8); white-space: nowrap; pointer-events: none; }
@@ -209,6 +206,15 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .stack .win + .win { width: min(560px, 100%); margin: -40px 0 0 auto; position: relative; z-index: 2; box-shadow: 0 24px 60px rgba(0,0,0,0.7); }
 @media (max-width: 860px) { .stack .win { width: 100%; } .stack .win + .win { margin-top: 24px; box-shadow: none; } }
 .lede + .lede { margin-top: 0.9em; }
+/* the walkthrough: a small window laid over the overview's lower right corner, as a note left on top of it */
+.walk { width: min(340px, 100%); margin: -52px calc((100% - min(820px, 100%)) / 2 - 28px) 0 auto; position: relative; z-index: 2; box-shadow: 0 24px 60px rgba(0,0,0,0.7); }
+.walk .bar { font-size: 15px; padding: 10px 14px; }
+.walk .bar .close { width: 14px; height: 14px; margin-left: 10px; }
+.walk .page { padding: 14px 16px 16px; font-size: 13.5px; line-height: 1.5; }
+.walk .page p { max-width: none; margin-bottom: 0.8em; }
+.walk .page p:last-child { margin-bottom: 0; }
+@media (max-width: 860px) { .walk { width: min(300px, 90%); margin: -36px 4% 0 auto; } }
+.venues .page p:last-child { margin-top: 1em; }
 .lede { font-size: clamp(17px, 1rem + 0.45vw, 21px); line-height: 1.5; color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 12px rgba(255,255,255,0.25); max-width: 30em; }
 .facts { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 28px 0 0; padding-top: 20px; border-top: 1px solid rgba(249,248,248,0.14); }
 /* the credits window above the bios, in the bios' own column and as wide as Shakti's window: the facts alone, no lede over them */
@@ -222,6 +228,8 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
 .facts dd { margin: 0; color: #FFFFFF; }
 .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }   /* the text sits level with the middle of the picture */
 .split h2 { max-width: 16em; }
+.win .page h2 { max-width: 16em; margin-bottom: 1.2rem; }   /* a heading inside a window of text (the walkthrough, the date) */
+.win .page h2 + p, .win .page p + p { max-width: 36rem; }
 .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .grid li { min-width: 0; }
 .grid.two { gap: 12px; }
@@ -303,6 +311,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .title h1 { font-size: clamp(22px, 7vw, 112px); }
     .title .by { font-size: 16px; letter-spacing: 0.08em; }
     .title .sub { font-size: 13px; letter-spacing: 0.08em; white-space: normal; }
+    .title .date { font-size: 13px; letter-spacing: 0.08em; }
     .desk .desktop-icon.hide-s { display: none; }
     .foot { flex-direction: column; }
 }
@@ -324,6 +333,8 @@ html[data-mode="film"] [data-copy="performance"]:not(.title *), html[data-mode="
 .title { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; align-items: center; }
 .title h1 { grid-row: 1; grid-column: 1; align-self: end; }   /* the shorter title sits at the foot of the row, so its gap to the by-line is the taller one's */
 .title .by { grid-row: 2; grid-column: 1; }
+/* the date under the by-line, on the performance side; the row is there on both sides, so the block is one height and nothing moves */
+.title .date { grid-row: 3; grid-column: 1; margin: clamp(10px, 1.2vw, 16px) auto 0; min-height: 1.3em; font-size: clamp(15px, 1.6vw, 24px); letter-spacing: 0.06em; color: var(--text); max-width: none; }
 html[data-mode="film"] .title [data-copy="performance"], html[data-mode="performance"] .title [data-copy="film"] { opacity: 0; pointer-events: none; }
 /* it stays at the top of the screen as the page scrolls, under the desktop's windows and overlay (98 and up) */
 .mode { position: fixed; top: 20px; left: 0; right: 0; width: max-content; max-width: calc(100vw - 24px); box-sizing: border-box; margin: 0 auto; z-index: 80; display: flex; padding: 5px; border: 1px solid rgba(249,248,248,0.55); border-radius: 999px; background: rgba(0,0,0,0.72); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.7), 0 0 24px rgba(255,255,255,0.08); font-family: var(--font-meta); font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; }

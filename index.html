@@ -53,6 +53,8 @@
         <h1 class="typed" data-copy="performance"><span class="line">unstable</span><span class="line">performers<span class="caret" aria-hidden="true"></span></span></h1>
         <p class="by" data-copy="film">a film by Shakti Mb</p>
         <p class="by" data-copy="performance">a live performance and screening</p>
+        <p class="date" data-copy="film"></p>
+        <p class="date" data-copy="performance">December 10 at Onyx, New York</p>
     </div>
     <!-- the cue at the fold: there is more below -->
     <a class="down" href="#overview" aria-label="scroll to the overview"><span class="down-text">scroll</span><svg class="down-chev" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 1.5 L8 8 L14.5 1.5"/></svg></a>
@@ -80,18 +82,14 @@
     </div>
 </section>
 
-<!-- the performance side only: how it goes in the room, with a reference (copy from the unstable-performers page) -->
-<section class="split" id="walkthrough" data-copy="performance">
-    <div class="text">
-        <h2>the <span class="lit">experiential</span> walkthrough</h2>
+<!-- the performance side only: the walkthrough, a small window laid over the overview's lower right corner -->
+<section class="win walk" id="walkthrough" data-copy="performance" data-id="win-walkthrough" data-win>
+    <div class="bar"><span class="name">the walkthrough</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
+    <div class="page">
         <p>The audience enters a darkened room and a single projection anchors the space.</p>
         <p>Between the voices, a single light finds the artist as she reads from her diary. The audience overhears conversations never meant for them.</p>
         <p>Botmakers, bots, and the artist all take turns performing.</p>
     </div>
-    <figure class="win ref" style="margin:0" data-id="win-walkthrough" data-win>
-        <div class="bar"><span class="name">Alex Quicho, 2023, SOFT POWER, Bad Omens</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
-        <img src="img/photos/reference-reading.jpg" alt="The artist reading at a microphone beside a large projection of an animated character, a seated audience in the dark" width="1056" height="692"><span class="badge">reference photo</span>
-    </figure>
 </section>
 
 <!-- the teaser, in a window of the desktop's chrome -->
@@ -113,19 +111,6 @@
     </div>
 </section>
 
-<!-- the performance side only: the space it needs, with two references (copy from the unstable-performers page) -->
-<section class="split" id="venue" data-copy="performance">
-    <div class="text">
-        <h2>we are seeking an <span class="lit">intimate</span> NYC space to host a performance</h2>
-        <p>The work can be staged in a small gallery or space, with a seated audience facing a single screen or projection.</p>
-        <p>Seating and lighting placement will be developed in response to the venue and tested in rehearsal.</p>
-    </div>
-    <ul class="grid two">
-        <li class="win still ref" data-id="win-venue-reading" data-win><div class="bar"><span class="name">Alex Quicho, 2023, SOFT POWER, Bad Omens</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div><img src="img/photos/reference-reading.jpg" alt="A reading beside a projection, audience seated in the dark"><span class="badge">reference photo</span></li>
-        <li class="win still ref" data-id="win-venue-blue" data-win><div class="bar"><span class="name">Bogna Konior, Angels in Latent Spaces, OpenLAB</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div><img src="img/photos/venue-blue.jpg" alt="A blue projected title across a wide screen in a dim room"><span class="badge">reference photo</span></li>
-    </ul>
-</section>
-
 <!-- the lower sections, with the archive's things in the margins round them on a wide screen (desktop.js lays them out);
      narrower than that, the same things as a desk of their own at the end -->
 <div class="lower">
@@ -135,10 +120,15 @@
     <div class="win" data-id="win-credits" data-win>
         <div class="bar"><span class="name">credits</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
         <div class="page">
-            <dl class="facts">
+            <dl class="facts" data-copy="film">
                 <div><dt>a film by</dt><dd>Shakti Mb</dd></div>
                 <div><dt>co-edited by</dt><dd>Shakti Mb &amp; Kiana Fernandez</dd></div>
                 <div><dt>creative direction</dt><dd>Kiana Fernandez</dd></div>
+            </dl>
+            <dl class="facts" data-copy="performance">
+                <div><dt>research and performance</dt><dd>Shakti Mb</dd></div>
+                <div><dt>dramaturgy and staging</dt><dd>Kiana Fernandez</dd></div>
+                <div><dt>film</dt><dd><a href="/" data-flip="film">Intimacy When the Other Side Is a Variable</a> (directed by Shakti Mb, co-edited with Kiana Fernandez)</dd></div>
             </dl>
         </div>
     </div>
@@ -185,6 +175,15 @@
             <p class="lede">...you are curious about the <span class="lit">psychology of botmakers,</span> internet subcultures, and human behavior, <span data-copy="film">watch this film</span><span data-copy="performance">come to the performance</span>.</p>
     </div>
     </section>
+</section>
+
+<!-- the performance side only, for a curator: what the work needs of a room, and the invitation to host it -->
+<section class="win narrow venues" id="venues" data-copy="performance" data-id="win-venues" data-win>
+    <div class="bar"><span class="name">for venues</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
+    <div class="page">
+        <p class="lede">The work can be staged in a small gallery or space, with a seated audience facing a single screen or projection. Seating and lighting placement are developed in response to the venue and tested in rehearsal.</p>
+        <p>If you would like to host the performance, email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a>.</p>
+    </div>
 </section>
 
 <section class="contact" id="contact">
@@ -237,12 +236,12 @@
 </div>
 
 <!-- the screening sign-up, as the desktop had it: the input and the button alone. Bottom right on a desktop; a bar along the bottom on a phone -->
-<form class="win signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up for screening">
-    <div class="bar"><span class="name" id="signupTitle">sign up for screening</span><button class="close" type="button" id="signupClose" aria-label="close"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></button></div>
+<form class="win signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up">
+    <div class="bar"><span class="name" id="signupTitle"><span data-copy="film">sign up for screening</span><span data-copy="performance">sign up for the performance</span></span><button class="close" type="button" id="signupClose" aria-label="close"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></button></div>
     <div class="page">
         <input type="hidden" name="form-name" value="screening-invites">
         <p class="signup-bot"><label>Do not fill this out: <input name="bot-field"></label></p>
-        <label class="signup-heading" for="signupEmail">Sign up for screening</label>
+        <label class="signup-heading" for="signupEmail"><span data-copy="film">Sign up for screening</span><span data-copy="performance">Sign up for the performance</span></label>
         <input id="signupEmail" class="signup-input" type="email" name="email" placeholder="email@gmail.com" autocomplete="email" required>
         <button class="signup-submit" type="submit">Sign up</button>
         <p class="signup-note"><span data-copy="film">Email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> for inquiries.</span><span data-copy="performance">Email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> to host the performance.</span></p>
