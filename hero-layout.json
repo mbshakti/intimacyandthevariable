@@ -116,13 +116,13 @@
       },
       "margin-file-luna": {
         "zone": "page",
-        "x": 6.5,
-        "y": 22
+        "x": 12.3,
+        "y": 14.1
       },
       "margin-file-priest": {
         "zone": "page",
-        "x": 93.5,
-        "y": 26
+        "x": 90,
+        "y": 29.3
       },
       "margin-file-parents": {
         "zone": "page",
@@ -172,8 +172,12 @@
         "y": 637
       },
       "scene-craft-picture-29": {
-        "x": 178,
-        "y": 3750
+        "x": 115,
+        "y": 3542
+      },
+      "scene-windows-picture-00": {
+        "x": 1040,
+        "y": 373
       }
     },
     "phone": {
