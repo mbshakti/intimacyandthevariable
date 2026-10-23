@@ -290,7 +290,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note])   { left: 25%; top: 77%; }
     .desk a[data-chapter="user"]:not([data-thread]):not([data-note])         { left: 75%; top: 77%; }
     .sim { left: 56%; top: 65%; height: 4.5vh; min-height: 28px; }
-    .down { bottom: calc(100px + env(safe-area-inset-bottom)); }   /* above the sign-up bar */
+    .down { bottom: calc(170px + env(safe-area-inset-bottom)); }   /* above the sign-up window */
     .down .down-text { display: none; }   /* on a phone the chevron alone, so no stray word at the fold */
     .down .down-chev { width: 20px; height: 12px; }
     /* the longer title on a phone: smaller type, and the subtitle may wrap */
@@ -336,7 +336,8 @@ html[data-mode="film"] .title [data-copy="performance"], html[data-mode="perform
 @media (max-width: 520px) {
     .mode { top: calc(12px + env(safe-area-inset-top)); font-size: 15px; }   /* the open side's title shortens to fit the screen */
     .mode-btn { padding: 14px 18px; }
-    .mode-btn small { font-size: 12px; }
+    .mode-btn small { display: none; }   /* on a phone the words alone, no project name after the pressed one */
+    .mode-btn[aria-pressed="true"] { column-gap: 0; }
     .desk { top: calc(76px + env(safe-area-inset-top)); }   /* the phone's desk begins under the toggle, so the top folders keep clear of it */
 }
 /* switching sides: the copy of the old side fades, the title with it; then the new side's comes in */
@@ -351,9 +352,14 @@ html.modal-open body { position: fixed; left: 0; right: 0; overflow: hidden; }
 .thread-body, .folder-window .folder-body { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 
 /* ---- the screening sign-up: the input and the button, in the desktop's dress; bottom right on a desktop, a bar along the bottom on a phone ---- */
-.signup { position: fixed; right: 20px; bottom: 20px; z-index: 90; width: 340px; max-width: calc(100vw - 32px); display: flex; flex-direction: column; gap: 8px; padding: 12px; background: var(--bg); border: 1px solid rgba(249,248,248,0.28); border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.65); font-family: var(--font-ui); letter-spacing: 0; }
-.signup .signup-bot { position: absolute; left: -9999px; }
-.signup-heading { font-size: 13px; color: var(--text); padding: 2px 2px 0; }
+/* a window of the desktop's chrome (the .win rules draw it), fixed at the bottom right; its heading is the window's title */
+.signup { position: fixed; right: 20px; bottom: 20px; z-index: 90; width: 340px; max-width: calc(100vw - 32px); box-shadow: 0 16px 48px rgba(0,0,0,0.65); font-family: var(--font-ui); letter-spacing: 0; }
+.signup .bar { font-size: 15px; padding: 10px 12px 10px 14px; }
+.signup .bar .close { width: 16px; height: 16px; margin-left: 10px; background: none; border: 0; padding: 0; cursor: pointer; color: var(--text-muted); }
+.signup .bar .close:hover { color: #FFFFFF; }
+.signup .page { display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+.signup .signup-bot, .signup-heading { position: absolute; left: -9999px; }   /* the heading is the title bar's; it stays for the input's label */
+.signup[hidden] { display: none; }
 .signup-input { width: 100%; box-sizing: border-box; height: 46px; background: rgba(255,138,247,0.06); border: 1px solid rgba(255,138,247,0.45); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 14px; padding: 0 14px; outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; }
 .signup-input:focus { border-color: var(--accent); background: rgba(255,138,247,0.1); box-shadow: 0 0 0 3px rgba(255,138,247,0.18); }
 .signup-input::placeholder { color: rgba(226,225,225,0.45); }
@@ -370,13 +376,15 @@ html.modal-open body { position: fixed; left: 0; right: 0; overflow: hidden; }
 html.admin .signup { display: none; }   /* out of the way while laying things out */
 @media (max-width: 700px) {
     /* a bar along the bottom: the input and the button side by side */
-    .signup { right: 0; left: 0; bottom: 0; width: auto; max-width: none; flex-direction: row; flex-wrap: wrap; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); border-radius: 0; border-width: 1px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,0.6); }
-    .signup-heading { flex: 0 0 100%; padding: 0 2px; font-size: 12px; }
+    /* a window floating above the bottom of the phone's screen, clear of its edges, the input and the button side by side inside it */
+    .signup { right: 12px; left: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); width: auto; max-width: none; box-shadow: 0 16px 48px rgba(0,0,0,0.7); }
+    .signup .bar { font-size: 13px; padding: 8px 12px; }
+    .signup .page { flex-direction: row; flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
     .signup-input { flex: 1; min-width: 0; height: 44px; font-size: 16px; }
     .signup-submit { width: auto; flex: none; height: 44px; padding: 0 16px; }
-    .signup.done { justify-content: center; }
+    .signup.done .page { justify-content: center; }
     .signup-note { flex: 0 0 100%; padding: 0 2px; font-size: 11px; }
-    body { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }   /* the page scrolls clear of the bar */
+    body { padding-bottom: calc(160px + env(safe-area-inset-bottom)); }   /* the page scrolls clear of the window floating at the bottom */
 }
 
 /* ---- the layout admin (/admin, js/admin.js): everything draggable, nothing else on screen ---- */

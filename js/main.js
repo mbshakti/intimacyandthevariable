@@ -56,6 +56,8 @@
 // and the form becomes a line of thanks. Netlify keeps a copy too (data-netlify), as before.
 (function () {
     var form = document.getElementById('signup'); if (!form) return;
+    var close = document.getElementById('signupClose');   // the window's close shuts it, as a window's does, until the page is opened again
+    if (close) close.addEventListener('click', function () { form.hidden = true; });
     var endpoint = 'https://script.google.com/macros/s/AKfycbxhqH0y36PICJiRVloJxEDyZKgg8oSJw4UjG1N_CpoJ4VDfI5BWZIfy69o8BuPhaWYf/exec';
     form.addEventListener('submit', function (ev) {
         ev.preventDefault();
@@ -63,7 +65,7 @@
         if (!email) return;
         submit.disabled = true; submit.textContent = 'Sending\u2026';
         fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ email: email, source: 'screening-invites', page: location.href }) })
-            .then(function () { var note = form.querySelector('.signup-note'); form.classList.add('done'); form.innerHTML = '<p class="signup-done">You\u2019re on the list.</p>' + (note ? note.outerHTML : ''); })
+            .then(function () { var note = form.querySelector('.signup-note'), page = form.querySelector('.page') || form; form.classList.add('done'); page.innerHTML = '<p class="signup-done">You\u2019re on the list.</p>' + (note ? note.outerHTML : ''); })
             .catch(function () { submit.disabled = false; submit.textContent = 'Sign up'; var s = form.querySelector('.signup-status') || document.createElement('p'); s.className = 'signup-status'; s.textContent = 'Something went wrong. Try again?'; form.appendChild(s); });
     });
 })();

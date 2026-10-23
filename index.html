@@ -236,13 +236,16 @@
 </div>
 
 <!-- the screening sign-up, as the desktop had it: the input and the button alone. Bottom right on a desktop; a bar along the bottom on a phone -->
-<form class="signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up for the screening and the performance">
-    <input type="hidden" name="form-name" value="screening-invites">
-    <p class="signup-bot"><label>Do not fill this out: <input name="bot-field"></label></p>
-    <label class="signup-heading" for="signupEmail">Sign up for the screening and the performance</label>
-    <input id="signupEmail" class="signup-input" type="email" name="email" placeholder="email@gmail.com" autocomplete="email" required>
-    <button class="signup-submit" type="submit">Sign up</button>
-    <p class="signup-note"><span data-copy="film">Or email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> for inquiries.</span><span data-copy="performance">Or email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> to host the performance.</span></p>
+<form class="win signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up for screening">
+    <div class="bar"><span class="name" id="signupTitle">sign up for screening</span><button class="close" type="button" id="signupClose" aria-label="close"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></button></div>
+    <div class="page">
+        <input type="hidden" name="form-name" value="screening-invites">
+        <p class="signup-bot"><label>Do not fill this out: <input name="bot-field"></label></p>
+        <label class="signup-heading" for="signupEmail">Sign up for screening</label>
+        <input id="signupEmail" class="signup-input" type="email" name="email" placeholder="email@gmail.com" autocomplete="email" required>
+        <button class="signup-submit" type="submit">Sign up</button>
+        <p class="signup-note"><span data-copy="film">Email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> for inquiries.</span><span data-copy="performance">Email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> to host the performance.</span></p>
+    </div>
 </form>
 <script src="js/main.js"></script>
 <script src="js/desktop.js"></script>
