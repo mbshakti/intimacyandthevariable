@@ -116,7 +116,8 @@ h3 { font-size: 17px; }
 .mark { position: fixed; left: 20px; top: 44px; z-index: 81; margin: 0; max-width: none; font-family: var(--font-ui); font-size: 14px; letter-spacing: 0.02em; line-height: 1; color: rgba(226,225,225,0.6); text-shadow: 0 0 8px rgba(0,0,0,0.8); white-space: nowrap; pointer-events: none; }
 @media (max-width: 520px) { .mark { left: 16px; top: calc(82px + env(safe-area-inset-top)); font-size: 13px; } }   /* under the toggle, which takes the top on a phone */
 /* the way into the admin, and out: the same badge, fixed at the top right, faint until the pointer finds it */
-.admin-link { position: fixed; right: 16px; top: 39px; z-index: 81; text-decoration: none; opacity: 0.45; transition: opacity 150ms, color 150ms; }
+.admin-link { display: none; position: fixed; right: 16px; top: 39px; z-index: 81; text-decoration: none; opacity: 0.45; transition: opacity 150ms, color 150ms; }
+html.local .admin-link, html.admin .admin-link { display: inline-block; }   /* only with the site running locally (js/admin.js), or once the admin is on; never on the live site */
 .admin-link:hover, .admin-link:focus-visible, html.admin .admin-link { opacity: 1; color: #FFFFFF; }
 html.admin .admin-link { border-color: var(--accent); color: var(--accent); }
 @media (max-width: 520px) { .admin-link { top: calc(76px + env(safe-area-inset-top)); right: 12px; opacity: 0.55; } }   /* under the toggle, which takes the top on a phone */

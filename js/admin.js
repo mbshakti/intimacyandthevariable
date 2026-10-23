@@ -157,6 +157,7 @@
     admin = /^\/admin\/?$/.test(location.pathname) || new URLSearchParams(location.search).get('admin') === '1';
     // the badge at the top right: into the admin from the page, back to the page from the admin, on the side showing
     var link = document.getElementById('adminLink');
+    if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) document.documentElement.classList.add('local');   // the badge shows here only
     if (link) {
         var flag = function () { return document.documentElement.dataset.mode === 'performance' ? '?performance' : ''; };
         var point = function () { link.href = (admin ? '/' : '/admin') + flag(); };
