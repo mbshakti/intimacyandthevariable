@@ -554,8 +554,8 @@
     "phone": {
       "thread-voice-requests": {
         "zone": "hero",
-        "x": 54,
-        "y": 27
+        "x": 33.1,
+        "y": 27.9
       },
       "phone-strip-0-folder-bot-requests": {
         "x": -38.1,
@@ -570,8 +570,8 @@
         "y": -1402
       },
       "phone-strip-0-pic-24": {
-        "x": -9.8,
-        "y": -173
+        "x": -10.4,
+        "y": -186
       },
       "folder-user": {
         "zone": "hero",
@@ -592,52 +592,103 @@
         "y": -7
       },
       "phone-strip-0-folder-the-craft": {
-        "x": 9.7,
-        "y": 1624
+        "x": 4.7,
+        "y": 1748
       },
       "win-teaser": {
         "x": -0.1,
         "y": -73
       },
       "phone-strip-1-file-experiment_0682": {
-        "x": -2.1,
-        "y": -12
+        "x": -24,
+        "y": -218
       },
       "phone-strip-1-thread-scared-to-join-voice-chat": {
-        "x": -0.6,
-        "y": -109
+        "x": 28.2,
+        "y": -4310
       },
       "phone-strip-1-pic-20": {
         "x": 8.7,
         "y": -51
       },
       "phone-strip-3-pic-17": {
-        "x": 20,
-        "y": -853
+        "x": 11.4,
+        "y": -833
       },
       "phone-strip-2-folder-the-user": {
-        "x": 3.6,
-        "y": 706
+        "x": 1.7,
+        "y": 862
       },
       "phone-strip-3-pic-01": {
         "x": -11.5,
         "y": -90
       },
       "phone-strip-3-clip-delta-demon": {
-        "x": 7.5,
-        "y": 630
+        "x": 0.9,
+        "y": 679
       },
       "phone-strip-1-pic-08": {
-        "x": -18.6,
-        "y": -1668
+        "x": -45.9,
+        "y": 3552
       },
       "phone-strip-1-clip-delta-psychology": {
-        "x": 7.6,
-        "y": -133
+        "x": -2.3,
+        "y": -44
       },
       "phone-strip-1-thread-rude-bots": {
         "x": 17.5,
         "y": 2
+      },
+      "folder-craft": {
+        "zone": "page",
+        "x": 80.3,
+        "y": 24
+      },
+      "cursor": {
+        "zone": "hero",
+        "x": 78.6,
+        "y": 31.9
+      },
+      "folder-bot-requests": {
+        "zone": "hero",
+        "x": 28.7,
+        "y": 9.6
+      },
+      "phone-strip-2-file-judgemental_priest": {
+        "x": 46.2,
+        "y": -259
+      },
+      "phone-strip-2-request-haunted-costume-shop": {
+        "x": -25.7,
+        "y": 7
+      },
+      "phone-strip-2-folder-bot-makers": {
+        "x": -15.7,
+        "y": 24
+      },
+      "phone-strip-3-request-succubus-better-person": {
+        "x": -16.6,
+        "y": -529
+      },
+      "phone-strip-3-pic-26": {
+        "x": -15.3,
+        "y": -116
+      },
+      "phone-strip-3-file-mentally_unwell_dad_and_stressed_mom": {
+        "x": 7.8,
+        "y": -103
+      },
+      "phone-strip-3-file-evil_bully_wife": {
+        "x": 2.2,
+        "y": -11
+      },
+      "phone-strip-3-thread-what-porn-was-filling": {
+        "x": -25.8,
+        "y": -150
+      },
+      "phone-strip-2-file-loving_korean_boyfriend": {
+        "x": 27.2,
+        "y": 2589
       }
     }
   },
