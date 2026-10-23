@@ -1,7 +1,7 @@
 // Film or performance: the toggle at the top of the hero. The same work, two sides of a coin; the content stays
 // and only the copy follows (every element marked data-copy, shown or hidden by landing.css off html[data-mode]).
-// ?performance in the address opens the page on that side, and the toggle keeps the address in step, so either
-// side can be sent as a link.
+// /performance opens the page on that side (the admin keeps its own address and takes ?performance instead), and
+// the toggle keeps the address in step, so either side can be sent as a link.
 (function () {
     var root = document.documentElement, btns = document.querySelectorAll('.mode-btn');
     var titles = {
@@ -34,13 +34,16 @@
         root.classList.add('switching');
         wait(240).then(function () {
             apply(mode);
-            if (history.replaceState) history.replaceState(null, '', location.pathname + (mode === 'performance' ? '?performance' : '') + location.hash);
+            if (history.replaceState) history.replaceState(null, '', addressFor(mode) + location.hash);
             root.classList.remove('switching');
             root.classList.add('copy-in');
             return wait(450);
         }).then(function () { root.classList.remove('copy-in'); busy = false; });
     }
-    apply(/[?&]performance(?=&|=|$)/.test(location.search) ? 'performance' : 'film');
+    // the admin lives at /admin and takes the side as ?performance; the page itself is / or /performance
+    var onAdmin = /^\/admin\/?$/.test(location.pathname);
+    function addressFor(mode) { return onAdmin ? ('/admin' + (mode === 'performance' ? '?performance' : '')) : (mode === 'performance' ? '/performance' : '/'); }
+    apply(/^\/performance\/?$/.test(location.pathname) || /[?&]performance(?=&|=|$)/.test(location.search) ? 'performance' : 'film');
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);   // the type settles, the highlight fits it
     window.addEventListener('resize', place);
     if (window.ResizeObserver) { var ro = new ResizeObserver(place); btns.forEach(function (b) { ro.observe(b); }); }   // the highlight follows a side as it opens or closes

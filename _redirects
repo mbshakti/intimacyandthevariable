@@ -1,4 +1,6 @@
 /admin  /index.html  200
+/performance/  /performance  301
+/performance  /index.html  200
 /archive  /  301
 /archive/ /  301
 /archive/* /content/:splat 301

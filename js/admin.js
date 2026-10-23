@@ -170,7 +170,7 @@
     if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) document.documentElement.classList.add('local');   // the badge shows here only
     if (link) {
         var flag = function () { return document.documentElement.dataset.mode === 'performance' ? '?performance' : ''; };
-        var point = function () { link.href = (admin ? '/' : '/admin') + flag(); };
+        var point = function () { link.href = admin ? (flag() ? '/performance' : '/') : '/admin' + flag(); };
         if (admin) link.textContent = 'exit admin';
         point();
         new MutationObserver(point).observe(document.documentElement, { attributes: true, attributeFilter: ['data-mode'] });

@@ -13,6 +13,7 @@ app.use(express.static(__dirname));
 // the layout admin lives at /admin (the same page; js/admin.js turns the mode on there), and saves hero-layout.json
 // back here as things are moved; on the static host there is no such route, and the admin keeps the moves in the browser
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/performance', (req, res) => /\/$/.test(req.originalUrl.split('?')[0]) ? res.redirect(301, '/performance') : res.sendFile(path.join(__dirname, 'index.html')));   // the performance side, at its own address (never with a slash after it: the page's paths are relative)
 app.post('/api/layout', (req, res) => {
   const L = req.body;
   var ok = L && typeof L === 'object' && ((L.film && L.film.desktop && L.film.phone) || (L.desktop && L.phone));   // the two-sided file, or the one from before the toggle
