@@ -23,11 +23,12 @@
         document.title = titles[mode];
         place();
     }
-    // the switch, as a sequence: the old side's copy, title included, fades; then the new side's comes in.
-    // A press during the switch waits its turn.
+    // the switch, as a sequence: the page goes back to the top while the old side's copy, title included, fades;
+    // then the new side's comes in, from its hero. A press during the switch waits its turn.
     function set(mode) {
         if (busy || root.dataset.mode === mode) return;
         busy = true;
+        if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
         btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === mode)); });   // the highlight moves at once
         place();
         root.classList.add('switching');
@@ -47,7 +48,7 @@
     // a link in the copy to the other side (the other work's name) flips the toggle in place; without JS it is a plain link to that side
     document.addEventListener('click', function (ev) {
         var a = ev.target.closest && ev.target.closest('a[data-flip]'); if (!a) return;
-        ev.preventDefault(); set(a.dataset.flip);   // the reader stays where they are and watches the overview change sides
+        ev.preventDefault(); set(a.dataset.flip);
     });
 })();
 
