@@ -33,8 +33,8 @@
       },
       "folder-craft": {
         "zone": "page",
-        "x": 8.8,
-        "y": 47.6
+        "x": 55.7,
+        "y": 44
       },
       "folder-bot-makers": {
         "zone": "hero",
@@ -48,28 +48,28 @@
       },
       "thread-body-measurements": {
         "zone": "hero",
-        "x": 28,
-        "y": 78
+        "x": 31.1,
+        "y": 85.6
       },
       "thread-fantasy-and-reality": {
         "zone": "hero",
-        "x": 74.2,
-        "y": 88.7
+        "x": 74.8,
+        "y": 99.1
       },
       "thread-get-laid": {
         "zone": "hero",
-        "x": 87.8,
-        "y": 71.9
+        "x": 81.1,
+        "y": 73.2
       },
       "margin-thread-making-bots": {
         "zone": "page",
-        "x": 21.2,
-        "y": 56.3
+        "x": 48.4,
+        "y": 59.7
       },
       "margin-clip-delta-demon": {
         "zone": "page",
-        "x": 89.6,
-        "y": 71.1
+        "x": 86.9,
+        "y": 69.6
       },
       "margin-folder-bot-requests": {
         "zone": "page",
@@ -162,6 +162,18 @@
         "zone": "hero",
         "x": 59.5,
         "y": 75.4
+      },
+      "scene-craft-picture-26": {
+        "x": 1077,
+        "y": 1961
+      },
+      "scene-craft-icon-6": {
+        "x": 796,
+        "y": 637
+      },
+      "scene-craft-picture-29": {
+        "x": 178,
+        "y": 3750
       }
     },
     "phone": {
@@ -248,12 +260,8 @@
         "y": -121
       },
       "phone-strip-0-folder-the-craft": {
-        "x": 15,
-        "y": 126
-      },
-      "phone-strip-0-pic-22": {
-        "x": 7,
-        "y": -9
+        "x": 15.6,
+        "y": -5
       },
       "phone-strip-1-pic-04": {
         "x": 3.1,
@@ -276,8 +284,8 @@
         "y": -65
       },
       "phone-strip-1-thread-rude-bots": {
-        "x": 17.8,
-        "y": 81
+        "x": 10.1,
+        "y": 321
       },
       "phone-strip-1-pic-20": {
         "x": 7.6,
@@ -300,20 +308,16 @@
         "y": -87
       },
       "phone-strip-2-thread-making-bots-at-2am": {
-        "x": 12.2,
-        "y": -162
-      },
-      "phone-strip-2-pic-03": {
-        "x": -32.3,
-        "y": -269
+        "x": 8.7,
+        "y": -184
       },
       "phone-strip-2-file-loving_korean_boyfriend": {
-        "x": 49.7,
-        "y": -105
+        "x": 35.4,
+        "y": 2383
       },
       "phone-strip-2-file-judgemental_priest": {
-        "x": 12.5,
-        "y": -140
+        "x": 15.5,
+        "y": -204
       },
       "phone-strip-2-request-haunted-costume-shop": {
         "x": -14.4,
@@ -328,28 +332,64 @@
         "y": 13
       },
       "phone-strip-3-clip-delta-demon": {
-        "x": 10.1,
-        "y": 643
+        "x": 4.7,
+        "y": 680
       },
       "phone-strip-3-pic-17": {
-        "x": 11.1,
-        "y": -1
+        "x": 10.8,
+        "y": 39
       },
       "phone-strip-3-pic-01": {
         "x": -14.8,
         "y": -104
       },
       "phone-strip-3-request-succubus-better-person": {
-        "x": 10.1,
-        "y": -522
+        "x": -1.8,
+        "y": -539
       },
       "phone-strip-3-file-mentally_unwell_dad_and_stressed_mom": {
-        "x": 18.9,
-        "y": -38
+        "x": 6.4,
+        "y": -91
       },
       "phone-strip-3-thread-what-porn-was-filling": {
-        "x": 16.3,
-        "y": -63
+        "x": -18.2,
+        "y": -145
+      },
+      "phone-strip-0-pic-29": {
+        "x": 9.8,
+        "y": -18
+      },
+      "phone-strip-0-pic-27": {
+        "x": 37,
+        "y": -75
+      },
+      "win-teaser": {
+        "x": -1.6,
+        "y": -132
+      },
+      "phone-strip-1-pic-28": {
+        "x": 16,
+        "y": -150
+      },
+      "phone-strip-2-pic-25": {
+        "x": -34.3,
+        "y": -291
+      },
+      "phone-strip-3-pic-26": {
+        "x": -10.7,
+        "y": -83
+      },
+      "phone-strip-3-pic-00": {
+        "x": 6.6,
+        "y": -19
+      },
+      "phone-strip-2-pic-30": {
+        "x": -6.3,
+        "y": 0
+      },
+      "phone-strip-3-pic-20": {
+        "x": 4.7,
+        "y": 17
       }
     }
   },
@@ -357,8 +397,8 @@
     "desktop": {
       "margin-folder-bot-requests": {
         "zone": "page",
-        "x": 76.3,
-        "y": 70.2
+        "x": 60.7,
+        "y": 65.7
       },
       "margin-file-ossix": {
         "zone": "page",
@@ -377,13 +417,13 @@
       },
       "margin-thread-voice-chat": {
         "zone": "page",
-        "x": 26.9,
-        "y": 96.8
+        "x": 32.2,
+        "y": 94.3
       },
       "margin-thread-breached-400k": {
         "zone": "page",
-        "x": 71,
-        "y": 86.1
+        "x": 71.7,
+        "y": 87.2
       },
       "margin-clip-delta-demon": {
         "zone": "page",
@@ -392,26 +432,26 @@
       },
       "margin-file-priest": {
         "zone": "page",
-        "x": 10.8,
-        "y": 33.7
+        "x": 57.5,
+        "y": 56.6
       },
       "margin-request-succubus": {
         "zone": "page",
-        "x": 91.1,
-        "y": 27.4
+        "x": 88.8,
+        "y": 19.8
       },
       "margin-file-luna": {
         "zone": "page",
-        "x": 12.3,
+        "x": 31.2,
         "y": 18.8
       },
       "scene-craft-icon-0": {
-        "x": 385,
-        "y": 8
+        "x": 740,
+        "y": 328
       },
       "scene-craft-icon-2": {
-        "x": 737,
-        "y": 164
+        "x": 222,
+        "y": 1960
       },
       "margin-file-minho": {
         "zone": "hero",
@@ -459,12 +499,38 @@
         "y": 9.1
       },
       "scene-craft-picture-12": {
-        "x": 557,
-        "y": 144
+        "x": 1268,
+        "y": 412
       },
       "scene-craft-picture-17": {
         "x": 497,
         "y": 353
+      },
+      "scene-craft-icon-6": {
+        "x": 786,
+        "y": 689
+      },
+      "margin-picture-stew": {
+        "zone": "page",
+        "x": 16.9,
+        "y": 78.3
+      },
+      "folder-craft": {
+        "zone": "page",
+        "x": 57.2,
+        "y": 50.8
+      },
+      "scene-craft-icon-5": {
+        "x": 177,
+        "y": 1140
+      },
+      "scene-craft-cursor": {
+        "x": 379,
+        "y": 80
+      },
+      "scene-craft-icon-1": {
+        "x": 1047,
+        "y": 15
       }
     },
     "phone": {
@@ -482,17 +548,17 @@
         "y": -129
       },
       "phone-strip-0-file-rich_dommy_mommy": {
-        "x": 49.7,
-        "y": -1277
+        "x": 8.7,
+        "y": -1402
       },
       "phone-strip-0-pic-24": {
-        "x": -12.5,
-        "y": -184
+        "x": -9.8,
+        "y": -173
       },
       "folder-user": {
-        "zone": "page",
-        "x": 32.8,
-        "y": 0.1
+        "zone": "hero",
+        "x": 37.4,
+        "y": 92.6
       },
       "win-overview": {
         "x": 0.1,
@@ -502,6 +568,58 @@
         "zone": "hero",
         "x": 77,
         "y": 64.6
+      },
+      "phone-strip-0-thread-breached-400k": {
+        "x": 3.1,
+        "y": -7
+      },
+      "phone-strip-0-folder-the-craft": {
+        "x": 9.7,
+        "y": 1624
+      },
+      "win-teaser": {
+        "x": -0.1,
+        "y": -73
+      },
+      "phone-strip-1-file-experiment_0682": {
+        "x": -2.1,
+        "y": -12
+      },
+      "phone-strip-1-thread-scared-to-join-voice-chat": {
+        "x": -0.6,
+        "y": -109
+      },
+      "phone-strip-1-pic-20": {
+        "x": 8.7,
+        "y": -51
+      },
+      "phone-strip-3-pic-17": {
+        "x": 20,
+        "y": -853
+      },
+      "phone-strip-2-folder-the-user": {
+        "x": 3.6,
+        "y": 706
+      },
+      "phone-strip-3-pic-01": {
+        "x": -11.5,
+        "y": -90
+      },
+      "phone-strip-3-clip-delta-demon": {
+        "x": 7.5,
+        "y": 630
+      },
+      "phone-strip-1-pic-08": {
+        "x": -18.6,
+        "y": -1668
+      },
+      "phone-strip-1-clip-delta-psychology": {
+        "x": 7.6,
+        "y": -133
+      },
+      "phone-strip-1-thread-rude-bots": {
+        "x": 17.5,
+        "y": 2
       }
     }
   },

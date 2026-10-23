@@ -11,11 +11,12 @@
     var CURSOR = '<svg viewBox="0 0 24 30" fill="#FFFFFF" stroke="#17111A" stroke-width="1.4" stroke-linejoin="round"><path d="M2 2 L2 24 L8 18.5 L12 27 L16 25.2 L12.2 17 L20 17 Z"/></svg>';
     // the found pictures: the thumb's file, the name its window shows, and its shape
     var PIC = {
-        '00': ['00005-3114799947.png', 800, 600], '01': ['00137-2557897375.png', 600, 800], '02': ['1ae111ac-ad9a-4cdb.png', 800, 547], '03': ['2025-12-29-073550.png', 800, 480],
+        '00': ['00005-3114799947.png', 800, 600], '01': ['00137-2557897375.png', 600, 800], '02': ['1ae111ac-ad9a-4cdb.png', 800, 547],
         '04': ['2026-02-24-201537_prefect.png', 600, 800], '06': ['4d405574-a120-45af.png', 800, 800], '08': ['a-woo.jpg', 800, 800], '10': ['a81cd40b-328d-49dd.png', 800, 533],
         '11': ['b344f719-82c0-464f.png', 480, 800], '12': ['bodyguard 1.png', 514, 800], '13': ['c2c96d44-1e1a-4f67.png', 800, 533], '14': ['c7d61dfd-dc69-4328.png', 533, 800],
         '15': ['f66d83d4-b598-47da.png', 800, 450], '16': ['god_why.jpg', 800, 800], '17': ['kitty_cat.jpg', 800, 800], '20': ['popping_a_squat.jpg', 800, 800],
-        '22': ['SPOILER_view.png', 600, 800], '23': ['why_is_there_lime_on_the_stew.jpg', 800, 800], '24': ['00063-2713696236.png', 1344, 1728]
+        '23': ['why_is_there_lime_on_the_stew.jpg', 800, 800], '24': ['00063-2713696236.png', 1344, 1728],
+        '26': ['ram_pam_pam.png', 603, 800], '27': ['old_crone_2.png', 603, 800], '28': ['fantasy_game_hud.png', 603, 800], '29': ['fighting_bunny.png', 603, 800], '30': ['zone-tan.png', 603, 800], '25': ['old_crone.png', 603, 800]
     };
     // the desks, the frames the deck shows; each one a working desktop
     var folder = function (id, label, x, y) { return { folder: id, label: label, x: x, y: y }; };
@@ -48,28 +49,28 @@
             rest: [280, 344],
             icons: [thread('facial expression is critical', '3 messages', ['face-07'], 208, 112, 'facial-expression-is-critical', 'craft'), clip('delta-psychology', 'craft', 'what hooked her', 1180, 120), folder('bot-makers', 'bot makers', 896, 320), thread('what the bots replaced', '3 messages', ['face-07'], 1408, 376, 'what-porn-was-filling', 'user'),
                 folder('the-craft', 'the craft', 235, 656), thread('rude bots', '4 messages', ['face-09', 'face-05'], 752, 656, 'rude-bots', 'craft'), folder('the-user', 'the {{user}}', 1032, 704)],
-            pics: [pic('12', 480, 144, 208), pic('17', 429, 360, 208), pic('24', 1080, 328, 221), pic('08', 1240, 560, 205)]
+            pics: [pic('12', 480, 144, 208), pic('17', 429, 360, 208), pic('24', 1080, 328, 221), pic('08', 1240, 560, 205), pic('25', 790, 110, 230), pic('26', 1350, 80, 200), pic('29', 150, 560, 210)]
         },
         // the hoard: fifteen pictures covering the desk
         hoard: {
             rest: [1288, 360],
             icons: [],
-            pics: [pic('23', 60, 70, 420), pic('12', 1190, 20, 300), pic('16', 470, 40, 170), pic('22', 30, 430, 330), pic('11', 1040, 110, 230),
-                pic('00', 920, 450, 560), pic('15', 1330, 600, 220), pic('10', 600, 130, 380), pic('17', 1460, 300, 140), pic('03', 540, 650, 330),
+            pics: [pic('23', 60, 70, 420), pic('12', 1190, 20, 300), pic('16', 470, 40, 170), pic('11', 1040, 110, 230), pic('25', 30, 430, 300),
+                pic('00', 920, 450, 560), pic('15', 1330, 600, 220), pic('10', 600, 130, 380), pic('17', 1460, 300, 140), 
                 pic('06', 780, 20, 160), pic('02', 330, 250, 260), pic('04', 1250, 330, 250), pic('20', 440, 520, 200), pic('13', 640, 300, 440)]
         },
         // seven windows on the empty desk
         windows: {
             icons: [],
-            pics: [pic('03', 125, 419, 208), pic('12', 477, 141, 208), pic('01', 528, 352, 211), pic('22', 848, 232, 208), pic('20', 1104, 72, 208), pic('00', 1120, 419, 312), pic('08', 1232, 560, 208)]
+            pics: [pic('00', 880, 480, 300), pic('12', 477, 141, 208), pic('01', 528, 352, 211), pic('20', 1104, 72, 208), pic('08', 1050, 520, 208), pic('27', 120, 100, 220), pic('28', 800, 430, 260), pic('30', 300, 580, 200)]   // the first picture lies at the bottom of the pile, under the game and the robot
         }
     };
     // what each folder holds (the site's folderContents): the found pictures of that chapter
     var FOLDERS = {
         'bot-requests': { title: 'bot requests', path: 'bot requests', files: ['00', '20', '14', '16', '01'] },
-        'bot-makers':   { title: 'bot makers',   path: 'bot makers',   files: ['12', '17', '24', '08'] },
-        'the-craft':    { title: 'the craft',    path: 'the craft',    files: ['23', '12', '16', '22', '11', '00', '15', '10', '17', '03', '06', '02', '04', '20', '13'] },
-        'the-user':     { title: 'the {{user}}', path: 'the user',     files: ['03', '22', '04', '23', '08'] }
+        'bot-makers':   { title: 'bot makers',   path: 'bot makers',   files: ['12', '17', '24', '08', '28'] },
+        'the-craft':    { title: 'the craft',    path: 'the craft',    files: ['23', '12', '16', '11', '00', '15', '10', '17', '06', '02', '04', '20', '13', '25', '26', '29'] },
+        'the-user':     { title: 'the {{user}}', path: 'the user',     files: ['04', '23', '08', '30', '27'] }
     };
 
     // ---- the desktop's sounds (main.js: getAudio, tone, rtone, playSound) ----
@@ -232,22 +233,9 @@
             win.style.cssText = 'left:' + w.x + 'px; top:' + w.y + 'px; width:' + w.w + 'px; z-index:' + (10 + i) + ';';
             desk.appendChild(win);
         });
-        // the pictures sit on the desk as files, each under the middle of its window, the window open over it
-        var top = 10 + L.pics.length;   // the front-most window on this desk
+        // the pictures sit on the desk as open windows (no file icons under them: the thumbnails are off the site)
         L.pics.forEach(function (p, i) {
             var meta = PIC[p.t], win;
-            var th = document.createElement('div');
-            th.className = 'desktop-icon';
-            th.innerHTML = '<div class="icon img-thumb"><img src="' + THUMBS + p.t + '.jpg" alt=""></div><span class="label"></span>';
-            th.querySelector('.label').textContent = meta[0];
-            th.dataset.id = 'scene-' + scene + '-file-' + p.t; th.dataset.anchor = 'centre';
-            // the file opens its own window on the desk (or brings it to the front if it is already open)
-            th.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (win.classList.contains('closed')) { win.classList.remove('closed'); playSound('open'); }
-                win.style.zIndex = ++top;
-            });
-            place(th, p.x + p.w / 2, p.y + (BAR + p.w * meta[2] / meta[1]) / 2 - 14); desk.appendChild(th);
             win = document.createElement('div');
             win.className = 'win';
             win.dataset.id = 'scene-' + scene + '-picture-' + p.t; win.dataset.anchor = 'left';
