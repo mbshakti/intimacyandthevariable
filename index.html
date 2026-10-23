@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-mode="film">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,11 +35,23 @@
         <a class="desktop-icon hide-m" href="desktop/#craft" data-chapter="craft" data-id="thread-body-measurements" data-thread="body-measurements" style="--x:28%; --y:78%"><div class="msg-avatar-stack"><img src="content/img/discord%20avatars/discord-avatar-05.jpg" class="msg-avatar-circle" alt=""></div><span class="label">body measurements</span><div class="meta-group"><span class="meta">5 messages</span></div></a>
         <a class="desktop-icon hide-s" href="desktop/#user" data-chapter="user" data-id="thread-fantasy-and-reality" data-thread="getting-bullied" style="--x:76%; --y:78%"><div class="msg-avatar-stack"><img src="content/img/discord%20avatars/discord-avatar-015.png" class="msg-avatar-circle" alt=""></div><span class="label">fantasy and reality</span><div class="meta-group"><span class="meta">1 message</span></div></a>
         <a class="desktop-icon" href="desktop/#user" data-chapter="user" data-id="thread-get-laid" data-thread="get-laid-or-god-destroys-humanity" style="--x:88%; --y:88%"><div class="msg-avatar-stack"><img src="content/img/discord%20avatars/discord-avatar-01.jpg" class="msg-avatar-circle" alt=""><img src="content/img/discord%20avatars/discord-avatar-017.png" class="msg-avatar-circle" alt=""></div><span class="label">Get Laid or God Destroys Humanity</span><div class="meta-group"><span class="meta">4 messages</span></div></a>
-        <div class="sim"><svg viewBox="0 0 24 30" fill="#FFFFFF" stroke="#17111A" stroke-width="1.4" stroke-linejoin="round"><path d="M2 2 L2 24 L8 18.5 L12 27 L16 25.2 L12.2 17 L20 17 Z"/></svg></div>
+        <div class="sim" data-id="cursor" data-anchor="left"><svg viewBox="0 0 24 30" fill="#FFFFFF" stroke="#17111A" stroke-width="1.4" stroke-linejoin="round"><path d="M2 2 L2 24 L8 18.5 L12 27 L16 25.2 L12.2 17 L20 17 Z"/></svg></div>
+    </div>
+    <!-- film or performance: the same work, two sides of a coin. The toggle changes the page's copy only (html[data-mode], js/main.js);
+         every element marked data-copy shows in its own mode and is hidden in the other -->
+    <!-- the mark at the top left: whose work this is, on the side showing -->
+    <p class="mark"><span data-copy="film">a film by Shakti Mb</span><span data-copy="performance">a performance by Shakti Mb</span></p>
+    <a class="badge admin-link" id="adminLink" href="admin">admin</a>
+    <div class="mode" role="group" aria-label="film or performance">
+        <span class="mode-ind" aria-hidden="true"></span>
+        <button class="mode-btn" type="button" data-set="film" aria-pressed="true">film<small>intimacy</small></button>
+        <button class="mode-btn" type="button" data-set="performance" aria-pressed="false">performance<small>unstable performers</small></button>
     </div>
     <div class="title">
-        <h1 class="typed"><span class="line">intimacy when</span><span class="line">the other side</span><span class="line">is a variable<span class="caret" aria-hidden="true"></span></span></h1>
-        <p class="by">a film by Shakti Mb</p>
+        <h1 class="typed" data-copy="film"><span class="line">intimacy when</span><span class="line">the other side</span><span class="line">is a variable<span class="caret" aria-hidden="true"></span></span></h1>
+        <h1 class="typed" data-copy="performance"><span class="line">unstable</span><span class="line">performers<span class="caret" aria-hidden="true"></span></span></h1>
+        <p class="by" data-copy="film">a film by Shakti Mb</p>
+        <p class="by" data-copy="performance">a live performance and screening</p>
     </div>
     <!-- the cue at the fold: there is more below -->
     <a class="down" href="#overview" aria-label="scroll to the overview"><span class="down-text">scroll</span><svg class="down-chev" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 1.5 L8 8 L14.5 1.5"/></svg></a>
@@ -49,22 +61,41 @@
 <!-- the archive's things in the margins, anywhere below the hero (desktop.js lays them out, the admin moves them) -->
 <div class="margin-desk" id="marginDesk"></div>
 
-<section class="win narrow" id="overview">
+<section class="win narrow" id="overview" data-id="win-overview" data-win>
     <div class="bar"><span class="name">overview</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
     <div class="page">
-        <p class="lede">An artist begins lurking in online communities where strangers gather to make AI roleplay bots. Expecting virtual girlfriends, she finds monsters and difficult lovers. Conversations with a botmaker named <span class="lit">Delta</span> draw her in. What do these bots reveal about their makers?</p>
-        <dl class="facts">
+        <p class="lede" data-copy="film">An artist begins lurking in online communities where strangers gather to make AI roleplay bots. Expecting virtual girlfriends, she finds monsters and difficult lovers. Conversations with a botmaker named <span class="lit">Delta</span> draw her in. What do these bots reveal about their makers? The film is also staged live, as <a href="?performance" data-flip="performance">Unstable Performers</a>, with the artist reading from her diary in the room.</p>
+        <p class="lede" data-copy="performance"><span class="lit">Unstable Performers</span> is an audiovisual performance that turns the audience into voyeurs, lurking in the online space where AI botmakers gather. It is the film <a href="./" data-flip="film">Intimacy when the other side is a variable</a>, played in the room, with the artist reading from her diary between its voices.</p>
+        <dl class="facts" data-copy="film">
             <div><dt>format</dt><dd>Desktop Documentary and Video Essay</dd></div>
             <div><dt>duration</dt><dd>25 minutes</dd></div>
-            <div><dt>a film by</dt><dd>Shakti Mb</dd></div>
-            <div><dt>co-edited by</dt><dd>Shakti Mb &amp; Kiana Fernandez</dd></div>
-            <div><dt>creative direction</dt><dd>Kiana Fernandez</dd></div>
+            <div><dt>also staged as</dt><dd><a href="?performance" data-flip="performance">Unstable Performers</a>, a live performance and screening</dd></div>
+        </dl>
+        <dl class="facts" data-copy="performance">
+            <div><dt>duration</dt><dd>about 30 minutes</dd></div>
+            <div><dt>a live work by</dt><dd>Shakti Mb &amp; Kiana Fernandez</dd></div>
+            <div><dt>seeking</dt><dd>an intimate NYC space</dd></div>
+            <div><dt>built on</dt><dd><a href="./" data-flip="film">Intimacy when the other side is a variable</a>, the 25-minute film</dd></div>
         </dl>
     </div>
 </section>
 
+<!-- the performance side only: how it goes in the room, with a reference (copy from the unstable-performers page) -->
+<section class="split" id="walkthrough" data-copy="performance">
+    <div class="text">
+        <h2>the <span class="lit">experiential</span> walkthrough</h2>
+        <p>The audience enters a darkened room and a single projection anchors the space.</p>
+        <p>Between the voices, a single light finds the artist as she reads from her diary. The audience overhears conversations never meant for them.</p>
+        <p>Botmakers, bots, and the artist all take turns performing.</p>
+    </div>
+    <figure class="win ref" style="margin:0" data-id="win-walkthrough" data-win>
+        <div class="bar"><span class="name">Alex Quicho, 2023, SOFT POWER, Bad Omens</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
+        <img src="img/photos/reference-reading.jpg" alt="The artist reading at a microphone beside a large projection of an animated character, a seated audience in the dark" width="1056" height="692"><span class="badge">reference photo</span>
+    </figure>
+</section>
+
 <!-- the teaser, in a window of the desktop's chrome -->
-<section class="win" id="teaser">
+<section class="win" id="teaser" data-id="win-teaser" data-win>
     <div class="bar"><span class="name">teaser</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
     <!-- the poster frame with a play pill; the Vimeo player only loads when it is pressed (js/main.js) -->
     <div class="video" id="teaserVideo" data-vimeo="1238459185">
@@ -82,28 +113,55 @@
     </div>
 </section>
 
+<!-- the performance side only: the space it needs, with two references (copy from the unstable-performers page) -->
+<section class="split" id="venue" data-copy="performance">
+    <div class="text">
+        <h2>we are seeking an <span class="lit">intimate</span> NYC space to host a performance</h2>
+        <p>The work can be staged in a small gallery or space, with a seated audience facing a single screen or projection.</p>
+        <p>Seating and lighting placement will be developed in response to the venue and tested in rehearsal.</p>
+    </div>
+    <ul class="grid two">
+        <li class="win still ref" data-id="win-venue-reading" data-win><div class="bar"><span class="name">Alex Quicho, 2023, SOFT POWER, Bad Omens</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div><img src="img/photos/reference-reading.jpg" alt="A reading beside a projection, audience seated in the dark"><span class="badge">reference photo</span></li>
+        <li class="win still ref" data-id="win-venue-blue" data-win><div class="bar"><span class="name">Bogna Konior, Angels in Latent Spaces, OpenLAB</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div><img src="img/photos/venue-blue.jpg" alt="A blue projected title across a wide screen in a dim room"><span class="badge">reference photo</span></li>
+    </ul>
+</section>
+
 <!-- the lower sections, with the archive's things in the margins round them on a wide screen (desktop.js lays them out);
      narrower than that, the same things as a desk of their own at the end -->
 <div class="lower">
 
+<!-- the film's credits, in a window above the two bios they belong with -->
+<section class="people credits" id="credits">
+    <div class="win" data-id="win-credits" data-win>
+        <div class="bar"><span class="name">credits</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
+        <div class="page">
+            <dl class="facts">
+                <div><dt>a film by</dt><dd>Shakti Mb</dd></div>
+                <div><dt>co-edited by</dt><dd>Shakti Mb &amp; Kiana Fernandez</dd></div>
+                <div><dt>creative direction</dt><dd>Kiana Fernandez</dd></div>
+            </dl>
+        </div>
+    </div>
+</section>
+
 <section id="team">
     <div class="people">
-    <div class="win">
+    <div class="win" data-id="win-shakti" data-win>
         <div class="bar"><span class="name">Shakti Mb</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
         <div class="page">
             <article class="person">
             <img src="img/team/shakti-mb.jpg" alt="Shakti Mb holding a phone on a tripod in front of her face, the screen showing her eyes" width="295" height="300">
-            <h3><span class="lit">Shakti Mb</span> <span class="role">Director, co-editor</span></h3>
+            <h3><span class="lit">Shakti Mb</span> <span class="role" data-copy="film">Director, co-editor</span><span class="role" data-copy="performance">artist, filmmaker</span></h3>
             <p>Shakti Mb is a New York based artist, filmmaker, and software designer whose work explores the psychology of people. Her work has been supported by Rhizome, NEW INC, Emergent Ventures, Mozilla, and UnionDocs, and presented at the New Museum, Anthology Film Archives, and DCTV. Her net-art archive, <a href="https://mygirlfriendisajsonfile.com">My Girlfriend Is a JSON File</a>, received a 2024 Rhizome Microgrant. She is currently a NEW INC Y13 member and was previously a NEW INC Art + Code Fellow, Mozilla Counter Structures resident, and UnionDocs Collaborative Studio Fellow.</p>
         </article>
         </div>
     </div>
-    <div class="win">
+    <div class="win" data-id="win-kiana" data-win>
         <div class="bar"><span class="name">Kiana Fernandez</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
         <div class="page">
             <article class="person">
             <img src="img/team/kiana-fernandez.jpg" alt="Kiana Fernandez in profile, cut out against a gold shape" width="700" height="913">
-            <h3><span class="lit">Kiana Fernandez</span> <span class="role">Co-editor, creative director</span></h3>
+            <h3><span class="lit">Kiana Fernandez</span> <span class="role" data-copy="film">Co-editor, creative direction</span><span class="role" data-copy="performance">artist, filmmaker, exhibition designer</span></h3>
             <p>Kiana Fernandez is an artist, art director, multimedia designer, and filmmaker based in New York City.</p>
             <p>Engaging across the boundaries of print, video, photomontage, crowdsourcing, and tangibility, her work has been exhibited through Anthology Film Archives, The Museum of Moving Image, The New Museum, Union Docs, The MOMA, Nguyen Wahed, DCTV, Rockaway Film Festival, Science New Wave Festival, and more.</p>
         </article>
@@ -114,17 +172,17 @@
 
 <!-- two smaller windows, one over the other, as they would lie on the desk -->
 <section class="stack" id="notes">
-    <section class="win" id="support">
+    <section class="win" id="support" data-id="win-support" data-win>
         <div class="bar"><span class="name">support</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
         <div class="page">
             <p class="lede">This work grew out of Shakti's research on AI companions, supported by <span class="lit">Rhizome</span>, <span class="lit">NEW INC</span>, <span class="lit">Emergent Ventures</span>, and <span class="lit">Mozilla</span>.</p>
     </div>
     </section>
 
-    <section class="win" id="audience">
+    <section class="win" id="audience" data-id="win-audience" data-win>
         <div class="bar"><span class="name">this is for you, if...</span><span class="close" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></span></div>
         <div class="page">
-            <p class="lede">...you are curious about the <span class="lit">psychology of botmakers,</span> internet subcultures, and human behavior, watch this film.</p>
+            <p class="lede">...you are curious about the <span class="lit">psychology of botmakers,</span> internet subcultures, and human behavior, <span data-copy="film">watch this film</span><span data-copy="performance">come to the performance</span>.</p>
     </div>
     </section>
 </section>
@@ -179,12 +237,13 @@
 </div>
 
 <!-- the screening sign-up, as the desktop had it: the input and the button alone. Bottom right on a desktop; a bar along the bottom on a phone -->
-<form class="signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up for the screening">
+<form class="signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up for the screening and the performance">
     <input type="hidden" name="form-name" value="screening-invites">
     <p class="signup-bot"><label>Do not fill this out: <input name="bot-field"></label></p>
-    <label class="signup-heading" for="signupEmail">Sign up for a screening</label>
+    <label class="signup-heading" for="signupEmail">Sign up for the screening and the performance</label>
     <input id="signupEmail" class="signup-input" type="email" name="email" placeholder="email@gmail.com" autocomplete="email" required>
     <button class="signup-submit" type="submit">Sign up</button>
+    <p class="signup-note"><span data-copy="film">Or email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> for inquiries.</span><span data-copy="performance">Or email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> to host the performance.</span></p>
 </form>
 <script src="js/main.js"></script>
 <script src="js/desktop.js"></script>

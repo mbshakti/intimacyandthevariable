@@ -1,54 +1,53 @@
-// The title types itself in once, the way the diary does in the film: the
-// caret stands where the next letter will go and follows each one in, quick
-// inside a word, a breath at the line break, now and then a hesitation; it
-// holds solid while keys go in and blinks only once the writer stops. With
-// reduced motion, or if the fonts never arrive, the title is simply there.
+// Film or performance: the toggle at the top of the hero. The same work, two sides of a coin; the content stays
+// and only the copy follows (every element marked data-copy, shown or hidden by landing.css off html[data-mode]).
+// ?performance in the address opens the page on that side, and the toggle keeps the address in step, so either
+// side can be sent as a link.
 (function () {
-    var h1 = document.querySelector('.typed');
-    if (!h1 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var caret = h1.querySelector('.caret');
-    var lines = h1.querySelectorAll('.line');
-    var chars = [];
-    lines.forEach(function (line) {
-        var text = line.textContent;
-        line.textContent = '';
-        for (var i = 0; i < text.length; i++) {
-            var s = document.createElement('span');
-            s.className = 'ch';
-            s.textContent = text[i];
-            s.dataset.last = (i === text.length - 1) ? '1' : '';
-            line.appendChild(s);
-            chars.push(s);
-        }
-    });
-    if (!caret || !chars.length) return;
-    // the caret waits at the start of the first line, blinking, until the writer begins
-    lines[0].insertBefore(caret, chars[0]);
-    var rand = function (a, b) { return a + Math.random() * (b - a); };
-    var restTimer = null;
-    function keystroke() {
-        caret.classList.add('typing');
-        clearTimeout(restTimer);
-        restTimer = setTimeout(function () { caret.classList.remove('typing'); }, 450);
+    var root = document.documentElement, btns = document.querySelectorAll('.mode-btn');
+    var titles = {
+        film: 'Intimacy when the other side is a variable, a desktop documentary and video essay',
+        performance: 'Unstable Performers, a live performance and screening'
+    };
+    var ind = document.querySelector('.mode-ind'), busy = false, wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    // the highlight sits under the pressed side; it slides there once it has a place to slide from
+    function place() {
+        if (!ind) return;
+        var b = document.querySelector('.mode-btn[aria-pressed="true"]'); if (!b) return;
+        ind.style.width = b.offsetWidth + 'px';
+        ind.style.transform = 'translateX(' + (b.offsetLeft - 5) + 'px)';
+        if (!ind.classList.contains('placed')) requestAnimationFrame(function () { ind.classList.add('placed'); });
     }
-    var ready = document.fonts ? document.fonts.ready : Promise.resolve();
-    var fallback = new Promise(function (r) { setTimeout(r, 600); });
-    Promise.race([ready, fallback]).then(function () {
-        var i = 0;
-        function next() {
-            if (i >= chars.length) return;
-            var ch = chars[i];
-            ch.classList.add('on');
-            ch.after(caret);                                      // the caret moves on behind the letter
-            keystroke();
-            i++;
-            if (i >= chars.length) return;
-            var d = rand(72, 128);                                // a key
-            if (ch.dataset.last) d = rand(480, 680);              // the breath at the line break
-            else if (Math.random() < 0.12) d += rand(200, 390);   // a hesitation
-            setTimeout(next, d);
-        }
-        setTimeout(next, 150);                                 // the first key, as soon as the type is in
+    function apply(mode) {
+        root.dataset.mode = mode;
+        btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === mode)); });
+        document.title = titles[mode];
+        place();
+    }
+    // the switch, as a sequence: the old side's copy, title included, fades; then the new side's comes in.
+    // A press during the switch waits its turn.
+    function set(mode) {
+        if (busy || root.dataset.mode === mode) return;
+        busy = true;
+        btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === mode)); });   // the highlight moves at once
+        place();
+        root.classList.add('switching');
+        wait(240).then(function () {
+            apply(mode);
+            if (history.replaceState) history.replaceState(null, '', location.pathname + (mode === 'performance' ? '?performance' : '') + location.hash);
+            root.classList.remove('switching');
+            root.classList.add('copy-in');
+            return wait(450);
+        }).then(function () { root.classList.remove('copy-in'); busy = false; });
+    }
+    apply(/[?&]performance(?=&|=|$)/.test(location.search) ? 'performance' : 'film');
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);   // the type settles, the highlight fits it
+    window.addEventListener('resize', place);
+    if (window.ResizeObserver) { var ro = new ResizeObserver(place); btns.forEach(function (b) { ro.observe(b); }); }   // the highlight follows a side as it opens or closes
+    btns.forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.set); }); });
+    // a link in the copy to the other side (the other work's name) flips the toggle in place; without JS it is a plain link to that side
+    document.addEventListener('click', function (ev) {
+        var a = ev.target.closest && ev.target.closest('a[data-flip]'); if (!a) return;
+        ev.preventDefault(); set(a.dataset.flip);   // the reader stays where they are and watches the overview change sides
     });
 })();
 
@@ -63,7 +62,7 @@
         if (!email) return;
         submit.disabled = true; submit.textContent = 'Sending\u2026';
         fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ email: email, source: 'screening-invites', page: location.href }) })
-            .then(function () { form.classList.add('done'); form.innerHTML = '<p class="signup-done">You\u2019re on the list.</p>'; })
+            .then(function () { var note = form.querySelector('.signup-note'); form.classList.add('done'); form.innerHTML = '<p class="signup-done">You\u2019re on the list.</p>' + (note ? note.outerHTML : ''); })
             .catch(function () { submit.disabled = false; submit.textContent = 'Sign up'; var s = form.querySelector('.signup-status') || document.createElement('p'); s.className = 'signup-status'; s.textContent = 'Something went wrong. Try again?'; form.appendChild(s); });
     });
 })();

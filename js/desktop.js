@@ -261,6 +261,7 @@
         });
         if (L.rest) {
             var sim = document.createElement('div'); sim.className = 'sim on'; sim.innerHTML = CURSOR; sim.setAttribute('aria-hidden', 'true');
+            sim.dataset.id = 'scene-' + scene + '-cursor'; sim.dataset.anchor = 'left';   // the cursor moves in the admin like the rest (js/admin.js)
             sim.style.left = L.rest[0] + 'px'; sim.style.top = L.rest[1] + 'px'; desk.appendChild(sim);
         }
         wire(host);

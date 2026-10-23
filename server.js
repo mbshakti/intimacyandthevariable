@@ -15,7 +15,8 @@ app.use(express.static(__dirname));
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.post('/api/layout', (req, res) => {
   const L = req.body;
-  if (!L || typeof L !== 'object' || !L.desktop || !L.phone) return res.status(400).json({ error: 'not a layout' });
+  var ok = L && typeof L === 'object' && ((L.film && L.film.desktop && L.film.phone) || (L.desktop && L.phone));   // the two-sided file, or the one from before the toggle
+  if (!ok) return res.status(400).json({ error: 'not a layout' });
   fs.writeFileSync(path.join(__dirname, 'hero-layout.json'), JSON.stringify(L, null, 2) + '\n');
   res.json({ ok: true });
 });
