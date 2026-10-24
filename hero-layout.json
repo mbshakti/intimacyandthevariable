@@ -343,8 +343,8 @@
       },
       "folder-craft": {
         "zone": "page",
-        "x": 22.1,
-        "y": 21.6
+        "x": 67.7,
+        "y": 21.8
       },
       "thread-voice-requests": {
         "zone": "hero",
@@ -400,23 +400,23 @@
       },
       "win-credits": {
         "zone": "page",
-        "x": 5.1,
-        "y": 31.9
+        "x": 4.4,
+        "y": 32.1
       },
       "win-shakti": {
         "zone": "page",
-        "x": 4,
-        "y": 35.3
+        "x": 3.9,
+        "y": 36.8
       },
       "win-kiana": {
         "zone": "page",
-        "x": 3.9,
-        "y": 42.6
+        "x": 3.6,
+        "y": 44.5
       },
       "win-teaser": {
         "zone": "page",
         "x": 3.8,
-        "y": 17.2
+        "y": 17.4
       },
       "phone-folder-bot-requests": {
         "zone": "page",
@@ -465,8 +465,8 @@
       },
       "phone-clip-delta-psychology": {
         "zone": "page",
-        "x": 82.5,
-        "y": 65.8
+        "x": 72.6,
+        "y": 63.8
       },
       "phone-thread-scared-to-join-voice-chat": {
         "zone": "page",
@@ -475,8 +475,8 @@
       },
       "phone-thread-rude-bots": {
         "zone": "page",
-        "x": 81.3,
-        "y": 69.6
+        "x": 69.2,
+        "y": 71
       },
       "phone-pic-12": {
         "zone": "page",
@@ -485,8 +485,8 @@
       },
       "phone-thread-making-bots-at-2am": {
         "zone": "page",
-        "x": 74.7,
-        "y": 61.5
+        "x": 69.5,
+        "y": 61.7
       },
       "phone-file-loving_korean_boyfriend": {
         "zone": "page",
@@ -495,13 +495,13 @@
       },
       "phone-file-judgemental_priest": {
         "zone": "page",
-        "x": 21.9,
-        "y": 61.9
+        "x": 43.2,
+        "y": 58.9
       },
       "phone-request-haunted-costume-shop": {
         "zone": "page",
-        "x": 71.6,
-        "y": 64.3
+        "x": 41.9,
+        "y": 66.8
       },
       "phone-folder-bot-makers": {
         "zone": "page",
@@ -510,8 +510,8 @@
       },
       "phone-clip-delta-demon": {
         "zone": "page",
-        "x": 80.5,
-        "y": 97.4
+        "x": 40.7,
+        "y": 96.2
       },
       "phone-pic-17": {
         "zone": "page",
@@ -520,13 +520,13 @@
       },
       "phone-request-succubus-better-person": {
         "zone": "page",
-        "x": 75.1,
-        "y": 71.1
+        "x": 70.2,
+        "y": 72.5
       },
       "phone-file-mentally_unwell_dad_and_stressed_mom": {
         "zone": "page",
-        "x": 77,
-        "y": 73.2
+        "x": 53.5,
+        "y": 75.3
       },
       "phone-thread-what-porn-was-filling": {
         "zone": "page",
@@ -550,8 +550,8 @@
       },
       "phone-pic-25": {
         "zone": "page",
-        "x": 12.7,
-        "y": 50.4
+        "x": 11.5,
+        "y": 52.3
       },
       "phone-pic-26": {
         "zone": "page",
@@ -560,13 +560,13 @@
       },
       "phone-pic-30": {
         "zone": "hero",
-        "x": 48.7,
-        "y": -2.6
+        "x": 49.3,
+        "y": -1.3
       },
       "phone-pic-20": {
         "zone": "page",
-        "x": 41.7,
-        "y": 89.6
+        "x": 41.1,
+        "y": 80
       },
       "phone-thread-shitting-bots-today": {
         "zone": "page",
@@ -585,18 +585,18 @@
       },
       "phone-file-evil_bully_wife": {
         "zone": "page",
-        "x": 81.3,
-        "y": 85.8
+        "x": 42.9,
+        "y": 86.8
       },
       "phone-thread-chatting-style-characters": {
         "zone": "page",
-        "x": 22.4,
-        "y": 98
+        "x": 37.5,
+        "y": 96.6
       },
       "win-venues": {
         "zone": "page",
-        "x": 4.7,
-        "y": 78.9
+        "x": 4.5,
+        "y": 79.3
       },
       "phone-thread-stuck-in-a-loop": {
         "zone": "page",
@@ -605,8 +605,8 @@
       },
       "phone-thread-keyword-collisions": {
         "zone": "page",
-        "x": 34.2,
-        "y": 84
+        "x": 77.6,
+        "y": 85
       },
       "phone-pic-01": {
         "zone": "page",
@@ -620,8 +620,8 @@
       },
       "phone-thread-templates-secret-formula": {
         "zone": "page",
-        "x": 68.6,
-        "y": 21.3
+        "x": 49.2,
+        "y": 12.5
       },
       "phone-thread-essay-length-replies": {
         "zone": "page",
@@ -635,8 +635,8 @@
       },
       "win-walkthrough": {
         "zone": "page",
-        "x": 12.7,
-        "y": 10.3
+        "x": 16.4,
+        "y": 10.6
       },
       "phone-thread-malicious-compliance-succubus": {
         "zone": "page",
@@ -645,8 +645,8 @@
       },
       "phone-thread-living-at-home": {
         "zone": "page",
-        "x": 76.4,
-        "y": 30.7
+        "x": 51.3,
+        "y": 36.1
       },
       "phone-thread-mother-of-all-bots": {
         "zone": "page",
@@ -655,8 +655,8 @@
       },
       "phone-thread-improvise-trick": {
         "zone": "page",
-        "x": 35.3,
-        "y": 70.9
+        "x": 37.3,
+        "y": 70.3
       },
       "win-support": {
         "zone": "page",
@@ -665,23 +665,23 @@
       },
       "phone-thread-porn-drives-innovation": {
         "zone": "page",
-        "x": 64.8,
-        "y": 81.2
+        "x": 30.2,
+        "y": 83.1
       },
       "win-audience": {
         "zone": "page",
-        "x": 4.6,
-        "y": 76.3
+        "x": 4.7,
+        "y": 76.6
       },
       "phone-thread-no-more-json": {
         "zone": "page",
-        "x": 66.6,
-        "y": 84.3
+        "x": 30.8,
+        "y": 34.5
       },
       "phone-request-thanos": {
         "zone": "page",
-        "x": 78.5,
-        "y": 95.8
+        "x": 79.3,
+        "y": 98
       },
       "phone-request-undercover-job": {
         "zone": "page",
@@ -725,8 +725,8 @@
       },
       "phone-thread-monster-girls": {
         "zone": "page",
-        "x": 79,
-        "y": 51.1
+        "x": 33.4,
+        "y": 61.9
       },
       "phone-thread-repetitive-answers": {
         "zone": "page",
