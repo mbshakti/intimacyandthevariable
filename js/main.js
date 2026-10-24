@@ -35,6 +35,7 @@
         wait(240).then(function () {
             apply(mode);
             if (history.replaceState) history.replaceState(null, '', addressFor(mode) + location.hash);
+            if (!onAdmin && window.fathom) fathom.trackPageview({ url: location.origin + addressFor(mode) });   // the toggle is a pageview of the other side: Fathom sees / and /performance apart
             root.classList.remove('switching');
             root.classList.add('copy-in');
             return wait(450);

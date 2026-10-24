@@ -17,6 +17,9 @@
 <link rel="preload" href="font/lekton/Lekton-Bold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="landing.css">
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="UQYISFVY" defer></script>
+<!-- / Fathom -->
 </head>
 <body>
 
@@ -236,12 +239,12 @@
 </div>
 
 <!-- the screening sign-up, as the desktop had it: the input and the button alone. Bottom right on a desktop; a bar along the bottom on a phone -->
-<form class="win signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up">
-    <div class="bar"><span class="name" id="signupTitle"><span data-copy="film">sign up for screening</span><span data-copy="performance">sign up for the performance</span></span><button class="close" type="button" id="signupClose" aria-label="close"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></button></div>
+<form class="win signup" id="signup" name="screening-invites" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="sign up for upcoming dates">
+    <div class="bar"><span class="name" id="signupTitle">sign up for upcoming dates</span><button class="close" type="button" id="signupClose" aria-label="close"><svg viewBox="0 0 10 10"><path d="M1.5 1.5 L8.5 8.5 M8.5 1.5 L1.5 8.5"/></svg></button></div>
     <div class="page">
         <input type="hidden" name="form-name" value="screening-invites">
         <p class="signup-bot"><label>Do not fill this out: <input name="bot-field"></label></p>
-        <label class="signup-heading" for="signupEmail"><span data-copy="film">Sign up for screening</span><span data-copy="performance">Sign up for the performance</span></label>
+        <label class="signup-heading" for="signupEmail">Sign up for upcoming dates</label>
         <input id="signupEmail" class="signup-input" type="email" name="email" placeholder="email@gmail.com" autocomplete="email" required>
         <button class="signup-submit" type="submit">Sign up</button>
         <p class="signup-note"><span data-copy="film">Email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> for inquiries.</span><span data-copy="performance">Email <a href="mailto:mbshakti@gmail.com">mbshakti@gmail.com</a> to host the performance.</span></p>

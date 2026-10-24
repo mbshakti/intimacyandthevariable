@@ -304,7 +304,7 @@ main > * + *, .lower > * + * { margin-top: clamp(64px, 9vw, 120px); }
     .desk a[data-chapter="bot-makers"]:not([data-thread]):not([data-note])   { left: 25%; top: 77%; }
     .desk a[data-chapter="user"]:not([data-thread]):not([data-note])         { left: 75%; top: 77%; }
     .sim { left: 56%; top: 65%; height: 4.5vh; min-height: 28px; }
-    .down { bottom: calc(170px + env(safe-area-inset-bottom)); }   /* above the sign-up window */
+    .down { bottom: calc(230px + env(safe-area-inset-bottom)); }   /* well above the sign-up window */
     .down .down-text { display: none; }   /* on a phone the chevron alone, so no stray word at the fold */
     .down .down-chev { width: 20px; height: 12px; }
     /* the longer title on a phone: smaller type, and the subtitle may wrap */
@@ -356,6 +356,14 @@ html[data-mode="film"] .title [data-copy="performance"], html[data-mode="perform
     .mode-btn small { display: none; }   /* on a phone the words alone, no project name after the pressed one */
     .mode-btn[aria-pressed="true"] { column-gap: 0; }
     .desk { top: calc(76px + env(safe-area-inset-top)); }   /* the phone's desk begins under the toggle, so the top folders keep clear of it */
+    .desk > .win, .margin-desk .win { width: 46vw; }   /* a picture or file taken out of a strip onto the hero or the page: about a strip's column wide */
+    /* more room between the windows on a phone, for the things laid between them */
+    main > * + *, .lower > * + * { margin-top: 200px; }
+    #teaser { margin-top: 220px; }
+    .lower > .contact { margin-top: 16px; }   /* the thank-you close right under what is above it, with no black field above or below */
+    .contact { padding: 24px 16px 8px; }
+    .desktop.mobile .scene-desk { gap: 56px 14px; padding-bottom: 16px; }
+    .desktop.mobile .stand-in { visibility: hidden; pointer-events: none; }   /* where a thing was before the admin took it out of the strip */
 }
 /* switching sides: the copy of the old side fades, the title with it; then the new side's comes in */
 [data-copy] { transition: opacity 220ms ease; }
@@ -401,7 +409,7 @@ html.admin .signup { display: none; }   /* out of the way while laying things ou
     .signup-submit { width: auto; flex: none; height: 44px; padding: 0 16px; }
     .signup.done .page { justify-content: center; }
     .signup-note { flex: 0 0 100%; padding: 0 2px; font-size: 11px; }
-    body { padding-bottom: calc(160px + env(safe-area-inset-bottom)); }   /* the page scrolls clear of the window floating at the bottom */
+    body { padding-bottom: calc(140px + env(safe-area-inset-bottom)); }   /* just what the sign-up window floating at the bottom needs */
 }
 
 /* ---- the layout admin (/admin, js/admin.js): everything draggable, nothing else on screen ---- */
@@ -409,7 +417,7 @@ html.admin .signup { display: none; }   /* out of the way while laying things ou
 html:not(.admin) .desktop-icon, html:not(.admin) .desktop-icon * { pointer-events: none; cursor: default; }
 html.admin .hero .desk [data-id], html.admin #marginDesk [data-id], html.admin .scene-desk [data-id] { cursor: move; user-select: none; touch-action: none; -webkit-user-select: none; -webkit-touch-callout: none; }   /* a finger on a thing drags it; the page scrolls from anywhere else */
 html.admin .sim { pointer-events: auto; }   /* the cursors take the pointer in the admin, to be dragged; on the page they never do */
-html.admin main [data-win] { cursor: move; user-select: none; -webkit-user-select: none; touch-action: none; }   /* the page's windows drag as a whole, from anywhere on them */
+html.admin main [data-win] > .bar { cursor: move; user-select: none; -webkit-user-select: none; touch-action: none; }   /* the page's windows drag by their title bar; a finger on the body scrolls */
 main [data-win].nudged { position: relative; z-index: 1; }   /* a window moved from its place lies over the sections after it, under the margins' things */
 .desktop.mobile .nudged { position: relative; z-index: 1; }   /* and a thing nudged out of its cell in a phone desk lies over its neighbours */
 html.admin main [data-win] a, html.admin main [data-win] button { pointer-events: none; }

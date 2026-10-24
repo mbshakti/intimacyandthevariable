@@ -3,33 +3,33 @@
     "desktop": {
       "folder-bot-requests": {
         "zone": "hero",
-        "x": 20,
-        "y": 18
+        "x": 75.9,
+        "y": 15.4
       },
       "thread-facial-expression": {
         "zone": "hero",
-        "x": 9.5,
-        "y": 35.5
+        "x": 22.5,
+        "y": 15.4
       },
       "thread-persona-design": {
         "zone": "hero",
-        "x": 69.1,
-        "y": 13.7
+        "x": 67,
+        "y": 13.3
       },
       "request-ossix-ayto": {
         "zone": "page",
-        "x": 91,
-        "y": 6.7
+        "x": 88.9,
+        "y": 4.7
       },
       "thread-catharsis": {
         "zone": "hero",
-        "x": 81.2,
-        "y": 27.7
+        "x": 78.5,
+        "y": 65.8
       },
       "thread-voice-requests": {
-        "zone": "hero",
-        "x": 16.8,
-        "y": 49.2
+        "zone": "page",
+        "x": 60.1,
+        "y": 1.8
       },
       "folder-craft": {
         "zone": "page",
@@ -37,9 +37,9 @@
         "y": 44
       },
       "folder-bot-makers": {
-        "zone": "hero",
-        "x": 10,
-        "y": 72
+        "zone": "page",
+        "x": 86.1,
+        "y": 12.5
       },
       "folder-user": {
         "zone": "page",
@@ -58,42 +58,38 @@
       },
       "thread-get-laid": {
         "zone": "hero",
-        "x": 81.1,
-        "y": 73.2
+        "x": 88.3,
+        "y": 82.5
       },
       "margin-thread-making-bots": {
         "zone": "page",
-        "x": 33.5,
-        "y": 57
+        "x": 36,
+        "y": 55.7
       },
       "margin-clip-delta-demon": {
         "zone": "page",
-        "x": 72.4,
-        "y": 69.3
+        "x": 63,
+        "y": 70.3
       },
       "margin-folder-bot-requests": {
         "zone": "page",
-        "x": 72.6,
-        "y": 84.4
+        "x": 70.7,
+        "y": 85
       },
       "margin-file-ossix": {
         "zone": "page",
-        "x": 15.3,
-        "y": 74.7
+        "x": 16.3,
+        "y": 76.1
       },
       "margin-picture-stew": {
         "zone": "page",
-        "x": 24.8,
-        "y": 76.7
+        "x": 27.4,
+        "y": 76.2
       },
       "margin-picture-dragon": {
         "zone": "page",
         "x": 77.6,
         "y": 92.5
-      },
-      "scene-craft-icon-3": {
-        "x": 366,
-        "y": 716
       },
       "scene-windows-picture-01": {
         "x": 497,
@@ -101,18 +97,18 @@
       },
       "margin-file-minho": {
         "zone": "hero",
-        "x": 87.8,
-        "y": 47.7
+        "x": 26.8,
+        "y": 65.8
       },
       "margin-file-victoria": {
         "zone": "page",
-        "x": 10.1,
-        "y": 7.7
+        "x": 15.4,
+        "y": 8.2
       },
       "margin-file-eleanor": {
         "zone": "page",
-        "x": 30.7,
-        "y": 93.3
+        "x": 31,
+        "y": 91.8
       },
       "margin-file-luna": {
         "zone": "page",
@@ -121,8 +117,8 @@
       },
       "margin-file-priest": {
         "zone": "page",
-        "x": 14.9,
-        "y": 33.3
+        "x": 14,
+        "y": 34.7
       },
       "margin-file-parents": {
         "zone": "page",
@@ -131,23 +127,23 @@
       },
       "margin-thread-breached-400k": {
         "zone": "page",
-        "x": 93.5,
-        "y": 44
+        "x": 75.7,
+        "y": 42.7
       },
       "margin-thread-voice-chat": {
         "zone": "page",
-        "x": 19.8,
-        "y": 96.8
+        "x": 18.7,
+        "y": 94.9
       },
       "margin-request-costume-shop": {
         "zone": "page",
-        "x": 38.1,
-        "y": 74.4
+        "x": 33.8,
+        "y": 74.6
       },
       "margin-request-succubus": {
         "zone": "page",
-        "x": 93.5,
-        "y": 34
+        "x": 63.5,
+        "y": 28.2
       },
       "margin-request-bodyguard": {
         "zone": "page",
@@ -164,28 +160,150 @@
         "y": 75.4
       },
       "scene-craft-picture-26": {
-        "x": 1077,
-        "y": 1961
-      },
-      "scene-craft-icon-6": {
-        "x": 796,
-        "y": 637
+        "x": 891,
+        "y": 1883
       },
       "scene-craft-picture-29": {
-        "x": 115,
-        "y": 3542
+        "x": 177,
+        "y": 3354
       },
       "scene-windows-picture-00": {
         "x": 1040,
         "y": 373
       },
       "scene-windows-picture-30": {
-        "x": 464,
-        "y": 426
+        "x": 1288,
+        "y": -3472
       },
       "scene-windows-picture-27": {
         "x": 118,
         "y": 735
+      },
+      "scene-craft-picture-24": {
+        "x": 304,
+        "y": -34
+      },
+      "scene-craft-picture-08": {
+        "x": 115,
+        "y": -2460
+      },
+      "scene-craft-cursor": {
+        "x": 511,
+        "y": 147
+      },
+      "margin-thread-shitting-bots-today": {
+        "zone": "page",
+        "x": 11.6,
+        "y": 11.2
+      },
+      "margin-thread-templates-secret-formula": {
+        "zone": "page",
+        "x": 86.6,
+        "y": 9.1
+      },
+      "margin-thread-sixty-hour-week": {
+        "zone": "page",
+        "x": 29.7,
+        "y": 94.2
+      },
+      "margin-thread-reddit-dm-intro": {
+        "zone": "page",
+        "x": 42.4,
+        "y": 82.6
+      },
+      "margin-thread-simpler-bot-setup": {
+        "zone": "page",
+        "x": 14.6,
+        "y": 89
+      },
+      "margin-thread-keyword-collisions": {
+        "zone": "page",
+        "x": 10.4,
+        "y": 78.3
+      },
+      "margin-thread-waluigi-lorebook": {
+        "zone": "page",
+        "x": 8.9,
+        "y": 70.6
+      },
+      "margin-thread-stuck-in-a-loop": {
+        "zone": "page",
+        "x": 25.4,
+        "y": 61.6
+      },
+      "margin-thread-improvise-trick": {
+        "zone": "page",
+        "x": 83,
+        "y": 60.8
+      },
+      "margin-thread-malicious-compliance-succubus": {
+        "zone": "page",
+        "x": 44.5,
+        "y": 58.7
+      },
+      "margin-thread-living-at-home": {
+        "zone": "page",
+        "x": 70.2,
+        "y": 93.3
+      },
+      "margin-thread-porn-drives-innovation": {
+        "zone": "page",
+        "x": 87,
+        "y": 86.3
+      },
+      "margin-thread-chatting-style-characters": {
+        "zone": "page",
+        "x": 88.8,
+        "y": 79
+      },
+      "margin-thread-sharing-a-name-with-your-bot": {
+        "zone": "page",
+        "x": 84.5,
+        "y": 70.7
+      },
+      "margin-thread-testing-bots": {
+        "zone": "page",
+        "x": 56,
+        "y": 47.5
+      },
+      "margin-thread-for-you-feed": {
+        "zone": "page",
+        "x": 66.8,
+        "y": 36.5
+      },
+      "margin-thread-so-many-fetishes": {
+        "zone": "page",
+        "x": 81.4,
+        "y": 33.3
+      },
+      "margin-thread-cant-fuck-this-bot": {
+        "zone": "page",
+        "x": 85.4,
+        "y": 34.9
+      },
+      "margin-request-undercover-job": {
+        "zone": "page",
+        "x": 44.5,
+        "y": 29.7
+      },
+      "scene-craft-thread-what-porn-was-filling": {
+        "x": 366,
+        "y": 716
+      },
+      "margin-thread-few-tokens-popular": {
+        "zone": "page",
+        "x": 22.6,
+        "y": 52.1
+      },
+      "margin-thread-repetitive-answers": {
+        "zone": "page",
+        "x": 19.8,
+        "y": 46.4
+      },
+      "margin-thread-essay-length-replies": {
+        "zone": "page",
+        "x": 85.4,
+        "y": 67.7
       }
     },
     "phone": {
@@ -251,58 +369,6 @@
         "x": 0.6,
         "y": -167
       },
-      "phone-strip-0-folder-bot-requests": {
-        "x": 14.9,
-        "y": -238
-      },
-      "phone-strip-0-pic-23": {
-        "x": 6.5,
-        "y": -36
-      },
-      "phone-strip-0-pic-24": {
-        "x": -7.9,
-        "y": -151
-      },
-      "phone-strip-0-file-rich_dommy_mommy": {
-        "x": 6.7,
-        "y": -22
-      },
-      "phone-strip-0-thread-facial-expression-is-critical": {
-        "x": -5.6,
-        "y": -121
-      },
-      "phone-strip-0-folder-the-craft": {
-        "x": 15.6,
-        "y": -5
-      },
-      "phone-strip-1-pic-04": {
-        "x": 3.1,
-        "y": 16
-      },
-      "phone-strip-1-file-experiment_0682": {
-        "x": -2.7,
-        "y": -57
-      },
-      "phone-strip-1-pic-08": {
-        "x": -6.6,
-        "y": -89
-      },
-      "phone-strip-1-clip-delta-psychology": {
-        "x": 8.8,
-        "y": -81
-      },
-      "phone-strip-1-thread-scared-to-join-voice-chat": {
-        "x": -1.1,
-        "y": -65
-      },
-      "phone-strip-1-thread-rude-bots": {
-        "x": 10.1,
-        "y": 321
-      },
-      "phone-strip-1-pic-20": {
-        "x": 7.6,
-        "y": -24
-      },
       "win-credits": {
         "x": 0.2,
         "y": -8
@@ -315,93 +381,159 @@
         "x": -0.3,
         "y": -54
       },
-      "phone-strip-2-pic-12": {
-        "x": 2.6,
-        "y": -87
-      },
-      "phone-strip-2-thread-making-bots-at-2am": {
-        "x": 8.7,
-        "y": -184
-      },
-      "phone-strip-2-file-loving_korean_boyfriend": {
-        "x": 35.4,
-        "y": 2383
-      },
-      "phone-strip-2-file-judgemental_priest": {
-        "x": 15.5,
-        "y": -204
-      },
-      "phone-strip-2-request-haunted-costume-shop": {
-        "x": -14.4,
-        "y": -37
-      },
-      "phone-strip-2-pic-00": {
-        "x": 8.9,
-        "y": -41
-      },
-      "phone-strip-2-folder-bot-makers": {
-        "x": -6.4,
-        "y": 13
-      },
-      "phone-strip-3-clip-delta-demon": {
-        "x": 4.7,
-        "y": 680
-      },
-      "phone-strip-3-pic-17": {
-        "x": 10.8,
-        "y": 39
-      },
-      "phone-strip-3-pic-01": {
-        "x": -14.8,
-        "y": -104
-      },
-      "phone-strip-3-request-succubus-better-person": {
-        "x": -1.8,
-        "y": -539
-      },
-      "phone-strip-3-file-mentally_unwell_dad_and_stressed_mom": {
-        "x": 6.4,
-        "y": -91
-      },
-      "phone-strip-3-thread-what-porn-was-filling": {
-        "x": -18.2,
-        "y": -145
-      },
-      "phone-strip-0-pic-29": {
-        "x": 9.8,
-        "y": -18
-      },
-      "phone-strip-0-pic-27": {
-        "x": 37,
-        "y": -75
-      },
       "win-teaser": {
         "x": -1.6,
         "y": -132
       },
-      "phone-strip-1-pic-28": {
-        "x": 16,
-        "y": -150
+      "phone-folder-bot-requests": {
+        "zone": "page",
+        "x": 77.5,
+        "y": 12.8
       },
-      "phone-strip-2-pic-25": {
-        "x": -34.3,
-        "y": -291
+      "phone-pic-23": {
+        "zone": "page",
+        "x": 12.7,
+        "y": 14.2
       },
-      "phone-strip-3-pic-26": {
-        "x": -10.7,
-        "y": -83
+      "phone-pic-24": {
+        "zone": "page",
+        "x": 43.6,
+        "y": 16.3
       },
-      "phone-strip-3-pic-00": {
-        "x": 6.6,
-        "y": -19
+      "phone-file-rich_dommy_mommy": {
+        "zone": "page",
+        "x": 26.7,
+        "y": 20
       },
-      "phone-strip-2-pic-30": {
-        "x": -6.3,
-        "y": 0
+      "phone-thread-facial-expression-is-critical": {
+        "zone": "page",
+        "x": 68.8,
+        "y": 22.5
       },
-      "phone-strip-3-pic-20": {
-        "x": 4.7,
-        "y": 17
+      "phone-folder-the-craft": {
+        "zone": "page",
+        "x": 79.7,
+        "y": 26.2
+      },
+      "phone-pic-04": {
+        "zone": "page",
+        "x": 8.2,
+        "y": 35.7
+      },
+      "phone-file-experiment_0682": {
+        "zone": "page",
+        "x": 76.3,
+        "y": 35.1
+      },
+      "phone-pic-08": {
+        "zone": "page",
+        "x": 43.7,
+        "y": 35.8
+      },
+      "phone-clip-delta-psychology": {
+        "zone": "page",
+        "x": 75.2,
+        "y": 38.6
+      },
+      "phone-thread-scared-to-join-voice-chat": {
+        "zone": "page",
+        "x": 33.3,
+        "y": 38.9
+      },
+      "phone-thread-rude-bots": {
+        "zone": "page",
+        "x": 71.4,
+        "y": 47.5
+      },
+      "phone-pic-12": {
+        "zone": "page",
+        "x": 9.8,
+        "y": 69.1
+      },
+      "phone-thread-making-bots-at-2am": {
+        "zone": "page",
+        "x": 76.5,
+        "y": 67.8
+      },
+      "phone-file-loving_korean_boyfriend": {
+        "zone": "page",
+        "x": 57.5,
+        "y": 111.5
+      },
+      "phone-file-judgemental_priest": {
+        "zone": "page",
+        "x": 38.4,
+        "y": 69.9
+      },
+      "phone-request-haunted-costume-shop": {
+        "zone": "page",
+        "x": 67.7,
+        "y": 72.7
+      },
+      "phone-folder-bot-makers": {
+        "zone": "page",
+        "x": 80,
+        "y": 75.1
+      },
+      "phone-clip-delta-demon": {
+        "zone": "page",
+        "x": 71.9,
+        "y": 99.9
+      },
+      "phone-pic-17": {
+        "zone": "hero",
+        "x": 12.6,
+        "y": 84.1
+      },
+      "phone-request-succubus-better-person": {
+        "zone": "page",
+        "x": 69.5,
+        "y": 83.3
+      },
+      "phone-file-mentally_unwell_dad_and_stressed_mom": {
+        "zone": "page",
+        "x": 36.9,
+        "y": 90.8
+      },
+      "phone-thread-what-porn-was-filling": {
+        "zone": "page",
+        "x": 54.7,
+        "y": 91.6
+      },
+      "phone-pic-29": {
+        "zone": "page",
+        "x": 16.7,
+        "y": 25.7
+      },
+      "phone-pic-27": {
+        "zone": "page",
+        "x": 38.5,
+        "y": 26.1
+      },
+      "phone-pic-28": {
+        "zone": "page",
+        "x": 18.6,
+        "y": 40.6
+      },
+      "phone-pic-25": {
+        "zone": "page",
+        "x": 18.8,
+        "y": 67
+      },
+      "phone-pic-26": {
+        "zone": "page",
+        "x": 42.1,
+        "y": 89.4
+      },
+      "phone-pic-30": {
+        "zone": "page",
+        "x": 44.2,
+        "y": 77
+      },
+      "phone-pic-20": {
+        "zone": "page",
+        "x": 6.2,
+        "y": 94.4
       }
     }
   },
@@ -409,8 +541,8 @@
     "desktop": {
       "margin-folder-bot-requests": {
         "zone": "page",
-        "x": 74.3,
-        "y": 65.4
+        "x": 66.7,
+        "y": 66.6
       },
       "margin-file-ossix": {
         "zone": "page",
@@ -429,8 +561,8 @@
       },
       "margin-thread-voice-chat": {
         "zone": "page",
-        "x": 32.2,
-        "y": 94.3
+        "x": 26.7,
+        "y": 97.8
       },
       "margin-thread-breached-400k": {
         "zone": "page",
@@ -444,36 +576,28 @@
       },
       "margin-file-priest": {
         "zone": "page",
-        "x": 86.2,
-        "y": 53.7
+        "x": 37.9,
+        "y": 51.7
       },
       "margin-request-succubus": {
         "zone": "page",
-        "x": 86.3,
-        "y": 14.9
+        "x": 50.7,
+        "y": 13.5
       },
       "margin-file-luna": {
         "zone": "page",
         "x": 16.8,
         "y": 32
       },
-      "scene-craft-icon-0": {
-        "x": 740,
-        "y": 328
-      },
-      "scene-craft-icon-2": {
-        "x": 316,
-        "y": 2166
-      },
       "margin-file-minho": {
         "zone": "hero",
-        "x": 79.1,
-        "y": 44.6
+        "x": 77.3,
+        "y": 53.3
       },
       "thread-voice-requests": {
         "zone": "hero",
-        "x": 20.3,
-        "y": 40.2
+        "x": 21.5,
+        "y": 34.4
       },
       "thread-fantasy-and-reality": {
         "zone": "hero",
@@ -492,8 +616,8 @@
       },
       "thread-persona-design": {
         "zone": "hero",
-        "x": 63.6,
-        "y": 22.6
+        "x": 54,
+        "y": 22.3
       },
       "cursor": {
         "zone": "hero",
@@ -518,10 +642,6 @@
         "x": 497,
         "y": 353
       },
-      "scene-craft-icon-6": {
-        "x": 786,
-        "y": 689
-      },
       "margin-picture-stew": {
         "zone": "page",
         "x": 31.6,
@@ -529,20 +649,12 @@
       },
       "folder-craft": {
         "zone": "page",
-        "x": 55.6,
-        "y": 43.8
-      },
-      "scene-craft-icon-5": {
-        "x": 177,
-        "y": 1140
+        "x": 57.9,
+        "y": 43.1
       },
       "scene-craft-cursor": {
         "x": 522,
         "y": 46
-      },
-      "scene-craft-icon-1": {
-        "x": 1047,
-        "y": 15
       },
       "margin-thread-making-bots": {
         "zone": "page",
@@ -575,34 +687,127 @@
         "zone": "hero",
         "x": 10.7,
         "y": 22.7
+      },
+      "win-walkthrough": {
+        "x": 14.2,
+        "y": -100
+      },
+      "scene-windows-picture-30": {
+        "x": 1281,
+        "y": -3704
+      },
+      "thread-catharsis": {
+        "zone": "hero",
+        "x": 73.8,
+        "y": 31.1
+      },
+      "folder-bot-makers": {
+        "zone": "page",
+        "x": 75.6,
+        "y": 14.4
+      },
+      "scene-craft-picture-24": {
+        "x": 1174,
+        "y": 1762
+      },
+      "scene-craft-picture-08": {
+        "x": 148,
+        "y": -2469
+      },
+      "margin-request-dee-yandere-cashier": {
+        "zone": "page",
+        "x": 22.1,
+        "y": 28.3
+      },
+      "margin-thread-testing-bots": {
+        "zone": "page",
+        "x": 52.8,
+        "y": 45.8
+      },
+      "margin-thread-repetitive-answers": {
+        "zone": "page",
+        "x": 33.1,
+        "y": 54.3
+      },
+      "margin-thread-few-tokens-popular": {
+        "zone": "page",
+        "x": 24.8,
+        "y": 58.4
+      },
+      "margin-thread-malicious-compliance-succubus": {
+        "zone": "page",
+        "x": 49.4,
+        "y": 56.4
+      },
+      "margin-thread-improvise-trick": {
+        "zone": "page",
+        "x": 73.4,
+        "y": 59.6
+      },
+      "margin-thread-essay-length-replies": {
+        "zone": "page",
+        "x": 86.2,
+        "y": 65.6
+      },
+      "margin-thread-waluigi-lorebook": {
+        "zone": "page",
+        "x": 39.5,
+        "y": 72.5
+      },
+      "margin-thread-keyword-collisions": {
+        "zone": "page",
+        "x": 19.9,
+        "y": 75.3
+      },
+      "margin-thread-sharing-a-name-with-your-bot": {
+        "zone": "page",
+        "x": 77.3,
+        "y": 67.3
+      },
+      "margin-thread-chatting-style-characters": {
+        "zone": "page",
+        "x": 84.9,
+        "y": 81
+      },
+      "margin-thread-reddit-dm-intro": {
+        "zone": "page",
+        "x": 85.3,
+        "y": 90
+      },
+      "margin-thread-living-at-home": {
+        "zone": "page",
+        "x": 60.3,
+        "y": 93.8
+      },
+      "margin-thread-templates-secret-formula": {
+        "zone": "page",
+        "x": 85.3,
+        "y": 6.2
+      },
+      "margin-thread-cant-fuck-this-bot": {
+        "zone": "page",
+        "x": 25.2,
+        "y": 38.3
+      },
+      "scene-craft-clip-delta-psychology": {
+        "x": 1047,
+        "y": 15
+      },
+      "scene-craft-thread-rude-bots": {
+        "x": 177,
+        "y": 1140
       }
     },
     "phone": {
       "thread-voice-requests": {
         "zone": "hero",
-        "x": 33.1,
-        "y": 27.9
-      },
-      "phone-strip-0-folder-bot-requests": {
-        "x": -38.1,
-        "y": 235
-      },
-      "phone-strip-0-thread-facial-expression-is-critical": {
-        "x": -11.6,
-        "y": -129
-      },
-      "phone-strip-0-file-rich_dommy_mommy": {
-        "x": 8.7,
-        "y": -1402
-      },
-      "phone-strip-0-pic-24": {
-        "x": -10.4,
-        "y": -186
+        "x": 27.1,
+        "y": 27.6
       },
       "folder-user": {
         "zone": "hero",
-        "x": 37.4,
-        "y": 92.6
+        "x": 27.5,
+        "y": 82.9
       },
       "win-overview": {
         "x": 0.1,
@@ -610,65 +815,17 @@
       },
       "folder-bot-makers": {
         "zone": "hero",
-        "x": 77,
-        "y": 64.6
-      },
-      "phone-strip-0-thread-breached-400k": {
-        "x": 3.1,
-        "y": -7
-      },
-      "phone-strip-0-folder-the-craft": {
-        "x": 2.3,
-        "y": 1819
+        "x": 79.1,
+        "y": 70.1
       },
       "win-teaser": {
-        "x": -0.1,
-        "y": -73
-      },
-      "phone-strip-1-file-experiment_0682": {
-        "x": -24,
-        "y": -218
-      },
-      "phone-strip-1-thread-scared-to-join-voice-chat": {
-        "x": 28.2,
-        "y": -4310
-      },
-      "phone-strip-1-pic-20": {
-        "x": 8.7,
-        "y": -51
-      },
-      "phone-strip-3-pic-17": {
-        "x": 11.4,
-        "y": -833
-      },
-      "phone-strip-2-folder-the-user": {
-        "x": 1.7,
-        "y": 862
-      },
-      "phone-strip-3-pic-01": {
-        "x": -11.5,
-        "y": -90
-      },
-      "phone-strip-3-clip-delta-demon": {
-        "x": 0.9,
-        "y": 679
-      },
-      "phone-strip-1-pic-08": {
-        "x": -45.9,
-        "y": 3552
-      },
-      "phone-strip-1-clip-delta-psychology": {
-        "x": -2.3,
-        "y": -44
-      },
-      "phone-strip-1-thread-rude-bots": {
-        "x": 17.5,
-        "y": 2
+        "x": 1,
+        "y": -1051
       },
       "folder-craft": {
         "zone": "page",
-        "x": 28.9,
-        "y": 20.8
+        "x": 67.6,
+        "y": 19.2
       },
       "cursor": {
         "zone": "hero",
@@ -677,44 +834,282 @@
       },
       "folder-bot-requests": {
         "zone": "hero",
-        "x": 28.7,
-        "y": 9.6
+        "x": 23.6,
+        "y": 7.7
       },
-      "phone-strip-2-file-judgemental_priest": {
-        "x": 46.2,
-        "y": -259
+      "phone-folder-bot-requests": {
+        "zone": "page",
+        "x": 24.5,
+        "y": 17.4
       },
-      "phone-strip-2-request-haunted-costume-shop": {
-        "x": -25.7,
-        "y": 7
+      "phone-thread-facial-expression-is-critical": {
+        "zone": "page",
+        "x": 62.8,
+        "y": 19
       },
-      "phone-strip-2-folder-bot-makers": {
-        "x": -15.7,
+      "phone-file-rich_dommy_mommy": {
+        "zone": "hero",
+        "x": 25.5,
+        "y": 63.6
+      },
+      "phone-pic-24": {
+        "zone": "page",
+        "x": 40.4,
+        "y": 10
+      },
+      "phone-thread-breached-400k": {
+        "zone": "page",
+        "x": 30.7,
+        "y": 20.2
+      },
+      "phone-folder-the-craft": {
+        "zone": "page",
+        "x": 74.1,
+        "y": 52.7
+      },
+      "phone-file-experiment_0682": {
+        "zone": "page",
+        "x": 51.1,
+        "y": 25.1
+      },
+      "phone-thread-scared-to-join-voice-chat": {
+        "zone": "page",
+        "x": 65.2,
+        "y": -0.1
+      },
+      "phone-pic-17": {
+        "zone": "page",
+        "x": 41.7,
+        "y": 69.1
+      },
+      "phone-folder-the-user": {
+        "zone": "page",
+        "x": 26.8,
+        "y": 85.6
+      },
+      "phone-clip-delta-demon": {
+        "zone": "page",
+        "x": 58,
+        "y": 92.1
+      },
+      "phone-pic-08": {
+        "zone": "page",
+        "x": 12.7,
+        "y": 87.3
+      },
+      "phone-clip-delta-psychology": {
+        "zone": "page",
+        "x": 64.1,
+        "y": 37.2
+      },
+      "phone-thread-rude-bots": {
+        "zone": "page",
+        "x": 29.3,
+        "y": 36.8
+      },
+      "phone-file-judgemental_priest": {
+        "zone": "page",
+        "x": 41.7,
+        "y": 63.7
+      },
+      "phone-request-haunted-costume-shop": {
+        "zone": "page",
+        "x": 71.6,
+        "y": 65.4
+      },
+      "phone-folder-bot-makers": {
+        "zone": "page",
+        "x": 70.7,
+        "y": 71.1
+      },
+      "phone-request-succubus-better-person": {
+        "zone": "page",
+        "x": 68.7,
+        "y": 71.7
+      },
+      "phone-pic-26": {
+        "zone": "page",
+        "x": 28.8,
+        "y": 78
+      },
+      "phone-file-mentally_unwell_dad_and_stressed_mom": {
+        "zone": "page",
+        "x": 76.6,
+        "y": 80.8
+      },
+      "phone-file-evil_bully_wife": {
+        "zone": "page",
+        "x": 39.5,
+        "y": 81.1
+      },
+      "phone-thread-what-porn-was-filling": {
+        "zone": "page",
+        "x": 38.2,
+        "y": 85.3
+      },
+      "phone-file-loving_korean_boyfriend": {
+        "zone": "page",
+        "x": 39.5,
+        "y": 96.4
+      },
+      "phone-pic-04": {
+        "zone": "page",
+        "x": 43.4,
+        "y": 34
+      },
+      "phone-pic-30": {
+        "zone": "hero",
+        "x": 48.9,
+        "y": 10
+      },
+      "phone-pic-20": {
+        "zone": "page",
+        "x": 41.7,
+        "y": 88
+      },
+      "phone-thread-chatting-style-characters": {
+        "zone": "page",
+        "x": 33.5,
+        "y": 93.7
+      },
+      "win-venues": {
+        "x": 0.2,
+        "y": -1539
+      },
+      "phone-thread-stuck-in-a-loop": {
+        "zone": "page",
+        "x": 70.8,
+        "y": 95
+      },
+      "phone-thread-keyword-collisions": {
+        "zone": "page",
+        "x": 54.2,
+        "y": 73.8
+      },
+      "phone-pic-01": {
+        "zone": "page",
+        "x": 42.5,
+        "y": 57.6
+      },
+      "phone-file-mental_chastity_girlfriend": {
+        "zone": "page",
+        "x": 75.2,
+        "y": 13.3
+      },
+      "phone-thread-templates-secret-formula": {
+        "zone": "page",
+        "x": 20.7,
+        "y": 10.5
+      },
+      "phone-thread-essay-length-replies": {
+        "zone": "page",
+        "x": 35.2,
+        "y": 17.1
+      },
+      "phone-pic-27": {
+        "zone": "page",
+        "x": 18.1,
+        "y": 28.7
+      },
+      "phone-thread-for-you-feed": {
+        "zone": "page",
+        "x": 79.8,
+        "y": 16.4
+      },
+      "phone-pic-29": {
+        "zone": "page",
+        "x": 14.6,
+        "y": 26
+      },
+      "win-walkthrough": {
+        "x": 0.7,
+        "y": -2010
+      },
+      "phone-thread-malicious-compliance-succubus": {
+        "zone": "page",
+        "x": 27.6,
         "y": 24
       },
-      "phone-strip-3-request-succubus-better-person": {
-        "x": -16.6,
-        "y": -529
+      "phone-pic-23": {
+        "zone": "page",
+        "x": 14.4,
+        "y": 13.7
       },
-      "phone-strip-3-pic-26": {
-        "x": -15.3,
-        "y": -116
+      "phone-thread-living-at-home": {
+        "zone": "page",
+        "x": 67.2,
+        "y": 24
       },
-      "phone-strip-3-file-mentally_unwell_dad_and_stressed_mom": {
-        "x": 7.8,
-        "y": -103
+      "phone-thread-shitting-bots-today": {
+        "zone": "page",
+        "x": 34.4,
+        "y": 0.8
       },
-      "phone-strip-3-file-evil_bully_wife": {
-        "x": 2.2,
-        "y": -11
+      "win-shakti": {
+        "x": 0,
+        "y": -196
       },
-      "phone-strip-3-thread-what-porn-was-filling": {
-        "x": -25.8,
-        "y": -150
+      "win-kiana": {
+        "x": -0.2,
+        "y": -204
       },
-      "phone-strip-2-file-loving_korean_boyfriend": {
-        "x": 27.2,
-        "y": 2589
+      "phone-pic-25": {
+        "zone": "page",
+        "x": 16.6,
+        "y": 60.1
+      },
+      "phone-thread-making-bots-at-2am": {
+        "zone": "page",
+        "x": 72.9,
+        "y": 63.2
+      },
+      "phone-thread-mother-of-all-bots": {
+        "zone": "page",
+        "x": 35.1,
+        "y": 65
+      },
+      "phone-pic-12": {
+        "zone": "page",
+        "x": 16.5,
+        "y": 66
+      },
+      "phone-thread-improvise-trick": {
+        "zone": "page",
+        "x": 80.2,
+        "y": 61.3
+      },
+      "win-support": {
+        "x": 0.5,
+        "y": -305
+      },
+      "phone-thread-porn-drives-innovation": {
+        "zone": "page",
+        "x": 67.5,
+        "y": 72.7
+      },
+      "win-audience": {
+        "x": 0.7,
+        "y": -317
+      },
+      "phone-thread-no-more-json": {
+        "zone": "page",
+        "x": 71.5,
+        "y": 85.7
+      },
+      "phone-request-thanos": {
+        "zone": "page",
+        "x": 54.3,
+        "y": 86.7
+      },
+      "phone-request-undercover-job": {
+        "zone": "page",
+        "x": 70.8,
+        "y": 90.5
+      },
+      "phone-thread-reddit-dm-intro": {
+        "zone": "page",
+        "x": 33.5,
+        "y": 90.7
       }
     }
   },

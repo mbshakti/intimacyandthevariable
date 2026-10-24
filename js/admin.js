@@ -37,6 +37,13 @@
     // a window of the page (data-win) keeps its place in the flow and is nudged from it; the rest are laid on a desk
     function homeZone(el) { return el.hasAttribute('data-win') ? 'flow' : /^phone-/.test(el.dataset.id) ? 'grid' : /^scene-/.test(el.dataset.id) ? 'scene' : /^margin-/.test(el.dataset.id) ? 'page' : 'hero'; }
     var gridWidth = function (el) { var h = el.closest('.desktop'); return h ? h.getBoundingClientRect().width : 1; };
+    // a thing leaving its strip for the hero or the page leaves a stand-in of its size in its cell, so the strip's grid keeps its shape and nothing else shifts
+    function leaveStandIn(el) {
+        if (!el.closest('.scene-desk')) return;
+        var ghost = el.cloneNode(true); ghost.removeAttribute('data-id'); ghost.removeAttribute('id'); ghost.className += ' stand-in';
+        ghost.querySelectorAll('[data-id], [id]').forEach(function (n) { n.removeAttribute('data-id'); n.removeAttribute('id'); });
+        el.parentNode.insertBefore(ghost, el);
+    }
     var column = function () { var m = document.querySelector('main'); return m ? m.getBoundingClientRect().width : 1; };
     function zoneOf(el) { return el.closest('.scene-desk') ? 'scene' : el.closest('#marginDesk') ? 'page' : 'hero'; }
     // a desk scene is drawn on a 1600px canvas and scaled to fit; its things are placed in those px
@@ -55,7 +62,7 @@
             el.classList.toggle('nudged', nudged);   // forward, so a section after it in the page does not paint over it and take the pointer
             return;
         }
-        if (homeZone(el) === 'grid') {    // a phone desk's thing, nudged within its cell on top of the small nudge the desk gave it: x in % of the desk's width, y in px
+        if (homeZone(el) === 'grid' && !(e && e.zone)) {    // a phone desk's thing with no place of its own stays in its cell (an old entry without a zone nudges it there: x in % of the desk's width, y in px)
             if (e && e.hide) { el.style.display = 'none'; return; }
             el.style.display = '';
             var moved = !!(e && (e.x || e.y));
@@ -73,7 +80,8 @@
         }
         var zone = (e && e.zone) || homeZone(el);
         var box = zone === 'page' ? page() : hero();
-        if (box && el.parentElement !== box) box.appendChild(el);
+        if (box && el.parentElement !== box) { if (homeZone(el) === 'grid') leaveStandIn(el); box.appendChild(el); }
+        if (homeZone(el) === 'grid') { el.style.transform = ''; el.classList.remove('nudged'); }   // out of its strip: the strip's own little nudge goes
         if (!e) {   // no saved position: back to where the markup or the desk script put it
             el.style.display = ''; el.style.left = el.style.top = el.style.right = '';
             if (el.dataset.homeY) el.style.top = el.dataset.homeY;
@@ -117,7 +125,13 @@
 
     // ---- dragging: anywhere on the page. Leaving the hero puts a thing on the page layer, and the other way round ----
     var drag = null;
-    function target(ev) { if (!admin) return null; return ev.target.closest && ev.target.closest('.hero .desk [data-id], #marginDesk [data-id], .scene-desk [data-id], main [data-win]'); }
+    // a page window (data-win) is taken by its title bar only, so a finger on its body scrolls the page; everything else by any part of it
+    function target(ev) {
+        if (!admin || !ev.target.closest) return null;
+        var t = ev.target.closest('.hero .desk [data-id], #marginDesk [data-id], .scene-desk [data-id], main [data-win]');
+        if (t && t.hasAttribute('data-win') && !ev.target.closest('.bar')) return null;
+        return t;
+    }
     function anchorPoint(el) { var r = el.getBoundingClientRect(); return anchorCentre(el) ? { x: r.left + r.width / 2, y: r.top + r.height / 2 } : { x: r.left, y: r.top }; }
     document.addEventListener('pointerdown', function (ev) {
         var t = target(ev); if (!t || ev.button !== 0) return;
@@ -131,11 +145,11 @@
     document.addEventListener('pointermove', function (ev) {
         if (!drag) return;
         var el = drag.el, d = draftFor(el);
-        if (homeZone(el) === 'flow' || homeZone(el) === 'grid') {    // the nudge grows with the pointer's travel from where it took hold
-            var span = homeZone(el) === 'flow' ? column() : gridWidth(el);
-            d.x = Math.round((drag.ex + (ev.pageX - drag.x0) / span * 100) * 10) / 10; d.y = Math.round(drag.ey + (ev.pageY - drag.y0));
+        if (homeZone(el) === 'flow') {    // the nudge grows with the pointer's travel from where it took hold
+            d.x = Math.round((drag.ex + (ev.pageX - drag.x0) / column() * 100) * 10) / 10; d.y = Math.round(drag.ey + (ev.pageY - drag.y0));
             drag.moved = true; place(el, d); return;
         }
+        // a phone desk's thing, like the hero's and the margins' things, goes to the hero or the page wherever the pointer takes it
         if (homeZone(el) === 'scene') {   // within its scene, in the scene's px
             var sb = el.closest('.scene-desk').getBoundingClientRect(), sc = sceneScale(el) * (parseFloat(getComputedStyle(el).zoom) || 1);   // the scene's scale, and the thing's own zoom (its left and top are in that zoomed space)
             d.x = Math.round((ev.clientX - drag.dx - sb.left) / sc); d.y = Math.round((ev.clientY - drag.dy - sb.top) / sc);
@@ -144,7 +158,7 @@
         // which zone the pointer is in: on the hero while it is over the hero, on the page anywhere below it, at every width
         var heroRect = document.querySelector('.hero').getBoundingClientRect();
         var zone = !page() ? 'hero' : (ev.clientY <= heroRect.bottom ? 'hero' : 'page');
-        if (zone !== drag.zone) { drag.zone = zone; (zone === 'page' ? page() : hero()).appendChild(el); }
+        if (zone !== drag.zone) { drag.zone = zone; if (homeZone(el) === 'grid') leaveStandIn(el); (zone === 'page' ? page() : hero()).appendChild(el); if (homeZone(el) === 'grid') { el.style.transform = ''; el.classList.remove('nudged'); delete d.hide; } }
         var box = (zone === 'page' ? page() : hero()).getBoundingClientRect();
         var x = (ev.clientX - drag.dx - box.left) / box.width * 100, y = (ev.clientY - drag.dy - box.top) / box.height * 100;
         d.zone = zone;

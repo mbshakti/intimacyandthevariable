@@ -34,6 +34,8 @@
     // a window open on the desk showing the start of a character file, or of a diary entry; click for the whole thing
     var codewin = function (file, x, y, w) { return { code: file, x: x, y: y, w: w }; };
     var notewin = function (slug, date, x, y, w) { return { note: slug, date: date, x: x, y: y, w: w }; };
+    // what an icon is, for its id in the layout (js/admin.js): the folder, thread, clip, request or file it stands for
+    var iconKey = function (ic) { return ic.folder ? 'folder-' + ic.folder : ic.id ? 'thread-' + ic.id : ic.clip ? 'clip-' + ic.clip : ic.req ? 'request-' + ic.req : ic.char ? 'file-' + ic.char : ic.note ? 'note-' + ic.note : 'icon-' + String(ic.label || '').replace(/\W+/g, '-'); };
     var LAYOUTS = {
         // the bot requests desktop: the chapter folders, threads, five pictures open
         requests: {
@@ -47,8 +49,8 @@
         // the craft desktop: four pictures among the folders
         craft: {
             rest: [280, 344],
-            icons: [thread('facial expression is critical', '3 messages', ['face-07'], 208, 112, 'facial-expression-is-critical', 'craft'), clip('delta-psychology', 'craft', 'what hooked her', 1180, 120), folder('bot-makers', 'bot makers', 896, 320), thread('what the bots replaced', '3 messages', ['face-07'], 1408, 376, 'what-porn-was-filling', 'user'),
-                folder('the-craft', 'the craft', 235, 656), thread('rude bots', '4 messages', ['face-09', 'face-05'], 752, 656, 'rude-bots', 'craft'), folder('the-user', 'the {{user}}', 1032, 704)],
+            icons: [clip('delta-psychology', 'craft', 'what hooked her', 1180, 120), thread('what the bots replaced', '3 messages', ['face-07'], 1408, 376, 'what-porn-was-filling', 'user'),
+                thread('rude bots', '4 messages', ['face-09', 'face-05'], 752, 656, 'rude-bots', 'craft')],
             pics: [pic('12', 480, 144, 208), pic('17', 429, 360, 208), pic('24', 1080, 328, 221), pic('08', 1240, 560, 205), pic('25', 790, 110, 230), pic('26', 1350, 80, 200), pic('29', 150, 560, 210)]
         },
         // the hoard: fifteen pictures covering the desk
@@ -62,7 +64,7 @@
         // seven windows on the empty desk
         windows: {
             icons: [],
-            pics: [pic('00', 880, 480, 300), pic('12', 477, 141, 208), pic('01', 528, 352, 211), pic('20', 1104, 72, 208), pic('08', 1050, 520, 208), pic('27', 120, 100, 220), pic('28', 800, 430, 260), pic('30', 300, 580, 200)]   // the first picture lies at the bottom of the pile, under the game and the robot
+            pics: [pic('00', 880, 480, 300), pic('01', 528, 352, 211), pic('20', 1104, 72, 208), pic('27', 120, 100, 220), pic('28', 800, 430, 260), pic('30', 300, 580, 200)]   // the first picture lies at the bottom of the pile, under the game and the robot
         }
     };
     // what each folder holds (the site's folderContents): the found pictures of that chapter
@@ -183,7 +185,7 @@
     function makePicWin(t) {
         var meta = PIC[t], win = document.createElement('div');
         win.className = 'win';
-        win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + t + '.jpg" alt="" loading="lazy">';
+        win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + t + '.jpg" alt="" loading="lazy" width="' + meta[1] + '" height="' + meta[2] + '">';
         win.querySelector('.name').textContent = meta[0];
         win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
         win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + t + '.jpg'); });
@@ -226,7 +228,7 @@
         var desk = document.createElement('div'); desk.className = 'scene-desk'; host.appendChild(desk);
         var place = function (el, x, y) { el.style.left = Math.round(x / ZOOM) + 'px'; el.style.top = Math.round(y / ZOOM) + 'px'; };
         var scene = host.dataset.layout;
-        L.icons.forEach(function (ic, i) { var el = makeIcon(ic); el.dataset.id = 'scene-' + scene + '-icon-' + i; el.dataset.anchor = 'centre'; place(el, ic.x, ic.y); desk.appendChild(el); });
+        L.icons.forEach(function (ic, i) { var el = makeIcon(ic); el.dataset.id = 'scene-' + scene + '-' + iconKey(ic); el.dataset.anchor = 'centre'; place(el, ic.x, ic.y); desk.appendChild(el); });
         (L.wins || []).forEach(function (w, i) {
             var win = makeFileWin(w);
             win.dataset.id = 'scene-' + scene + '-window-' + (w.code || w.note); win.dataset.anchor = 'left';
@@ -240,7 +242,7 @@
             win.className = 'win';
             win.dataset.id = 'scene-' + scene + '-picture-' + p.t; win.dataset.anchor = 'left';
             win.style.cssText = 'left:' + p.x + 'px; top:' + p.y + 'px; width:' + p.w + 'px; z-index:' + (10 + i) + ';';
-            win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="">';
+            win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="" width="' + meta[1] + '" height="' + meta[2] + '">';
             win.querySelector('.name').textContent = meta[0];
             win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
             win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + p.t + '.jpg'); });
@@ -290,14 +292,14 @@
             if (!isWin) node.style.justifySelf = side;
         };
         // each thing's id in the layout (js/admin.js nudges it within its cell): the scene, then what it is
-        var ident = function (node, key) { node.dataset.id = 'phone-' + host.dataset.layout + '-' + key; node.dataset.anchor = 'left'; node.dataset.base = node.style.transform || ''; };
-        var iconKey = function (ic) { return ic.folder ? 'folder-' + ic.folder : ic.id ? 'thread-' + ic.id : ic.clip ? 'clip-' + ic.clip : ic.req ? 'request-' + ic.req : ic.char ? 'file-' + ic.char : ic.note ? 'note-' + ic.note : 'icon-' + String(ic.label || '').replace(/\W+/g, '-'); };
+        // a strip's thing is named for what it is, whichever strip deals it; the desk scenes' own phone copies (hidden on a phone) keep a name of their own, so the layout never moves two things at once
+        var ident = function (node, key) { node.dataset.id = (host.classList.contains('strip') ? 'phone-' : 'phone-' + host.dataset.layout + '-') + key; node.dataset.anchor = node.classList.contains('desktop-icon') ? 'centre' : 'left'; node.dataset.base = node.style.transform || ''; };   // an icon is placed by its centre, a window by its corner, as on the desks
         cells.forEach(function (c, ci) {
             if (c.pic) {
                 var p = c.pic, meta = PIC[p.t];
                 var win = document.createElement('div');
                 win.className = 'win';   // never the full width: a picture keeps to its column, as a window on a desk would
-                win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="" loading="lazy">';
+                win.innerHTML = '<div class="bar"><span class="name"></span><button class="close" type="button" aria-label="close">' + CLOSE + '</button></div><img src="' + THUMBS + p.t + '.jpg" alt="" loading="lazy" width="' + meta[1] + '" height="' + meta[2] + '">';
                 win.querySelector('.name').textContent = meta[0];
                 win.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); win.classList.add('closed'); playSound('close'); });
                 win.querySelector('img').addEventListener('click', function (e) { e.stopPropagation(); openLightbox(THUMBS + p.t + '.jpg'); });
@@ -316,7 +318,6 @@
     var MARGIN = [
         { id: 'thread-making-bots', icon: thread('making bots at 2am', '4 messages', ['face-012', 'face-02', 'face-015'], 0, 0, 'making-bots-at-2am', 'bot-makers'), x: '6.5%', y: '62.7%' },
         { id: 'clip-delta-demon', icon: clip('delta-demon', 'bot-makers', 'the word demon', 0, 0), x: '93.5%', y: '62.3%' },
-        { id: 'folder-bot-requests', icon: folder('bot-requests', 'bot requests', 0, 0), x: '6.5%', y: '73.5%' },
         { id: 'file-ossix', icon: char('experiment_0682', 'experiment_0682', 'Ossix Ayto', 0, 0), x: '93.5%', y: '74.3%' },
         { id: 'picture-stew', pic: '23', side: 'left', y: '80.7%' },
         { id: 'picture-dragon', pic: '04', side: 'right', y: '79.9%' },
@@ -331,7 +332,35 @@
         { id: 'thread-breached-400k', icon: thread('top bots breached 400K', '1 message', ['face-021'], 0, 0, 'breached-400k', 'bot-makers'), x: '93.5%', y: '44%' },
         { id: 'thread-voice-chat', icon: thread('scared to join the voice chat', '8 messages', ['face-09', 'face-017'], 0, 0, 'scared-to-join-voice-chat', 'bot-makers'), x: '6.5%', y: '52%' },
         { id: 'request-costume-shop', icon: request('haunted-costume-shop', 'haunted costume shop', 0, 0), x: '93.5%', y: '15%' },
-        { id: 'request-succubus', icon: request('succubus-better-person', 'a succubus who tempts you to be a better person', 0, 0), x: '93.5%', y: '34%' }
+        { id: 'request-succubus', icon: request('succubus-better-person', 'a succubus who tempts you to be a better person', 0, 0), x: '93.5%', y: '34%' },
+        // the rest of the archive's threads and requests, so every one is on the page (the titles and counts are the archive's own; they open nothing here)
+        { id: 'thread-no-more-json', icon: thread('no more json', '4 messages', ['face-015', 'face-012'], 0, 0, 'no-more-json', 'bot-makers'), x: '6.5%', y: '6.0%' },
+        { id: 'thread-templates-secret-formula', icon: thread('are templates the secret formula', '5 messages', ['face-09'], 0, 0, 'templates-secret-formula', 'bot-makers'), x: '93.5%', y: '9.2%' },
+        { id: 'thread-shitting-bots-today', icon: thread('gonna be shitting bots today', '5 messages', ['face-012', 'face-03'], 0, 0, 'shitting-bots-today', 'bot-makers'), x: '6.5%', y: '12.4%' },
+        { id: 'thread-mother-of-all-bots', icon: thread('dropping bots', '4 messages', ['face-017', 'face-09', 'face-02'], 0, 0, 'mother-of-all-bots', 'bot-makers'), x: '93.5%', y: '15.6%' },
+        { id: 'request-thanos', icon: request('thanos', 'Thanos, philosophy and nihilism', 0, 0), x: '6.5%', y: '18.9%' },
+        { id: 'request-leonardo-malcom', icon: request('leonardo-malcom', 'Leonardo/Malcom', 0, 0), x: '93.5%', y: '22.1%' },
+        { id: 'request-giant-golden-heart', icon: request('giant-golden-heart', 'a giant with a golden heart', 0, 0), x: '6.5%', y: '25.3%' },
+        { id: 'request-dee-yandere-cashier', icon: request('dee-yandere-cashier', 'Dee Leanne Hopfensperger', 0, 0), x: '93.5%', y: '28.5%' },
+        { id: 'request-undercover-job', icon: request('undercover-job', 'undercover stressful job', 0, 0), x: '6.5%', y: '31.7%' },
+        { id: 'thread-for-you-feed', icon: thread('the for-you feed argument', '11 messages', ['face-03', 'face-015'], 0, 0, 'for-you-feed', 'community'), x: '93.5%', y: '41.4%' },
+        { id: 'thread-monster-girls', icon: thread('monster girls', '2 messages', ['face-015'], 0, 0, 'monster-girls', 'community'), x: '6.5%', y: '44.6%' },
+        { id: 'thread-testing-bots', icon: thread('testing bots out of character', '5 messages', ['face-07', 'face-021'], 0, 0, 'testing-bots', 'craft'), x: '93.5%', y: '47.8%' },
+        { id: 'thread-repetitive-answers', icon: thread('repetitive answers', '3 messages', ['face-012', 'face-03'], 0, 0, 'repetitive-answers', 'craft'), x: '6.5%', y: '51.0%' },
+        { id: 'thread-malicious-compliance-succubus', icon: thread('the malicious-compliance succubus', '6 messages', ['face-01'], 0, 0, 'malicious-compliance-succubus', 'craft'), x: '93.5%', y: '54.2%' },
+        { id: 'thread-few-tokens-popular', icon: thread('few tokens, still popular', '3 messages', ['face-09'], 0, 0, 'few-tokens-popular', 'craft'), x: '6.5%', y: '57.4%' },
+        { id: 'thread-improvise-trick', icon: thread('the improvise trick', '3 messages', ['face-015'], 0, 0, 'improvise-trick', 'craft'), x: '93.5%', y: '60.6%' },
+        { id: 'thread-stuck-in-a-loop', icon: thread('stuck in a loop', '8 messages', ['face-021', 'face-03'], 0, 0, 'stuck-in-a-loop', 'craft'), x: '6.5%', y: '63.9%' },
+        { id: 'thread-essay-length-replies', icon: thread('essay-length replies', '2 messages', ['face-012'], 0, 0, 'essay-length-replies', 'craft'), x: '93.5%', y: '67.1%' },
+        { id: 'thread-waluigi-lorebook', icon: thread('the Waluigi problem', '3 messages', ['face-021'], 0, 0, 'waluigi-lorebook', 'craft'), x: '6.5%', y: '70.3%' },
+        { id: 'thread-sharing-a-name-with-your-bot', icon: thread('sharing a name with your bot', '3 messages', ['face-05', 'face-01'], 0, 0, 'sharing-a-name-with-your-bot', 'craft'), x: '93.5%', y: '73.5%' },
+        { id: 'thread-keyword-collisions', icon: thread('keyword collisions', '2 messages', ['face-02'], 0, 0, 'keyword-collisions', 'craft'), x: '6.5%', y: '76.7%' },
+        { id: 'thread-chatting-style-characters', icon: thread('chatting-style characters', '3 messages', ['face-01', 'face-03', 'face-02'], 0, 0, 'chatting-style-characters', 'craft'), x: '93.5%', y: '79.9%' },
+        { id: 'thread-simpler-bot-setup', icon: thread('the simpler bot setup', '6 messages', ['face-05', 'face-02'], 0, 0, 'simpler-bot-setup', 'craft'), x: '6.5%', y: '83.1%' },
+        { id: 'thread-porn-drives-innovation', icon: thread('porn drives innovation', '2 messages', ['face-017'], 0, 0, 'porn-drives-innovation', 'margins'), x: '93.5%', y: '86.4%' },
+        { id: 'thread-reddit-dm-intro', icon: thread('the reddit DM', '2 messages', ['face-05'], 0, 0, 'reddit-dm-intro', 'misc'), x: '6.5%', y: '89.6%' },
+        { id: 'thread-living-at-home', icon: thread('living at home', '8 messages', ['face-09'], 0, 0, 'living-at-home', 'user'), x: '93.5%', y: '92.8%' },
+        { id: 'thread-sixty-hour-week', icon: thread('the 60-hour week', '1 message', ['face-03'], 0, 0, 'sixty-hour-week', 'user'), x: '6.5%', y: '96.0%' }
     ];
     // on a screen with no margins (under 1024px), the margins' things go between the window sections instead: a few
     // after the overview, after the teaser, after the team and after the support stack, each group a small desk flow
