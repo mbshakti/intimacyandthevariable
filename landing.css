@@ -419,13 +419,15 @@ html.admin .hero .desk [data-id], html.admin #marginDesk [data-id], html.admin .
 html.admin .sim { pointer-events: auto; }   /* the cursors take the pointer in the admin, to be dragged; on the page they never do */
 html.admin main [data-win] > .bar { cursor: move; user-select: none; -webkit-user-select: none; touch-action: none; }
 @media (hover: hover) { html.admin main [data-win] { cursor: move; } }   /* with a mouse, taken anywhere on it */   /* the page's windows drag by their title bar; a finger on the body scrolls */
-main [data-win].nudged { position: relative; z-index: 1; }   /* a window moved from its place lies over the sections after it, under the margins' things */
+/* every window of the page lies over the margins' things (the icons, pictures and threads, at 3) and over the hero's, under the toggle and the
+   sign-up: a window laid over an icon keeps its text readable. The pairs' own rules (.people, .stack) are named so they do not keep a lower order */
+main [data-win], main .people .win[data-win], main .stack .win[data-win] { position: relative; z-index: 4; }
 .desktop.mobile .nudged { position: relative; z-index: 1; }   /* and a thing nudged out of its cell in a phone desk lies over its neighbours */
 html.admin main [data-win] a, html.admin main [data-win] button { pointer-events: none; }
 
 /* ---- a window lifted off the flow (the admin, on the phone): on the page layer like the icons, placed by its top left
    corner, under the icons and over the sections; the page closes up where it was ---- */
-main [data-win].lifted, main .people .win.lifted, main .stack .win.lifted { position: absolute; margin: 0; z-index: 2; }   /* named with the pair's own rules, which would otherwise keep the second window relative */
+main [data-win].lifted, main .people .win[data-win].lifted, main .stack .win[data-win].lifted { position: absolute; margin: 0; z-index: 4; }
 main [data-win].lifted { width: 100%; }   /* out of the flow a window would shrink to its content: the column's width, as in the flow */
 main .walk.lifted { width: min(300px, 90%); }   /* the walkthrough keeps its small size */
 #teaser.lifted { margin: 0; }   /* its own room above (by id, which would outrank the rule above) goes too */
