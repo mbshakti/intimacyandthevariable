@@ -425,5 +425,7 @@ html.admin main [data-win] a, html.admin main [data-win] button { pointer-events
 /* ---- a window lifted off the flow (the admin, on the phone): on the page layer like the icons, placed by its top left
    corner, under the icons and over the sections; the page closes up where it was ---- */
 main [data-win].lifted, main .people .win.lifted, main .stack .win.lifted { position: absolute; margin: 0; z-index: 2; }   /* named with the pair's own rules, which would otherwise keep the second window relative */
+main [data-win].lifted { width: 100%; }   /* out of the flow a window would shrink to its content: the column's width, as in the flow */
+main .walk.lifted { width: min(300px, 90%); }   /* the walkthrough keeps its small size */
 main .emptied { display: contents; }   /* a section whose windows have all been lifted or hidden: no room left where they were */
 .people .win.lifted + .win, .stack .win.lifted + .win { margin-top: 0; }   /* the one left behind no longer tucks under the one above */
