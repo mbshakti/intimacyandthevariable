@@ -371,18 +371,18 @@
       },
       "win-credits": {
         "zone": "page",
-        "x": 13.7,
-        "y": 32.9
+        "x": 5.6,
+        "y": 32.5
       },
       "win-shakti": {
         "zone": "page",
-        "x": 4.1,
-        "y": 35.2
+        "x": 4,
+        "y": 35.3
       },
       "win-kiana": {
         "zone": "page",
-        "x": 4,
-        "y": 41.7
+        "x": 3.8,
+        "y": 42.2
       },
       "win-teaser": {
         "zone": "page",
@@ -426,8 +426,8 @@
       },
       "phone-file-experiment_0682": {
         "zone": "page",
-        "x": 59.4,
-        "y": 31.9
+        "x": 58.2,
+        "y": 33.1
       },
       "phone-pic-08": {
         "zone": "page",
@@ -546,8 +546,8 @@
       },
       "phone-thread-breached-400k": {
         "zone": "page",
-        "x": 26.1,
-        "y": 29.8
+        "x": 24.4,
+        "y": 29.3
       },
       "phone-folder-the-user": {
         "zone": "page",
@@ -556,8 +556,8 @@
       },
       "phone-file-evil_bully_wife": {
         "zone": "page",
-        "x": 84.1,
-        "y": 88.7
+        "x": 81.3,
+        "y": 85.8
       },
       "phone-thread-chatting-style-characters": {
         "zone": "page",
@@ -576,8 +576,8 @@
       },
       "phone-thread-keyword-collisions": {
         "zone": "page",
-        "x": 78.6,
-        "y": 84.3
+        "x": 34.2,
+        "y": 84
       },
       "phone-pic-01": {
         "zone": "page",
@@ -611,8 +611,8 @@
       },
       "phone-thread-malicious-compliance-succubus": {
         "zone": "page",
-        "x": 26.5,
-        "y": 31.6
+        "x": 41.5,
+        "y": 31
       },
       "phone-thread-living-at-home": {
         "zone": "page",
@@ -636,8 +636,8 @@
       },
       "phone-thread-porn-drives-innovation": {
         "zone": "page",
-        "x": 43.7,
-        "y": 83.9
+        "x": 64.8,
+        "y": 81.2
       },
       "win-audience": {
         "zone": "page",
@@ -646,8 +646,8 @@
       },
       "phone-thread-no-more-json": {
         "zone": "page",
-        "x": 84.6,
-        "y": 86.1
+        "x": 78.7,
+        "y": 83.6
       },
       "phone-request-thanos": {
         "zone": "page",
@@ -656,8 +656,8 @@
       },
       "phone-request-undercover-job": {
         "zone": "page",
-        "x": 70.8,
-        "y": 93.2
+        "x": 75.5,
+        "y": 93.6
       },
       "phone-thread-reddit-dm-intro": {
         "zone": "page",
@@ -691,13 +691,13 @@
       },
       "phone-thread-few-tokens-popular": {
         "zone": "page",
-        "x": 75.7,
-        "y": 50.5
+        "x": 69.5,
+        "y": 46.1
       },
       "phone-thread-monster-girls": {
         "zone": "page",
-        "x": 75.9,
-        "y": 49
+        "x": 79,
+        "y": 50.3
       },
       "phone-thread-repetitive-answers": {
         "zone": "page",
@@ -706,8 +706,8 @@
       },
       "phone-thread-sharing-a-name-with-your-bot": {
         "zone": "page",
-        "x": 18.1,
-        "y": 84.4
+        "x": 24.9,
+        "y": 80
       },
       "phone-thread-simpler-bot-setup": {
         "zone": "page",
