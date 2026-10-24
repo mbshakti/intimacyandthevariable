@@ -112,7 +112,7 @@
       },
       "margin-file-luna": {
         "zone": "page",
-        "x": 12.3,
+        "x": 18,
         "y": 14.1
       },
       "margin-file-priest": {
@@ -151,8 +151,8 @@
         "y": 96.9
       },
       "win-credits": {
-        "x": 47.5,
-        "y": 406
+        "x": 53.5,
+        "y": 324
       },
       "cursor": {
         "zone": "hero",
@@ -302,8 +302,37 @@
       },
       "margin-thread-essay-length-replies": {
         "zone": "page",
-        "x": 85.4,
-        "y": 67.7
+        "x": 74.2,
+        "y": 68.6
+      },
+      "margin-thread-no-more-json": {
+        "zone": "page",
+        "x": 9.4,
+        "y": 5.2
+      },
+      "margin-thread-mother-of-all-bots": {
+        "zone": "page",
+        "x": 63.9,
+        "y": 14.3
+      },
+      "margin-request-leonardo-malcom": {
+        "zone": "page",
+        "x": 83.6,
+        "y": 35.2
+      },
+      "margin-request-giant-golden-heart": {
+        "zone": "page",
+        "x": 62.9,
+        "y": 39.9
+      },
+      "margin-thread-monster-girls": {
+        "zone": "page",
+        "x": 13.6,
+        "y": 43.6
+      },
+      "scene-windows-picture-28": {
+        "x": 1110,
+        "y": 486
       }
     },
     "phone": {
@@ -814,12 +843,12 @@
         "y": 9.1
       },
       "scene-craft-picture-12": {
-        "x": 1268,
-        "y": 412
+        "x": 500,
+        "y": 321
       },
       "scene-craft-picture-17": {
-        "x": 497,
-        "y": 353
+        "x": 519,
+        "y": 465
       },
       "margin-picture-stew": {
         "zone": "page",
@@ -915,8 +944,8 @@
       },
       "margin-thread-malicious-compliance-succubus": {
         "zone": "page",
-        "x": 49.4,
-        "y": 56.4
+        "x": 44.5,
+        "y": 56.5
       },
       "margin-thread-improvise-trick": {
         "zone": "page",
@@ -975,6 +1004,54 @@
       "scene-craft-thread-rude-bots": {
         "x": 177,
         "y": 1140
+      },
+      "win-credits": {
+        "x": 54.3,
+        "y": 396
+      },
+      "margin-thread-monster-girls": {
+        "zone": "page",
+        "x": 18.4,
+        "y": 43.8
+      },
+      "margin-file-parents": {
+        "zone": "page",
+        "x": 15.6,
+        "y": 37.4
+      },
+      "scene-craft-picture-25": {
+        "x": 935,
+        "y": 110
+      },
+      "margin-request-thanos": {
+        "zone": "page",
+        "x": 21,
+        "y": 14.3
+      },
+      "margin-request-giant-golden-heart": {
+        "zone": "page",
+        "x": 89.2,
+        "y": 32.4
+      },
+      "margin-request-leonardo-malcom": {
+        "zone": "page",
+        "x": 16,
+        "y": 34.7
+      },
+      "margin-thread-mother-of-all-bots": {
+        "zone": "page",
+        "x": 33.6,
+        "y": 12.1
+      },
+      "margin-thread-shitting-bots-today": {
+        "zone": "page",
+        "x": 16.7,
+        "y": 11.7
+      },
+      "margin-thread-no-more-json": {
+        "zone": "page",
+        "x": 39.4,
+        "y": 1.7
       }
     },
     "phone": {}
