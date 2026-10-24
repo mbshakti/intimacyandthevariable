@@ -1,11 +1,14 @@
 // Where every movable thing sits comes from hero-layout.json: for each side of the toggle (film, performance), a
 // desktop layout and a phone layout, each thing in the hero's desk (x, y in % of the hero) or on the page below it
 // (x in % of the page width, y of the main column), or, for a window of the page itself (data-win), a nudge from its
-// place in the flow (x in % of the column's width, y in px); hide: true leaves it out. The performance side's layout is the
-// film's except where it says otherwise: a thing moved on the performance side gets an entry there of its own, and
-// the rest keep following the film's. The admin, at /admin, lets you drag them anywhere, on whichever side the
-// toggle shows and in a phone layout of its own; every move saves straight back to the file when the site runs
-// locally, and keeps in this browser otherwise.
+// place in the flow (x in % of the column's width, y in px); hide: true leaves it out. On the phone a window dragged is
+// lifted off the flow instead (zone 'page', x and y in % of the page like the icons, by its top left corner), and the
+// page closes up where it was, so no empty room is left behind. The desktop has a layout per side of the toggle: the
+// performance side's is the film's except where it says otherwise (a thing moved there gets an entry of its own, the
+// rest keep following the film's). The phone has one layout for both sides, kept under film.phone, so the two sides
+// look alike on a phone; a window one side does not show keeps its entry for the other. The admin, at /admin, lets you
+// drag them anywhere, on whichever side the toggle shows and in the phone layout; every move saves straight back to the
+// file when the site runs locally, and keeps in this browser otherwise.
 (function () {
     var KEY = 'heroLayoutDraft2';
     var PHONE = matchMedia('(max-width: 520px)');
@@ -29,8 +32,8 @@
         }); });
         return out;
     }
-    // the layout in force now: this side's entries, and the film's for everything this side has no entry for
-    function current() { var L = merged(), m = mode(); return Object.assign({}, L.film[m], L[side()][m]); }
+    // the layout in force now. The phone has one layout for both sides (under film); on the desktop, this side's entries, and the film's for everything this side has no entry for
+    function current() { var L = merged(), m = mode(); return m === 'phone' ? Object.assign({}, L.film.phone) : Object.assign({}, L.film[m], L[side()][m]); }
     var hero = function () { return document.querySelector('.hero .desk'); };
     var page = function () { return document.getElementById('marginDesk'); };
     function items() { return document.querySelectorAll('.hero .desk [data-id], #marginDesk [data-id], .scene-desk [data-id], main [data-win]'); }
@@ -49,14 +52,41 @@
     // a desk scene is drawn on a 1600px canvas and scaled to fit; its things are placed in those px
     function sceneScale(el) { var host = el.closest('.desktop'); return host ? (parseFloat(host.style.getPropertyValue('--desk-scale')) || host.clientWidth / 1600) : 1; }
     function entryFor(el) { return current()[el.dataset.id]; }
-    function draftFor(el) { var set = draft[side()][mode()]; return set[el.dataset.id] || (set[el.dataset.id] = {}); }
+    function draftFor(el) { var set = draft[mode() === 'phone' ? 'film' : side()][mode()]; return set[el.dataset.id] || (set[el.dataset.id] = {}); }
     function anchorCentre(el) { return el.dataset.anchor ? el.dataset.anchor === 'centre' : true; }
 
     // ---- placing everything from the layout ----
-    function place(el, e) {
-        if (homeZone(el) === 'flow') {    // nudged from its place in the flow: x in % of the column's width, y in px
+    // a lifted window's place on the page, in px from whatever it is positioned by (its section, or the page itself once the section has folded away)
+    function settle(el, e) {
+        var box = page().getBoundingClientRect(), op = el.offsetParent, or = op ? op.getBoundingClientRect() : { left: 0, top: 0 };
+        el.style.left = Math.round(box.left + (e.x || 0) / 100 * box.width - or.left - (op ? op.clientLeft : 0)) + 'px';
+        el.style.top = Math.round(box.top + (e.y || 0) / 100 * box.height - or.top - (op ? op.clientTop : 0)) + 'px';
+    }
+    // a section whose windows have all been lifted or hidden folds away (landing.css), so it leaves no empty room: true if every child is such a window or such a section
+    function folds(sec, L) {
+        var kids = Array.prototype.slice.call(sec.children); if (!kids.length) return false;
+        return kids.every(function (c) {
+            if (c.hasAttribute('data-win')) { var e = L[c.dataset.id]; return !!(e && (e.hide || e.zone === 'page')); }
+            return !!c.querySelector('[data-win]') && folds(c, L);
+        });
+    }
+    function fold(L) {
+        document.querySelectorAll('main *').forEach(function (sec) {
+            if (sec.hasAttribute('data-win') || sec.id === 'marginDesk' || !sec.querySelector('[data-win]')) return;
+            sec.classList.toggle('emptied', folds(sec, L));
+        });
+    }
+    function place(el, e, later) {
+        if (homeZone(el) === 'flow') {
             if (e && e.hide) { el.style.display = 'none'; return; }
             el.style.display = '';
+            if (e && e.zone === 'page' && page()) {   // lifted off the flow onto the page layer (the phone): x, y in % of the page, by its top left corner
+                el.classList.add('lifted'); el.classList.remove('nudged'); el.style.transform = '';
+                if (later) later.push(el); else { fold(current()); settle(el, e); }
+                return;
+            }
+            el.classList.remove('lifted'); el.style.left = el.style.top = '';
+            // nudged from its place in the flow: x in % of the column's width, y in px
             var nudged = !!(e && (e.x || e.y));
             el.style.transform = nudged ? 'translate(' + (e.x || 0) / 100 * column() + 'px, ' + (e.y || 0) + 'px)' : '';
             el.classList.toggle('nudged', nudged);   // forward, so a section after it in the page does not paint over it and take the pointer
@@ -94,8 +124,10 @@
         if (e.y !== undefined) el.style.top = e.y + '%';
     }
     function apply() {
-        var L = current();
-        items().forEach(function (el) { place(el, L[el.dataset.id]); });
+        var L = current(), lifted = [];
+        fold(L);
+        items().forEach(function (el) { place(el, L[el.dataset.id], lifted); });
+        lifted.forEach(function (el) { settle(el, L[el.dataset.id]); });   // once the flow has closed up without them
         if (panel) status();
     }
     window.applyLayout = apply;   // the desk scenes call this after rebuilding themselves
@@ -145,7 +177,15 @@
     document.addEventListener('pointermove', function (ev) {
         if (!drag) return;
         var el = drag.el, d = draftFor(el);
-        if (homeZone(el) === 'flow') {    // the nudge grows with the pointer's travel from where it took hold
+        if (homeZone(el) === 'flow') {
+            if (mode() === 'phone' && page()) {   // on the phone a window lifts off the flow onto the page layer, wherever the pointer takes it
+                var pb = page().getBoundingClientRect();
+                d.zone = 'page'; delete d.hide;
+                d.x = Math.round(Math.max(-30, Math.min(130, (ev.clientX - drag.dx - pb.left) / pb.width * 100)) * 10) / 10;
+                d.y = Math.round(Math.max(-30, Math.min(130, (ev.clientY - drag.dy - pb.top) / pb.height * 100)) * 10) / 10;
+                drag.moved = true; place(el, Object.assign({}, entryFor(el), d)); return;
+            }
+            // on the desktop the nudge grows with the pointer's travel from where it took hold
             d.x = Math.round((drag.ex + (ev.pageX - drag.x0) / column() * 100) * 10) / 10; d.y = Math.round(drag.ey + (ev.pageY - drag.y0));
             drag.moved = true; place(el, d); return;
         }
@@ -194,7 +234,11 @@
         if (j && j.film) file = { _about: j._about, film: { desktop: j.film.desktop || {}, phone: j.film.phone || {} }, performance: { desktop: P.desktop || {}, phone: P.phone || {} } };
         else if (j && j.desktop) file = { _about: j._about, film: { desktop: j.desktop, phone: j.phone || {} }, performance: { desktop: {}, phone: {} } };   // the file from before there were two sides
     }).catch(function () {}).then(function () {
+        document.querySelectorAll('main [data-win]').forEach(function (w) { w.dataset.anchor = 'left'; });   // a window is placed by its top left corner
         apply();
+        // the column's height changes (a picture, a font): the lifted windows, placed in px, are settled again
+        var main = document.querySelector('main'), settleTimer = null;
+        if (main && 'ResizeObserver' in window) new ResizeObserver(function () { clearTimeout(settleTimer); settleTimer = setTimeout(apply, 60); }).observe(main);
         if (admin) openPanel();
         var onChange = function () { selected = null; apply(); };
         (PHONE.addEventListener ? PHONE.addEventListener('change', onChange) : PHONE.addListener(onChange));

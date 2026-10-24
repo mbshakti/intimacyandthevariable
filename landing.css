@@ -421,3 +421,9 @@ html.admin main [data-win] > .bar { cursor: move; user-select: none; -webkit-use
 main [data-win].nudged { position: relative; z-index: 1; }   /* a window moved from its place lies over the sections after it, under the margins' things */
 .desktop.mobile .nudged { position: relative; z-index: 1; }   /* and a thing nudged out of its cell in a phone desk lies over its neighbours */
 html.admin main [data-win] a, html.admin main [data-win] button { pointer-events: none; }
+
+/* ---- a window lifted off the flow (the admin, on the phone): on the page layer like the icons, placed by its top left
+   corner, under the icons and over the sections; the page closes up where it was ---- */
+main [data-win].lifted, main .people .win.lifted, main .stack .win.lifted { position: absolute; margin: 0; z-index: 2; }   /* named with the pair's own rules, which would otherwise keep the second window relative */
+main .emptied { display: contents; }   /* a section whose windows have all been lifted or hidden: no room left where they were */
+.people .win.lifted + .win, .stack .win.lifted + .win { margin-top: 0; }   /* the one left behind no longer tucks under the one above */
