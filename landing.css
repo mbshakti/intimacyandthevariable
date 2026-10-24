@@ -433,3 +433,13 @@ main .walk.lifted { width: min(300px, 90%); }   /* the walkthrough keeps its sma
 #teaser.lifted { margin: 0; }   /* its own room above (by id, which would outrank the rule above) goes too */
 main .emptied { display: contents; }   /* a section whose windows have all been lifted or hidden: no room left where they were */
 .people .win.lifted + .win, .stack .win.lifted + .win { margin-top: 0; }   /* the one left behind no longer tucks under the one above */
+
+/* ---- among the desks' things the pictures lie over the threads, files and folders, so a thread's text never reads over a
+   picture: on the hero's desk, on the page layer, in the desk scenes and in the phone's strips. The title and the cursor stay over all of it ---- */
+.desk > .win, .margin-desk .win, .scene-desk .win { z-index: 2; }
+.desk .desktop-icon, .margin-desk .desktop-icon, .scene-desk .desktop-icon { z-index: 1; }
+.desktop.mobile .scene-desk > * { position: relative; }   /* a strip's things, in their cells, take the order too */
+.desktop.mobile .scene-desk .win, .desktop.mobile .scene-desk .win.nudged { z-index: 2; }
+.desktop.mobile .scene-desk .desktop-icon, .desktop.mobile .scene-desk .desktop-icon.nudged { z-index: 1; }
+.title { z-index: 3; }
+.sim { z-index: 4; }
