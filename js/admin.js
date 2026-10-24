@@ -157,11 +157,12 @@
 
     // ---- dragging: anywhere on the page. Leaving the hero puts a thing on the page layer, and the other way round ----
     var drag = null;
-    // a page window (data-win) is taken by its title bar only, so a finger on its body scrolls the page; everything else by any part of it
+    // a page window (data-win) is taken by its title bar when the pointer is a finger, so a finger on its body scrolls the page; a mouse takes
+    // it anywhere on it (a window lying under another, its bar covered, can still be taken by what shows). Everything else by any part of it
     function target(ev) {
         if (!admin || !ev.target.closest) return null;
         var t = ev.target.closest('.hero .desk [data-id], #marginDesk [data-id], .scene-desk [data-id], main [data-win]');
-        if (t && t.hasAttribute('data-win') && !ev.target.closest('.bar')) return null;
+        if (t && t.hasAttribute('data-win') && ev.pointerType === 'touch' && !ev.target.closest('.bar')) return null;
         return t;
     }
     function anchorPoint(el) { var r = el.getBoundingClientRect(); return anchorCentre(el) ? { x: r.left + r.width / 2, y: r.top + r.height / 2 } : { x: r.left, y: r.top }; }

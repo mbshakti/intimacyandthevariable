@@ -41,16 +41,6 @@
         <a class="desktop-icon" href="desktop/#user" data-chapter="user" data-id="thread-get-laid" data-thread="get-laid-or-god-destroys-humanity" style="--x:88%; --y:88%"><div class="msg-avatar-stack"><img src="content/img/discord%20avatars/discord-avatar-01.jpg" class="msg-avatar-circle" alt=""><img src="content/img/discord%20avatars/discord-avatar-017.png" class="msg-avatar-circle" alt=""></div><span class="label">Get Laid or God Destroys Humanity</span><div class="meta-group"><span class="meta">4 messages</span></div></a>
         <div class="sim" data-id="cursor" data-anchor="left"><svg viewBox="0 0 24 30" fill="#FFFFFF" stroke="#17111A" stroke-width="1.4" stroke-linejoin="round"><path d="M2 2 L2 24 L8 18.5 L12 27 L16 25.2 L12.2 17 L20 17 Z"/></svg></div>
     </div>
-    <!-- film or performance: the same work, two sides of a coin. The toggle changes the page's copy only (html[data-mode], js/main.js);
-         every element marked data-copy shows in its own mode and is hidden in the other -->
-    <!-- the mark at the top left: whose work this is, on the side showing -->
-    <p class="mark"><span data-copy="film">a film by Shakti Mb</span><span data-copy="performance">a performance by Shakti Mb</span></p>
-    <a class="badge admin-link" id="adminLink" href="admin">admin</a>
-    <div class="mode" role="group" aria-label="film or performance">
-        <span class="mode-ind" aria-hidden="true"></span>
-        <button class="mode-btn" type="button" data-set="film" aria-pressed="true">film<small>intimacy</small></button>
-        <button class="mode-btn" type="button" data-set="performance" aria-pressed="false">performance<small>unstable performers</small></button>
-    </div>
     <div class="title">
         <h1 class="typed" data-copy="film"><span class="line">intimacy when</span><span class="line">the other side</span><span class="line">is a variable<span class="caret" aria-hidden="true"></span></span></h1>
         <h1 class="typed" data-copy="performance"><span class="line">unstable</span><span class="line">performers<span class="caret" aria-hidden="true"></span></span></h1>
@@ -62,6 +52,18 @@
     <!-- the cue at the fold: there is more below -->
     <a class="down" href="#overview" aria-label="scroll to the overview"><span class="down-text">scroll</span><svg class="down-chev" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 1.5 L8 8 L14.5 1.5"/></svg></a>
 </header>
+
+<!-- film or performance: the same work, two sides of a coin. The toggle changes the page's copy only (html[data-mode], js/main.js);
+     every element marked data-copy shows in its own mode and is hidden in the other. The toggle, the mark and the admin badge are
+     fixed to the screen and sit outside the hero, so they lie over everything on the page, the things dragged about included -->
+<!-- the mark at the top left: whose work this is, on the side showing -->
+<p class="mark"><span data-copy="film">a film by Shakti Mb</span><span data-copy="performance">a performance by Shakti Mb</span></p>
+<a class="badge admin-link" id="adminLink" href="admin">admin</a>
+<div class="mode" role="group" aria-label="film or performance">
+    <span class="mode-ind" aria-hidden="true"></span>
+    <button class="mode-btn" type="button" data-set="film" aria-pressed="true">film<small>intimacy</small></button>
+    <button class="mode-btn" type="button" data-set="performance" aria-pressed="false">performance<small>unstable performers</small></button>
+</div>
 
 <main>
 <!-- the archive's things in the margins, anywhere below the hero (desktop.js lays them out, the admin moves them) -->

@@ -417,7 +417,8 @@ html.admin .signup { display: none; }   /* out of the way while laying things ou
 html:not(.admin) .desktop-icon, html:not(.admin) .desktop-icon * { pointer-events: none; cursor: default; }
 html.admin .hero .desk [data-id], html.admin #marginDesk [data-id], html.admin .scene-desk [data-id] { cursor: move; user-select: none; touch-action: none; -webkit-user-select: none; -webkit-touch-callout: none; }   /* a finger on a thing drags it; the page scrolls from anywhere else */
 html.admin .sim { pointer-events: auto; }   /* the cursors take the pointer in the admin, to be dragged; on the page they never do */
-html.admin main [data-win] > .bar { cursor: move; user-select: none; -webkit-user-select: none; touch-action: none; }   /* the page's windows drag by their title bar; a finger on the body scrolls */
+html.admin main [data-win] > .bar { cursor: move; user-select: none; -webkit-user-select: none; touch-action: none; }
+@media (hover: hover) { html.admin main [data-win] { cursor: move; } }   /* with a mouse, taken anywhere on it */   /* the page's windows drag by their title bar; a finger on the body scrolls */
 main [data-win].nudged { position: relative; z-index: 1; }   /* a window moved from its place lies over the sections after it, under the margins' things */
 .desktop.mobile .nudged { position: relative; z-index: 1; }   /* and a thing nudged out of its cell in a phone desk lies over its neighbours */
 html.admin main [data-win] a, html.admin main [data-win] button { pointer-events: none; }
@@ -427,5 +428,6 @@ html.admin main [data-win] a, html.admin main [data-win] button { pointer-events
 main [data-win].lifted, main .people .win.lifted, main .stack .win.lifted { position: absolute; margin: 0; z-index: 2; }   /* named with the pair's own rules, which would otherwise keep the second window relative */
 main [data-win].lifted { width: 100%; }   /* out of the flow a window would shrink to its content: the column's width, as in the flow */
 main .walk.lifted { width: min(300px, 90%); }   /* the walkthrough keeps its small size */
+#teaser.lifted { margin: 0; }   /* its own room above (by id, which would outrank the rule above) goes too */
 main .emptied { display: contents; }   /* a section whose windows have all been lifted or hidden: no room left where they were */
 .people .win.lifted + .win, .stack .win.lifted + .win { margin-top: 0; }   /* the one left behind no longer tucks under the one above */
