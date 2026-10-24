@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>the phone layout</title>
+<!-- the admin in a frame 390px wide, the width every phone lays the page out at (index.html), so what is arranged here is what a phone shows.
+     Local only, like the admin (server.js serves it at /admin/phone; ?performance opens that side) -->
+<style>
+    html, body { margin: 0; height: 100%; background: #111; color: #888; font: 13px/1.4 ui-monospace, Menlo, monospace; }
+    .wrap { display: flex; flex-direction: column; align-items: center; height: 100%; }
+    .note { margin: 0; padding: 10px 16px; text-align: center; }
+    .note b { color: #ddd; font-weight: 500; }
+    iframe { width: 390px; flex: 1; border: 0; border-left: 1px solid #333; border-right: 1px solid #333; background: #000; }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <p class="note"><b>the phone layout</b>, 390px wide as every phone sees it. Drag here; the moves save to hero-layout.json.</p>
+    <iframe title="the admin, at the phone's width" src="/admin"></iframe>
+</div>
+<script>document.querySelector('iframe').src = '/admin' + location.search;</script>
+</body>
+</html>

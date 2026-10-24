@@ -223,8 +223,20 @@
     // the badge at the top right: into the admin from the page, back to the page from the admin, on the side showing
     var link = document.getElementById('adminLink');
     if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) document.documentElement.classList.add('local');   // the badge shows here only
+    var flag = function () { return document.documentElement.dataset.mode === 'performance' ? '?performance' : ''; };
+    // the phone layout is made at the phone's width, 390px (index.html lays every phone out at that): a window of another width shows it
+    // differently, so the admin says so and points to the frame at /admin/phone, where the window's width does not matter
+    if (admin && window === window.top) {
+        var widthNote = function () {
+            var off = PHONE.matches && Math.abs(innerWidth - 390) > 2, n = document.getElementById('adminWidthNote');
+            if (off && !n) { n = el('<a id="adminWidthNote" class="admin-width-note" href="#"></a>'); document.body.appendChild(n); }
+            if (n && !off) { n.remove(); return; }
+            if (n) { n.textContent = 'this window is ' + innerWidth + 'px wide; a phone is 390. open the phone frame'; n.href = '/admin/phone' + flag(); }
+        };
+        widthNote(); addEventListener('resize', widthNote);
+        new MutationObserver(widthNote).observe(document.documentElement, { attributes: true, attributeFilter: ['data-mode'] });
+    }
     if (link) {
-        var flag = function () { return document.documentElement.dataset.mode === 'performance' ? '?performance' : ''; };
         var point = function () { link.href = admin ? (flag() ? '/performance' : '/') : '/admin' + flag(); };
         if (admin) link.textContent = 'exit admin';
         point();

@@ -443,3 +443,6 @@ main .emptied { display: contents; }   /* a section whose windows have all been 
 .desktop.mobile .scene-desk .desktop-icon, .desktop.mobile .scene-desk .desktop-icon.nudged { z-index: 1; }
 .title { z-index: 3; }
 .sim { z-index: 4; }
+
+/* the admin's note that its window is not a phone's width (js/admin.js), with the way to the phone frame */
+.admin-width-note { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 95; padding: 8px 14px; border-radius: 999px; background: #ff2d8a; color: #000; font: 500 12px/1.3 var(--font-ui); text-decoration: none; white-space: nowrap; box-shadow: 0 6px 24px rgba(0,0,0,0.6); }

@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// one phone viewport: a phone held upright lays the page out 390px wide and scales that to its screen, so every phone sees the
+// one phone layout, the same at every size (the admin makes that layout at 390px: /admin/phone). A tablet, a phone on its side
+// and a desktop browser take their own width, as before
+(function () {
+    var m = document.querySelector('meta[name="viewport"]'), portrait = matchMedia('(orientation: portrait)');
+    function fit() { var phone = Math.min(screen.width, screen.height) <= 520 && portrait.matches; m.setAttribute('content', phone ? 'width=390' : 'width=device-width, initial-scale=1'); }
+    fit(); if (portrait.addEventListener) portrait.addEventListener('change', fit); else portrait.addListener(fit);
+})();
+</script>
 <title>Intimacy when the other side is a variable, a desktop documentary and video essay</title>
 <meta name="description" content="An artist begins lurking in online communities where strangers gather to make AI roleplay bots. Expecting virtual girlfriends, she finds monsters and difficult lovers. Conversations with a botmaker named Delta draw her in. A desktop documentary and video essay by Shakti Mb.">
 <meta property="og:title" content="Intimacy when the other side is a variable">
