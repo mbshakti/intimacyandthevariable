@@ -129,6 +129,7 @@
         items().forEach(function (el) { place(el, L[el.dataset.id], lifted); });
         lifted.forEach(function (el) { settle(el, L[el.dataset.id]); });   // once the flow has closed up without them
         if (panel) status();
+        document.documentElement.classList.remove('placing');   // placed: the things can show (index.html, landing.css)
     }
     window.applyLayout = apply;   // the desk scenes call this after rebuilding themselves
 
@@ -242,7 +243,10 @@
         point();
         new MutationObserver(point).observe(document.documentElement, { attributes: true, attributeFilter: ['data-mode'] });
     }
-    fetch('hero-layout.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+    // the layout is baked into the page (scripts/inline-layout.js), so it is known before the page paints; the file is fetched only if that is missing
+    var baked = document.getElementById('heroLayout'), given = null;
+    if (baked) { try { given = JSON.parse(baked.textContent); } catch (e) {} }
+    (given ? Promise.resolve(given) : fetch('hero-layout.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; })).then(function (j) {
         var P = (j && j.performance) || {};
         if (j && j.film) file = { _about: j._about, film: { desktop: j.film.desktop || {}, phone: j.film.phone || {} }, performance: { desktop: P.desktop || {}, phone: P.phone || {} } };
         else if (j && j.desktop) file = { _about: j._about, film: { desktop: j.desktop, phone: j.phone || {} }, performance: { desktop: {}, phone: {} } };   // the file from before there were two sides

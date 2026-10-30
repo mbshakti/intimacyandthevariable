@@ -633,11 +633,6 @@
         "x": 79.8,
         "y": 24
       },
-      "win-walkthrough": {
-        "zone": "page",
-        "x": 16.4,
-        "y": 10.6
-      },
       "phone-thread-malicious-compliance-succubus": {
         "zone": "page",
         "x": 41.5,
@@ -895,10 +890,6 @@
         "zone": "hero",
         "x": 10.7,
         "y": 22.7
-      },
-      "win-walkthrough": {
-        "x": 14.2,
-        "y": -100
       },
       "scene-windows-picture-30": {
         "x": 1281,

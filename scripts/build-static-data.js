@@ -56,3 +56,7 @@ const foundFiles = fs.existsSync(foundDir)
   : [];
 fs.writeFileSync(path.join(apiDir, 'found-images.json'), JSON.stringify(foundFiles));
 console.log(`wrote api/found-images.json (${foundFiles.length} images)`);
+
+// --- the layout, baked into index.html so the icons are placed before the page first paints ---
+require('./inline-layout').run();
+console.log('baked hero-layout.json into index.html');

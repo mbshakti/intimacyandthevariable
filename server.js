@@ -20,6 +20,7 @@ app.post('/api/layout', (req, res) => {
   var ok = L && typeof L === 'object' && ((L.film && L.film.desktop && L.film.phone) || (L.desktop && L.phone));   // the two-sided file, or the one from before the toggle
   if (!ok) return res.status(400).json({ error: 'not a layout' });
   fs.writeFileSync(path.join(__dirname, 'hero-layout.json'), JSON.stringify(L, null, 2) + '\n');
+  require('./scripts/inline-layout').run(L);   // and into index.html, where the page reads it before it paints
   res.json({ ok: true });
 });
 
