@@ -113,9 +113,6 @@ h3 { font-size: 17px; }
 .win .bar .name { color: #FFFFFF; text-shadow: 0 0 2px #FFFFFF, 0 0 10px rgba(255,255,255,0.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .badge { display: inline-block; padding: 6px 10px; border: 1px solid rgba(249,248,248,0.28); border-radius: 999px; background: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-family: var(--font-meta); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(249,248,248,0.7); line-height: 1; }
 .grid.two .win .badge { right: 8px; bottom: 8px; font-size: 10px; padding: 5px 8px; }
-/* the mark at the top left, fixed like the toggle: whose work this is, in the scroll cue's small capitals; it follows the side */
-.mark { position: fixed; left: 20px; top: 44px; z-index: 81; margin: 0; max-width: none; font-family: var(--font-ui); font-size: 14px; letter-spacing: 0.02em; line-height: 1; color: rgba(226,225,225,0.6); text-shadow: 0 0 8px rgba(0,0,0,0.8); white-space: nowrap; pointer-events: none; }
-@media (max-width: 520px) { .mark { display: none; } }   /* not on a phone: the toggle has the top */
 /* the way into the admin, and out: the same badge, fixed at the top right, faint until the pointer finds it */
 .admin-link { display: none; position: fixed; right: 16px; top: 39px; z-index: 81; text-decoration: none; opacity: 0.45; transition: opacity 150ms, color 150ms; }
 html.local .admin-link, html.admin .admin-link { display: inline-block; }   /* only with the site running locally (js/admin.js), or once the admin is on; never on the live site */

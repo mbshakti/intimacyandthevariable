@@ -3,23 +3,18 @@
     "desktop": {
       "folder-bot-requests": {
         "zone": "hero",
-        "x": 75.9,
-        "y": 15.4
+        "x": 69,
+        "y": 11.4
       },
       "thread-facial-expression": {
         "zone": "hero",
         "x": 22.5,
         "y": 15.4
       },
-      "thread-persona-design": {
-        "zone": "hero",
-        "x": 67,
-        "y": 13.3
-      },
       "request-ossix-ayto": {
         "zone": "page",
-        "x": 88.9,
-        "y": 4.7
+        "x": 87.9,
+        "y": 7.4
       },
       "thread-catharsis": {
         "zone": "hero",
@@ -43,18 +38,13 @@
       },
       "folder-user": {
         "zone": "page",
-        "x": 15.8,
-        "y": 1.5
+        "x": 15.9,
+        "y": 2.2
       },
       "thread-body-measurements": {
         "zone": "hero",
         "x": 31.1,
         "y": 85.6
-      },
-      "thread-fantasy-and-reality": {
-        "zone": "hero",
-        "x": 74.8,
-        "y": 99.1
       },
       "thread-get-laid": {
         "zone": "hero",
@@ -63,13 +53,8 @@
       },
       "margin-thread-making-bots": {
         "zone": "page",
-        "x": 36,
-        "y": 55.7
-      },
-      "margin-clip-delta-demon": {
-        "zone": "page",
-        "x": 63,
-        "y": 70.3
+        "x": 44.3,
+        "y": 54.9
       },
       "margin-folder-bot-requests": {
         "zone": "page",
@@ -78,8 +63,8 @@
       },
       "margin-file-ossix": {
         "zone": "page",
-        "x": 16.3,
-        "y": 76.1
+        "x": 34.2,
+        "y": 78.2
       },
       "margin-picture-stew": {
         "zone": "page",
@@ -97,13 +82,13 @@
       },
       "margin-file-minho": {
         "zone": "hero",
-        "x": 26.8,
-        "y": 65.8
+        "x": 15.9,
+        "y": 77.3
       },
       "margin-file-victoria": {
         "zone": "page",
-        "x": 15.4,
-        "y": 8.2
+        "x": 57.9,
+        "y": 8.4
       },
       "margin-file-eleanor": {
         "zone": "page",
@@ -112,8 +97,8 @@
       },
       "margin-file-luna": {
         "zone": "page",
-        "x": 18,
-        "y": 14.1
+        "x": 34.8,
+        "y": 17.1
       },
       "margin-file-priest": {
         "zone": "page",
@@ -122,13 +107,13 @@
       },
       "margin-file-parents": {
         "zone": "page",
-        "x": 9.5,
-        "y": 37.4
+        "x": 45.2,
+        "y": 23.3
       },
       "margin-thread-breached-400k": {
         "zone": "page",
-        "x": 75.7,
-        "y": 42.7
+        "x": 52,
+        "y": 38
       },
       "margin-thread-voice-chat": {
         "zone": "page",
@@ -137,13 +122,13 @@
       },
       "margin-request-costume-shop": {
         "zone": "page",
-        "x": 33.8,
-        "y": 74.6
+        "x": 32.8,
+        "y": 77.9
       },
       "margin-request-succubus": {
         "zone": "page",
-        "x": 63.5,
-        "y": 28.2
+        "x": 34.9,
+        "y": 23.5
       },
       "margin-request-bodyguard": {
         "zone": "page",
@@ -160,8 +145,8 @@
         "y": 75.4
       },
       "scene-craft-picture-26": {
-        "x": 891,
-        "y": 1883
+        "x": 805,
+        "y": 1819
       },
       "scene-craft-picture-29": {
         "x": 177,
@@ -172,8 +157,8 @@
         "y": 373
       },
       "scene-windows-picture-30": {
-        "x": 1288,
-        "y": -3472
+        "x": 1232,
+        "y": -3349
       },
       "scene-windows-picture-27": {
         "x": 118,
@@ -184,92 +169,22 @@
         "y": -34
       },
       "scene-craft-picture-08": {
-        "x": 115,
-        "y": -2460
+        "x": 107,
+        "y": -2322
       },
       "scene-craft-cursor": {
         "x": 511,
         "y": 147
-      },
-      "margin-thread-shitting-bots-today": {
-        "zone": "page",
-        "x": 11.6,
-        "y": 11.2
-      },
-      "margin-thread-templates-secret-formula": {
-        "zone": "page",
-        "x": 86.6,
-        "y": 9.1
-      },
-      "margin-thread-sixty-hour-week": {
-        "zone": "page",
-        "x": 29.7,
-        "y": 94.2
-      },
-      "margin-thread-reddit-dm-intro": {
-        "zone": "page",
-        "x": 42.4,
-        "y": 82.6
-      },
-      "margin-thread-simpler-bot-setup": {
-        "zone": "page",
-        "x": 14.6,
-        "y": 89
-      },
-      "margin-thread-keyword-collisions": {
-        "zone": "page",
-        "x": 10.4,
-        "y": 78.3
       },
       "margin-thread-waluigi-lorebook": {
         "zone": "page",
         "x": 8.9,
         "y": 70.6
       },
-      "margin-thread-stuck-in-a-loop": {
-        "zone": "page",
-        "x": 25.4,
-        "y": 61.6
-      },
-      "margin-thread-improvise-trick": {
-        "zone": "page",
-        "x": 83,
-        "y": 60.8
-      },
-      "margin-thread-malicious-compliance-succubus": {
-        "zone": "page",
-        "x": 44.5,
-        "y": 58.7
-      },
       "margin-thread-living-at-home": {
         "zone": "page",
         "x": 70.2,
         "y": 93.3
-      },
-      "margin-thread-porn-drives-innovation": {
-        "zone": "page",
-        "x": 87,
-        "y": 86.3
-      },
-      "margin-thread-chatting-style-characters": {
-        "zone": "page",
-        "x": 88.8,
-        "y": 79
-      },
-      "margin-thread-sharing-a-name-with-your-bot": {
-        "zone": "page",
-        "x": 84.5,
-        "y": 70.7
-      },
-      "margin-thread-testing-bots": {
-        "zone": "page",
-        "x": 56,
-        "y": 47.5
-      },
-      "margin-thread-for-you-feed": {
-        "zone": "page",
-        "x": 66.8,
-        "y": 36.5
       },
       "margin-thread-so-many-fetishes": {
         "zone": "page",
@@ -283,37 +198,17 @@
       },
       "margin-request-undercover-job": {
         "zone": "page",
-        "x": 44.5,
-        "y": 29.7
+        "x": 59.9,
+        "y": 23.2
       },
       "scene-craft-thread-what-porn-was-filling": {
-        "x": 366,
+        "x": 576,
         "y": 716
-      },
-      "margin-thread-few-tokens-popular": {
-        "zone": "page",
-        "x": 22.6,
-        "y": 52.1
-      },
-      "margin-thread-repetitive-answers": {
-        "zone": "page",
-        "x": 19.8,
-        "y": 46.4
-      },
-      "margin-thread-essay-length-replies": {
-        "zone": "page",
-        "x": 74.2,
-        "y": 68.6
       },
       "margin-thread-no-more-json": {
         "zone": "page",
-        "x": 9.4,
-        "y": 5.2
-      },
-      "margin-thread-mother-of-all-bots": {
-        "zone": "page",
-        "x": 63.9,
-        "y": 14.3
+        "x": 9.8,
+        "y": 9.7
       },
       "margin-request-leonardo-malcom": {
         "zone": "page",
@@ -322,17 +217,26 @@
       },
       "margin-request-giant-golden-heart": {
         "zone": "page",
-        "x": 62.9,
-        "y": 39.9
-      },
-      "margin-thread-monster-girls": {
-        "zone": "page",
-        "x": 13.6,
-        "y": 43.6
+        "x": 80.7,
+        "y": 39.4
       },
       "scene-windows-picture-28": {
         "x": 1110,
         "y": 486
+      },
+      "margin-request-thanos": {
+        "zone": "page",
+        "x": 34.8,
+        "y": 19.8
+      },
+      "margin-request-dee-yandere-cashier": {
+        "zone": "page",
+        "x": 79.8,
+        "y": 29.2
+      },
+      "scene-craft-thread-rude-bots": {
+        "x": 131,
+        "y": 910
       }
     },
     "phone": {
@@ -343,8 +247,8 @@
       },
       "folder-craft": {
         "zone": "page",
-        "x": 67.7,
-        "y": 21.8
+        "x": 63.3,
+        "y": 23
       },
       "thread-voice-requests": {
         "zone": "hero",
@@ -354,7 +258,7 @@
       "folder-bot-makers": {
         "zone": "hero",
         "x": 73.5,
-        "y": 74.2
+        "y": 84.3
       },
       "folder-user": {
         "zone": "hero",
@@ -362,10 +266,6 @@
         "y": 89.8
       },
       "thread-facial-expression": {
-        "zone": "hero",
-        "hide": true
-      },
-      "thread-persona-design": {
         "zone": "hero",
         "hide": true
       },
@@ -378,10 +278,6 @@
         "hide": true
       },
       "thread-body-measurements": {
-        "zone": "hero",
-        "hide": true
-      },
-      "thread-fantasy-and-reality": {
         "zone": "hero",
         "hide": true
       },
@@ -400,18 +296,18 @@
       },
       "win-credits": {
         "zone": "page",
-        "x": 4.4,
-        "y": 32.1
+        "x": 3.6,
+        "y": 32.6
       },
       "win-shakti": {
         "zone": "page",
-        "x": 3.9,
-        "y": 36.8
+        "x": 2.9,
+        "y": 35.5
       },
       "win-kiana": {
         "zone": "page",
-        "x": 3.6,
-        "y": 44.5
+        "x": 3.1,
+        "y": 44.6
       },
       "win-teaser": {
         "zone": "page",
@@ -425,13 +321,13 @@
       },
       "phone-pic-23": {
         "zone": "page",
-        "x": 11.1,
-        "y": 14
+        "x": 9.2,
+        "y": 13.3
       },
       "phone-pic-24": {
         "zone": "page",
-        "x": 45.2,
-        "y": 13.9
+        "x": 42,
+        "y": 12
       },
       "phone-file-rich_dommy_mommy": {
         "zone": "hero",
@@ -461,22 +357,17 @@
       "phone-pic-08": {
         "zone": "page",
         "x": 12.7,
-        "y": 88.5
-      },
-      "phone-clip-delta-psychology": {
-        "zone": "page",
-        "x": 72.6,
-        "y": 63.8
+        "y": 89
       },
       "phone-thread-scared-to-join-voice-chat": {
         "zone": "page",
-        "x": 65.2,
-        "y": -0.1
+        "x": 69.3,
+        "y": 1.4
       },
       "phone-thread-rude-bots": {
         "zone": "page",
-        "x": 69.2,
-        "y": 71
+        "x": 76.1,
+        "y": 71.9
       },
       "phone-pic-12": {
         "zone": "page",
@@ -485,8 +376,8 @@
       },
       "phone-thread-making-bots-at-2am": {
         "zone": "page",
-        "x": 69.5,
-        "y": 61.7
+        "x": 71.7,
+        "y": 63.5
       },
       "phone-file-loving_korean_boyfriend": {
         "zone": "page",
@@ -508,20 +399,15 @@
         "x": 70.7,
         "y": 72.6
       },
-      "phone-clip-delta-demon": {
-        "zone": "page",
-        "x": 40.7,
-        "y": 96.2
-      },
       "phone-pic-17": {
         "zone": "page",
-        "x": 23.8,
-        "y": 66.6
+        "x": 23.5,
+        "y": 67.7
       },
       "phone-request-succubus-better-person": {
         "zone": "page",
-        "x": 70.2,
-        "y": 72.5
+        "x": 42.9,
+        "y": 69.2
       },
       "phone-file-mentally_unwell_dad_and_stressed_mom": {
         "zone": "page",
@@ -540,23 +426,23 @@
       },
       "phone-pic-27": {
         "zone": "page",
-        "x": 16.4,
-        "y": 94.5
+        "x": 14.5,
+        "y": 93.7
       },
       "phone-pic-28": {
         "zone": "page",
-        "x": 23.2,
-        "y": 86.3
+        "x": 43.3,
+        "y": 87.3
       },
       "phone-pic-25": {
         "zone": "page",
-        "x": 11.5,
-        "y": 52.3
+        "x": 44.9,
+        "y": 60.5
       },
       "phone-pic-26": {
         "zone": "page",
-        "x": 49.1,
-        "y": 54.5
+        "x": 39.1,
+        "y": 55.3
       },
       "phone-pic-30": {
         "zone": "hero",
@@ -567,11 +453,6 @@
         "zone": "page",
         "x": 41.1,
         "y": 80
-      },
-      "phone-thread-shitting-bots-today": {
-        "zone": "page",
-        "x": 39.3,
-        "y": 1.3
       },
       "phone-thread-breached-400k": {
         "zone": "page",
@@ -588,85 +469,35 @@
         "x": 42.9,
         "y": 86.8
       },
-      "phone-thread-chatting-style-characters": {
-        "zone": "page",
-        "x": 37.5,
-        "y": 96.6
-      },
       "win-venues": {
         "zone": "page",
-        "x": 4.5,
-        "y": 79.3
-      },
-      "phone-thread-stuck-in-a-loop": {
-        "zone": "page",
-        "x": 22.4,
-        "y": 100.9
-      },
-      "phone-thread-keyword-collisions": {
-        "zone": "page",
-        "x": 77.6,
-        "y": 85
+        "x": 4.4,
+        "y": 79.9
       },
       "phone-pic-01": {
         "zone": "page",
         "x": 42.5,
-        "y": 52.9
+        "y": 53.6
       },
       "phone-file-mental_chastity_girlfriend": {
         "zone": "page",
         "x": 68.4,
         "y": 15
       },
-      "phone-thread-templates-secret-formula": {
-        "zone": "page",
-        "x": 49.2,
-        "y": 12.5
-      },
-      "phone-thread-essay-length-replies": {
-        "zone": "page",
-        "x": 35.2,
-        "y": 25
-      },
-      "phone-thread-for-you-feed": {
-        "zone": "page",
-        "x": 79.8,
-        "y": 24
-      },
-      "phone-thread-malicious-compliance-succubus": {
-        "zone": "page",
-        "x": 41.5,
-        "y": 31
-      },
       "phone-thread-living-at-home": {
         "zone": "page",
-        "x": 51.3,
-        "y": 36.1
-      },
-      "phone-thread-mother-of-all-bots": {
-        "zone": "page",
-        "x": 35.1,
-        "y": 63.7
-      },
-      "phone-thread-improvise-trick": {
-        "zone": "page",
-        "x": 37.3,
-        "y": 70.3
+        "x": 61.3,
+        "y": 33.8
       },
       "win-support": {
         "zone": "page",
-        "x": 4.5,
-        "y": 73.8
-      },
-      "phone-thread-porn-drives-innovation": {
-        "zone": "page",
-        "x": 30.2,
-        "y": 83.1
+        "x": 4.4,
+        "y": 73.1
       },
       "win-audience": {
         "zone": "page",
-        "x": 4.7,
-        "y": 76.6
+        "x": 4.6,
+        "y": 76.5
       },
       "phone-thread-no-more-json": {
         "zone": "page",
@@ -683,15 +514,10 @@
         "x": 72.8,
         "y": 93.1
       },
-      "phone-thread-reddit-dm-intro": {
-        "zone": "page",
-        "x": 33.5,
-        "y": 93.5
-      },
       "phone-request-leonardo-malcom": {
         "zone": "page",
-        "x": 41.6,
-        "y": 23.1
+        "x": 31.8,
+        "y": 24.8
       },
       "phone-request-giant-golden-heart": {
         "zone": "page",
@@ -700,43 +526,18 @@
       },
       "phone-pic-00": {
         "zone": "page",
-        "x": 13.6,
-        "y": 85.4
+        "x": 27.6,
+        "y": 85.8
       },
       "phone-thread-waluigi-lorebook": {
         "zone": "page",
         "x": 79.4,
         "y": 57.1
       },
-      "phone-thread-sixty-hour-week": {
+      "phone-request-dee-yandere-cashier": {
         "zone": "page",
-        "x": 78.4,
-        "y": 54.6
-      },
-      "phone-thread-few-tokens-popular": {
-        "zone": "page",
-        "x": 69.5,
-        "y": 46.1
-      },
-      "phone-thread-monster-girls": {
-        "zone": "page",
-        "x": 33.4,
-        "y": 61.9
-      },
-      "phone-thread-repetitive-answers": {
-        "zone": "page",
-        "x": 29.3,
-        "y": 92.1
-      },
-      "phone-thread-sharing-a-name-with-your-bot": {
-        "zone": "page",
-        "x": 24.9,
-        "y": 80
-      },
-      "phone-thread-simpler-bot-setup": {
-        "zone": "page",
-        "x": 27,
-        "y": 53.3
+        "x": 48.2,
+        "y": 69.4
       }
     }
   },
@@ -759,8 +560,8 @@
       },
       "margin-file-eleanor": {
         "zone": "page",
-        "x": 14.8,
-        "y": 95
+        "x": 16.4,
+        "y": 93.6
       },
       "margin-thread-voice-chat": {
         "zone": "page",
@@ -772,11 +573,6 @@
         "x": 87.9,
         "y": 86.3
       },
-      "margin-clip-delta-demon": {
-        "zone": "page",
-        "x": 25.4,
-        "y": 84.7
-      },
       "margin-file-priest": {
         "zone": "page",
         "x": 37.9,
@@ -784,8 +580,8 @@
       },
       "margin-request-succubus": {
         "zone": "page",
-        "x": 50.7,
-        "y": 13.5
+        "x": 10.9,
+        "y": 9.3
       },
       "margin-file-luna": {
         "zone": "page",
@@ -793,34 +589,24 @@
         "y": 32
       },
       "margin-file-minho": {
-        "zone": "hero",
-        "x": 77.3,
-        "y": 53.3
+        "zone": "page",
+        "x": 52.8,
+        "y": 4.9
       },
       "thread-voice-requests": {
         "zone": "hero",
         "x": 21.5,
         "y": 34.4
       },
-      "thread-fantasy-and-reality": {
-        "zone": "hero",
-        "x": 74.9,
-        "y": 86.2
-      },
       "thread-body-measurements": {
-        "zone": "hero",
-        "x": 32.7,
-        "y": 87.1
+        "zone": "page",
+        "x": 88.7,
+        "y": 8.5
       },
       "thread-facial-expression": {
         "zone": "hero",
         "x": 32.6,
         "y": 23.5
-      },
-      "thread-persona-design": {
-        "zone": "hero",
-        "x": 54,
-        "y": 22.3
       },
       "cursor": {
         "zone": "hero",
@@ -829,13 +615,13 @@
       },
       "request-ossix-ayto": {
         "zone": "page",
-        "x": 85.6,
-        "y": 1.4
+        "x": 55.2,
+        "y": 6.2
       },
       "margin-file-victoria": {
         "zone": "page",
-        "x": 13.1,
-        "y": 9.1
+        "x": 48.8,
+        "y": 7.3
       },
       "scene-craft-picture-12": {
         "x": 500,
@@ -861,8 +647,8 @@
       },
       "margin-thread-making-bots": {
         "zone": "page",
-        "x": 23,
-        "y": 71.1
+        "x": 12.6,
+        "y": 71
       },
       "scene-craft-picture-26": {
         "x": 832,
@@ -892,18 +678,18 @@
         "y": 22.7
       },
       "scene-windows-picture-30": {
-        "x": 1281,
-        "y": -3704
+        "x": 1190,
+        "y": -3382
       },
       "thread-catharsis": {
         "zone": "hero",
-        "x": 73.8,
-        "y": 31.1
+        "x": 63.9,
+        "y": 22.1
       },
       "folder-bot-makers": {
         "zone": "page",
-        "x": 75.6,
-        "y": 14.4
+        "x": 65,
+        "y": 16.4
       },
       "scene-craft-picture-24": {
         "x": 1174,
@@ -911,86 +697,27 @@
       },
       "scene-craft-picture-08": {
         "x": 148,
-        "y": -2469
+        "y": -2247
       },
       "margin-request-dee-yandere-cashier": {
         "zone": "page",
         "x": 22.1,
         "y": 28.3
       },
-      "margin-thread-testing-bots": {
-        "zone": "page",
-        "x": 52.8,
-        "y": 45.8
-      },
-      "margin-thread-repetitive-answers": {
-        "zone": "page",
-        "x": 33.1,
-        "y": 54.3
-      },
-      "margin-thread-few-tokens-popular": {
-        "zone": "page",
-        "x": 24.8,
-        "y": 58.4
-      },
-      "margin-thread-malicious-compliance-succubus": {
-        "zone": "page",
-        "x": 44.5,
-        "y": 56.5
-      },
-      "margin-thread-improvise-trick": {
-        "zone": "page",
-        "x": 73.4,
-        "y": 59.6
-      },
-      "margin-thread-essay-length-replies": {
-        "zone": "page",
-        "x": 86.2,
-        "y": 65.6
-      },
       "margin-thread-waluigi-lorebook": {
         "zone": "page",
-        "x": 39.5,
-        "y": 72.5
-      },
-      "margin-thread-keyword-collisions": {
-        "zone": "page",
-        "x": 19.9,
-        "y": 75.3
-      },
-      "margin-thread-sharing-a-name-with-your-bot": {
-        "zone": "page",
-        "x": 77.3,
-        "y": 67.3
-      },
-      "margin-thread-chatting-style-characters": {
-        "zone": "page",
-        "x": 84.9,
-        "y": 81
-      },
-      "margin-thread-reddit-dm-intro": {
-        "zone": "page",
-        "x": 85.3,
-        "y": 90
+        "x": 28.2,
+        "y": 72.6
       },
       "margin-thread-living-at-home": {
         "zone": "page",
-        "x": 60.3,
+        "x": 45.2,
         "y": 93.8
-      },
-      "margin-thread-templates-secret-formula": {
-        "zone": "page",
-        "x": 85.3,
-        "y": 6.2
       },
       "margin-thread-cant-fuck-this-bot": {
         "zone": "page",
         "x": 25.2,
         "y": 38.3
-      },
-      "scene-craft-clip-delta-psychology": {
-        "x": 1047,
-        "y": 15
       },
       "scene-craft-thread-rude-bots": {
         "x": 177,
@@ -999,11 +726,6 @@
       "win-credits": {
         "x": 54.3,
         "y": 396
-      },
-      "margin-thread-monster-girls": {
-        "zone": "page",
-        "x": 18.4,
-        "y": 43.8
       },
       "margin-file-parents": {
         "zone": "page",
@@ -1021,28 +743,18 @@
       },
       "margin-request-giant-golden-heart": {
         "zone": "page",
-        "x": 89.2,
-        "y": 32.4
+        "x": 69.6,
+        "y": 36.3
       },
       "margin-request-leonardo-malcom": {
         "zone": "page",
         "x": 16,
         "y": 34.7
       },
-      "margin-thread-mother-of-all-bots": {
-        "zone": "page",
-        "x": 33.6,
-        "y": 12.1
-      },
-      "margin-thread-shitting-bots-today": {
-        "zone": "page",
-        "x": 16.7,
-        "y": 11.7
-      },
       "margin-thread-no-more-json": {
         "zone": "page",
-        "x": 39.4,
-        "y": 1.7
+        "x": 80.2,
+        "y": 1.1
       }
     },
     "phone": {}
